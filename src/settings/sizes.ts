@@ -1,11 +1,11 @@
 export enum SizesEnum {
-  ExtraSmall2 = '2xs',
-  ExtraSmall = 'xs',
-  Small = 'sm',
-  Medium = 'md',
-  Large = 'lg',
-  ExtraLarge = 'xl',
-  ExtraLarge2 = '2xl',
+  ExtraSmall2 = "2xas",
+  ExtraSmall = "xs",
+  Small = "sm",
+  Medium = "md",
+  Large = "lg",
+  ExtraLarge = "xl",
+  ExtraLarge2 = "2xl",
 }
 
 const sizes: { [key in SizesEnum]: number } = {

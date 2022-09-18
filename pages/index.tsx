@@ -1,8 +1,8 @@
-import type {NextPage} from 'next'
-import Head from 'next/head'
-import {DoggoBox, DoggoText} from "../src/ui-components";
-import {DoggoTextVariant} from "../src/ui-components/text";
-import {SizesEnum} from "../src/settings/sizes";
+import type { NextPage } from "next";
+import Head from "next/head";
+import { DoggoBox, DoggoText } from "../src/ui-components";
+import { DoggoTextVariant } from "../src/ui-components/text";
+import { SizesEnum } from "../src/settings/sizes";
 
 const Home: NextPage = () => {
   return (
@@ -14,13 +14,13 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-      <DoggoBox background="orange" padding={{ x: SizesEnum.ExtraLarge, y: SizesEnum.Large }}>
+        <DoggoBox background="orange" padding={{ x: SizesEnum.ExtraLarge, y: SizesEnum.Large }}>
           <DoggoText variant={DoggoTextVariant.Title1}>Hello hooman!</DoggoText>
           <DoggoText variant={DoggoTextVariant.Title3}>Woof, woof…</DoggoText>
-      </DoggoBox>
+        </DoggoBox>
       </main>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

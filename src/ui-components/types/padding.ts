@@ -1,4 +1,4 @@
-import type { SizesEnum } from '../../settings/sizes';
+import type { SizesEnum } from "../../settings/sizes";
 
 interface PaddingSizesXY {
   x?: SizesEnum;

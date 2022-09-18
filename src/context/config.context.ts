@@ -8,6 +8,7 @@ export interface ConfigContext {
 
 const Config = createContext<ConfigContext>({
   selectedTheme: ThemeVariants.Dark,
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   setSelectedTheme: (selectedTheme) => {},
 });
 

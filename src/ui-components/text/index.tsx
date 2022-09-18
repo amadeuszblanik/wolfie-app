@@ -1,21 +1,21 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const StyledText = styled.p<{ size: number }>`
   font-size: ${(props) => props.size}px;
 `;
 
 export enum DoggoTextVariant {
-  LargeTitle = 'LARGE_TITLE',
-  Title1 = 'TITLE_1',
-  Title2 = 'TITLE_2',
-  Title3 = 'TITLE_3',
-  Headline = 'HEADLINE',
-  Body = 'BODY',
-  Callout = 'CALLOUT',
-  Subhead = 'SUBHEAD',
-  Footnote = 'FOOTNOTE',
-  Caption1 = 'CAPTION_1',
-  Caption2 = 'CAPTION_2',
+  LargeTitle = "LARGE_TITLE",
+  Title1 = "TITLE_1",
+  Title2 = "TITLE_2",
+  Title3 = "TITLE_3",
+  Headline = "HEADLINE",
+  Body = "BODY",
+  Callout = "CALLOUT",
+  Subhead = "SUBHEAD",
+  Footnote = "FOOTNOTE",
+  Caption1 = "CAPTION_1",
+  Caption2 = "CAPTION_2",
 }
 
 const variantSize: {
@@ -41,10 +41,7 @@ interface DoggoTextProps {
 }
 
 const Component = ({ children, variant, leading }: DoggoTextProps) => {
-  const size =
-    variantSize[variant || DoggoTextVariant.Body][
-      leading ? 'leading' : 'standard'
-    ];
+  const size = variantSize[variant || DoggoTextVariant.Body][leading ? "leading" : "standard"];
 
   return <StyledText size={size}>{children}</StyledText>;
 };

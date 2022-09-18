@@ -1,1 +1,1 @@
-export { default as paddingMixin } from './padding';
+export { default as paddingMixin } from "./padding";

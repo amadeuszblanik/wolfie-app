@@ -1,46 +1,42 @@
-import styled from 'styled-components';
+import styled, {DefaultTheme} from 'styled-components';
 import type React from 'react';
-import Theme, { ThemeSchemesEnum, ThemeType } from '../../settings/theme';
 import Sizes, { SizesEnum } from '../../settings/sizes';
 import type { Padding } from '../types/padding';
 import { paddingMixin } from '../mixins';
 
 interface StyledViewProps {
-  colorScheme: ThemeSchemesEnum;
-  background?: ThemeType;
+  background?: keyof DefaultTheme;
   borderRadius?: number;
   padding?: Padding;
+  inline?: boolean;
 }
 
 const StyledView = styled.div<StyledViewProps>`
+  display: ${({ inline }) => inline ? 'inline-flex' : 'flex'};
   ${({ padding }) => padding && `${paddingMixin(padding)}`};
 
-  ${({ colorScheme, background }) =>
-    background && `background: ${Theme[colorScheme][background]}`}};
+  ${({ theme, background }) =>
+    background && `background: ${theme[background]}`}};
   ${({ borderRadius }) => borderRadius && `border-radius: ${borderRadius}px`};
 `;
 
 interface DoggoBoxProps {
   children: React.ReactNode;
-  background?: ThemeType;
+  background?: keyof DefaultTheme;
   border?: SizesEnum;
   padding?: Padding;
+  inline?: boolean;
 }
 
 const Component = ({
   children,
-  background,
-  border,
-  padding,
+    border,
+  ...props
 }: DoggoBoxProps) => {
-  const colorScheme = ThemeSchemesEnum.dark;
-
   return (
     <StyledView
-      colorScheme={colorScheme}
-      background={background}
       borderRadius={Sizes[border!]}
-      padding={padding}
+      {...props}
     >
       {children}
     </StyledView>

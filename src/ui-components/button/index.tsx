@@ -11,6 +11,7 @@ interface StyledButtonProps {
 interface ButtonProps {
   variant?: keyof DefaultTheme["palette"];
   children: string;
+  onClick: () => void;
 }
 
 const HOVER_BACKGROUND_DARKEN_VALUE = 13;
@@ -35,8 +36,8 @@ const StyledButton = styled.button<StyledButtonProps>`
   }
 `;
 
-const Button: React.FunctionComponent<ButtonProps> = ({ children, variant }) => (
-  <StyledButton variant={variant!}>
+const Button: React.FunctionComponent<ButtonProps> = ({ children, variant, onClick }) => (
+  <StyledButton variant={variant!} onClick={onClick}>
     <Text noBottomMargin>{children}</Text>
   </StyledButton>
 );

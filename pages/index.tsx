@@ -4,8 +4,11 @@ import { DoggoBox, DoggoButton, DoggoContainer, DoggoList, DoggoText } from "../
 import { DoggoTextVariant } from "../src/ui-components/text";
 import { SizesEnum } from "../src/settings/sizes";
 import { BoxWidth, FlexAlign } from "../src/ui-components/box";
+import { useRouter } from "next/router";
 
 const Home: NextPage = () => {
+  const router = useRouter();
+
   return (
     <div>
       <Head>
@@ -55,10 +58,12 @@ const Home: NextPage = () => {
             </DoggoBox>
             <DoggoBox alignX={FlexAlign.Center} padding={{ top: SizesEnum.Large }}>
               <DoggoBox inline padding={{ x: SizesEnum.Small }}>
-                <DoggoButton>Sign in</DoggoButton>
+                <DoggoButton onClick={() => router.push("/app/auth/sign-in")}>Sign in</DoggoButton>
               </DoggoBox>
               <DoggoBox inline padding={{ x: SizesEnum.Small }}>
-                <DoggoButton variant="green">Sign up</DoggoButton>
+                <DoggoButton variant="green" onClick={() => router.push("/app/auth/sign-up")}>
+                  Sign up
+                </DoggoButton>
               </DoggoBox>
             </DoggoBox>
           </DoggoContainer>

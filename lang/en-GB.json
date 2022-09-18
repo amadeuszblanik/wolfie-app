@@ -2,6 +2,7 @@
   "common.sign_in": "Sign in",
   "common.sign_up": "Sign up",
   "common.soon": "Soon…",
+  "common.back": "Back",
   "page.home.head.title": "Hello Hooman!",
   "page.home.head.description": "I am Doggo, your pet companion app. I will help you to take care of your pet.",
   "page.home.main.current_features": "Current features:",
@@ -15,5 +16,7 @@
   "page.home.main.features_list.ai_enhanced": "AI enhanced features",
   "page.home.main.features_list.more": "and much more…",
   "page.home.main.price": "And all of this is free* and open source*!",
-  "page.home.main.price_details": "*during alpha, after that we might introduce some paid features"
+  "page.home.main.price_details": "*during alpha, after that we might introduce some paid features",
+  "page.sign_in.header": "Sign in",
+  "page.sign_in.description": "Sign in to your Doggo account"
 }

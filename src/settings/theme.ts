@@ -19,6 +19,7 @@ const dark: DefaultTheme = {
     light: "rgb(243,243,243)",
     dark: "rgb(10,10,10)",
     background: "rgb(10,10,10)",
+    backgroundSecondary: "rgb(20,20,20)",
     text: "rgb(243,243,243)",
   },
 };
@@ -42,6 +43,7 @@ const light: DefaultTheme = {
     light: "rgb(243,243,243)",
     dark: "rgb(10,10,10)",
     background: "rgb(243,243,243)",
+    backgroundSecondary: "rgb(255,255,255)",
     text: "rgb(10,10,10)",
   },
 };

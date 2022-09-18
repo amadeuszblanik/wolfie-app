@@ -9,6 +9,11 @@ const Global = createGlobalStyle`
     background: ${({ theme }) => theme.palette.background};
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   }
+
+  :root {
+    --color-text: ${({ theme }) => theme.palette.text};
+    --color-background: ${({ theme }) => theme.palette.background};
+  }
   
   * {
     user-select: none;

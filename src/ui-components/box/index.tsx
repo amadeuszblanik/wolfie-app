@@ -2,8 +2,9 @@ import styled, { DefaultTheme } from "styled-components";
 import type React from "react";
 import Sizes, { SizesEnum } from "../../settings/sizes";
 import type { Padding } from "../types/padding";
-import { paddingMixin } from "../mixins";
+import { isDarkMixin, paddingMixin } from "../mixins";
 import { Property } from "csstype";
+import darkenColor from "../mixins/darkenColor";
 
 export enum FlexAlign {
   Left = "flex-start",
@@ -38,6 +39,12 @@ const StyledView = styled.div<StyledViewProps>`
   ${({ padding }) => padding && `${paddingMixin(padding)}`};
   background: ${({ theme, background }) => (background ? theme.palette[background] : "transparent")};
   border-radius: ${({ borderRadius }) => (borderRadius ? ` ${borderRadius}px` : "0")};
+
+  ${({ theme, background }) =>
+    background
+      ? `--color-text: ${isDarkMixin(theme.palette[background]) ? theme.palette.light : theme.palette.dark}`
+      : theme.palette.text};
+  ${({ theme, background }) => (background ? `--color-background: ${theme.palette[background]}` : "")};
 `;
 
 interface DoggoBoxProps {

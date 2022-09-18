@@ -1,7 +1,8 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import { FormattedMessage } from "react-intl";
 
-const Home: NextPage = () => {
+const App: NextPage = () => {
   return (
     <div>
       <Head>
@@ -10,9 +11,11 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>soon…</main>
+      <main>
+        <FormattedMessage id="common.soon" />
+      </main>
     </div>
   );
 };
 
-export default Home;
+export default App;

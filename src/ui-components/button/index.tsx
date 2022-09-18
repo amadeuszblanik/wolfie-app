@@ -10,7 +10,7 @@ interface StyledButtonProps {
 
 interface ButtonProps {
   variant?: keyof DefaultTheme["palette"];
-  children: string;
+  children: React.ReactNode;
   onClick: () => void;
 }
 

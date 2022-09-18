@@ -1,0 +1,19 @@
+{
+  "common.sign_in": "Sign in",
+  "common.sign_up": "Sign up",
+  "common.soon": "Soon…",
+  "page.home.head.title": "Hello Hooman!",
+  "page.home.head.description": "I am Doggo, your pet companion app. I will help you to take care of your pet.",
+  "page.home.main.current_features": "Current features:",
+  "page.home.main.planned_features_list": "Planned features:",
+  "page.home.main.features_list.weight": "Weight tracker",
+  "page.home.main.features_list.medications": "Medication tracker",
+  "page.home.main.features_list.vaccination": "Vaccination tracker",
+  "page.home.main.features_list.dog_park": "Dog park finder",
+  "page.home.main.features_list.walk_tinder": "Walk Tinder",
+  "page.home.main.features_list.dog_walk_tracking": "Dog walk tracking",
+  "page.home.main.features_list.ai_enhanced": "AI enhanced features",
+  "page.home.main.features_list.more": "and much more…",
+  "page.home.main.price": "And all of this is free* and open source*!",
+  "page.home.main.price_details": "*during alpha, after that we might introduce some paid features"
+}

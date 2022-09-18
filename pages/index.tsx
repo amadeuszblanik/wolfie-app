@@ -5,8 +5,10 @@ import { DoggoTextVariant } from "../src/ui-components/text";
 import { SizesEnum } from "../src/settings/sizes";
 import { BoxWidth, FlexAlign } from "../src/ui-components/box";
 import { useRouter } from "next/router";
+import { FormattedMessage, useIntl } from "react-intl";
 
 const Home: NextPage = () => {
+  const intl = useIntl();
   const router = useRouter();
 
   return (
@@ -24,10 +26,12 @@ const Home: NextPage = () => {
           </DoggoBox>
           <DoggoBox padding={{ bottom: SizesEnum.Large }}>
             <DoggoText variant={DoggoTextVariant.LargeTitle} leading>
-              Hello Hooman!
+              <FormattedMessage id="page.home.head.title" />
             </DoggoText>
           </DoggoBox>
-          <DoggoText>I am Doggo, your pet companion app. I will help you to take care of your pet.</DoggoText>
+          <DoggoText>
+            <FormattedMessage id="page.home.head.description" />
+          </DoggoText>
         </DoggoBox>
       </header>
 
@@ -35,34 +39,48 @@ const Home: NextPage = () => {
         <DoggoBox padding={{ top: SizesEnum.Medium, bottom: SizesEnum.ExtraLarge }}>
           <DoggoContainer>
             <DoggoBox column alignX={FlexAlign.Center} width={BoxWidth.Full}>
-              <DoggoText noBottomMargin>Current features:</DoggoText>
-              <DoggoBox width={BoxWidth.Full} padding={{ y: SizesEnum.Medium }}>
-                <DoggoList items={["Weight tracker", "Medication tracker", "Vaccination tracker"]}></DoggoList>
-              </DoggoBox>
-              <DoggoText noBottomMargin>Planned features:</DoggoText>
+              <DoggoText noBottomMargin>
+                <FormattedMessage id="page.home.main.current_features" />
+              </DoggoText>
               <DoggoBox width={BoxWidth.Full} padding={{ y: SizesEnum.Medium }}>
                 <DoggoList
                   items={[
-                    "Dog park finder",
-                    "Walk tinder",
-                    "Dog walk tracking",
-                    "AI enhanced features",
-                    "and much more…",
+                    intl.formatMessage({ id: "page.home.main.features_list.weight" }),
+                    intl.formatMessage({ id: "page.home.main.features_list.medications" }),
+                    intl.formatMessage({ id: "page.home.main.features_list.vaccination" }),
                   ]}
                 ></DoggoList>
               </DoggoBox>
-              <DoggoText variant={DoggoTextVariant.Title3}>And all of this is free* and open source*!</DoggoText>
+              <DoggoText noBottomMargin>
+                <FormattedMessage id="page.home.main.planned_features_list" />
+              </DoggoText>
+              <DoggoBox width={BoxWidth.Full} padding={{ y: SizesEnum.Medium }}>
+                <DoggoList
+                  items={[
+                    intl.formatMessage({ id: "page.home.main.features_list.dog_park" }),
+                    intl.formatMessage({ id: "page.home.main.features_list.walk_tinder" }),
+                    intl.formatMessage({ id: "page.home.main.features_list.dog_walk_tracking" }),
+                    intl.formatMessage({ id: "page.home.main.features_list.ai_enhanced" }),
+                    intl.formatMessage({ id: "page.home.main.features_list.more" }),
+                  ]}
+                ></DoggoList>
+              </DoggoBox>
+              <DoggoText variant={DoggoTextVariant.Title3}>
+                <FormattedMessage id="page.home.main.price" />
+              </DoggoText>
               <DoggoText variant={DoggoTextVariant.Footnote}>
-                *during alpha, after that we might introduce some paid features
+                <FormattedMessage id="page.home.main.price_details" />
               </DoggoText>
             </DoggoBox>
             <DoggoBox alignX={FlexAlign.Center} padding={{ top: SizesEnum.Large }}>
               <DoggoBox inline padding={{ x: SizesEnum.Small }}>
-                <DoggoButton onClick={() => router.push("/app/auth/sign-in")}>Sign in</DoggoButton>
+                <DoggoButton onClick={() => router.push("/app/auth/sign-in")}>
+                  <FormattedMessage id="common.sign_in" />
+                </DoggoButton>
               </DoggoBox>
               <DoggoBox inline padding={{ x: SizesEnum.Small }}>
                 <DoggoButton variant="green" onClick={() => router.push("/app/auth/sign-up")}>
-                  Sign up
+                  <FormattedMessage id="common.sign_up" />
                 </DoggoButton>
               </DoggoBox>
             </DoggoBox>

@@ -1,0 +1,19 @@
+{
+  "common.sign_in": "Zaloguj się",
+  "common.sign_up": "Zarejestruj się",
+  "common.soon": "Wkrótce…",
+  "page.home.head.title": "Witaj Człowieku!",
+  "page.home.head.description": "Jestem Twoim asystentem w codziennych zwierzęcych sprawach.",
+  "page.home.main.current_features": "Lista obecnych funkcji:",
+  "page.home.main.planned_features_list": "Lista planowanych funkcji:",
+  "page.home.main.features_list.weight": "Śledzenie wagi Twojego pupila",
+  "page.home.main.features_list.medications": "Śledzenie medykamentów",
+  "page.home.main.features_list.vaccination": "Śledzenie szczepień",
+  "page.home.main.features_list.dog_park": "Wyszukiwarka parków dla psów",
+  "page.home.main.features_list.walk_tinder": "Wyszukiwarka osób chcących wyprowadzić psa",
+  "page.home.main.features_list.dog_walk_tracking": "Śledzenie wyprowadzania psa",
+  "page.home.main.features_list.ai_enhanced": "Funkcje wzbogacone o AI",
+  "page.home.main.features_list.more": "i wiele więcej…",
+  "page.home.main.price": "I to wszystko za darmo oraz w open-source'ie*!",
+  "page.home.main.price_details": "*podczas trwania alpha-testów, w przyszłości możemy wprowadzić płatne usługi"
+}

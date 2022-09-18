@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { DoggoBox, DoggoContainer, DoggoList, DoggoText } from "../src/ui-components";
+import { DoggoBox, DoggoButton, DoggoContainer, DoggoList, DoggoText } from "../src/ui-components";
 import { DoggoTextVariant } from "../src/ui-components/text";
 import { SizesEnum } from "../src/settings/sizes";
 import { BoxWidth, FlexAlign } from "../src/ui-components/box";
@@ -52,6 +52,14 @@ const Home: NextPage = () => {
               <DoggoText variant={DoggoTextVariant.Footnote}>
                 *during alpha, after that we might introduce some paid features
               </DoggoText>
+            </DoggoBox>
+            <DoggoBox alignX={FlexAlign.Center} padding={{ top: SizesEnum.Large }}>
+              <DoggoBox inline padding={{ x: SizesEnum.Small }}>
+                <DoggoButton>Sign in</DoggoButton>
+              </DoggoBox>
+              <DoggoBox inline padding={{ x: SizesEnum.Small }}>
+                <DoggoButton variant="green">Sign up</DoggoButton>
+              </DoggoBox>
             </DoggoBox>
           </DoggoContainer>
         </DoggoBox>

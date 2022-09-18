@@ -3,6 +3,7 @@ import "styled-components";
 
 declare module "styled-components" {
   export interface DefaultTheme {
+    borderRadius: string;
     palette: {
       red: string;
       orange: string;
@@ -17,6 +18,8 @@ declare module "styled-components" {
       pink: string;
       gray: string;
       brown: string;
+      light: string;
+      dark: string;
       background: string;
       text: string;
     };

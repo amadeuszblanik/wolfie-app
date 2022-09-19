@@ -4,10 +4,12 @@ import ApiClient from "../client";
 import { ApiStatesTypes } from "../../types/api-states.types";
 import { AuthSignInBody } from "../types/auth-sign-in.types";
 import { useDeviceName } from "../../hooks";
+import { useIntl } from "react-intl";
 
 const useSignIn = () => {
   const queryClient = useQueryClient();
   const deviceName = useDeviceName();
+  const intl = useIntl();
 
   const [accessToken, setAccessToken] = useState<string>();
   const [refreshToken, setRefreshToken] = useState<string>();
@@ -16,7 +18,7 @@ const useSignIn = () => {
 
   const { isLoading, isError, isSuccess, mutate } = useMutation(
     (body: AuthSignInBody) => {
-      return new ApiClient().signIn({ ...body, device: deviceName });
+      return new ApiClient(intl.locale).signIn({ ...body, device: deviceName });
     },
     {
       onSuccess: (response) => {

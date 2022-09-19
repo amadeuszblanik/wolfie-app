@@ -34,8 +34,8 @@ const useDeviceNameHook = (): string => {
   const [userAgent, setUserAgent] = useState<string>("");
 
   useEffect(() => {
-    setUserAgent(navigator.userAgent);
-  }, [navigator.userAgent]);
+    setUserAgent(navigator?.userAgent ?? "Other");
+  });
 
   return `${getDevice(userAgent)} ${getBrowser(userAgent)}`;
 };

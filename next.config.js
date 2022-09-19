@@ -4,6 +4,7 @@ const withPWA = require("next-pwa")({
   dest: "public",
   runtimeCaching,
 });
+const withSvgr = require('next-plugin-svgr');
 
 const nextConfig = {
   reactStrictMode: true,
@@ -20,4 +21,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withPWA(nextConfig);
+module.exports = withPWA(withSvgr(nextConfig));

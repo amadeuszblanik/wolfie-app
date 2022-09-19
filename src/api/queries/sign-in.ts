@@ -61,12 +61,7 @@ const useSignIn = () => {
     setStatus(ApiStatesTypes.Idle);
   }, [isLoading, isError, isSuccess, errorMessage]);
 
-  useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.debug("useSignIn", { isLoading, isError, isSuccess, accessToken, refreshToken });
-  });
-
-  return { accessToken, refreshToken, mutate, status, errorMessage };
+  return { accessToken, refreshToken, mutate, isLoading, isError, isSuccess, status, errorMessage };
 };
 
 export default useSignIn;

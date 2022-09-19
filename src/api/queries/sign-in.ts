@@ -2,9 +2,12 @@ import { useEffect, useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import ApiClient from "../client";
 import { ApiStatesTypes } from "../../types/api-states.types";
+import { AuthSignInBody } from "../types/auth-sign-in.types";
+import { useDeviceName } from "../../hooks";
 
 const useSignIn = () => {
   const queryClient = useQueryClient();
+  const deviceName = useDeviceName();
 
   const [accessToken, setAccessToken] = useState<string>();
   const [refreshToken, setRefreshToken] = useState<string>();
@@ -12,7 +15,9 @@ const useSignIn = () => {
   const [status, setStatus] = useState<ApiStatesTypes>(ApiStatesTypes.Idle);
 
   const { isLoading, isError, isSuccess, mutate } = useMutation(
-    ({ username, password }: { username: string; password: string }) => new ApiClient().signIn(username, password),
+    (body: AuthSignInBody) => {
+      return new ApiClient().signIn({ ...body, device: deviceName });
+    },
     {
       onSuccess: (response) => {
         queryClient.invalidateQueries(["signIn"]);

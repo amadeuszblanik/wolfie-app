@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { FormattedMessage, useIntl } from "react-intl";
 import { LayoutAuth } from "../../../src/layout";
-import { DoggoBox, DoggoButton, DoggoInput, DoggoModal } from "../../../src/ui-components";
+import { DoggoBox, DoggoButton, DoggoCheckbox, DoggoInput, DoggoModal } from "../../../src/ui-components";
 import useSignIn from "../../../src/api/queries/sign-in";
 import { useEffect, useState } from "react";
 import { ApiStatesTypes } from "../../../src/types/api-states.types";
@@ -13,8 +13,9 @@ const SignIn: NextPage = () => {
   const intl = useIntl();
   const router = useRouter();
 
-  const [username, setUsername] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [keepSignIn, setKeepSignIn] = useState(false);
 
   const { accessToken, refreshToken, mutate, isLoading, status, errorMessage } = useSignIn();
 
@@ -63,8 +64,9 @@ const SignIn: NextPage = () => {
             onChange={setUsername}
           />
           <DoggoInput label="Password" type="password" value={password} onChange={setPassword} />
+          <DoggoCheckbox label="Keep me signed in" value={keepSignIn} onChange={setKeepSignIn} />
         </DoggoBox>
-        <DoggoButton onClick={() => mutate({ username, password })} disabled={isLoading}>
+        <DoggoButton onClick={() => mutate({ username, password, keepSignIn })} disabled={isLoading}>
           <FormattedMessage id="common.sign_in" />
         </DoggoButton>
         {errorModalVisible && (
@@ -72,7 +74,7 @@ const SignIn: NextPage = () => {
             <ComponentErrorScreen
               title={intl.formatMessage({ id: "common.error_header" })}
               message={errorMessage || intl.formatMessage({ id: "common.error_message" })}
-              onTryAgain={() => mutate({ username, password })}
+              onTryAgain={() => mutate({ username, password, keepSignIn })}
             />
           </DoggoModal>
         )}

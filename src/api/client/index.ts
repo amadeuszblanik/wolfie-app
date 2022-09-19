@@ -1,3 +1,5 @@
+import { AuthSignInBody, AuthSignInResponse } from "../types/auth-sign-in.types";
+
 interface CommonErrorResponse {
   error: string;
   message: string;
@@ -7,11 +9,8 @@ interface CommonErrorResponse {
 export default class ApiClient {
   constructor(private readonly baseUrl: string = "http://localhost:3000/api") {}
 
-  public signIn = async (
-    username: string,
-    password: string,
-  ): Promise<{ accessToken: string; refreshToken: string } | CommonErrorResponse> => {
-    return this.post("/auth/sign-in", { username, password });
+  public signIn = async (body: AuthSignInBody): Promise<AuthSignInResponse | CommonErrorResponse> => {
+    return this.post("/auth/sign-in", body);
   };
 
   private async get<T>(path: string): Promise<T> {

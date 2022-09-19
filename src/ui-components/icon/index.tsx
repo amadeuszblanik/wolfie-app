@@ -3,10 +3,11 @@ import Sizes, { SizesEnum } from "../../settings/sizes";
 import React from "react";
 import CloseIcon from "./icons/close-outline.svg";
 import CloseCircleIcon from "./icons/close-circle-outline.svg";
-import WarningOutlineIcon from "./icons/warning-outline.svg";
+import WarningIcon from "./icons/warning-outline.svg";
+import CheckmarkIcon from "./icons/checkmark-outline.svg";
 
 interface Props {
-  icon: "close" | "close-circle" | "warning-outline";
+  icon: "close" | "close-circle" | "warning" | "checkmark";
   size?: SizesEnum;
 }
 
@@ -27,8 +28,10 @@ const Component: React.FunctionComponent<Props> = ({ icon, size }) => {
         return <CloseIcon />;
       case "close-circle":
         return <CloseCircleIcon />;
-      case "warning-outline":
-        return <WarningOutlineIcon />;
+      case "warning":
+        return <WarningIcon />;
+      case "checkmark":
+        return <CheckmarkIcon />;
       default:
         return null;
     }

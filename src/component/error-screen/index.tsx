@@ -16,7 +16,7 @@ const Component: React.FunctionComponent<Props> = ({ title, message, onTryAgain 
     <DoggoBox alignX={FlexAlign.Center} column>
       <DoggoBox padding={{ bottom: SizesEnum.Medium }}>
         <DoggoBox alignX={FlexAlign.Center}>
-          <DoggoIcon icon="warning-outline" size={SizesEnum.ExtraLarge2} />
+          <DoggoIcon icon="warning" size={SizesEnum.ExtraLarge2} />
         </DoggoBox>
       </DoggoBox>
       <DoggoBox>

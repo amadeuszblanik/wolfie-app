@@ -2,9 +2,19 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { FormattedMessage } from "react-intl";
 import { LayoutAuth } from "../../../src/layout";
-import { DoggoBox, DoggoButton, DoggoInput } from "../../../src/ui-components";
+import { DoggoBox, DoggoButton, DoggoInput, DoggoText } from "../../../src/ui-components";
+import useSignIn from "../../../src/api/queries/sign-in";
+import { useEffect } from "react";
+import { BoxWidth } from "../../../src/ui-components/box";
 
 const SignIn: NextPage = () => {
+  const { accessToken, refreshToken, mutate, status, errorMessage } = useSignIn();
+
+  useEffect(() => {
+    // eslint-disable-next-line no-console
+    console.debug(accessToken, refreshToken);
+  });
+
   return (
     <div>
       <Head>
@@ -23,9 +33,15 @@ const SignIn: NextPage = () => {
           />
         </DoggoBox>
         {/* eslint-disable-next-line no-console */}
-        <DoggoButton onClick={() => console.debug("Sign in")}>
+        <DoggoButton onClick={() => mutate({ username: "amadeusz@blanik.me", password: "Passw0rd!1" })}>
           <FormattedMessage id="common.sign_in" />
         </DoggoButton>
+        <DoggoBox width={BoxWidth.Full} background="purple" column>
+          <DoggoText>{status}</DoggoText>
+          <DoggoText>{accessToken}</DoggoText>
+          <DoggoText>{refreshToken}</DoggoText>
+          <DoggoText>{errorMessage}</DoggoText>
+        </DoggoBox>
       </LayoutAuth>
     </div>
   );

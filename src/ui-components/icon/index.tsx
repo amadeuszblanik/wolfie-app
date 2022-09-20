@@ -6,8 +6,10 @@ import CloseCircleIcon from "./icons/close-circle-outline.svg";
 import WarningIcon from "./icons/warning-outline.svg";
 import CheckmarkIcon from "./icons/checkmark-outline.svg";
 
+export const Icons = ["close", "close-circle", "warning", "checkmark"];
+
 interface Props {
-  icon: "close" | "close-circle" | "warning" | "checkmark";
+  icon: typeof Icons[number];
   size?: SizesEnum;
 }
 

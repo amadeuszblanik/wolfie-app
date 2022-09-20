@@ -48,7 +48,7 @@ const StyledView = styled.div<StyledViewProps>`
 `;
 
 interface DoggoBoxProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   background?: keyof DefaultTheme["palette"];
   border?: SizesEnum;
   padding?: Padding;

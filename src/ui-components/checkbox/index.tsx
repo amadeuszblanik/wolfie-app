@@ -14,7 +14,6 @@ interface Props {
   value: boolean;
   onChange: (nextValue: boolean) => void;
   label: string;
-  placeholder?: string;
   errors?: string[];
 }
 
@@ -37,7 +36,7 @@ const StyledLabel = styled.label`
   cursor: pointer;
 `;
 
-const Component: React.FunctionComponent<Props> = ({ label, placeholder, errors, value, onChange }) => (
+const Component: React.FunctionComponent<Props> = ({ label, errors, value, onChange }) => (
   <Box padding={{ bottom: SizesEnum.Medium }} column>
     <StyledLabel>
       <StyledInputNative

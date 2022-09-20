@@ -58,7 +58,7 @@ const variantSize: {
   [DoggoTextVariant.Caption2]: { standard: 11, leading: 13 },
 };
 
-interface DoggoTextProps {
+export interface Props {
   children: React.ReactNode;
   variant?: DoggoTextVariant;
   weight?: DoggoTextWeight;
@@ -67,7 +67,7 @@ interface DoggoTextProps {
   color?: keyof DefaultTheme["palette"];
 }
 
-const Component = ({ children, variant, leading, weight, color, ...props }: DoggoTextProps) => {
+const Component: React.FunctionComponent<Props> = ({ children, variant, leading, weight, color, ...props }) => {
   const size = variantSize[variant || DoggoTextVariant.Body][leading ? "leading" : "standard"];
 
   return (

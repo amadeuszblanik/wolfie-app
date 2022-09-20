@@ -6,6 +6,22 @@ import Box from "../box";
 import { DoggoText } from "../index";
 import { DoggoTextVariant } from "../text";
 
+export enum InputTypes {
+  Color = "color",
+  Date = "date",
+  DatetimeLocal = "datetime-local",
+  Email = "email",
+  Month = "month",
+  Number = "number",
+  Password = "password",
+  Search = "search",
+  Telephone = "tel",
+  Text = "text",
+  Time = "time",
+  Url = "url",
+  Week = "week",
+}
+
 interface Props {
   value: string;
   onChange: (nextValue: string) => void;

@@ -46,6 +46,32 @@ setIntlConfig({
     getFormats,
 });
 
-addDecorator(withThemes(ThemeProvider, [Theme.light, Theme.dark]));
-addDecorator(story => <><GlobalStyles theme={Theme.light} />{story()}</>);
+const providerFn = ({ theme, children }) => {
+    return <ThemeProvider theme={theme}>
+        <GlobalStyles/>
+        {children}
+    </ThemeProvider>;
+};
+
+
+export const onThemeSwitch = context => {
+    const { theme } = context;
+    console.debug('onThemeSwitch', theme);
+
+    const color = theme.palette.text;
+    const background = theme.palette.background;
+    const parameters = {
+        color: {
+            default: color,
+        },
+        backgrounds: {
+            default: background,
+        },
+    };
+    return {
+        parameters,
+    };
+};
+
+addDecorator(withThemes(ThemeProvider, [Theme.light, Theme.dark], { providerFn, onThemeSwitch }));
 addDecorator(withIntl);

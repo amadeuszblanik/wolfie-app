@@ -6,13 +6,13 @@ import { useRouter } from "next/router";
 import { BoxWidth, FlexAlign } from "../../ui-components/box";
 import { DoggoTextVariant } from "../../ui-components/text";
 
-interface AuthProps {
+interface Props {
   title: string;
   description: string;
   children: React.ReactNode;
 }
 
-const Auth: React.FunctionComponent<AuthProps> = ({ children, title, description }) => {
+const Auth: React.FunctionComponent<Props> = ({ children, title, description }) => {
   const router = useRouter();
 
   return (

@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { FormattedMessage } from "react-intl";
+import { LayoutApp } from "../../src/layout";
 
 const App: NextPage = () => {
   return (
@@ -11,9 +12,9 @@ const App: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
+      <LayoutApp>
         <FormattedMessage id="common.soon" />
-      </main>
+      </LayoutApp>
     </div>
   );
 };

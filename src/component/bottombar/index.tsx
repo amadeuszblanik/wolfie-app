@@ -3,9 +3,13 @@ import { DoggoBox, DoggoButton, DoggoContainer, DoggoIcon, DoggoText } from "../
 import { BoxWidth, FlexAlign } from "../../ui-components/box";
 import { SizesEnum } from "../../settings/sizes";
 import { DoggoTextVariant } from "../../ui-components/text";
+import { DoggoIcons } from "../../ui-components/icon";
 
-interface StyledBottomBarButtonProps {
+interface ItemProps {
   active: boolean;
+  icon: DoggoIcons;
+  name: string;
+  disabled?: boolean;
 }
 
 const StyledBottomBar = styled(DoggoBox)`
@@ -14,15 +18,19 @@ const StyledBottomBar = styled(DoggoBox)`
   left: 0;
 `;
 
-const Item = ({ active }: { active: boolean }) => (
+const Item = ({ active, icon, name, disabled }: ItemProps) => (
   // eslint-disable-next-line no-console
-  <DoggoButton onClick={() => console.debug("Button clicked")} variant={active ? "background" : "backgroundSecondary"}>
+  <DoggoButton
+    onClick={() => console.warn("Button clicked")}
+    variant={active ? "background" : "backgroundSecondary"}
+    disabled={disabled}
+  >
     <DoggoBox alignX={FlexAlign.Center} column>
       <DoggoBox padding={{ bottom: SizesEnum.Small }}>
-        <DoggoIcon icon="close-circle" size={SizesEnum.Large2} color={active ? "blue" : undefined} />
+        <DoggoIcon icon={icon} size={SizesEnum.Large2} color={active ? "blue" : undefined} />
       </DoggoBox>
       <DoggoText variant={DoggoTextVariant.Caption2} noBottomMargin uppercase color={active ? "blue" : undefined}>
-        Pets
+        {name}
       </DoggoText>
     </DoggoBox>
   </DoggoButton>
@@ -39,10 +47,9 @@ const Component = () => {
     >
       <DoggoContainer fullWidth>
         <DoggoBox alignX={FlexAlign.SpaceBetween} width={BoxWidth.Full}>
-          <Item active={false} />
-          <Item active={true} />
-          <Item active={false} />
-          <Item active={false} />
+          <Item icon="apps" name="Pets" active={true} />
+          <Item icon="book" name="GDPR" active={false} disabled />
+          <Item icon="cog" name="Settings" active={false} disabled />
         </DoggoBox>
       </DoggoContainer>
     </StyledBottomBar>

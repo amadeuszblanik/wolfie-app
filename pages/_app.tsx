@@ -8,7 +8,7 @@ import en_GB from "../lang/en-GB.json";
 import pl_PL from "../lang/pl-PL.json";
 import { useRouter } from "next/router";
 import { IntlProvider } from "react-intl";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools, ReactQueryDevtoolsPanel } from "react-query/devtools";
 
 const MESSAGES = {
@@ -16,7 +16,7 @@ const MESSAGES = {
   "pl-PL": pl_PL,
 };
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: AppProps<{ dehydratedState: any }>) {
   const [selectedTheme, setSelectedTheme] = useState<ThemeVariants>(ThemeVariants.Dark);
   const [queryClient] = useState(() => new QueryClient());
 
@@ -32,13 +32,15 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <IntlProvider locale={locale} messages={MESSAGES[locale]}>
       <QueryClientProvider client={queryClient}>
-        <ConfigContext.Provider value={{ selectedTheme, setSelectedTheme }}>
-          <ThemeProvider theme={theme[selectedTheme]}>
-            <GlobalStyles />
-            <Component {...pageProps} />
-          </ThemeProvider>
-        </ConfigContext.Provider>
-        <ReactQueryDevtools initialIsOpen />
+        <Hydrate state={pageProps.dehydratedState}>
+          <ConfigContext.Provider value={{ selectedTheme, setSelectedTheme }}>
+            <ThemeProvider theme={theme[selectedTheme]}>
+              <GlobalStyles />
+              <Component {...pageProps} />
+            </ThemeProvider>
+          </ConfigContext.Provider>
+          <ReactQueryDevtools initialIsOpen />
+        </Hydrate>
       </QueryClientProvider>
     </IntlProvider>
   );

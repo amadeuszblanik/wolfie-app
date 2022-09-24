@@ -8,7 +8,7 @@ export default {
   title: "UI-Components/Box",
   component: Component,
   argTypes: {
-    background: { options: Object.keys(Theme.dark["palette"]), control: "select" },
+    background: { options: Object.keys(Theme.dark["palette"]), control: "multi-select" },
     border: { options: SizesEnum, control: "select" },
     padding: { control: "object" },
     width: { options: BoxWidth, control: "select" },

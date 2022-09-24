@@ -6,8 +6,8 @@ import { DoggoTextVariant } from "../../ui-components/text";
 import { FormattedMessage } from "react-intl";
 
 interface Props {
-  title: string;
-  message: string;
+  title?: string;
+  message?: string;
   onTryAgain?: () => void;
 }
 
@@ -21,11 +21,11 @@ const Component: React.FunctionComponent<Props> = ({ title, message, onTryAgain 
       </DoggoBox>
       <DoggoBox>
         <DoggoText variant={DoggoTextVariant.Title1} leading>
-          {title}
+          {title ?? <FormattedMessage id="common.error_header" />}
         </DoggoText>
       </DoggoBox>
       <DoggoText variant={DoggoTextVariant.Headline} leading>
-        {message}
+        {message ?? <FormattedMessage id="common.error_message" />}
       </DoggoText>
       {onTryAgain && (
         <DoggoBox padding={{ top: SizesEnum.Large }}>

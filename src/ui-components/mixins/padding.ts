@@ -2,8 +2,6 @@ import type { Padding } from "../types/padding";
 import Sizes from "../../settings/sizes";
 
 const padding = (values: Padding): string => {
-  console.warn(values);
-
   if (typeof values === "string") {
     return `padding: ${Sizes[values]}px;`;
   }

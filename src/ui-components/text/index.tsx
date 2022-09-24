@@ -31,19 +31,17 @@ export enum DoggoTextWeight {
 export interface StyledTextProps {
   size: number;
   weight: string;
-  color: keyof DefaultTheme["palette"];
+  color?: keyof DefaultTheme["palette"];
   noBottomMargin?: boolean;
   textTransform?: string;
 }
 
 const StyledText = styled.p<StyledTextProps>`
   margin-bottom: ${({ noBottomMargin }) => (noBottomMargin ? "0" : `${Sizes[SizesEnum.Small]}px`)};
-  color: var(--color-text, ${({ theme, color }) => theme.palette[color]});
+  color: ${({ theme, color }) => (color ? theme.palette[color] : "var(--color-text)")};
   font-weight: ${({ weight }) => weight};
   font-size: ${({ size }) => size}px;
   text-transform: ${({ textTransform }) => textTransform};
-
-  ${({ theme, color }) => color && `--color-text: ${theme.palette[color]}`};
 `;
 
 const variantSize: {
@@ -87,7 +85,7 @@ const Component: React.FunctionComponent<Props> = ({
     <StyledText
       size={size}
       weight={weight!}
-      color={color!}
+      color={color}
       textTransform={uppercase ? "uppercase" : undefined}
       {...props}
     >
@@ -99,7 +97,6 @@ const Component: React.FunctionComponent<Props> = ({
 Component.defaultProps = {
   variant: DoggoTextVariant.Body,
   weight: DoggoTextWeight.Regular,
-  color: "text",
 };
 
 export default Component;

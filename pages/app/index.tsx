@@ -1,9 +1,15 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { FormattedMessage } from "react-intl";
 import { LayoutApp } from "../../src/layout";
+import usePetsMy from "../../src/api/queries/pets-my";
+import PetCardGrid from "../../src/component/pet-card-grid";
+import ErrorScreen from "../../src/component/error-screen";
+import { DoggoLoader } from "../../src/ui-components";
+import { SizesEnum } from "../../src/settings/sizes";
 
 const App: NextPage = () => {
+  const { myPets, myPetsError, refetch, isLoading } = usePetsMy();
+
   return (
     <div>
       <Head>
@@ -13,7 +19,9 @@ const App: NextPage = () => {
       </Head>
 
       <LayoutApp>
-        <FormattedMessage id="common.soon" />
+        {isLoading && <DoggoLoader fullScreen size={SizesEnum.ExtraLarge} />}
+        {myPets && <PetCardGrid pets={myPets} />}
+        {myPetsError && <ErrorScreen message={myPetsError.message} onTryAgain={refetch} />}
       </LayoutApp>
     </div>
   );

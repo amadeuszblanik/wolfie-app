@@ -6,6 +6,16 @@
   "common.try_again": "Try again",
   "common.error_header": "Oops! Something went wrong.",
   "common.error_message": "Please try again later.",
+  "common.years": "years",
+  "common.year": "year",
+  "common.months": "months",
+  "common.month": "month",
+  "common.weeks": "weeks",
+  "common.week": "week",
+  "common.days": "days",
+  "common.day": "day",
+  "common.just_born": "Just born",
+  "common.not_born": "Not born yet",
   "page.home.head.title": "Hello Hooman!",
   "page.home.head.description": "I am Doggo, your pet companion app. I will help you to take care of your pet.",
   "page.home.main.current_features": "Current features:",
@@ -21,5 +31,10 @@
   "page.home.main.price": "And all of this is free* and open source*!",
   "page.home.main.price_details": "*during alpha, after that we might introduce some paid features",
   "page.sign_in.header": "Sign in",
-  "page.sign_in.description": "Sign in to your Doggo account"
+  "page.sign_in.description": "Sign in to your Doggo account",
+  "pet.age": "Age",
+  "pet.birthday": "Birthday",
+  "pet.microchip": "Microchip",
+  "pet.breed": "Breed",
+  "pet.breed.mixed": "Mixed"
 }

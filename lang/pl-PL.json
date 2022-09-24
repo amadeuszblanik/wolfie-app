@@ -6,6 +6,16 @@
   "common.try_again": "Spróbuj ponownie",
   "common.error_header": "Ups, coś poszło nie tak",
   "common.error_message": "Spróbuj ponownie później",
+  "common.years": "lat",
+  "common.year": "rok",
+  "common.months": "miesięcy",
+  "common.month": "miesiąc",
+  "common.weeks": "tygodni",
+  "common.week": "tydzień",
+  "common.days": "dni",
+  "common.day": "dzień",
+  "common.just_born": "noworodek",
+  "common.not_born": "nie urodzony",
   "page.home.head.title": "Witaj Człowieku!",
   "page.home.head.description": "Jestem Twoim asystentem w codziennych zwierzęcych sprawach.",
   "page.home.main.current_features": "Lista obecnych funkcji:",
@@ -21,5 +31,10 @@
   "page.home.main.price": "I to wszystko za darmo oraz w open-source'ie*!",
   "page.home.main.price_details": "*podczas trwania alpha-testów, w przyszłości możemy wprowadzić płatne usługi",
   "page.sign_in.header": "Zaloguj się",
-  "page.sign_in.description": "Zaloguj się do swojego konta"
+  "page.sign_in.description": "Zaloguj się do swojego konta",
+  "pet.age": "Wiek",
+  "pet.birthday": "Data urodzenia",
+  "pet.microchip": "Numer mikrochipu",
+  "pet.breed": "Rasa",
+  "pet.breed.mixed": "Mieszana"
 }

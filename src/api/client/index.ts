@@ -1,18 +1,20 @@
 import { AuthSignInBody, AuthSignInResponse } from "../types/auth-sign-in.types";
-
-interface CommonErrorResponse {
-  error: string;
-  message: string;
-  statusCode: number;
-}
+import { PetSingleResponseModel } from "../response-model/pet-single.response-model";
+import myPetsDto from "../dto/my-pets.dto";
+import { CommonErrorResponseModel } from "../response-model/common-error.response-model";
+import responseDto, { ApiResponse } from "../dto/response.dto";
 
 export default class ApiClient {
   private readonly baseUrl: string = "http://localhost:3000/api";
 
   constructor(private readonly language: string) {}
 
-  public signIn = async (body: AuthSignInBody): Promise<AuthSignInResponse | CommonErrorResponse> => {
+  public signIn = async (body: AuthSignInBody): Promise<AuthSignInResponse | CommonErrorResponseModel> => {
     return this.post("/auth/sign-in", body);
+  };
+
+  public petsMy = async (): Promise<ApiResponse<PetSingleResponseModel[]>> => {
+    return this.get<PetSingleResponseModel[]>("/pets/my").then((response) => responseDto(response, myPetsDto));
   };
 
   private getHeaders(): Headers {

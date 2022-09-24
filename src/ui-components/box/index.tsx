@@ -1,10 +1,8 @@
-import styled, { DefaultTheme } from "styled-components";
+import styled, { ThemePalette } from "styled-components";
 import type React from "react";
 import Sizes, { SizesEnum } from "../../settings/sizes";
 import type { Padding } from "../types/padding";
-import { isDarkMixin, paddingMixin } from "../mixins";
-import { Property } from "csstype";
-import darkenColor from "../mixins/darkenColor";
+import { backgroundMixin, colorTextMixin, paddingMixin } from "../mixins";
 
 export enum FlexAlign {
   Left = "flex-start",
@@ -20,7 +18,7 @@ export enum BoxWidth {
 }
 
 interface StyledViewProps {
-  background?: keyof DefaultTheme["palette"];
+  background?: ThemePalette | ThemePalette[];
   borderRadius?: number;
   width?: string;
   padding?: Padding;
@@ -37,19 +35,14 @@ const StyledView = styled.div<StyledViewProps>`
   ${({ alignItems }) => (alignItems ? `align-items: ${alignItems}` : "")};
   ${({ width }) => width && `width: ${width}`};
   ${({ padding }) => padding && `${paddingMixin(padding)}`};
-  background: ${({ theme, background }) => (background ? theme.palette[background] : "transparent")};
+  ${({ background }) => background && colorTextMixin(background)};
+  ${({ background }) => background && backgroundMixin(background)};
   border-radius: ${({ borderRadius }) => (borderRadius ? ` ${borderRadius}px` : "0")};
-
-  ${({ theme, background }) =>
-    background
-      ? `--color-text: ${isDarkMixin(theme.palette[background]) ? theme.palette.light : theme.palette.dark}`
-      : theme.palette.text};
-  ${({ theme, background }) => (background ? `--color-background: ${theme.palette[background]}` : "")};
 `;
 
 interface DoggoBoxProps {
   children?: React.ReactNode;
-  background?: keyof DefaultTheme["palette"];
+  background?: ThemePalette | ThemePalette[];
   border?: SizesEnum;
   padding?: Padding;
   width?: BoxWidth;

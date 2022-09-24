@@ -1,7 +1,14 @@
 import { DefaultTheme } from "styled-components";
 
+const shared = {
+  borderRadius: "8px",
+  opacity: {
+    modal: 0.5,
+  },
+};
+
 const dark: DefaultTheme = {
-  borderRadius: "4px",
+  ...shared,
   palette: {
     primary: "rgb(255, 219, 184)",
     red: "rgb(255, 69, 58)",
@@ -31,7 +38,7 @@ const dark: DefaultTheme = {
 };
 
 const light: DefaultTheme = {
-  borderRadius: "4px",
+  ...shared,
   palette: {
     primary: "rgb(255, 219, 184)",
     red: "rgb(255, 59, 48)",

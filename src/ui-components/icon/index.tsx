@@ -1,12 +1,17 @@
 import styled, { DefaultTheme } from "styled-components";
 import Sizes, { SizesEnum } from "../../settings/sizes";
 import React from "react";
-import CloseIcon from "./icons/close-outline.svg";
-import CloseCircleIcon from "./icons/close-circle-outline.svg";
-import WarningIcon from "./icons/warning-outline.svg";
+import AppsIcon from "./icons/apps-outline.svg";
+import BookIcon from "./icons/book-outline.svg";
 import CheckmarkIcon from "./icons/checkmark-outline.svg";
+import CloseCircleIcon from "./icons/close-circle-outline.svg";
+import CloseIcon from "./icons/close-outline.svg";
+import CogIcon from "./icons/cog-outline.svg";
+import WarningIcon from "./icons/warning-outline.svg";
 
-export const Icons = ["close", "close-circle", "warning", "checkmark"];
+export const Icons = ["apps", "book", "checkmark", "close-circle", "close", "cog", "warning"];
+
+export type DoggoIcons = typeof Icons[number];
 
 interface Props {
   icon: typeof Icons[number];
@@ -31,14 +36,20 @@ const StyledIcon = styled.div<StyledIconProps>`
 const Component: React.FunctionComponent<Props> = ({ icon, size, ...props }) => {
   const iconToShow = () => {
     switch (icon) {
-      case "close":
-        return <CloseIcon />;
-      case "close-circle":
-        return <CloseCircleIcon />;
-      case "warning":
-        return <WarningIcon />;
+      case "apps":
+        return <AppsIcon />;
+      case "book":
+        return <BookIcon />;
       case "checkmark":
         return <CheckmarkIcon />;
+      case "close-circle":
+        return <CloseCircleIcon />;
+      case "close":
+        return <CloseIcon />;
+      case "cog":
+        return <CogIcon />;
+      case "warning":
+        return <WarningIcon />;
       default:
         return null;
     }

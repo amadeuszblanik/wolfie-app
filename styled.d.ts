@@ -4,6 +4,9 @@ import "styled-components";
 declare module "styled-components" {
   export interface DefaultTheme {
     borderRadius: string;
+    opacity: {
+      modal: number;
+    };
     palette: {
       primary: string;
       red: string;
@@ -31,4 +34,6 @@ declare module "styled-components" {
       text: string;
     };
   }
+
+  export type ThemePalette = keyof DefaultTheme["palette"];
 }

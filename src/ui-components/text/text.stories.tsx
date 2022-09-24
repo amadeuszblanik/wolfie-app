@@ -18,6 +18,7 @@ export default {
     variant: { options: DoggoTextVariant, control: "select" },
     weight: { options: DoggoTextWeight, control: "select" },
     leading: { control: "boolean" },
+    uppercase: { control: "boolean" },
     noBottomMargin: { control: "boolean" },
     color: { options: Object.keys(Theme.light.palette), control: "select" },
     sampleText: { control: "text" },

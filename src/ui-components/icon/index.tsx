@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { DefaultTheme } from "styled-components";
 import Sizes, { SizesEnum } from "../../settings/sizes";
 import React from "react";
 import CloseIcon from "./icons/close-outline.svg";
@@ -11,19 +11,24 @@ export const Icons = ["close", "close-circle", "warning", "checkmark"];
 interface Props {
   icon: typeof Icons[number];
   size?: SizesEnum;
+  color?: keyof DefaultTheme["palette"];
 }
 
 interface StyledIconProps {
   fullWidth?: boolean;
   size: number;
+  color?: keyof DefaultTheme["palette"];
 }
 
 const StyledIcon = styled.div<StyledIconProps>`
   width: ${({ size }) => size}px;
   height: ${({ size }) => size}px;
+  color: var(--color-text, ${({ theme, color }) => theme.palette[color ?? "text"]});
+
+  ${({ theme, color }) => color && `--color-text: ${theme.palette[color]}`};
 `;
 
-const Component: React.FunctionComponent<Props> = ({ icon, size }) => {
+const Component: React.FunctionComponent<Props> = ({ icon, size, ...props }) => {
   const iconToShow = () => {
     switch (icon) {
       case "close":
@@ -39,7 +44,11 @@ const Component: React.FunctionComponent<Props> = ({ icon, size }) => {
     }
   };
 
-  return <StyledIcon size={size ? Sizes[size] : Sizes[SizesEnum.Large]}>{iconToShow()}</StyledIcon>;
+  return (
+    <StyledIcon size={size ? Sizes[size] : Sizes[SizesEnum.Large]} {...props}>
+      {iconToShow()}
+    </StyledIcon>
+  );
 };
 
 export default Component;

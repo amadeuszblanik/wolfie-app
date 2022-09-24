@@ -3,6 +3,7 @@ import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import Component, { Icons } from "./index";
 import { SizesEnum } from "../../settings/sizes";
+import Theme from "../../settings/theme";
 
 export default {
   title: "UI-Components/Icon",
@@ -10,6 +11,7 @@ export default {
   argTypes: {
     icon: { options: Icons, control: "select" },
     size: { options: SizesEnum, control: "select" },
+    color: { options: Object.keys(Theme.light.palette), control: "select" },
   },
 } as ComponentMeta<typeof Component>;
 

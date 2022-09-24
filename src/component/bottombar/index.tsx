@@ -4,20 +4,24 @@ import { BoxWidth, FlexAlign } from "../../ui-components/box";
 import { SizesEnum } from "../../settings/sizes";
 import { DoggoTextVariant } from "../../ui-components/text";
 
+interface StyledBottomBarButtonProps {
+  active: boolean;
+}
+
 const StyledBottomBar = styled(DoggoBox)`
   position: fixed;
   bottom: 0;
   left: 0;
 `;
 
-const Item = () => (
+const Item = ({ active }: { active: boolean }) => (
   // eslint-disable-next-line no-console
-  <DoggoButton onClick={() => console.debug("Button clicked")} variant="blue">
+  <DoggoButton onClick={() => console.debug("Button clicked")} variant={active ? "background" : "backgroundSecondary"}>
     <DoggoBox alignX={FlexAlign.Center} column>
       <DoggoBox padding={{ bottom: SizesEnum.Small }}>
-        <DoggoIcon icon="close-circle" size={SizesEnum.Large2} />
+        <DoggoIcon icon="close-circle" size={SizesEnum.Large2} color={active ? "blue" : undefined} />
       </DoggoBox>
-      <DoggoText variant={DoggoTextVariant.Caption2} noBottomMargin>
+      <DoggoText variant={DoggoTextVariant.Caption2} noBottomMargin uppercase color={active ? "blue" : undefined}>
         Pets
       </DoggoText>
     </DoggoBox>
@@ -35,10 +39,10 @@ const Component = () => {
     >
       <DoggoContainer fullWidth>
         <DoggoBox alignX={FlexAlign.SpaceBetween} width={BoxWidth.Full}>
-          <Item />
-          <Item />
-          <Item />
-          <Item />
+          <Item active={false} />
+          <Item active={true} />
+          <Item active={false} />
+          <Item active={false} />
         </DoggoBox>
       </DoggoContainer>
     </StyledBottomBar>

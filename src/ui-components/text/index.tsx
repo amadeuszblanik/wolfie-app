@@ -33,13 +33,17 @@ export interface StyledTextProps {
   weight: string;
   color: keyof DefaultTheme["palette"];
   noBottomMargin?: boolean;
+  textTransform?: string;
 }
 
 const StyledText = styled.p<StyledTextProps>`
   margin-bottom: ${({ noBottomMargin }) => (noBottomMargin ? "0" : `${Sizes[SizesEnum.Small]}px`)};
-  color: ${({ theme, color }) => theme.palette[color]};
+  color: var(--color-text, ${({ theme, color }) => theme.palette[color]});
   font-weight: ${({ weight }) => weight};
   font-size: ${({ size }) => size}px;
+  text-transform: ${({ textTransform }) => textTransform};
+
+  ${({ theme, color }) => color && `--color-text: ${theme.palette[color]}`};
 `;
 
 const variantSize: {
@@ -65,13 +69,28 @@ export interface Props {
   leading?: boolean;
   noBottomMargin?: boolean;
   color?: keyof DefaultTheme["palette"];
+  uppercase?: boolean;
 }
 
-const Component: React.FunctionComponent<Props> = ({ children, variant, leading, weight, color, ...props }) => {
+const Component: React.FunctionComponent<Props> = ({
+  children,
+  variant,
+  leading,
+  weight,
+  color,
+  uppercase,
+  ...props
+}) => {
   const size = variantSize[variant || DoggoTextVariant.Body][leading ? "leading" : "standard"];
 
   return (
-    <StyledText size={size} weight={weight!} color={color!} {...props}>
+    <StyledText
+      size={size}
+      weight={weight!}
+      color={color!}
+      textTransform={uppercase ? "uppercase" : undefined}
+      {...props}
+    >
       {children}
     </StyledText>
   );

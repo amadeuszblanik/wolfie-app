@@ -1,12 +1,10 @@
 import { SizesEnum } from "../../settings/sizes";
 import React from "react";
-import { PetSingleResponseModel } from "../../api/response-model/pet-single.response-model";
 import styled from "styled-components";
-import PetCard from "../pet-card";
 import { sizeMixin } from "../../ui-components/mixins";
 
 type Props = {
-  pets: PetSingleResponseModel[];
+  children: React.ReactNode;
 };
 
 const StyledGrid = styled.div`
@@ -20,14 +18,8 @@ const StyledGrid = styled.div`
   }
 `;
 
-const Component: React.FunctionComponent<Props> = ({ pets }) => {
-  return (
-    <StyledGrid>
-      {pets.map((pet) => (
-        <PetCard {...pet} key={pet.id} />
-      ))}
-    </StyledGrid>
-  );
+const Component: React.FunctionComponent<Props> = ({ children }) => {
+  return <StyledGrid>{children}</StyledGrid>;
 };
 
 export default Component;

@@ -8,6 +8,8 @@ export enum FlexAlign {
   Left = "flex-start",
   Right = "flex-end",
   Center = "center",
+  Top = "flex-start",
+  Bottom = "flex-end",
   SpaceBetween = "space-between",
   SpaceAround = "space-around",
   SpaceEvenly = "space-evenly",

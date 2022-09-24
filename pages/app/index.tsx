@@ -2,9 +2,10 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { LayoutApp } from "../../src/layout";
 import usePetsMy from "../../src/api/queries/pets-my";
-import { DoggoLoader } from "../../src/ui-components";
+import { DoggoGrid, DoggoLoader } from "../../src/ui-components";
 import { SizesEnum } from "../../src/settings/sizes";
-import { ComponentCsr, ComponentErrorScreen, ComponentPetCardGrid } from "../../src/component";
+import { ComponentCsr, ComponentErrorScreen, ComponentPetCard } from "../../src/component";
+import Link from "next/link";
 
 const App: NextPage = () => {
   const { myPets, myPetsError, refetch, isLoading } = usePetsMy();
@@ -20,7 +21,17 @@ const App: NextPage = () => {
       <LayoutApp>
         <ComponentCsr>
           {isLoading && <DoggoLoader fullScreen size={SizesEnum.ExtraLarge} />}
-          {myPets && <ComponentPetCardGrid pets={myPets} />}
+          {myPets && (
+            <DoggoGrid>
+              {myPets.map((pet) => (
+                <Link href={`/app/pet/${pet.id}`} key={pet.id}>
+                  <a>
+                    <ComponentPetCard {...pet} />
+                  </a>
+                </Link>
+              ))}
+            </DoggoGrid>
+          )}
           {myPetsError && <ComponentErrorScreen message={myPetsError.message} onTryAgain={refetch} />}
         </ComponentCsr>
       </LayoutApp>

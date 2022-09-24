@@ -36,5 +36,8 @@
   "pet.birthday": "Data urodzenia",
   "pet.microchip": "Numer mikrochipu",
   "pet.breed": "Rasa",
-  "pet.breed.mixed": "Mieszana"
+  "pet.breed.mixed": "Mieszana",
+  "pet.weight": "Waga",
+  "pet.vaccinations": "Szczepienia",
+  "pet.medications": "Medykamenty"
 }

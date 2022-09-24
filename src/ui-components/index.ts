@@ -3,6 +3,7 @@ export { default as DoggoBox } from "./box";
 export { default as DoggoButton } from "./button";
 export { default as DoggoCheckbox } from "./checkbox";
 export { default as DoggoContainer } from "./container";
+export { default as DoggoGrid } from "./grid";
 export { default as DoggoIcon } from "./icon";
 export { default as DoggoInput } from "./input";
 export { default as DoggoList } from "./list";

@@ -2,14 +2,28 @@ import styled, { DefaultTheme } from "styled-components";
 import Sizes, { SizesEnum } from "../../settings/sizes";
 import React from "react";
 import AppsIcon from "./icons/apps-outline.svg";
+import BarbellIcon from "./icons/barbell-outline.svg";
 import BookIcon from "./icons/book-outline.svg";
 import CheckmarkIcon from "./icons/checkmark-outline.svg";
 import CloseCircleIcon from "./icons/close-circle-outline.svg";
 import CloseIcon from "./icons/close-outline.svg";
 import CogIcon from "./icons/cog-outline.svg";
+import MedicalIcon from "./icons/medical-outline.svg";
+import MedkitIcon from "./icons/medkit-outline.svg";
 import WarningIcon from "./icons/warning-outline.svg";
 
-export const Icons = ["apps", "book", "checkmark", "close-circle", "close", "cog", "warning"];
+export const Icons = [
+  "apps",
+  "barbell",
+  "book",
+  "checkmark",
+  "close-circle",
+  "close",
+  "cog",
+  "medical",
+  "medkit",
+  "warning",
+];
 
 export type DoggoIcons = typeof Icons[number];
 
@@ -38,6 +52,8 @@ const Component: React.FunctionComponent<Props> = ({ icon, size, ...props }) => 
     switch (icon) {
       case "apps":
         return <AppsIcon />;
+      case "barbell":
+        return <BarbellIcon />;
       case "book":
         return <BookIcon />;
       case "checkmark":
@@ -48,6 +64,10 @@ const Component: React.FunctionComponent<Props> = ({ icon, size, ...props }) => 
         return <CloseIcon />;
       case "cog":
         return <CogIcon />;
+      case "medical":
+        return <MedicalIcon />;
+      case "medkit":
+        return <MedkitIcon />;
       case "warning":
         return <WarningIcon />;
       default:

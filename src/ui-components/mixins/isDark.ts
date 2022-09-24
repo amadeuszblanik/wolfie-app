@@ -1,12 +1,14 @@
 /* eslint-disable no-magic-numbers */
 
+const DARK_BREAKPOINT_YIQ = 200;
+
 const isDarkColorHex = (hex: string): boolean => {
   hex = hex.replace("#", "");
   const r = parseInt(hex.substr(0, 2), 16);
   const g = parseInt(hex.substr(2, 2), 16);
   const b = parseInt(hex.substr(4, 2), 16);
   const yiq = (r * 299 + g * 587 + b * 114) / 1000;
-  return yiq < 128;
+  return yiq < DARK_BREAKPOINT_YIQ;
 };
 
 const isDarkColorRgb = (rgb: string): boolean => {
@@ -18,7 +20,7 @@ const isDarkColorRgb = (rgb: string): boolean => {
   }
 
   const [r, g, b] = rgbMatch[1].split(/ *, */).map(Number);
-  return (r * 299 + g * 587 + b * 114) / 1000 < 128;
+  return (r * 299 + g * 587 + b * 114) / 1000 < DARK_BREAKPOINT_YIQ;
 };
 
 const isDarkColor = (colour: string): boolean => {

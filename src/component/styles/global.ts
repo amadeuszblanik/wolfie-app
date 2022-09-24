@@ -19,6 +19,10 @@ const Global = createGlobalStyle`
     user-select: none;
     box-sizing: border-box;
   }
+  
+   a {
+     text-decoration: none;
+   }
 `;
 
 export default Global;

@@ -3,6 +3,7 @@ import { PetSingleResponseModel } from "../response-model/pet-single.response-mo
 import myPetsDto from "../dto/my-pets.dto";
 import { CommonErrorResponseModel } from "../response-model/common-error.response-model";
 import responseDto, { ApiResponse } from "../dto/response.dto";
+import getPetsDto from "../dto/get-pets.dto";
 
 export default class ApiClient {
   private readonly baseUrl: string = "http://localhost:3000/api";
@@ -15,6 +16,10 @@ export default class ApiClient {
 
   public petsMy = async (): Promise<ApiResponse<PetSingleResponseModel[]>> => {
     return this.get<PetSingleResponseModel[]>("/pets/my").then((response) => responseDto(response, myPetsDto));
+  };
+
+  public petsSingle = (id: string) => async (): Promise<ApiResponse<PetSingleResponseModel>> => {
+    return this.get<PetSingleResponseModel>(`/pets/${id}`).then((response) => responseDto(response, getPetsDto));
   };
 
   private getHeaders(): Headers {

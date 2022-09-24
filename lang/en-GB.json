@@ -36,5 +36,8 @@
   "pet.birthday": "Birthday",
   "pet.microchip": "Microchip",
   "pet.breed": "Breed",
-  "pet.breed.mixed": "Mixed"
+  "pet.breed.mixed": "Mixed",
+  "pet.weight": "Weight",
+  "pet.vaccinations": "Vaccinations",
+  "pet.medications": "Medication"
 }

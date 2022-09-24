@@ -57,13 +57,11 @@ const Component = ({ children, alt, size }: Props) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageFailed, setImageFailed] = useState(false);
 
-  const handleImageLoaded = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    console.debug("Image loaded", event);
+  const handleImageLoaded = () => {
     setImageLoaded(true);
   };
 
-  const handleImageLoadedError = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    console.debug("Image loaded error", event);
+  const handleImageLoadedError = () => {
     setImageLoaded(true);
     setImageFailed(true);
   };

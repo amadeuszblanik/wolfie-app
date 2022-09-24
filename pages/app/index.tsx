@@ -2,10 +2,9 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { LayoutApp } from "../../src/layout";
 import usePetsMy from "../../src/api/queries/pets-my";
-import PetCardGrid from "../../src/component/pet-card-grid";
-import ErrorScreen from "../../src/component/error-screen";
 import { DoggoLoader } from "../../src/ui-components";
 import { SizesEnum } from "../../src/settings/sizes";
+import { ComponentCsr, ComponentErrorScreen, ComponentPetCardGrid } from "../../src/component";
 
 const App: NextPage = () => {
   const { myPets, myPetsError, refetch, isLoading } = usePetsMy();
@@ -19,9 +18,11 @@ const App: NextPage = () => {
       </Head>
 
       <LayoutApp>
-        {isLoading && <DoggoLoader fullScreen size={SizesEnum.ExtraLarge} />}
-        {myPets && <PetCardGrid pets={myPets} />}
-        {myPetsError && <ErrorScreen message={myPetsError.message} onTryAgain={refetch} />}
+        <ComponentCsr>
+          {isLoading && <DoggoLoader fullScreen size={SizesEnum.ExtraLarge} />}
+          {myPets && <ComponentPetCardGrid pets={myPets} />}
+          {myPetsError && <ComponentErrorScreen message={myPetsError.message} onTryAgain={refetch} />}
+        </ComponentCsr>
       </LayoutApp>
     </div>
   );

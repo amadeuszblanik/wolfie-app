@@ -6,8 +6,11 @@ import { DoggoGrid, DoggoLoader } from "../../src/ui-components";
 import { SizesEnum } from "../../src/settings/sizes";
 import { ComponentCsr, ComponentErrorScreen, ComponentPetCard } from "../../src/component";
 import Link from "next/link";
+import { useIntl } from "react-intl";
 
 const App: NextPage = () => {
+  const intl = useIntl();
+
   const { myPets, myPetsError, refetch, isLoading } = usePetsMy();
 
   return (
@@ -18,7 +21,7 @@ const App: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <LayoutApp>
+      <LayoutApp title={intl.formatMessage({ id: "page.app.header" })}>
         <ComponentCsr>
           {isLoading && <DoggoLoader fullScreen size={SizesEnum.ExtraLarge} />}
           {myPets && (

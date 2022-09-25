@@ -5,6 +5,8 @@ import { CommonErrorResponseModel } from "../response-model/common-error.respons
 import responseDto, { ApiResponse } from "../dto/response.dto";
 import getPetsDto from "../dto/get-pets.dto";
 import { AuthRefreshTokenBody, AuthRefreshTokenResponse } from "../types/auth-refresh-token.types";
+import { WeightValueResponseModel } from "../response-model/weight-value.response-model";
+import getPetsWeightDto from "../dto/get-pets-weight.dto";
 
 type HTTP_METHOD = "GET" | "POST" | "PUT" | "DELETE";
 
@@ -35,6 +37,12 @@ export default class ApiClient {
 
   public petsSingle = (id: string) => async (): Promise<ApiResponse<PetSingleResponseModel>> => {
     return this.get<PetSingleResponseModel>(`/pets/${id}`).then((response) => responseDto(response, getPetsDto));
+  };
+
+  public petsWeight = (id: string) => async (): Promise<ApiResponse<WeightValueResponseModel[]>> => {
+    return this.get<WeightValueResponseModel[]>(`/pets/${id}/weight?last=ALL`).then((response) =>
+      responseDto(response, getPetsWeightDto),
+    );
   };
 
   public refreshToken = (body: AuthRefreshTokenBody) => async (): Promise<ApiResponse<AuthRefreshTokenResponse>> => {

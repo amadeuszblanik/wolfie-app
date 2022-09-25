@@ -17,6 +17,11 @@ const Template: ComponentStory<typeof Component> = (args) => <Component {...args
 
 export const Playground = Template.bind({});
 Playground.args = {
-  items: ["Lorem", "Ipsum", "Dolor", "Sit", "Amet"],
+  label: "KG",
+  items: [
+    ["13.70", "5 Sept at 11:22am"],
+    ["13.70", "5 Sept at 11:22am"],
+    ["13.70", "5 Sept at 11:22am"],
+  ],
   textVariant: DoggoTextVariant.Body,
 };

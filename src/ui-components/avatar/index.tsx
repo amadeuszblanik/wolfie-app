@@ -30,9 +30,9 @@ const AVATAR_FONT_SIZES: { [key in SizesEnum]: number } = {
 
 const StyledBox = styled(Box)<{ size: SizesEnum }>`
   position: relative;
-  overflow: hidden;
   width: ${({ size }) => sizeMixin(size, AVATAR_SIZES)};
   height: ${({ size }) => sizeMixin(size, AVATAR_SIZES)};
+  overflow: hidden;
   font-size: ${({ size }) => sizeMixin(size, AVATAR_FONT_SIZES)};
   background: ${({ theme }) => theme.palette.gray2};
 `;

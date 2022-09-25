@@ -6,6 +6,7 @@ export { default as DoggoContainer } from "./container";
 export { default as DoggoGrid } from "./grid";
 export { default as DoggoIcon } from "./icon";
 export { default as DoggoInput } from "./input";
+export { default as DoggoLineChart } from "./line-chart";
 export { default as DoggoList } from "./list";
 export { default as DoggoLoader } from "./loader";
 export { default as DoggoModal } from "./modal";

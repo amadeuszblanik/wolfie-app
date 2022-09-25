@@ -22,7 +22,7 @@ const App: NextPage = () => {
         <ComponentCsr>
           {isLoading && <DoggoLoader fullScreen size={SizesEnum.ExtraLarge} />}
           {myPets && (
-            <DoggoGrid>
+            <DoggoGrid mobile={1} desktop={2}>
               {myPets.map((pet) => (
                 <Link href={`/app/pet/${pet.id}`} key={pet.id}>
                   <a>

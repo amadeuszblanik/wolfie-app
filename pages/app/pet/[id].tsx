@@ -9,7 +9,9 @@ import { DoggoGrid } from "../../../src/ui-components";
 import styled from "styled-components";
 
 const StyledPetCard = styled.div`
-  grid-column: 1 / 3;
+  @media screen and (min-width: 900px) {
+    grid-column: 1 / 4;
+  }
 `;
 
 const App: NextPage = () => {
@@ -28,7 +30,7 @@ const App: NextPage = () => {
 
       <LayoutApp>
         {pet && (
-          <DoggoGrid>
+          <DoggoGrid mobile={1}>
             <StyledPetCard>
               <ComponentPetCard {...pet} />
             </StyledPetCard>

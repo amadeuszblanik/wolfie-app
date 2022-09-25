@@ -5,6 +5,8 @@ import Sizes, { SizesEnum } from "../../settings/sizes";
 import { getIndexes } from "../../utils";
 import { pipeDate } from "../../pipe";
 
+// @TODO - Fix labeling; it's not working properly
+
 const CHART_RATIO = 1.799;
 
 interface LineChartItem {

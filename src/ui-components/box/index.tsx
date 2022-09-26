@@ -76,7 +76,7 @@ const Component = ({ children, border, column, alignX, alignY, onSizeChange, ...
     window.addEventListener("resize", handleResize);
 
     return () => window.removeEventListener("resize", handleResize);
-  }, [window]);
+  });
 
   return (
     <StyledView

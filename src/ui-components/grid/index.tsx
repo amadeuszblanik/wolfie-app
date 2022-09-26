@@ -46,7 +46,7 @@ const Component: React.FunctionComponent<Props> = ({ children, mobile, desktop, 
     window.addEventListener("resize", handleResize);
 
     return () => window.removeEventListener("resize", handleResize);
-  }, [window]);
+  });
 
   return (
     <StyledGrid ref={ref} mobile={mobile ?? DEFAULT_MOBILE_GRID} desktop={desktop ?? DEFAULT_DESKTOP_GRID}>

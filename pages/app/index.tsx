@@ -4,7 +4,7 @@ import { LayoutApp } from "../../src/layout";
 import usePetsMy from "../../src/api/queries/pets-my";
 import { DoggoGrid, DoggoLoader } from "../../src/ui-components";
 import { SizesEnum } from "../../src/settings/sizes";
-import { ComponentCsr, ComponentErrorScreen, ComponentPetCard } from "../../src/component";
+import { ComponentErrorScreen, ComponentPetCard } from "../../src/component";
 import Link from "next/link";
 import { useIntl } from "react-intl";
 

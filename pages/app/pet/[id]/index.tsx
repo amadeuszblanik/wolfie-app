@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from "react-intl";
 import { LayoutApp } from "../../../../src/layout";
 import { useRouter } from "next/router";
 import usePetsSingle from "../../../../src/api/queries/pets-single";
-import { ComponentCardItem, ComponentCsr, ComponentErrorScreen, ComponentPetCard } from "../../../../src/component";
+import { ComponentCardItem, ComponentErrorScreen, ComponentPetCard } from "../../../../src/component";
 import { DoggoGrid } from "../../../../src/ui-components";
 import styled from "styled-components";
 import Link from "next/link";

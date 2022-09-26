@@ -6,7 +6,7 @@ import styled from "styled-components";
 import React, { useEffect, useState } from "react";
 import usePetsSingle from "../../../../../src/api/queries/pets-single";
 import usePetsWeight from "../../../../../src/api/queries/pets-weight";
-import { ComponentAddWeight, ComponentCsr, ComponentErrorScreen, ComponentPetCard } from "../../../../../src/component";
+import { ComponentAddWeight, ComponentErrorScreen, ComponentPetCard } from "../../../../../src/component";
 import { LayoutApp } from "../../../../../src/layout";
 import { DoggoButton, DoggoGrid, DoggoLineChart, DoggoList, DoggoSheet } from "../../../../../src/ui-components";
 import { pipeDate } from "../../../../../src/pipe";

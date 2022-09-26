@@ -14,7 +14,7 @@ const App: NextPage = () => {
   const { myPets, myPetsError, refetch, isLoading } = usePetsMy();
 
   return (
-    <div>
+    <>
       <Head>
         <title>Doggo - Your pet companion app</title>
         <meta name="description" content="Pet companion app" />
@@ -22,23 +22,21 @@ const App: NextPage = () => {
       </Head>
 
       <LayoutApp title={intl.formatMessage({ id: "page.app.header" })}>
-        <ComponentCsr>
-          {isLoading && <DoggoLoader fullScreen size={SizesEnum.ExtraLarge} />}
-          {myPets && (
-            <DoggoGrid mobile={1} desktop={2}>
-              {myPets.map((pet) => (
-                <Link href={`/app/pet/${pet.id}`} key={pet.id}>
-                  <a>
-                    <ComponentPetCard {...pet} />
-                  </a>
-                </Link>
-              ))}
-            </DoggoGrid>
-          )}
-          {myPetsError && <ComponentErrorScreen message={myPetsError.message} onTryAgain={refetch} />}
-        </ComponentCsr>
+        {isLoading && <DoggoLoader fullScreen size={SizesEnum.ExtraLarge} />}
+        {myPets && (
+          <DoggoGrid mobile={1} desktop={2}>
+            {myPets.map((pet) => (
+              <Link href={`/app/pet/${pet.id}`} key={pet.id}>
+                <a>
+                  <ComponentPetCard {...pet} />
+                </a>
+              </Link>
+            ))}
+          </DoggoGrid>
+        )}
+        {myPetsError && <ComponentErrorScreen message={myPetsError.message} onTryAgain={refetch} />}
       </LayoutApp>
-    </div>
+    </>
   );
 };
 

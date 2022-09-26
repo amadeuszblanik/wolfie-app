@@ -30,11 +30,13 @@ const AppBackButton: React.FunctionComponent = () => {
 
 const App: React.FunctionComponent<Props> = ({ children, title, back, right }) => {
   return (
-    <StyledLayout padding={{ y: SizesEnum.Large }} column>
-      <ComponentTopbar title={title} left={back && <AppBackButton />} right={right} />
-      <DoggoContainer fullWidth>{children}</DoggoContainer>
-      <ComponentBottombar />
-    </StyledLayout>
+    <>
+      <StyledLayout padding={{ y: SizesEnum.Large }} column>
+        <ComponentTopbar title={title} left={back && <AppBackButton />} right={right} />
+        <DoggoContainer fullWidth>{children}</DoggoContainer>
+        <ComponentBottombar />
+      </StyledLayout>
+    </>
   );
 };
 

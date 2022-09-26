@@ -45,7 +45,7 @@ const Button: React.FunctionComponent<ButtonProps> = ({ children, variant, onCli
     onClick={!disabled ? onClick : () => console.warn("Button disabled")}
     disabled={disabled}
   >
-    <Text noBottomMargin>{children}</Text>
+    {children instanceof String ? <Text noBottomMargin>{children}</Text> : children}
   </StyledButton>
 );
 

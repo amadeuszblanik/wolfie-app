@@ -36,7 +36,7 @@ const usePetsWeight = (id: string) => {
     }
 
     setStatus(ApiStatesTypes.Idle);
-  }, [isLoading, isError, isSuccess, petsWeightError]);
+  }, [data, isLoading, isError, isSuccess, petsWeightError]);
 
   return { petsWeight, petsWeightError, isLoading, isError, isSuccess, status, refetch };
 };

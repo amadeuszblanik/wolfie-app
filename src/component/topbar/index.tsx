@@ -1,15 +1,17 @@
 import styled from "styled-components";
-import { DoggoBox, DoggoButton, DoggoContainer, DoggoText } from "../../ui-components";
+import { DoggoBox, DoggoButton, DoggoContainer, DoggoGrid, DoggoText } from "../../ui-components";
 import { BoxWidth, FlexAlign } from "../../ui-components/box";
 import { SizesEnum } from "../../settings/sizes";
 import { DoggoTextVariant } from "../../ui-components/text";
 import { FormattedMessage } from "react-intl";
 import { useRouter } from "next/router";
 import React from "react";
+import { GridAlign } from "../../ui-components/grid";
 
 interface Props {
   title: string;
-  back?: boolean;
+  left?: React.ReactNode;
+  right?: React.ReactNode;
 }
 
 const StyledTopBar = styled(DoggoBox)`
@@ -18,7 +20,15 @@ const StyledTopBar = styled(DoggoBox)`
   left: 0;
 `;
 
-const Component: React.FunctionComponent<Props> = ({ title, back }) => {
+const StyledTopBarLeft = styled.div`
+  justify-self: start;
+`;
+
+const StyledTopBarRight = styled.div`
+  justify-self: end;
+`;
+
+const Component: React.FunctionComponent<Props> = ({ title, left, right }) => {
   const router = useRouter();
 
   return (
@@ -30,17 +40,11 @@ const Component: React.FunctionComponent<Props> = ({ title, back }) => {
       background="backgroundSecondary"
     >
       <DoggoContainer fullWidth>
-        <DoggoBox alignX={FlexAlign.SpaceBetween} alignY={FlexAlign.Center} width={BoxWidth.Full}>
-          {back ? (
-            <DoggoButton onClick={router && router.back} variant="gray6">
-              <FormattedMessage id="common.back" />
-            </DoggoButton>
-          ) : (
-            <DoggoBox></DoggoBox>
-          )}
+        <DoggoGrid mobile={3} desktop={3} alignX={GridAlign.Center} alignY={GridAlign.Center}>
+          <StyledTopBarLeft>{left}</StyledTopBarLeft>
           <DoggoText variant={DoggoTextVariant.Body}>{title}</DoggoText>
-          <DoggoBox></DoggoBox>
-        </DoggoBox>
+          <StyledTopBarRight>{right}</StyledTopBarRight>
+        </DoggoGrid>
       </DoggoContainer>
     </StyledTopBar>
   );

@@ -3,6 +3,7 @@ import "styled-components";
 
 declare module "styled-components" {
   export interface DefaultTheme {
+    modalBackgroundOpacity: number;
     borderRadius: string;
     opacity: {
       modal: number;

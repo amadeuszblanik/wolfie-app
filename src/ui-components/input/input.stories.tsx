@@ -10,8 +10,11 @@ export default {
     value: { control: "text" },
     onValueChange: { action: "onValueChange()" },
     label: { control: "text" },
+    max: { control: "text" },
+    min: { control: "text" },
     errors: { control: "array" },
     type: { options: InputTypes, control: "select" },
+    plain: { control: "boolean" },
   },
 } as ComponentMeta<typeof Component>;
 

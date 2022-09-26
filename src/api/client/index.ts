@@ -7,6 +7,9 @@ import getPetsDto from "../dto/get-pets.dto";
 import { AuthRefreshTokenBody, AuthRefreshTokenResponse } from "../types/auth-refresh-token.types";
 import { WeightValueResponseModel } from "../response-model/weight-value.response-model";
 import getPetsWeightDto from "../dto/get-pets-weight.dto";
+import { ConfigPrivateResponseModel } from "../response-model/config-private.response-model";
+import getConfigPrivateDto from "../dto/get-config-private.dto";
+import { PetWeightAddBody, PetWeightAddResponse } from "../types/pet-weight-add.types";
 
 type HTTP_METHOD = "GET" | "POST" | "PUT" | "DELETE";
 
@@ -24,12 +27,18 @@ const STATUS_CODES = {
 
 export default class ApiClient {
   private readonly baseUrl: string =
-    process.env.NODE_ENV === "production" ? "https://doggo.rocks/api" : "http://localhost:3000/api";
+    process.env.NODE_ENV === "production" ? "https://doggo.rocks/api" : "http://192.168.1.50:3000/api";
 
   constructor(private readonly language: string) {}
 
   public signIn = async (body: AuthSignInBody): Promise<AuthSignInResponse | CommonErrorResponseModel> => {
     return this.post("/auth/sign-in", body);
+  };
+
+  public configPrivate = async (): Promise<ApiResponse<ConfigPrivateResponseModel>> => {
+    return this.get<ConfigPrivateResponseModel>("/config/private").then((response) =>
+      responseDto(response, getConfigPrivateDto),
+    );
   };
 
   public petsMy = async (): Promise<ApiResponse<PetSingleResponseModel[]>> => {
@@ -45,6 +54,12 @@ export default class ApiClient {
       responseDto(response, getPetsWeightDto),
     );
   };
+
+  public petsWeightAdd =
+    (id: string) =>
+    async (body: PetWeightAddBody): Promise<PetWeightAddResponse | CommonErrorResponseModel> => {
+      return this.post(`/pets/${id}/weight`, body);
+    };
 
   public refreshToken = (body: AuthRefreshTokenBody) => async (): Promise<ApiResponse<AuthRefreshTokenResponse>> => {
     return this.post<AuthRefreshTokenResponse, AuthRefreshTokenBody>(`/auth/refresh-token`, body).then((response) =>

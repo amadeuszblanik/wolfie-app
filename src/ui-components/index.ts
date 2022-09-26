@@ -10,4 +10,5 @@ export { default as DoggoLineChart } from "./line-chart";
 export { default as DoggoList } from "./list";
 export { default as DoggoLoader } from "./loader";
 export { default as DoggoModal } from "./modal";
+export { default as DoggoSheet } from "./sheet";
 export { default as DoggoText } from "./text";

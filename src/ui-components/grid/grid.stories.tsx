@@ -1,7 +1,7 @@
 /* eslint-disable no-magic-numbers */
 import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import Component from "./index";
+import Component, { GridAlign } from "./index";
 import { DoggoContainer } from "../../ui-components";
 
 export default {
@@ -9,6 +9,10 @@ export default {
   component: Component,
   argTypes: {
     onSizeChange: { action: "onSizeChange()" },
+    mobile: { control: "number" },
+    desktop: { control: "number" },
+    alignX: { options: GridAlign, control: "select" },
+    alignY: { options: GridAlign, control: "select" },
   },
 } as ComponentMeta<typeof Component>;
 

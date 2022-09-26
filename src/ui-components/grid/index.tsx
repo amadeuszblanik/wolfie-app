@@ -6,9 +6,19 @@ import { sizeMixin } from "../../ui-components/mixins";
 const DEFAULT_MOBILE_GRID = 2;
 const DEFAULT_DESKTOP_GRID = 3;
 
+export enum GridAlign {
+  Left = "start",
+  Right = "end",
+  Center = "center",
+  Top = "start",
+  Bottom = "end",
+}
+
 interface StyledGridProps {
   mobile: number;
   desktop: number;
+  alignX?: GridAlign;
+  alignY?: GridAlign;
 }
 
 type Props = {
@@ -16,6 +26,8 @@ type Props = {
   mobile?: number;
   desktop?: number;
   onSizeChange?: (size: { width: number; height: number }) => void;
+  alignX?: GridAlign;
+  alignY?: GridAlign;
 };
 
 const StyledGrid = styled.div<StyledGridProps>`
@@ -24,12 +36,17 @@ const StyledGrid = styled.div<StyledGridProps>`
   grid-template-columns: repeat(${({ mobile }) => mobile}, 1fr);
   margin: 0 auto;
 
+  & > * {
+    align-self: ${({ alignY }) => alignY};
+    justify-self: ${({ alignX }) => alignX};
+  }
+
   @media screen and (min-width: 900px) {
     grid-template-columns: repeat(${({ desktop }) => desktop}, 1fr);
   }
 `;
 
-const Component: React.FunctionComponent<Props> = ({ children, mobile, desktop, onSizeChange }) => {
+const Component: React.FunctionComponent<Props> = ({ children, mobile, desktop, onSizeChange, ...props }) => {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -46,10 +63,10 @@ const Component: React.FunctionComponent<Props> = ({ children, mobile, desktop, 
     window.addEventListener("resize", handleResize);
 
     return () => window.removeEventListener("resize", handleResize);
-  });
+  }, [onSizeChange]);
 
   return (
-    <StyledGrid ref={ref} mobile={mobile ?? DEFAULT_MOBILE_GRID} desktop={desktop ?? DEFAULT_DESKTOP_GRID}>
+    <StyledGrid ref={ref} mobile={mobile ?? DEFAULT_MOBILE_GRID} desktop={desktop ?? DEFAULT_DESKTOP_GRID} {...props}>
       {children}
     </StyledGrid>
   );

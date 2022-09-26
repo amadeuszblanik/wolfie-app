@@ -2,7 +2,7 @@ import React, { HTMLInputTypeAttribute } from "react";
 import styled from "styled-components";
 import { paddingMixin } from "../mixins";
 import Sizes, { SizesEnum } from "../../settings/sizes";
-import Box from "../box";
+import Box, { BoxWidth } from "../box";
 import { DoggoText } from "../index";
 import { DoggoTextVariant } from "../text";
 
@@ -22,27 +22,35 @@ export enum InputTypes {
   Week = "week",
 }
 
-interface Props {
-  value: string;
-  onChange: (nextValue: string) => void;
-  label: string;
-  placeholder?: string;
-  errors?: string[];
-  type: HTMLInputTypeAttribute;
+interface StyledInputProps {
+  plain?: boolean;
 }
 
-const StyledInput = styled.input`
+interface Props {
+  label?: string;
+  placeholder?: string;
+  errors?: string[];
+  plain?: boolean;
+  value: string;
+  onChange: (nextValue: string) => void;
+  max?: string;
+  min?: string;
+  type: InputTypes | HTMLInputTypeAttribute;
+}
+
+const StyledInput = styled.input<StyledInputProps>`
   width: 100%;
-  max-width: 400px;
   ${paddingMixin({ x: SizesEnum.Large, y: SizesEnum.Medium })};
   margin-bottom: ${Sizes[SizesEnum.Medium]}px;
   color: var(--color-text);
+  font-family: var(--font-family);
   font-size: 1rem;
   background: var(--color-background);
-  border: 2px solid ${({ theme }) => theme.palette.gray};
+  border: ${({ plain, theme }) => (!plain ? `2px solid ${theme.palette.gray}` : "none")};
   border-radius: ${({ theme }) => theme.borderRadius};
   box-shadow: 0 0 0 0 ${({ theme }) => theme.palette.blue};
   transition: box-shadow 0.3s ease-in-out;
+  text-align: ${({ plain }) => (plain ? "right" : "left")};
 
   &:focus {
     outline: none;
@@ -50,22 +58,39 @@ const StyledInput = styled.input`
   }
 `;
 
-const Component: React.FunctionComponent<Props> = ({ label, placeholder, type, errors, value, onChange }) => (
-  <Box padding={{ bottom: SizesEnum.Medium }} column>
-    <Box padding={{ bottom: SizesEnum.Medium }}>
-      <DoggoText variant={DoggoTextVariant.Callout}>{label}</DoggoText>
-    </Box>
+const Component: React.FunctionComponent<Props> = ({
+  label,
+  placeholder,
+  type,
+  errors,
+  value,
+  onChange,
+  max,
+  min,
+  plain,
+}) => (
+  <Box width={plain ? BoxWidth.Full : undefined} padding={{ bottom: SizesEnum.Medium }} column>
+    {!plain && label && (
+      <Box padding={{ bottom: SizesEnum.Medium }}>
+        <DoggoText variant={DoggoTextVariant.Callout}>{label}</DoggoText>
+      </Box>
+    )}
     <StyledInput
       placeholder={placeholder}
       type={type}
       value={value}
-      onChange={({ target: { value: nextValue } }) => onChange(nextValue)}
+      onChange={({ target: { value: nextValue, valueAsNumber } }) => onChange(nextValue)}
+      max={max}
+      min={min}
+      plain={plain}
     />
-    <Box padding={{ bottom: SizesEnum.Medium }}>
-      <DoggoText color="red" variant={DoggoTextVariant.Caption1}>
-        {(errors || []).map((error, index) => error).join(", ")}
-      </DoggoText>
-    </Box>
+    {!plain && (
+      <Box padding={{ bottom: SizesEnum.Medium }}>
+        <DoggoText color="red" variant={DoggoTextVariant.Caption1}>
+          {(errors || []).map((error, index) => error).join(", ")}
+        </DoggoText>
+      </Box>
+    )}
   </Box>
 );
 

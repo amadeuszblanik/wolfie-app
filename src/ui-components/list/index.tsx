@@ -3,11 +3,13 @@ import styled from "styled-components";
 import Sizes, { SizesEnum } from "../../settings/sizes";
 import Text, { DoggoTextVariant } from "../text";
 import { backgroundMixin, paddingMixin } from "../mixins";
-import Box, { FlexAlign } from "../box";
+import Box, { BoxWidth, FlexAlign } from "../box";
+
+type ListItem = string | React.ReactNode;
 
 export interface ListProps {
   label?: string;
-  items: string[] | string[][];
+  items: ListItem[] | ListItem[][];
   textVariant?: DoggoTextVariant;
 }
 
@@ -43,11 +45,19 @@ const List: React.FunctionComponent<ListProps> = ({ label, items, textVariant })
         <StyledLi key={index}>
           {subItems instanceof Array ? (
             <Box alignX={FlexAlign.SpaceBetween}>
-              {subItems.map((subItem, subItemIndex) => (
-                <Text variant={textVariant} key={subItemIndex} color={!subItemIndex ? "text" : "gray2"}>
-                  {subItem}
-                </Text>
-              ))}
+              {subItems.map((subItem, subItemIndex) =>
+                React.isValidElement(subItem) ? (
+                  <Box key={subItemIndex} width={BoxWidth.Full} padding={{ x: SizesEnum.Medium }}>
+                    {subItem}
+                  </Box>
+                ) : (
+                  <Box key={subItemIndex} width={BoxWidth.Full} padding={{ x: SizesEnum.Medium }}>
+                    <Text variant={textVariant} color={!subItemIndex ? "text" : "gray2"}>
+                      {subItem}
+                    </Text>
+                  </Box>
+                ),
+              )}
             </Box>
           ) : (
             <Text variant={textVariant}>{subItems}</Text>

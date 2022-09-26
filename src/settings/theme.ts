@@ -1,6 +1,7 @@
 import { DefaultTheme } from "styled-components";
 
 const shared = {
+  modalBackgroundOpacity: 0.95,
   borderRadius: "8px",
   opacity: {
     modal: 0.5,

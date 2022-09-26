@@ -7,8 +7,6 @@ import Icon from "../icon";
 import Button from "../button";
 import { toRgba } from "bme-utils";
 
-const BACKGROUND_OPACITY = 0.95;
-
 interface Props {
   children: React.ReactNode;
   onClose: () => void;
@@ -24,7 +22,7 @@ const StyledModalBackdrop = styled.div`
   justify-content: center;
   width: 100%;
   height: 100%;
-  background-color: ${({ theme }) => toRgba(theme.palette.background, BACKGROUND_OPACITY)};
+  background-color: ${({ theme }) => toRgba(theme.palette.background, theme.modalBackgroundOpacity)};
   backdrop-filter: blur(5px);
 `;
 

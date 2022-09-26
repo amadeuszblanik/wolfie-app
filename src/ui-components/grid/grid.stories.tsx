@@ -7,11 +7,14 @@ import { DoggoContainer } from "../../ui-components";
 export default {
   title: "UI Components/Grid",
   component: Component,
+  argTypes: {
+    onSizeChange: { action: "onSizeChange()" },
+  },
 } as ComponentMeta<typeof Component>;
 
-const Template: ComponentStory<typeof Component> = () => (
+const Template: ComponentStory<typeof Component> = (props) => (
   <DoggoContainer fullWidth>
-    <Component>
+    <Component {...props}>
       <p>Lorem</p>
       <p>Ipsum</p>
       <p>Dolor</p>

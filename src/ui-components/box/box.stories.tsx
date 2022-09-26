@@ -16,6 +16,7 @@ export default {
     column: { control: "boolean" },
     alignX: { options: FlexAlign, control: "select" },
     alignY: { options: FlexAlign, control: "select" },
+    onSizeChange: { action: "onSizeChange()" },
   },
 } as ComponentMeta<typeof Component>;
 

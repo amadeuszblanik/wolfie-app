@@ -3,17 +3,14 @@ import type React from "react";
 import { useScreenSize } from "../../hooks";
 import Sizes, { SizesEnum } from "../../settings/sizes";
 import { getIndexes } from "../../utils";
-import { pipeDate } from "../../pipe";
-
-// @TODO - Fix labeling; it's not working properly
+import { pipeDate, pipeNumber } from "../../pipe";
+import { clamp } from "bme-utils";
 
 const CHART_RATIO = 1.799;
 
 interface LineChartItem {
   x: number | Date;
   y: number;
-  labelX?: string;
-  labelY?: string;
 }
 
 interface Props {
@@ -39,13 +36,10 @@ const StyledChartLine = styled.line`
   stroke-width: 2;
 `;
 
-const StyledChartLabelY = styled.text`
-  font: italic 13px sans-serif;
-  fill: ${({ theme }) => theme.palette.gray2};
-`;
-
-const StyledChartLabelX = styled.text`
-  font: italic 13px sans-serif;
+const StyledChartLabel = styled.text`
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 12px;
   fill: ${({ theme }) => theme.palette.gray2};
 `;
 
@@ -58,24 +52,29 @@ const StyledChartLabelLine = styled.line`
 const BOTH_PADDING_MULTIPLIER = 2;
 const X_Y_2_INDEX_DIFFERENCE = 1;
 
-const LABELS_Y_TO_SHOW = 5;
-const LABELS_X_TO_SHOW = 5;
+const LABELS_Y_TO_SHOW_MOBILE = 4;
+const LABELS_X_TO_SHOW_MOBILE = 3;
 
-const NO_REMAINDER_VALUE = 0;
+const LABELS_Y_TO_SHOW_DESKTOP = 4;
+const LABELS_X_TO_SHOW_DESKTOP = 5;
 
-const Component = ({ data, width }: Props) => {
+const DESKTOP_BREAKPOINT = 900;
+
+const Component = ({ data, width: componentWidth }: Props) => {
   const dataIndexes = getIndexes(data);
   const { width: screenWidth } = useScreenSize();
   const labelYWidth = 50;
-  const labelXHeight = 20;
+  const labelXHeight = 8;
 
-  width = width ?? screenWidth;
+  const width = componentWidth ?? screenWidth;
+
+  const isDesktop = screenWidth >= DESKTOP_BREAKPOINT;
+  const labelsYToShow = isDesktop ? LABELS_Y_TO_SHOW_DESKTOP : LABELS_Y_TO_SHOW_MOBILE;
+  const labelsXToShow = isDesktop ? LABELS_X_TO_SHOW_DESKTOP : LABELS_X_TO_SHOW_MOBILE;
 
   const dataChart = data.map((item) => ({
     ...item,
-    x: Number(item.y),
-    labelX: item.labelX || item.x instanceof Date ? pipeDate(item.x as Date) : String(item.x),
-    labelY: item.labelY ?? String(item.y),
+    x: Number(item.x),
   }));
 
   const minXValue = Math.min(...dataChart.map((item) => item.x));
@@ -89,15 +88,33 @@ const Component = ({ data, width }: Props) => {
   const height = width / CHART_RATIO;
   const paddingX = Sizes[SizesEnum.ExtraLarge];
   const paddingY = Sizes[SizesEnum.ExtraLarge];
+  const paddingLabelX = Sizes[SizesEnum.Large];
+  const paddingLabelY = Sizes[SizesEnum.Large];
   const availableWidth = width - paddingX * BOTH_PADDING_MULTIPLIER - labelYWidth;
   const availableHeight = height - paddingY * BOTH_PADDING_MULTIPLIER - labelXHeight;
 
-  const labelsY = dataChart.filter(
-    (_, index) => index % Math.ceil(data.length / LABELS_Y_TO_SHOW) === NO_REMAINDER_VALUE,
-  );
-  const labelsX = dataChart.filter(
-    (_, index) => index % Math.ceil(data.length / LABELS_X_TO_SHOW) === NO_REMAINDER_VALUE,
-  );
+  const labelsY = Array(labelsYToShow)
+    .fill(null)
+    .map((_, index) => {
+      const value = minYValue + (rangeY / labelsYToShow) * index;
+      return {
+        value: clamp(value, minYValue, maxYValue),
+        label: pipeNumber(value),
+      };
+    });
+  labelsY.push({
+    value: maxYValue,
+    label: pipeNumber(maxYValue),
+  });
+  const labelsX = Array(labelsXToShow)
+    .fill(null)
+    .map((_, index) => {
+      const value = clamp(minXValue + (rangeX / labelsXToShow) * index, minXValue, maxXValue);
+      const label = pipeDate(new Date(value), { month: "short", day: "numeric", year: "2-digit" });
+
+      return { value, label };
+    })
+    .reverse();
   const labelsXIndexes = getIndexes(labelsX);
 
   const calculatePointX = (index: number) => {
@@ -127,11 +144,11 @@ const Component = ({ data, width }: Props) => {
   };
 
   const calculateLabelYX = () => {
-    return availableWidth + labelYWidth;
+    return width - paddingY - labelYWidth + paddingLabelX;
   };
 
   const calculateLabelYY = (index: number) => {
-    const value = labelsY[index].y;
+    const value = labelsY[index].value;
 
     return availableHeight - ((value - minYValue) / rangeY) * availableHeight + paddingY;
   };
@@ -145,7 +162,7 @@ const Component = ({ data, width }: Props) => {
   };
 
   const calculateLabelXY = () => {
-    return availableHeight + paddingY + labelXHeight;
+    return height - paddingLabelY;
   };
 
   const calculateLabelLineXY = () => {
@@ -154,50 +171,47 @@ const Component = ({ data, width }: Props) => {
 
   return (
     <StyledChartWrapper viewBox={`0 0 ${width} ${height}`}>
-      <>
+      <g>
         {labelsY.map((label, index) => (
-          <>
-            <StyledChartLabelY key={index} x={calculateLabelYX()} y={calculateLabelYY(index)}>
-              {label.labelY}
-            </StyledChartLabelY>
+          <g key={index}>
+            <StyledChartLabel x={calculateLabelYX()} y={calculateLabelYY(index)}>
+              {label.label}
+            </StyledChartLabel>
             <StyledChartLabelLine
-              key={index}
               x1={0}
               x2={calculateLabelLineYY()}
               y1={calculateLabelYY(index)}
               y2={calculateLabelYY(index)}
             />
-          </>
+          </g>
         ))}
         {labelsX.map((label, index) => (
-          <>
-            <StyledChartLabelX key={index} x={calculateLabelXX(index)} y={calculateLabelXY()}>
-              {label.labelX}
-            </StyledChartLabelX>
+          <g key={index}>
+            <StyledChartLabel x={calculateLabelXX(index)} y={calculateLabelXY()}>
+              {label.label}
+            </StyledChartLabel>
             <StyledChartLabelLine
-              key={index}
               x1={calculateLabelXX(index)}
               x2={calculateLabelXX(index)}
               y1={0}
               y2={calculateLabelLineXY()}
             />
-          </>
+          </g>
         ))}
         {dataChart.map((item, index) => (
-          <>
+          <g key={index}>
             {index < dataIndexes && (
               <StyledChartLine
-                key={index}
                 x1={calculateLineX1(index)}
                 x2={calculateLineX2(index)}
                 y1={calculateLineY1(index)}
                 y2={calculateLineY2(index)}
               />
             )}
-            <StyledChartPoint key={index} cx={calculatePointX(index)} cy={calculatePointY(index)} r={5} />
-          </>
+            <StyledChartPoint cx={calculatePointX(index)} cy={calculatePointY(index)} r={4} />
+          </g>
         ))}
-      </>
+      </g>
     </StyledChartWrapper>
   );
 };

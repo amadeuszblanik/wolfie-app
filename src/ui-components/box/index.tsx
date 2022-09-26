@@ -3,6 +3,7 @@ import type React from "react";
 import Sizes, { SizesEnum } from "../../settings/sizes";
 import type { Padding } from "../types/padding";
 import { backgroundMixin, colorTextMixin, paddingMixin } from "../mixins";
+import { useEffect, useRef } from "react";
 
 export enum FlexAlign {
   Left = "flex-start",
@@ -52,14 +53,34 @@ interface DoggoBoxProps {
   column?: boolean;
   alignX?: FlexAlign;
   alignY?: FlexAlign;
+  onSizeChange?: (size: { width: number; height: number }) => void;
 }
 
-const Component = ({ children, border, column, alignX, alignY, ...props }: DoggoBoxProps) => {
+const Component = ({ children, border, column, alignX, alignY, onSizeChange, ...props }: DoggoBoxProps) => {
   const justifyContent = column ? alignY : alignX;
   const alignItems = column ? alignX : alignY;
 
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!window || !onSizeChange) {
+      return;
+    }
+
+    const handleResize = () => {
+      const { width, height } = ref.current?.getBoundingClientRect() || { width: 0, height: 0 };
+      onSizeChange({ width, height });
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, [window]);
+
   return (
     <StyledView
+      ref={ref}
       borderRadius={Sizes[border!]}
       justifyContent={justifyContent}
       alignItems={alignItems}

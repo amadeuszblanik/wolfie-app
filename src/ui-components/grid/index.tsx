@@ -1,5 +1,5 @@
 import { SizesEnum } from "../../settings/sizes";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { sizeMixin } from "../../ui-components/mixins";
 
@@ -15,6 +15,7 @@ type Props = {
   children: React.ReactNode;
   mobile?: number;
   desktop?: number;
+  onSizeChange?: (size: { width: number; height: number }) => void;
 };
 
 const StyledGrid = styled.div<StyledGridProps>`
@@ -28,9 +29,27 @@ const StyledGrid = styled.div<StyledGridProps>`
   }
 `;
 
-const Component: React.FunctionComponent<Props> = ({ children, mobile, desktop }) => {
+const Component: React.FunctionComponent<Props> = ({ children, mobile, desktop, onSizeChange }) => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!window || !onSizeChange) {
+      return;
+    }
+
+    const handleResize = () => {
+      const { width, height } = ref.current?.getBoundingClientRect() || { width: 0, height: 0 };
+      onSizeChange({ width, height });
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, [window]);
+
   return (
-    <StyledGrid mobile={mobile ?? DEFAULT_MOBILE_GRID} desktop={desktop ?? DEFAULT_DESKTOP_GRID}>
+    <StyledGrid ref={ref} mobile={mobile ?? DEFAULT_MOBILE_GRID} desktop={desktop ?? DEFAULT_DESKTOP_GRID}>
       {children}
     </StyledGrid>
   );

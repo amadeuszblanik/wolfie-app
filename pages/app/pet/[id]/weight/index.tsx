@@ -49,10 +49,6 @@ const App: NextPage = () => {
     void refetchConfigPrivate();
   };
 
-  const handleAdd = (body: PetWeightAddBody) => {
-    void mutatePetWeightAdd(body);
-  };
-
   useEffect(() => {
     switch (petWeightAddStatus) {
       case ApiStatesTypes.Success:
@@ -65,7 +61,7 @@ const App: NextPage = () => {
   const isError = !isFetchedData || petError || petsWeightError || configPrivateError;
 
   return (
-    <ComponentCsr>
+    <>
       <Head>
         <title>Doggo - Your pet companion app</title>
         <meta name="description" content="Pet companion app" />
@@ -99,7 +95,7 @@ const App: NextPage = () => {
           <ComponentErrorScreen message={petError?.message} onTryAgain={handleTryAgain} />
         )}
       </LayoutApp>
-    </ComponentCsr>
+    </>
   );
 };
 

@@ -24,7 +24,7 @@ const App: NextPage = () => {
   const { pet, petError, refetch } = usePetsSingle(id as string);
 
   return (
-    <ComponentCsr>
+    <>
       <Head>
         <title>Doggo - Your pet companion app</title>
         <meta name="description" content="Pet companion app" />
@@ -54,7 +54,7 @@ const App: NextPage = () => {
         )}
         {petError && <ComponentErrorScreen message={petError?.message} onTryAgain={refetch} />}
       </LayoutApp>
-    </ComponentCsr>
+    </>
   );
 };
 

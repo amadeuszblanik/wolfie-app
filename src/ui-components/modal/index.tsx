@@ -5,6 +5,9 @@ import Box, { BoxWidth, FlexAlign } from "../box";
 import { SizesEnum } from "../../settings/sizes";
 import Icon from "../icon";
 import Button from "../button";
+import { toRgba } from "bme-utils";
+
+const BACKGROUND_OPACITY = 0.95;
 
 interface Props {
   children: React.ReactNode;
@@ -21,8 +24,7 @@ const StyledModalBackdrop = styled.div`
   justify-content: center;
   width: 100%;
   height: 100%;
-  background-color: ${({ theme }) => theme.palette.background};
-  opacity: 0.8;
+  background-color: ${({ theme }) => toRgba(theme.palette.background, BACKGROUND_OPACITY)};
   backdrop-filter: blur(5px);
 `;
 

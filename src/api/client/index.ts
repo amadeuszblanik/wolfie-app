@@ -23,7 +23,7 @@ const STATUS_CODES = {
 };
 
 export default class ApiClient {
-  private readonly baseUrl: string = "http://localhost:3000/api";
+  private readonly baseUrl: string = "https://doggo.rocks/api";
 
   constructor(private readonly language: string) {}
 

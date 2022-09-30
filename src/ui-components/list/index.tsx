@@ -47,7 +47,7 @@ const ListCell: React.FunctionComponent<ListCellProps> = ({ children, textVarian
       {children}
     </Text>
   ) : (
-    <>children</>
+    <>{children}</>
   );
 const List: React.FunctionComponent<ListProps> = ({ label, items, textVariant }) => {
   const flexAlignX = (index: number, subItemList: ListItem[]): FlexAlign => {

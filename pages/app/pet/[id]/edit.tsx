@@ -2,29 +2,35 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { FormattedMessage, useIntl } from "react-intl";
 import React, { useEffect, useState } from "react";
-import { LayoutApp } from "../../../src/layout";
-import useConfigPublic from "../../../src/api/queries/config-public";
-import { DoggoBox, DoggoButton, DoggoInput, DoggoModal, DoggoSelect } from "../../../src/ui-components";
-import { PetKind } from "../../../src/types/pet-kind.types";
-import { InputTypes } from "../../../src/ui-components/input";
-import { ComponentApiWrapper, ComponentErrorScreen, ComponentPetCard } from "../../../src/component";
-import { SizesEnum } from "../../../src/settings/sizes";
-import { FlexAlign } from "../../../src/ui-components/box";
-import usePetsAdd from "../../../src/api/queries/pets-add";
-import { ApiStatesTypes } from "../../../src/types/api-states.types";
 import { useRouter } from "next/router";
+import usePetsAdd from "../../../../src/api/queries/pets-add";
+import { PetKind } from "../../../../src/types/pet-kind.types";
+import useConfigPublic from "../../../../src/api/queries/config-public";
+import { ApiStatesTypes } from "../../../../src/types/api-states.types";
+import { LayoutApp } from "../../../../src/layout";
+import { ComponentApiWrapper, ComponentErrorScreen, ComponentPetCard } from "../../../../src/component";
+import { DoggoBox, DoggoButton, DoggoInput, DoggoModal, DoggoSelect } from "../../../../src/ui-components";
+import { SizesEnum } from "../../../../src/settings/sizes";
+import { InputTypes } from "../../../../src/ui-components/input";
+import { FlexAlign } from "../../../../src/ui-components/box";
+import usePetsSingle from "../../../../src/api/queries/pets-single";
+import { toDate } from "../../../../src/utils";
+import usePetsEdit from "../../../../src/api/queries/pets-edit";
 
 const App: NextPage = () => {
   const router = useRouter();
   const intl = useIntl();
 
+  const { id: petId } = router.query;
+
+  const { pet, petError, status: petStatus, refetch } = usePetsSingle(petId as string);
   const {
     status: configPublicStatus,
     configPublic,
     configPublicError,
     refetch: refetchConfigPublic,
   } = useConfigPublic();
-  const { status: petsAddStatus, error: petsAddError, mutate } = usePetsAdd();
+  const { status: petsAddStatus, error: petsAddError, mutate } = usePetsEdit();
 
   const [name, setName] = useState("");
   const [nameErrors, setNameErrors] = useState<string[]>([]);
@@ -41,6 +47,14 @@ const App: NextPage = () => {
   const image = configPublic?.breeds.find(({ id }) => id === breedId)?.image;
 
   useEffect(() => {
+    setName(pet?.name ?? "");
+    setKind(pet?.kind ?? PetKind.Dog);
+    setBreedId(pet?.breed?.id);
+    setMicrochip(pet?.microchip ?? "");
+    setBirthDate(pet ? toDate(pet.birthDate || new Date()) : "");
+  }, [pet]);
+
+  useEffect(() => {
     switch (petsAddStatus) {
       case ApiStatesTypes.Success:
         router.push("/app");
@@ -55,7 +69,7 @@ const App: NextPage = () => {
     refetchConfigPublic();
   };
 
-  const handleAddPet = () => {
+  const handleUpdatePet = () => {
     const isValid = name && kind && breedId && microchip && birthDate;
 
     if (!name) {
@@ -93,11 +107,14 @@ const App: NextPage = () => {
     }
 
     mutate({
-      name,
-      kind,
-      breed: breedId,
-      microchip,
-      birthDate: new Date(birthDate),
+      id: petId as string,
+      body: {
+        name,
+        kind,
+        breed: breedId,
+        microchip,
+        birthDate: new Date(birthDate),
+      },
     });
   };
 
@@ -110,7 +127,11 @@ const App: NextPage = () => {
       </Head>
 
       <LayoutApp title={intl.formatMessage({ id: "page.app.header" })} back>
-        <ComponentApiWrapper status={[configPublicStatus]} error={configPublicError} onTryAgain={handleTryAgain}>
+        <ComponentApiWrapper
+          status={[configPublicStatus || petStatus]}
+          error={configPublicError || petError}
+          onTryAgain={handleTryAgain}
+        >
           <DoggoBox padding={{ bottom: SizesEnum.ExtraLarge }}>
             <ComponentPetCard name={name} birthDate={new Date(birthDate)} microchip={microchip} image={image} />
           </DoggoBox>
@@ -139,15 +160,16 @@ const App: NextPage = () => {
             label={intl.formatMessage({ id: "pet.birthday" })}
             type={InputTypes.Date}
             errors={birthDateErrors}
+            max={toDate(new Date())}
           />
           <DoggoBox alignX={FlexAlign.Right}>
-            <DoggoButton onClick={handleAddPet} variant="green">
-              <FormattedMessage id="common.add" />
+            <DoggoButton onClick={handleUpdatePet} variant="green">
+              <FormattedMessage id="common.save" />
             </DoggoButton>
           </DoggoBox>
           {errorModal && (
             <DoggoModal onClose={() => setErrorModal(false)}>
-              <ComponentErrorScreen message={petsAddError?.message} onTryAgain={handleAddPet} />
+              <ComponentErrorScreen message={petsAddError?.message} onTryAgain={handleUpdatePet} />
             </DoggoModal>
           )}
         </ComponentApiWrapper>

@@ -5,15 +5,26 @@ import { LayoutApp } from "../../../../src/layout";
 import { useRouter } from "next/router";
 import usePetsSingle from "../../../../src/api/queries/pets-single";
 import { ComponentCardItem, ComponentErrorScreen, ComponentPetCard } from "../../../../src/component";
-import { DoggoGrid } from "../../../../src/ui-components";
+import { DoggoButton, DoggoGrid } from "../../../../src/ui-components";
 import styled from "styled-components";
 import Link from "next/link";
+import React from "react";
+
+interface EditButtonProps {
+  onClick: () => void;
+}
 
 const StyledPetCard = styled.div`
   @media screen and (min-width: 900px) {
     grid-column: 1 / 4;
   }
 `;
+
+const EditButton: React.FunctionComponent<EditButtonProps> = ({ onClick }) => (
+  <DoggoButton onClick={onClick}>
+    <FormattedMessage id="common.edit" />
+  </DoggoButton>
+);
 
 const App: NextPage = () => {
   const router = useRouter();
@@ -31,7 +42,11 @@ const App: NextPage = () => {
         <link rel="icon" href="/Users/ablanik/Projects/Blanik.me/doggo/web-react/doggo-web-react/public/favicon.ico" />
       </Head>
 
-      <LayoutApp title={intl.formatMessage({ id: "page.pet.header" })} back>
+      <LayoutApp
+        title={intl.formatMessage({ id: "page.pet.header" })}
+        back
+        right={<EditButton onClick={() => router.push(`/app/pet/${id}/edit`)} />}
+      >
         {pet && (
           <DoggoGrid mobile={1}>
             <StyledPetCard>

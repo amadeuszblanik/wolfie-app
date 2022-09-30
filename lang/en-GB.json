@@ -22,6 +22,7 @@
   "common.day": "day",
   "common.just_born": "Just born",
   "common.not_born": "Not born yet",
+  "error.required": "This field is required",
   "page.home.head.title": "Hello Hooman!",
   "page.home.head.description": "I am Doggo, your pet companion app. I will help you to take care of your pet.",
   "page.home.main.current_features": "Current features:",

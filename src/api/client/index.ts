@@ -12,6 +12,8 @@ import getConfigPrivateDto from "../dto/get-config-private.dto";
 import { PetWeightAddBody, PetWeightAddResponse } from "../types/pet-weight-add.types";
 import { ConfigPublicResponseModel } from "../response-model/config-public.response-model";
 import getConfigPublicDto from "../dto/get-config-public.dto";
+import { PetsAddResponseModel } from "../response-model/pets-add.response-model";
+import { PetsAddPayload } from "../payload/pets-add.payload";
 
 type HTTP_METHOD = "GET" | "POST" | "PUT" | "DELETE";
 
@@ -49,6 +51,12 @@ export default class ApiClient {
 
   public petsMy = async (): Promise<ApiResponse<PetSingleResponseModel[]>> => {
     return this.get<PetSingleResponseModel[]>("/pets/my").then((response) => responseDto(response, myPetsDto));
+  };
+
+  public petsAdd = async (body: PetsAddPayload): Promise<ApiResponse<PetSingleResponseModel>> => {
+    return this.post<PetsAddResponseModel, PetsAddPayload>("/pets/add", body).then((response) =>
+      responseDto(response, getPetsDto),
+    );
   };
 
   public petsSingle = (id: string) => async (): Promise<ApiResponse<PetSingleResponseModel>> => {

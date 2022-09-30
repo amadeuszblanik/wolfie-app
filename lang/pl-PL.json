@@ -22,6 +22,7 @@
   "common.day": "dzień",
   "common.just_born": "noworodek",
   "common.not_born": "nie urodzony",
+  "error.required": "To pole jest wymagane",
   "page.home.head.title": "Witaj Człowieku!",
   "page.home.head.description": "Jestem Twoim asystentem w codziennych zwierzęcych sprawach.",
   "page.home.main.current_features": "Lista obecnych funkcji:",

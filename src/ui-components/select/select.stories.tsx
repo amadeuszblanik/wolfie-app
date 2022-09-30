@@ -20,9 +20,9 @@ export default {
 const Template: ComponentStory<typeof Component> = (props) => <Component {...props} />;
 
 const TemplateExample: ComponentStory<typeof Component> = (props) => {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState<string>("");
 
-  return <Component {...props} value={value} onChange={setValue} />;
+  return <Component {...props} value={value} onChange={(nextValue) => setValue(String(nextValue))} />;
 };
 
 export const Playground = Template.bind({});

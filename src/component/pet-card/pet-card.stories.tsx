@@ -39,24 +39,10 @@ const Template: ComponentStory<typeof Component> = (props) => (
 
 export const Playground = Template.bind({});
 Playground.args = {
-  id: "1",
   name: "Testie",
-  kind: PetKind.Dog,
   microchip: "123456789",
   image: "https://placedog.net/1920?random",
-  createdAt: new Date(),
-  currentWeight: {
-    id: "1",
-    raw: 10,
-    formatted: "10 kg",
-    rawGram: 10000,
-    date: new Date(),
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
   birthDate: new Date("2020-02-12"),
-  vaccinations: 1,
-  medicines: 1,
   breed: {
     id: 1,
     name: "Standard Schnauzer",
@@ -70,5 +56,4 @@ Playground.args = {
     createdAt: new Date(),
     updatedAt: new Date(),
   },
-  updatedAt: new Date(),
 };

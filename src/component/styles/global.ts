@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import reset from "react-style-reset";
+import { isDarkMixin } from "../../ui-components/mixins";
 
 const Global = createGlobalStyle`
   ${reset};
@@ -19,6 +20,7 @@ const Global = createGlobalStyle`
   * {
     user-select: none;
     box-sizing: border-box;
+    color-scheme: ${({ theme }) => (isDarkMixin(theme.palette.dark) ? "dark" : "light")};
   }
   
    a {

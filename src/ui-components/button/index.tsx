@@ -4,6 +4,7 @@ import { darkenColorMixin, isDarkMixin, paddingMixin } from "../mixins";
 import { SizesEnum } from "../../settings/sizes";
 import Text from "../text";
 import { FormattedMessage } from "react-intl";
+import { isText } from "../../utils";
 
 interface StyledButtonProps {
   variant: keyof DefaultTheme["palette"];
@@ -40,20 +41,15 @@ const StyledButton = styled.button<StyledButtonProps>`
   }
 `;
 
-const Button: React.FunctionComponent<ButtonProps> = ({ children, variant, onClick, disabled }) => {
-  const childrenType = (children as ReactElement | null)?.type === FormattedMessage;
-  const isText = typeof children === "string" || childrenType;
-
-  return (
-    <StyledButton
-      variant={variant!}
-      onClick={!disabled ? onClick : () => console.warn("Button disabled")}
-      disabled={disabled}
-    >
-      {isText ? <Text noBottomMargin>{children}</Text> : children}
-    </StyledButton>
-  );
-};
+const Button: React.FunctionComponent<ButtonProps> = ({ children, variant, onClick, disabled }) => (
+  <StyledButton
+    variant={variant!}
+    onClick={!disabled ? onClick : () => console.warn("Button disabled")}
+    disabled={disabled}
+  >
+    {isText(children) ? <Text noBottomMargin>{children}</Text> : children}
+  </StyledButton>
+);
 
 Button.defaultProps = {
   variant: "blue",

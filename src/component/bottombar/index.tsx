@@ -16,6 +16,7 @@ const StyledBottomBar = styled(DoggoBox)`
   position: fixed;
   bottom: 0;
   left: 0;
+  z-index: 1090;
 `;
 
 const Item = ({ active, icon, name, disabled }: ItemProps) => (

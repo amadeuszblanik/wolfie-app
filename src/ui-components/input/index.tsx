@@ -35,7 +35,7 @@ interface Props {
   onChange: (nextValue: string) => void;
   max?: string;
   min?: string;
-  type: InputTypes | HTMLInputTypeAttribute;
+  type?: InputTypes | HTMLInputTypeAttribute;
 }
 
 const StyledInput = styled.input<StyledInputProps>`
@@ -43,14 +43,14 @@ const StyledInput = styled.input<StyledInputProps>`
   ${paddingMixin({ x: SizesEnum.Large, y: SizesEnum.Medium })};
   margin-bottom: ${Sizes[SizesEnum.Medium]}px;
   color: var(--color-text);
-  font-family: var(--font-family);
   font-size: 1rem;
+  font-family: var(--font-family);
+  text-align: ${({ plain }) => (plain ? "right" : "left")};
   background: var(--color-background);
   border: ${({ plain, theme }) => (!plain ? `2px solid ${theme.palette.gray}` : "none")};
   border-radius: ${({ theme }) => theme.borderRadius};
   box-shadow: 0 0 0 0 ${({ theme }) => theme.palette.blue};
   transition: box-shadow 0.3s ease-in-out;
-  text-align: ${({ plain }) => (plain ? "right" : "left")};
 
   &:focus {
     outline: none;
@@ -93,5 +93,9 @@ const Component: React.FunctionComponent<Props> = ({
     )}
   </Box>
 );
+
+Component.defaultProps = {
+  type: InputTypes.Text,
+};
 
 export default Component;

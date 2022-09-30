@@ -2,14 +2,20 @@ import { DoggoAvatar, DoggoBox, DoggoText } from "../../ui-components";
 import { BoxWidth, FlexAlign } from "../../ui-components/box";
 import { SizesEnum } from "../../settings/sizes";
 import React from "react";
-import { PetSingleResponseModel } from "../../api/response-model/pet-single.response-model";
 import { DoggoTextVariant } from "../../ui-components/text";
 import { FormattedMessage } from "react-intl";
 import { pipeAge, pipeDate } from "../../pipe";
 import { ThemePalette } from "styled-components";
 import { randomElement } from "bme-utils";
+import { Breed } from "../../types/breed.types";
 
-type Props = PetSingleResponseModel;
+interface Props {
+  name: string;
+  microchip: string;
+  image?: string;
+  birthDate: Date;
+  breed?: Breed;
+}
 
 const Component: React.FunctionComponent<Props> = ({ name, birthDate, microchip, breed, image }) => {
   const availableBackgrounds: ThemePalette[][] = [

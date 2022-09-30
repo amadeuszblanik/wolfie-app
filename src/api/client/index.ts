@@ -10,6 +10,8 @@ import getPetsWeightDto from "../dto/get-pets-weight.dto";
 import { ConfigPrivateResponseModel } from "../response-model/config-private.response-model";
 import getConfigPrivateDto from "../dto/get-config-private.dto";
 import { PetWeightAddBody, PetWeightAddResponse } from "../types/pet-weight-add.types";
+import { ConfigPublicResponseModel } from "../response-model/config-public.response-model";
+import getConfigPublicDto from "../dto/get-config-public.dto";
 
 type HTTP_METHOD = "GET" | "POST" | "PUT" | "DELETE";
 
@@ -33,6 +35,10 @@ export default class ApiClient {
 
   public signIn = async (body: AuthSignInBody): Promise<AuthSignInResponse | CommonErrorResponseModel> => {
     return this.post("/auth/sign-in", body);
+  };
+
+  public configPublic = async (): Promise<ApiResponse<ConfigPublicResponseModel>> => {
+    return this.get<ConfigPublicResponseModel>("/config").then((response) => responseDto(response, getConfigPublicDto));
   };
 
   public configPrivate = async (): Promise<ApiResponse<ConfigPrivateResponseModel>> => {

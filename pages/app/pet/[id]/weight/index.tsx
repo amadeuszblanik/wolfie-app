@@ -2,7 +2,6 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useRouter } from "next/router";
-import styled from "styled-components";
 import React, { useEffect, useState } from "react";
 import usePetsSingle from "../../../../../src/api/queries/pets-single";
 import usePetsWeight from "../../../../../src/api/queries/pets-weight";
@@ -12,7 +11,6 @@ import { DoggoButton, DoggoGrid, DoggoLineChart, DoggoList, DoggoSheet } from ".
 import { pipeDate } from "../../../../../src/pipe";
 import useConfigPrivate from "../../../../../src/api/queries/config-private";
 import usePetWeightAdd from "../../../../../src/api/queries/pet-weight-add";
-import { PetWeightAddBody } from "../../../../../src/api/types/pet-weight-add.types";
 import { ApiStatesTypes } from "../../../../../src/types/api-states.types";
 
 interface AddButtonProps {

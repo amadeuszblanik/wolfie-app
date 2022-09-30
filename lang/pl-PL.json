@@ -41,6 +41,8 @@
   "page.app.header": "Moje zwierzaki",
   "page.pet.header": "Mój zwierzak",
   "page.pet_weight.header": "Waga zwierzaka",
+  "pet.name": "Imię",
+  "pet.kind": "Gatunek",
   "pet.age": "Wiek",
   "pet.birthday": "Data urodzenia",
   "pet.microchip": "Numer mikrochipu",

@@ -41,6 +41,8 @@
   "page.app.header": "My pets",
   "page.pet.header": "Pet dashboard",
   "page.pet_weight.header": "Pet weight",
+  "pet.name": "Name",
+  "pet.kind": "Kind",
   "pet.age": "Age",
   "pet.birthday": "Birthday",
   "pet.microchip": "Microchip",

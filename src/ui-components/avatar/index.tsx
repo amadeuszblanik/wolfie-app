@@ -48,7 +48,7 @@ const StyledImage = styled.img<{ visible: boolean }>`
 `;
 
 interface Props {
-  children: string;
+  children?: string;
   alt?: string;
   size?: SizesEnum;
 }
@@ -68,8 +68,9 @@ const Component = ({ children, alt, size }: Props) => {
 
   return (
     <StyledBox alignX={FlexAlign.Center} alignY={FlexAlign.Center} size={size!}>
-      {!imageLoaded && <Loader />}
-      {!imageFailed && (
+      {!children && "🐕‍🦺"}
+      {children && !imageLoaded && <Loader />}
+      {children && !imageFailed && (
         <StyledImage
           visible={imageLoaded}
           src={children}
@@ -78,7 +79,7 @@ const Component = ({ children, alt, size }: Props) => {
           onError={handleImageLoadedError}
         />
       )}
-      {imageFailed && "🐕‍🦺"}
+      {children && imageFailed && "🐕‍🦺"}
     </StyledBox>
   );
 };

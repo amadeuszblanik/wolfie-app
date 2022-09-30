@@ -14,7 +14,7 @@ interface Props {
 }
 
 const StyledLayout = styled(DoggoBox)`
-  padding-top: 64px;
+  padding-top: 80px;
   padding-bottom: 120px;
 `;
 

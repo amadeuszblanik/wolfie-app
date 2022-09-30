@@ -5,6 +5,7 @@ import { SizesEnum } from "../../settings/sizes";
 import { DoggoTextVariant } from "../../ui-components/text";
 import React from "react";
 import { GridAlign } from "../../ui-components/grid";
+import { sizeMixin } from "../../ui-components/mixins";
 
 interface Props {
   title: string;
@@ -17,6 +18,7 @@ const StyledTopBar = styled(DoggoBox)`
   top: 0;
   left: 0;
   z-index: 1090;
+  min-height: ${sizeMixin(SizesEnum.ExtraLarge2)};
 `;
 
 const StyledTopBarLeft = styled.div`

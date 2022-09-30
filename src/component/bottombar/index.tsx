@@ -4,12 +4,12 @@ import { BoxWidth, FlexAlign } from "../../ui-components/box";
 import { SizesEnum } from "../../settings/sizes";
 import { DoggoTextVariant } from "../../ui-components/text";
 import { DoggoIcons } from "../../ui-components/icon";
+import { ButtonSizes } from "../../ui-components/button";
 
 interface ItemProps {
   active: boolean;
   icon: DoggoIcons;
   name: string;
-  disabled?: boolean;
 }
 
 const StyledBottomBar = styled(DoggoBox)`
@@ -19,12 +19,12 @@ const StyledBottomBar = styled(DoggoBox)`
   z-index: 1090;
 `;
 
-const Item = ({ active, icon, name, disabled }: ItemProps) => (
+const Item = ({ active, icon, name }: ItemProps) => (
   // eslint-disable-next-line no-console
   <DoggoButton
     onClick={() => console.warn("Button clicked")}
     variant={active ? "background" : "backgroundSecondary"}
-    disabled={disabled}
+    size={ButtonSizes.Small}
   >
     <DoggoBox alignX={FlexAlign.Center} column>
       <DoggoBox padding={{ bottom: SizesEnum.Small }}>
@@ -49,8 +49,8 @@ const Component = () => {
       <DoggoContainer fullWidth>
         <DoggoBox alignX={FlexAlign.SpaceBetween} width={BoxWidth.Full}>
           <Item icon="apps" name="Pets" active={true} />
-          <Item icon="book" name="GDPR" active={false} disabled />
-          <Item icon="cog" name="Settings" active={false} disabled />
+          <Item icon="book" name="GDPR" active={false} />
+          <Item icon="cog" name="Settings" active={false} />
         </DoggoBox>
       </DoggoContainer>
     </StyledBottomBar>

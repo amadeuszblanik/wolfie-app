@@ -76,13 +76,13 @@ const Home: NextPage = () => {
             </DoggoBox>
             <DoggoBox alignX={FlexAlign.Center} padding={{ top: SizesEnum.Large }}>
               {signedIn ? (
-                <DoggoButton onClick={() => router.push("/app")}>
+                <DoggoButton variant="blue" onClick={() => router.push("/app")}>
                   <FormattedMessage id="common.open_app" />
                 </DoggoButton>
               ) : (
                 <>
                   <DoggoBox inline padding={{ x: SizesEnum.Small }}>
-                    <DoggoButton onClick={() => router.push("/app/auth/sign-in")}>
+                    <DoggoButton variant="blue" onClick={() => router.push("/app/auth/sign-in")}>
                       <FormattedMessage id="common.sign_in" />
                     </DoggoButton>
                   </DoggoBox>

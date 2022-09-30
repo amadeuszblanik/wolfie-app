@@ -5,6 +5,7 @@ import { ComponentBottombar, ComponentTopbar } from "../../component";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import { FormattedMessage } from "react-intl";
+import { ButtonSizes } from "../../ui-components/button";
 
 interface Props {
   children: React.ReactNode;
@@ -22,7 +23,7 @@ const AppBackButton: React.FunctionComponent = () => {
   const router = useRouter();
 
   return (
-    <DoggoButton onClick={router.back}>
+    <DoggoButton onClick={router.back} size={ButtonSizes.Small}>
       <FormattedMessage id="common.back" />
     </DoggoButton>
   );

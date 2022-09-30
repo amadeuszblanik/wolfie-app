@@ -11,7 +11,7 @@ export enum ButtonSizes {
 }
 
 interface StyledButtonProps {
-  variant: keyof DefaultTheme["palette"];
+  variant?: keyof DefaultTheme["palette"];
   disabled?: boolean;
   size: ButtonSizes;
 }
@@ -34,8 +34,10 @@ const PADDING_SIZES: { [key in ButtonSizes]: { x: SizesEnum; y: SizesEnum } } = 
 
 const StyledButton = styled.button<StyledButtonProps>`
   ${({ size }) => paddingMixin(PADDING_SIZES[size])};
-  color: ${({ theme, variant }) => (isDarkMixin(theme.palette[variant]) ? theme.palette.light : theme.palette.dark)};
-  background: ${({ theme, variant, disabled }) => (!disabled ? theme.palette[variant] : theme.palette.gray)};
+  color: ${({ theme, variant }) =>
+    variant ? (isDarkMixin(theme.palette[variant]) ? theme.palette.light : theme.palette.dark) : `var(--color-text)`};
+  background: ${({ theme, variant, disabled }) =>
+    variant ? (!disabled ? theme.palette[variant] : theme.palette.gray) : `var(--color-background)`};
   border: none;
   border-radius: ${({ theme }) => theme.borderRadius};
   cursor: pointer;
@@ -44,17 +46,19 @@ const StyledButton = styled.button<StyledButtonProps>`
   appearance: none;
 
   &:hover {
-    background: ${({ theme, variant }) => darkenColorMixin(theme.palette[variant], HOVER_BACKGROUND_DARKEN_VALUE)};
+    background: ${({ theme, variant }) =>
+      variant ? darkenColorMixin(theme.palette[variant], HOVER_BACKGROUND_DARKEN_VALUE) : `var(--color-background)`};
   }
 
   &:active {
-    background: ${({ theme, variant }) => darkenColorMixin(theme.palette[variant], CLICK_BACKGROUND_DARKEN_VALUE)};
+    background: ${({ theme, variant }) =>
+      variant ? darkenColorMixin(theme.palette[variant], CLICK_BACKGROUND_DARKEN_VALUE) : `var(--color-background)`};
   }
 `;
 
 const Button: React.FunctionComponent<ButtonProps> = ({ children, variant, size, onClick, disabled }) => (
   <StyledButton
-    variant={variant!}
+    variant={variant}
     onClick={!disabled ? onClick : () => console.warn("Button disabled")}
     disabled={disabled}
     size={size || ButtonSizes.Normal}
@@ -62,9 +66,5 @@ const Button: React.FunctionComponent<ButtonProps> = ({ children, variant, size,
     {isText(children) ? <Text noBottomMargin>{children}</Text> : children}
   </StyledButton>
 );
-
-Button.defaultProps = {
-  variant: "blue",
-};
 
 export default Button;

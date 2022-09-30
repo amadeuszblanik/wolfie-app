@@ -9,13 +9,14 @@ import Link from "next/link";
 import { FormattedMessage, useIntl } from "react-intl";
 import React from "react";
 import { useRouter } from "next/router";
+import { ButtonSizes } from "../../src/ui-components/button";
 
 interface AddButtonProps {
   onClick: () => void;
 }
 
 const AddButton: React.FunctionComponent<AddButtonProps> = ({ onClick }) => (
-  <DoggoButton onClick={onClick}>
+  <DoggoButton onClick={onClick} size={ButtonSizes.Small}>
     <FormattedMessage id="common.add" />
   </DoggoButton>
 );

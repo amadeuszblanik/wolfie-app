@@ -9,6 +9,7 @@ import { DoggoButton, DoggoGrid } from "../../../../src/ui-components";
 import styled from "styled-components";
 import Link from "next/link";
 import React from "react";
+import { ButtonSizes } from "../../../../src/ui-components/button";
 
 interface EditButtonProps {
   onClick: () => void;
@@ -21,7 +22,7 @@ const StyledPetCard = styled.div`
 `;
 
 const EditButton: React.FunctionComponent<EditButtonProps> = ({ onClick }) => (
-  <DoggoButton onClick={onClick}>
+  <DoggoButton onClick={onClick} size={ButtonSizes.Small}>
     <FormattedMessage id="common.edit" />
   </DoggoButton>
 );

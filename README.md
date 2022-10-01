@@ -1,34 +1,46 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Doggo
 
-## Getting Started
+Doggo is a Next.JS web application for dealing with pet management.
 
-First, run the development server:
+_THIS APPLICATION IS IN DEVELOPMENT._
+
+## Official website
+[Stable build](https://doggo.rocks)
+[Development build](https://next.doggo.rocks)
+[Doggo Open API](https://doggo.rocks/api)
+
+## Installation
+Use the package manager [yarn](https://yarnpkg.com) to install all dependencies.
 
 ```bash
-npm run dev
-# or
-yarn dev
+yarn install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Usage
+* `yarn dev` - starts the application in development mode.
+* `yarn build && yarn start` - builds the application and starts it in production mode.
 
-You can start editing the page by modifying `pages/sign-in.tsx`. The page auto-updates as you edit the file.
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Please make sure to update tests as appropriate.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Stages for Doggo development:
+* [x] Create a Nest.JS application for the API
+* [x] Create a proof of concept web application based on Angular [repo](https://github.com/amadeuszblanik/doggo-frontend-poc)
+* [x] Decide about final technology stack
+* [x] Create a Next.JS application for the web application
+* [x] Create a custom built-in UI library for the web application
+* [] Implement all features from the proof of concept Angular application into Next.JS application
+* [] Implement photo uploading and displaying
+* [] Refactor code to be more readable and maintainable
+* [] Create a alpha stage of the web application
+* [] Implement dog tinder
+* [] Implement dog park finder
+* [] Create a beta stage of the web application
+* [] Create a native iOS mobile application [repo](https://github.com/amadeuszblanik/doggo-ios)
+* [] Implement dog walk tracking
+* [] Create a hybrid Android mobile application using Ionic or Capacitor.JS
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## License
+[MIT](https://choosealicense.com/licenses/mit/)

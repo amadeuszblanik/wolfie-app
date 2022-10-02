@@ -61,14 +61,14 @@ const Component: React.FunctionComponent<Props> = ({ onClose, onSave, petId }) =
     }
 
     submitForm();
-  }, [result, submitForm]);
+  }, [result]);
 
   useEffect(() => {
     switch (petsAvatarChangeStatus) {
       case ApiStatesTypes.Success:
         onSave();
     }
-  }, [petsAvatarChangeStatus, onSave]);
+  }, [petsAvatarChangeStatus]);
 
   return (
     <DoggoModal onClose={onClose}>

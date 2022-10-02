@@ -23,8 +23,9 @@ const useBase64ToFile = () => {
     }
     const blob = new Blob([ab], { type: mimeString });
     const file = new File([blob], originalFileName, { type: mimeString });
+
     setResult(file);
-  }, [dataUrl, originalFileName]);
+  }, [dataUrl]);
 
   return { result, error, setDataUrl, setFileName };
 };

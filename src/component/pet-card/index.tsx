@@ -15,6 +15,7 @@ interface Props {
   birthDate: Date;
   breed?: Breed;
   background?: [ThemePalette, ThemePalette];
+  onAvatarEdit?: () => void;
 }
 
 // const availableBackgrounds: ThemePalette[][] = [
@@ -25,7 +26,15 @@ interface Props {
 //   ["blue", "cyan"],
 // ];
 
-const Component: React.FunctionComponent<Props> = ({ name, birthDate, microchip, breed, image, background }) => (
+const Component: React.FunctionComponent<Props> = ({
+  name,
+  birthDate,
+  microchip,
+  breed,
+  image,
+  background,
+  onAvatarEdit,
+}) => (
   <DoggoBox
     width={BoxWidth.Full}
     padding={{ y: SizesEnum.ExtraLarge, x: SizesEnum.ExtraLarge }}
@@ -34,7 +43,7 @@ const Component: React.FunctionComponent<Props> = ({ name, birthDate, microchip,
   >
     <DoggoBox alignX={FlexAlign.SpaceBetween} padding={{ bottom: SizesEnum.Medium }}>
       <DoggoText variant={DoggoTextVariant.LargeTitle}>{name}</DoggoText>
-      <DoggoAvatar alt="Avatar" size={SizesEnum.ExtraLarge}>
+      <DoggoAvatar alt="Avatar" size={SizesEnum.ExtraLarge} onEdit={onAvatarEdit}>
         {image}
       </DoggoAvatar>
     </DoggoBox>

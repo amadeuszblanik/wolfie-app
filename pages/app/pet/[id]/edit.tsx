@@ -3,12 +3,16 @@ import Head from "next/head";
 import { FormattedMessage, useIntl } from "react-intl";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import usePetsAdd from "../../../../src/api/queries/pets-add";
 import { PetKind } from "../../../../src/types/pet-kind.types";
 import useConfigPublic from "../../../../src/api/queries/config-public";
 import { ApiStatesTypes } from "../../../../src/types/api-states.types";
 import { LayoutApp } from "../../../../src/layout";
-import { ComponentApiWrapper, ComponentErrorScreen, ComponentPetCard } from "../../../../src/component";
+import {
+  ComponentApiWrapper,
+  ComponentAvatarChange,
+  ComponentErrorScreen,
+  ComponentPetCard,
+} from "../../../../src/component";
 import { DoggoBox, DoggoButton, DoggoInput, DoggoModal, DoggoSelect } from "../../../../src/ui-components";
 import { SizesEnum } from "../../../../src/settings/sizes";
 import { InputTypes } from "../../../../src/ui-components/input";
@@ -23,7 +27,7 @@ const App: NextPage = () => {
 
   const { id: petId } = router.query;
 
-  const { pet, petError, status: petStatus, refetch } = usePetsSingle(petId as string);
+  const { pet, petError, status: petStatus, refetch: refetchPet } = usePetsSingle(petId as string);
   const {
     status: configPublicStatus,
     configPublic,
@@ -43,6 +47,7 @@ const App: NextPage = () => {
   const [birthDate, setBirthDate] = useState("");
   const [birthDateErrors, setBirthDateErrors] = useState<string[]>([]);
   const [errorModal, setErrorModal] = useState(false);
+  const [avatarChangeModal, setAvatarChangeModal] = useState(true);
 
   useEffect(() => {
     setName(pet?.name ?? "");
@@ -131,7 +136,13 @@ const App: NextPage = () => {
           onTryAgain={handleTryAgain}
         >
           <DoggoBox padding={{ bottom: SizesEnum.ExtraLarge }}>
-            <ComponentPetCard name={name} birthDate={new Date(birthDate)} microchip={microchip} image={pet?.image} />
+            <ComponentPetCard
+              name={name}
+              birthDate={new Date(birthDate)}
+              microchip={microchip}
+              image={pet?.image}
+              onAvatarEdit={() => setAvatarChangeModal(true)}
+            />
           </DoggoBox>
           <DoggoInput
             value={name}
@@ -169,6 +180,16 @@ const App: NextPage = () => {
             <DoggoModal onClose={() => setErrorModal(false)}>
               <ComponentErrorScreen message={petsAddError?.message} onTryAgain={handleUpdatePet} />
             </DoggoModal>
+          )}
+          {avatarChangeModal && (
+            <ComponentAvatarChange
+              petId={petId as string}
+              onSave={() => {
+                setAvatarChangeModal(false);
+                refetchPet();
+              }}
+              onClose={() => setAvatarChangeModal(false)}
+            />
           )}
         </ComponentApiWrapper>
       </LayoutApp>

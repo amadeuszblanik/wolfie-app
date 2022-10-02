@@ -8,10 +8,11 @@ interface Props {
   children: React.ReactNode;
   error: CommonErrorResponseModel | undefined;
   status: ApiStatesTypes | ApiStatesTypes[];
+  idleLoader?: boolean;
   onTryAgain: () => void;
 }
 
-const Component: React.FunctionComponent<Props> = ({ children, status, error, onTryAgain }) => {
+const Component: React.FunctionComponent<Props> = ({ children, status, error, idleLoader, onTryAgain }) => {
   const statuses: ApiStatesTypes[] = Array.isArray(status) ? status : [status];
 
   if (statuses.some((apiStatus) => apiStatus === ApiStatesTypes.Loading)) {
@@ -22,7 +23,15 @@ const Component: React.FunctionComponent<Props> = ({ children, status, error, on
     return <>{children}</>;
   }
 
-  return <ComponentErrorScreen message={error?.message} onTryAgain={onTryAgain} />;
+  if (statuses.some((apiStatus) => apiStatus === ApiStatesTypes.Error)) {
+    return <ComponentErrorScreen message={error?.message} onTryAgain={onTryAgain} />;
+  }
+
+  if (!idleLoader) {
+    return <>{children}</>;
+  }
+
+  return <DoggoLoader fullScreen />;
 };
 
 export default Component;

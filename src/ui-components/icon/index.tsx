@@ -9,6 +9,7 @@ import ChevronDownIcon from "./icons/chevron-down-outline.svg";
 import CloseCircleIcon from "./icons/close-circle-outline.svg";
 import CloseIcon from "./icons/close-outline.svg";
 import CogIcon from "./icons/cog-outline.svg";
+import CreateIcon from "./icons/create-outline.svg";
 import MedicalIcon from "./icons/medical-outline.svg";
 import MedkitIcon from "./icons/medkit-outline.svg";
 import WarningIcon from "./icons/warning-outline.svg";
@@ -22,6 +23,7 @@ export const Icons = [
   "close-circle",
   "close",
   "cog",
+  "create",
   "medical",
   "medkit",
   "warning",
@@ -68,6 +70,8 @@ const Component: React.FunctionComponent<Props> = ({ icon, size, ...props }) => 
         return <CloseIcon />;
       case "cog":
         return <CogIcon />;
+      case "create":
+        return <CreateIcon />;
       case "medical":
         return <MedicalIcon />;
       case "medkit":

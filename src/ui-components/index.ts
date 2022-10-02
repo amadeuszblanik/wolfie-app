@@ -1,4 +1,5 @@
 export { default as DoggoAvatar } from "./avatar";
+export { default as DoggoAvatarCrop } from "./avatar-crop";
 export { default as DoggoBox } from "./box";
 export { default as DoggoButton } from "./button";
 export { default as DoggoCheckbox } from "./checkbox";
@@ -6,6 +7,7 @@ export { default as DoggoContainer } from "./container";
 export { default as DoggoGrid } from "./grid";
 export { default as DoggoIcon } from "./icon";
 export { default as DoggoInput } from "./input";
+export { default as DoggoInputFile } from "./input-file";
 export { default as DoggoLineChart } from "./line-chart";
 export { default as DoggoList } from "./list";
 export { default as DoggoLoader } from "./loader";

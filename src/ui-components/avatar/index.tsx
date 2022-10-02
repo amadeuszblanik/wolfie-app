@@ -5,6 +5,7 @@ import { SizesEnum } from "../../settings/sizes";
 import Box, { FlexAlign } from "../box";
 import { sizeMixin } from "../mixins";
 import Loader from "../loader";
+import { DoggoButton, DoggoIcon } from "../index";
 
 const AVATAR_SIZES: { [key in SizesEnum]: number } = {
   [SizesEnum.ExtraSmall2]: 16,
@@ -37,6 +38,15 @@ const StyledBox = styled(Box)<{ size: SizesEnum }>`
   background: ${({ theme }) => theme.palette.gray2};
 `;
 
+const StyledEdit = styled(Box)<{ hover: boolean }>`
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1020;
+  opacity: ${({ hover }) => (hover ? "1" : "0.33")};
+  transition: opacity 0.2s ease-in-out;
+`;
+
 const StyledImage = styled.img<{ visible: boolean }>`
   position: absolute;
   top: 0;
@@ -51,11 +61,13 @@ interface Props {
   children?: string;
   alt?: string;
   size?: SizesEnum;
+  onEdit?: () => void;
 }
 
-const Component = ({ children, alt, size }: Props) => {
+const Component = ({ children, alt, size, onEdit }: Props) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageFailed, setImageFailed] = useState(false);
+  const [hover, setHover] = useState(false);
 
   const handleImageLoaded = () => {
     setImageLoaded(true);
@@ -67,25 +79,30 @@ const Component = ({ children, alt, size }: Props) => {
   };
 
   return (
-    <StyledBox alignX={FlexAlign.Center} alignY={FlexAlign.Center} size={size!}>
-      {!children && "🐕‍🦺"}
-      {children && !imageLoaded && <Loader />}
-      {children && !imageFailed && (
-        <StyledImage
-          visible={imageLoaded}
-          src={children}
-          alt={alt ?? ""}
-          onLoad={handleImageLoaded}
-          onError={handleImageLoadedError}
-        />
-      )}
-      {children && imageFailed && "🐕‍🦺"}
-    </StyledBox>
+    <div onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
+      <StyledBox alignX={FlexAlign.Center} alignY={FlexAlign.Center} size={size || SizesEnum.Medium}>
+        {onEdit && (
+          <StyledEdit hover={hover}>
+            <DoggoButton onClick={onEdit} variant="gray5">
+              <DoggoIcon icon="create" />
+            </DoggoButton>
+          </StyledEdit>
+        )}
+        {!children && "🐕‍🦺"}
+        {children && !imageLoaded && <Loader />}
+        {children && !imageFailed && (
+          <StyledImage
+            visible={imageLoaded}
+            src={children}
+            alt={alt ?? ""}
+            onLoad={handleImageLoaded}
+            onError={handleImageLoadedError}
+          />
+        )}
+        {children && imageFailed && "🐕‍🦺"}
+      </StyledBox>
+    </div>
   );
-};
-
-Component.defaultProps = {
-  size: SizesEnum.Medium,
 };
 
 export default Component;

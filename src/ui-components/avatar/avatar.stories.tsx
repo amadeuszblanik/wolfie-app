@@ -10,6 +10,7 @@ export default {
     children: { control: "text" },
     alt: { control: "text" },
     size: { options: SizesEnum, control: "select" },
+    onEdit: { action: "onEdit()" },
   },
 } as ComponentMeta<typeof Component>;
 
@@ -18,5 +19,5 @@ const Template: ComponentStory<typeof Component> = (args) => <Component {...args
 export const Playground = Template.bind({});
 Playground.args = {
   children: "https://placedog.net/1920?random",
-  size: SizesEnum.Medium,
+  size: SizesEnum.ExtraLarge2,
 };

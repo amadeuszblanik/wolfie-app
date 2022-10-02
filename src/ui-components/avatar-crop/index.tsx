@@ -37,7 +37,7 @@ interface ImageOnLoadEvent extends Event {
 const StyledCropCanvas = styled.canvas<StyledCropCanvasProps>`
   width: ${({ componentWidth }) => componentWidth}px;
   height: ${({ componentHeight }) => componentHeight}px;
-  background-color: ${({ theme }) => theme.palette.backgroundSecondary};
+  background-color: ${({ theme }) => theme.palette.gray5};
   cursor: move;
 `;
 
@@ -188,7 +188,7 @@ const Component = ({ width, height, src, onCrop, componentWidth }: Props) => {
       handleMoveImage(moveX, moveY);
       debounceUpdateOutput();
     },
-    [moveActive],
+    [moveActive, debounceUpdateOutput, handleMoveImage, cropRef],
   );
 
   const handleTouchMove = useCallback(

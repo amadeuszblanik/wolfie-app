@@ -3,7 +3,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import Component from "./index";
 
 export default {
-  title: "UI-Components/Photo crop",
+  title: "UI-Components/Photo crop [WIP]",
   component: Component,
   argTypes: {
     src: { control: "text" },

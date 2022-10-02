@@ -13,6 +13,7 @@ const CANVAS_CIRCLE_START_ANGLE = 0;
 const CANVAS_OUTPUT_DX = 0;
 const CANVAS_OUTPUT_DY = 0;
 const CANVAS_CLEAR_VALUE = 0;
+const CANVAS_INITIAL_SIZE = 0;
 
 type PointsType = "topRight" | "bottomRight" | "bottomLeft" | "topLeft";
 
@@ -51,8 +52,8 @@ const Component = ({ src, onCrop }: Props) => {
   const [ctx, setCtx] = useState<CanvasRenderingContext2D | null>();
   const [cropPoint, setCropPoint] = useState({ top: 0, right: 0, bottom: 0, left: 0 });
   const [moveActive, setMoveActive] = useState<PointsType>();
-  const [canvasWidth, setCanvasWidth] = useState<number>(0);
-  const [canvasHeight, setCanvasHeight] = useState<number>(0);
+  const [canvasWidth, setCanvasWidth] = useState<number>(CANVAS_INITIAL_SIZE);
+  const [canvasHeight, setCanvasHeight] = useState<number>(CANVAS_INITIAL_SIZE);
 
   const updateOutput = useCallback(() => {
     const canvasCrop = cropRef?.current;
@@ -101,11 +102,7 @@ const Component = ({ src, onCrop }: Props) => {
     setImage(newImage);
 
     newImage.onload = (event) => {
-      console.log("Image loaded", event);
-
       const path = (event.target as HTMLImageElement) || firstElement([...(event as ImageOnLoadEvent).path]);
-
-      console.log("Image loaded", path, event);
 
       if (!path) {
         throw new Error("Image is not defined");

@@ -47,7 +47,7 @@ const App: NextPage = () => {
   const [birthDate, setBirthDate] = useState("");
   const [birthDateErrors, setBirthDateErrors] = useState<string[]>([]);
   const [errorModal, setErrorModal] = useState(false);
-  const [avatarChangeModal, setAvatarChangeModal] = useState(true);
+  const [avatarChangeModal, setAvatarChangeModal] = useState(false);
 
   useEffect(() => {
     setName(pet?.name ?? "");

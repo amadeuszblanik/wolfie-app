@@ -15,13 +15,14 @@ const WHEEL_DELTA_Y_DIVIDER = 1000;
 const DEBOUNCE_ON_CROP = 1000;
 
 interface StyledCropCanvasProps {
-  width: number;
-  height: number;
+  componentWidth: number;
+  componentHeight: number;
 }
 
 interface Props {
   width: number;
   height: number;
+  componentWidth: number;
   src: string;
   onCrop: (data: string) => void;
 }
@@ -34,13 +35,13 @@ interface ImageOnLoadEvent extends Event {
 }
 
 const StyledCropCanvas = styled.canvas<StyledCropCanvasProps>`
-  width: ${({ width }) => width}px;
-  height: ${({ height }) => height}px;
+  width: ${({ componentWidth }) => componentWidth}px;
+  height: ${({ componentHeight }) => componentHeight}px;
   background-color: ${({ theme }) => theme.palette.backgroundSecondary};
   cursor: move;
 `;
 
-const Component = ({ width, height, src, onCrop }: Props) => {
+const Component = ({ width, height, src, onCrop, componentWidth }: Props) => {
   const cropRef = useRef<HTMLCanvasElement>(null);
 
   const [image, setImage] = useState(new Image());
@@ -52,6 +53,7 @@ const Component = ({ width, height, src, onCrop }: Props) => {
   const [ctx, setCtx] = useState<CanvasRenderingContext2D | null>();
   const [moveActive, setMoveActive] = useState<{ x: number; y: number }>();
 
+  const ratio = width / height;
   const imageToCanvasScale = imageWidth / width;
 
   const updateOutput = () => {
@@ -106,14 +108,14 @@ const Component = ({ width, height, src, onCrop }: Props) => {
       width,
       height,
     );
-  }, [ctx, width, height, image, imageWidth, imageHeight, imageX, imageY, imageScale]);
+  }, [ctx, width, height, image, imageWidth, imageHeight, imageX, imageY, imageScale, imageToCanvasScale]);
 
   useEffect(() => {
     const nextImage = new Image();
     nextImage.src = src;
     nextImage.onload = imageOnLoad;
     nextImage.crossOrigin = "anonymous";
-  }, [src]);
+  }, [src, imageOnLoad]);
 
   const handleMoveImage = useCallback(
     (moveX: number, moveY: number) => {
@@ -124,7 +126,7 @@ const Component = ({ width, height, src, onCrop }: Props) => {
       setImageX(imageX - moveX);
       setImageY(imageY - moveY);
     },
-    [ctx, width, height, imageX, imageY],
+    [ctx, imageX, imageY],
   );
 
   const handleMouseDown = (event: React.MouseEvent<HTMLCanvasElement>) => {
@@ -244,6 +246,8 @@ const Component = ({ width, height, src, onCrop }: Props) => {
         onWheel={handleMouseScroll}
         width={width}
         height={height}
+        componentWidth={componentWidth || width}
+        componentHeight={componentWidth * ratio || height}
       />
     </Box>
   );

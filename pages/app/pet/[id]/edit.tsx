@@ -44,8 +44,6 @@ const App: NextPage = () => {
   const [birthDateErrors, setBirthDateErrors] = useState<string[]>([]);
   const [errorModal, setErrorModal] = useState(false);
 
-  const image = configPublic?.breeds.find(({ id }) => id === breedId)?.image;
-
   useEffect(() => {
     setName(pet?.name ?? "");
     setKind(pet?.kind ?? PetKind.Dog);
@@ -133,7 +131,7 @@ const App: NextPage = () => {
           onTryAgain={handleTryAgain}
         >
           <DoggoBox padding={{ bottom: SizesEnum.ExtraLarge }}>
-            <ComponentPetCard name={name} birthDate={new Date(birthDate)} microchip={microchip} image={image} />
+            <ComponentPetCard name={name} birthDate={new Date(birthDate)} microchip={microchip} image={pet?.image} />
           </DoggoBox>
           <DoggoInput
             value={name}

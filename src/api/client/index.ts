@@ -64,7 +64,7 @@ export default class ApiClient {
   };
 
   public petsAvatarChange = async (id: string, body: PetsAvatarChangePayload): Promise<ApiResponse<string>> => {
-    return this.postMultipart<string, PetsAvatarChangePayload>(`/pets/${id}/avatar`, body).then((response) =>
+    return this.postForm<string, PetsAvatarChangePayload>(`/pets/${id}/avatar`, body).then((response) =>
       responseDto(response),
     );
   };
@@ -166,20 +166,19 @@ export default class ApiClient {
     return interceptResponse.json();
   }
 
-  private async postMultipart<T, B>(path: string, body: B): Promise<T> {
+  private async postForm<T, B>(path: string, body: B): Promise<T> {
     const formData = new FormData();
 
-    // @TODO: Refactor this later
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    Object.entries(body).forEach(([key, value]) => {
-      formData.append(key, value);
-    });
+    if (body instanceof Object) {
+      Object.entries(body).forEach(([key, value]) => {
+        formData.append(key, value);
+      });
+    }
 
     const response = await fetch(`${this.baseUrl}${path}`, {
       method: "POST",
       headers: this.getHeaders(),
-      body: formData,
+      body: formData as unknown as BodyInit,
     });
     const interceptResponse = await this.interceptors(response, "POST", path, JSON.stringify(body));
     return interceptResponse.json();

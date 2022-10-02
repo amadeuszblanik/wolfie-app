@@ -15,5 +15,5 @@ const Template: ComponentStory<typeof Component> = (args) => <Component {...args
 
 export const Playground = Template.bind({});
 Playground.args = {
-  src: "http://localhost:3000/uploads/2020-Mercedes-AMG-A45-005-1440w_1664669426847.jpg",
+  src: "https://images.pexels.com/photos/6218402/pexels-photo-6218402.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
 };

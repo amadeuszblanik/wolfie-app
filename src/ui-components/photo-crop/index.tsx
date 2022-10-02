@@ -51,6 +51,8 @@ const Component = ({ src, onCrop }: Props) => {
   const [ctx, setCtx] = useState<CanvasRenderingContext2D | null>();
   const [cropPoint, setCropPoint] = useState({ top: 0, right: 0, bottom: 0, left: 0 });
   const [moveActive, setMoveActive] = useState<PointsType>();
+  const [canvasWidth, setCanvasWidth] = useState<number>(0);
+  const [canvasHeight, setCanvasHeight] = useState<number>(0);
 
   const updateOutput = useCallback(() => {
     const canvasCrop = cropRef?.current;
@@ -97,6 +99,21 @@ const Component = ({ src, onCrop }: Props) => {
     newImage.src = src;
     newImage.crossOrigin = "Anonymous";
     setImage(newImage);
+
+    newImage.onload = (event) => {
+      console.log("Image loaded", event);
+
+      const path = (event.target as HTMLImageElement) || firstElement([...(event as ImageOnLoadEvent).path]);
+
+      console.log("Image loaded", path, event);
+
+      if (!path) {
+        throw new Error("Image is not defined");
+      }
+
+      setCanvasWidth(path.width);
+      setCanvasHeight(path.height);
+    };
   }, [src]);
 
   // Draw top right crop point
@@ -135,8 +152,8 @@ const Component = ({ src, onCrop }: Props) => {
     ctx.arc(cropPoint.left, cropPoint.top, CANVAS_MOUSE_RADIUS, CANVAS_CIRCLE_START_ANGLE, CANVAS_CIRCLE * Math.PI);
     ctx.stroke();
 
-    updateOutput(); // @TODO: optimize or even consider this
-  }, [cropPoint, updateOutput, ctx]);
+    // updateOutput(); // @TODO: optimize or even consider this
+  }, [cropPoint, ctx]);
 
   useEffect(() => {
     const canvas = cropRef?.current;
@@ -148,33 +165,19 @@ const Component = ({ src, onCrop }: Props) => {
     const ctxRef = canvas.getContext("2d");
     setCtx(ctxRef);
 
-    let width = 0;
-    let height = 0;
+    canvas.width = canvasWidth;
+    canvas.height = canvasHeight;
+    canvas.style.width = `${canvasWidth}px`;
+    canvas.style.height = `${canvasHeight}px`;
+    canvas.style.backgroundImage = `url(${src})`;
 
-    image.onload = (event) => {
-      const path = firstElement((event as ImageOnLoadEvent).path);
-
-      if (!path) {
-        throw new Error("Image path is not defined");
-      }
-
-      width = path.width;
-      height = path.height;
-
-      canvas.width = width;
-      canvas.height = height;
-      canvas.style.width = `${width}px`;
-      canvas.style.height = `${height}px`;
-      canvas.style.backgroundImage = `url(${src})`;
-
-      setCropPoint({
-        top: height * CANVAS_START_POSITIONS_MULTIPLIER_1,
-        right: width * CANVAS_START_POSITIONS_MULTIPLIER_2,
-        bottom: height * CANVAS_START_POSITIONS_MULTIPLIER_2,
-        left: width * CANVAS_START_POSITIONS_MULTIPLIER_1,
-      });
-    };
-  }, [cropRef, image, src]);
+    setCropPoint({
+      top: canvasHeight * CANVAS_START_POSITIONS_MULTIPLIER_1,
+      right: canvasWidth * CANVAS_START_POSITIONS_MULTIPLIER_2,
+      bottom: canvasHeight * CANVAS_START_POSITIONS_MULTIPLIER_2,
+      left: canvasWidth * CANVAS_START_POSITIONS_MULTIPLIER_1,
+    });
+  }, [cropRef, image, src, canvasWidth, canvasHeight]);
 
   const pointInCircle = (x: number, y: number, cx: number, cy: number, radius: number) => {
     const distanceSquared = (x - cx) * (x - cx) + (y - cy) * (y - cy);
@@ -276,7 +279,7 @@ const Component = ({ src, onCrop }: Props) => {
   );
 
   return (
-    <Box alignX={FlexAlign.Center} alignY={FlexAlign.Center} column>
+    <Box alignX={FlexAlign.Center} alignY={FlexAlign.Center}>
       <StyledCropCanvas
         ref={cropRef}
         onMouseDown={handleMouseDown}

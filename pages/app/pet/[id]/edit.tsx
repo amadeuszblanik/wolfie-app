@@ -40,7 +40,7 @@ const App: NextPage = () => {
   const [nameErrors, setNameErrors] = useState<string[]>([]);
   const [kind, setKind] = useState<PetKind>(PetKind.Dog);
   const [kindErrors, setKindErrors] = useState<string[]>([]);
-  const [breedId, setBreedId] = useState<number>();
+  const [breedId, setBreedId] = useState<string>();
   const [breedIdErrors, setBreedIdErrors] = useState<string[]>([]);
   const [microchip, setMicrochip] = useState("");
   const [microchipErrors, setMicrochipErrors] = useState<string[]>([]);
@@ -52,7 +52,7 @@ const App: NextPage = () => {
   useEffect(() => {
     setName(pet?.name ?? "");
     setKind(pet?.kind ?? PetKind.Dog);
-    setBreedId(pet?.breed?.id);
+    setBreedId(String(pet?.breed?.id));
     setMicrochip(pet?.microchip ?? "");
     setBirthDate(pet ? toDate(pet.birthDate || new Date()) : "");
   }, [pet]);
@@ -114,7 +114,7 @@ const App: NextPage = () => {
       body: {
         name,
         kind,
-        breed: breedId,
+        breed: Number(breedId),
         microchip,
         birthDate: new Date(birthDate),
       },
@@ -152,7 +152,7 @@ const App: NextPage = () => {
           />
           <DoggoSelect
             value={breedId}
-            onChange={(nextValue) => setBreedId(Number(nextValue))}
+            onChange={(nextValue) => setBreedId(nextValue)}
             label={intl.formatMessage({ id: "pet.breed" })}
             list={configPublic?.breeds.map(({ name: label, id }) => ({ id, label })) || []}
             errors={breedIdErrors}

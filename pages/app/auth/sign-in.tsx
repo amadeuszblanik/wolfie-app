@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { ApiStatesTypes } from "../../../src/types/api-states.types";
 import { ComponentErrorScreen } from "../../../src/component";
 import { useRouter } from "next/router";
+import { InputTypes } from "../../../src/ui-components/input";
 
 const SignIn: NextPage = () => {
   const intl = useIntl();
@@ -59,11 +60,11 @@ const SignIn: NextPage = () => {
           <DoggoInput
             label="E-mail"
             placeholder="joe.doe@doggo.rocks"
-            type="email"
+            type={InputTypes.Email}
             value={username}
             onChange={setUsername}
           />
-          <DoggoInput label="Password" type="password" value={password} onChange={setPassword} />
+          <DoggoInput label="Password" type={InputTypes.Password} value={password} onChange={setPassword} />
           <DoggoCheckbox label="Keep me signed in" value={keepSignIn} onChange={setKeepSignIn} />
         </DoggoBox>
         <DoggoButton onClick={() => mutate({ username, password, keepSignIn })} disabled={isLoading}>

@@ -35,8 +35,42 @@ interface Props {
   onChange: (nextValue: string) => void;
   max?: string;
   min?: string;
-  type?: InputTypes | HTMLInputTypeAttribute;
+  type?: InputTypes;
 }
+
+const TYPE: { [key in InputTypes]: HTMLInputTypeAttribute } = {
+  [InputTypes.Color]: "color",
+  [InputTypes.Date]: "date",
+  [InputTypes.DatetimeLocal]: "datetime-local",
+  [InputTypes.Email]: "email",
+  [InputTypes.Month]: "month",
+  [InputTypes.Number]: "text",
+  [InputTypes.Password]: "password",
+  [InputTypes.Search]: "search",
+  [InputTypes.Telephone]: "tel",
+  [InputTypes.Text]: "text",
+  [InputTypes.Time]: "time",
+  [InputTypes.Url]: "url",
+  [InputTypes.Week]: "week",
+};
+
+const INPUT_MODE: {
+  [key in InputTypes]: "none" | "text" | "tel" | "url" | "email" | "numeric" | "decimal" | "search" | undefined;
+} = {
+  [InputTypes.Number]: "decimal",
+  [InputTypes.Telephone]: "tel",
+  [InputTypes.Url]: "url",
+  [InputTypes.Email]: "email",
+  [InputTypes.Password]: undefined,
+  [InputTypes.Search]: undefined,
+  [InputTypes.Text]: undefined,
+  [InputTypes.Time]: undefined,
+  [InputTypes.Week]: undefined,
+  [InputTypes.Month]: undefined,
+  [InputTypes.DatetimeLocal]: undefined,
+  [InputTypes.Date]: undefined,
+  [InputTypes.Color]: undefined,
+};
 
 const StyledInput = styled.input<StyledInputProps>`
   width: 100%;
@@ -77,7 +111,8 @@ const Component: React.FunctionComponent<Props> = ({
     )}
     <StyledInput
       placeholder={placeholder}
-      type={type}
+      type={TYPE[type || InputTypes.Text]}
+      inputMode={INPUT_MODE[type || InputTypes.Text]}
       value={value}
       onChange={({ target: { value: nextValue, valueAsNumber } }) => onChange(nextValue)}
       max={max}

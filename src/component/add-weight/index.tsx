@@ -18,11 +18,11 @@ const Component: React.FunctionComponent<Props> = ({ onClose, onAdd, unit }) => 
 
   const [date, setDate] = useState(toDate(new Date()));
   const [time, setTime] = useState(toTime(new Date()));
-  const [weight, setWeight] = useState<number>(DEFAULT_WEIGHT);
+  const [weight, setWeight] = useState<string>(String(DEFAULT_WEIGHT));
 
   const handleAdd = () => {
     onAdd({
-      weight: weight,
+      weight: Number(weight),
       date: new Date(`${date} ${time}`),
     });
   };
@@ -65,8 +65,8 @@ const Component: React.FunctionComponent<Props> = ({ onClose, onAdd, unit }) => 
             unit,
             <DoggoInput
               key="weightInput"
-              value={String(weight)}
-              onChange={(nextValue) => setWeight(Number(nextValue))}
+              value={weight}
+              onChange={(nextValue) => setWeight(nextValue)}
               type={InputTypes.Number}
               plain
             />,

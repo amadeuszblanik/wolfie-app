@@ -20,6 +20,8 @@ import { PetsAvatarChangePayload } from "../payload/pets-avatar-change.payload";
 import FormData from "form-data";
 import { CommonMessageResponseModel } from "../response-model/common-message.response-model";
 import { SignUpPayload } from "../payload/sign-up.payload";
+import { GdprResponseModel } from "../response-model/gdpr.response-model";
+import getGdprDto from "../dto/get-gdpr.dto";
 
 type HTTP_METHOD = "GET" | "POST" | "PUT" | "DELETE";
 
@@ -49,6 +51,10 @@ export default class ApiClient {
     return this.post("/auth/sign-up", body).then((response) =>
       responseDto<CommonMessageResponseModel>(response as CommonMessageResponseModel),
     );
+  };
+
+  public gdpr = async (): Promise<ApiResponse<GdprResponseModel>> => {
+    return this.get<GdprResponseModel>("/gdpr").then((response) => responseDto(response, getGdprDto));
   };
 
   public configPublic = async (): Promise<ApiResponse<ConfigPublicResponseModel>> => {

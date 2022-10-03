@@ -9,8 +9,9 @@ import pl_PL from "../lang/pl-PL.json";
 import { useRouter } from "next/router";
 import { IntlProvider } from "react-intl";
 import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools, ReactQueryDevtoolsPanel } from "react-query/devtools";
+import { ReactQueryDevtools } from "react-query/devtools";
 import Head from "next/head";
+import { ComponentFooter } from "../src/component";
 
 const MESSAGES = {
   "en-GB": en_GB,
@@ -55,6 +56,7 @@ function MyApp({ Component, pageProps }: AppProps<{ dehydratedState: any }>) {
               </Head>
               <GlobalStyles />
               <Component {...pageProps} />
+              <ComponentFooter />
             </ThemeProvider>
           </ConfigContext.Provider>
           <ReactQueryDevtools initialIsOpen />

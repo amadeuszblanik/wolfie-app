@@ -16,7 +16,6 @@ interface Props {
 
 const StyledLayout = styled(DoggoBox)`
   padding-top: 80px;
-  padding-bottom: 120px;
 `;
 
 const AppBackButton: React.FunctionComponent = () => {

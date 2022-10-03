@@ -40,7 +40,7 @@ const StyledView = styled.div<StyledViewProps>`
   ${({ padding }) => padding && `${paddingMixin(padding)}`};
   ${({ background }) => background && colorTextMixin(background)};
   ${({ background }) => background && backgroundMixin(background)};
-  border-radius: ${({ borderRadius }) => (borderRadius ? ` ${borderRadius}px` : "0")};
+  border-radius: ${({ theme, borderRadius }) => (borderRadius ? ` ${borderRadius}px` : theme.borderRadius)};
 `;
 
 interface DoggoBoxProps {
@@ -90,11 +90,6 @@ const Component = ({ children, border, column, alignX, alignY, onSizeChange, ...
       {children}
     </StyledView>
   );
-};
-
-Component.defaultProps = {
-  border: SizesEnum.Small,
-  padding: { x: SizesEnum.Medium, y: SizesEnum.Small },
 };
 
 export default Component;

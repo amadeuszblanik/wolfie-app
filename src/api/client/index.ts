@@ -18,6 +18,8 @@ import { PetsUpdatePayload } from "../payload/pets-update.payload";
 import { PetsEditResponseModel } from "../response-model/pets-edit.response-model";
 import { PetsAvatarChangePayload } from "../payload/pets-avatar-change.payload";
 import FormData from "form-data";
+import { CommonMessageResponseModel } from "../response-model/common-message.response-model";
+import { SignUpPayload } from "../payload/sign-up.payload";
 
 type HTTP_METHOD = "GET" | "POST" | "PUT" | "DELETE";
 
@@ -41,6 +43,12 @@ export default class ApiClient {
 
   public signIn = async (body: AuthSignInBody): Promise<AuthSignInResponse | CommonErrorResponseModel> => {
     return this.post("/auth/sign-in", body);
+  };
+
+  public signUp = async (body: SignUpPayload): Promise<ApiResponse<CommonMessageResponseModel>> => {
+    return this.post("/auth/sign-up", body).then((response) =>
+      responseDto<CommonMessageResponseModel>(response as CommonMessageResponseModel),
+    );
   };
 
   public configPublic = async (): Promise<ApiResponse<ConfigPublicResponseModel>> => {

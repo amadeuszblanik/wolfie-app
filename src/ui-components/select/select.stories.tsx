@@ -14,6 +14,7 @@ export default {
     placeholder: { control: "array" },
     plain: { control: "boolean" },
     nullable: { control: "boolean" },
+    disabled: { control: "boolean" },
   },
 } as ComponentMeta<typeof Component>;
 

@@ -1,5 +1,7 @@
 export { default as dateDifference } from "./date-difference.utils";
+export { default as enumToList } from "./enum-to-list.utils";
 export { default as getIndexes } from "./get-indexes.utils";
+export { default as getQueryStatus } from "./get-query-status.utils";
 export { default as isText } from "./is-text.utils";
 export { default as saveFile } from "./save-file.utils";
 export { default as toDate } from "./to-date.utils";

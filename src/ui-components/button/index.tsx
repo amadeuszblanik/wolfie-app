@@ -22,6 +22,7 @@ interface ButtonProps {
   children: React.ReactNode;
   onClick?: () => void;
   disabled?: boolean;
+  type?: "submit" | "reset" | "button" | undefined;
 }
 
 const HOVER_BACKGROUND_DARKEN_VALUE = 13;
@@ -56,15 +57,20 @@ const StyledButton = styled.button<StyledButtonProps>`
   }
 `;
 
-const Button: React.FunctionComponent<ButtonProps> = ({ children, variant, size, onClick, disabled }) => (
+const Button: React.FunctionComponent<ButtonProps> = ({ children, variant, size, onClick, disabled, type }) => (
   <StyledButton
     variant={variant}
     onClick={!disabled ? onClick : () => console.warn("Button disabled")}
     disabled={disabled}
     size={size || ButtonSizes.Normal}
+    type={type}
   >
     {isText(children) ? <Text noBottomMargin>{children}</Text> : children}
   </StyledButton>
 );
+
+Button.defaultProps = {
+  type: "button",
+};
 
 export default Button;

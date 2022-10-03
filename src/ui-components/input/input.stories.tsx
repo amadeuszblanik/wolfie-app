@@ -15,6 +15,7 @@ export default {
     errors: { control: "array" },
     type: { options: InputTypes, control: "select" },
     plain: { control: "boolean" },
+    disabled: { control: "boolean" },
   },
 } as ComponentMeta<typeof Component>;
 

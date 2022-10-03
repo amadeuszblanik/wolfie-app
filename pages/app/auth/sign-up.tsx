@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { FormattedMessage } from "react-intl";
+import { FormSignUp } from "../../../src/form";
+import { LayoutAuth } from "../../../src/layout";
 
 const SignUp: NextPage = () => {
   return (
@@ -11,9 +12,9 @@ const SignUp: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <FormattedMessage id="common.soon" />
-      </main>
+      <LayoutAuth title="page.sign_up.header" description="page.sign_up.description">
+        <FormSignUp />
+      </LayoutAuth>
     </div>
   );
 };

@@ -15,6 +15,7 @@ interface Props {
   onChange: (nextValue: boolean) => void;
   label: string;
   errors?: string[];
+  disabled?: boolean;
 }
 
 const StyledInputNative = styled.input`
@@ -36,13 +37,14 @@ const StyledLabel = styled.label`
   cursor: pointer;
 `;
 
-const Component: React.FunctionComponent<Props> = ({ label, errors, value, onChange }) => (
+const Component: React.FunctionComponent<Props> = ({ label, errors, value, onChange, disabled }) => (
   <Box padding={{ bottom: SizesEnum.Medium }} column>
     <StyledLabel>
       <StyledInputNative
         type="checkbox"
         checked={value}
         onChange={({ target: { checked: nextValue } }) => onChange(nextValue)}
+        disabled={disabled}
       />
       <StyledInput checked={value}>{value && <DoggoIcon icon="checkmark" />}</StyledInput>
       <DoggoText variant={DoggoTextVariant.Callout}>{label}</DoggoText>

@@ -6,21 +6,18 @@ import Box, { BoxWidth } from "../box";
 import { DoggoText } from "../index";
 import { DoggoTextVariant } from "../text";
 import Icon from "../icon";
-
-interface ListItem {
-  id: string | number;
-  label: string;
-}
+import { ListItem } from "../../types/list-item.types";
 
 interface Props {
-  value: string | number | undefined;
-  onChange: (nextValue: string | number | undefined) => void;
+  value: string | undefined;
+  onChange: (nextValue: string | undefined) => void;
   list: ListItem[];
   label?: string;
   plain?: boolean;
   nullable?: boolean;
   placeholder?: string;
   errors?: string[];
+  disabled?: boolean;
 }
 
 interface StyledInputProps {
@@ -75,6 +72,7 @@ const Component: React.FunctionComponent<Props> = ({
   plain,
   nullable,
   errors,
+  disabled,
 }) => (
   <Box width={plain ? BoxWidth.Full : undefined} padding={{ bottom: SizesEnum.Medium }} column>
     {!plain && label && (
@@ -88,6 +86,7 @@ const Component: React.FunctionComponent<Props> = ({
         value={value}
         onChange={({ target: { value: nextValue } }) => onChange(nextValue)}
         plain={plain}
+        disabled={disabled}
       >
         <option disabled={!nullable} selected={!value}>
           {label}

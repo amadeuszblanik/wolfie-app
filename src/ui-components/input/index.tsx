@@ -36,6 +36,7 @@ interface Props {
   max?: string;
   min?: string;
   type?: InputTypes;
+  disabled?: boolean;
 }
 
 const TYPE: { [key in InputTypes]: HTMLInputTypeAttribute } = {
@@ -102,6 +103,7 @@ const Component: React.FunctionComponent<Props> = ({
   max,
   min,
   plain,
+  disabled,
 }) => (
   <Box width={plain ? BoxWidth.Full : undefined} padding={{ bottom: SizesEnum.Medium }} column>
     {!plain && label && (
@@ -118,6 +120,7 @@ const Component: React.FunctionComponent<Props> = ({
       max={max}
       min={min}
       plain={plain}
+      disabled={disabled}
     />
     {!plain && (
       <Box padding={{ bottom: SizesEnum.Medium }}>

@@ -6,6 +6,7 @@ import {
   DoggoCheckbox,
   DoggoForm,
   DoggoInput,
+  DoggoPasswordValidator,
   DoggoSelect,
   DoggoText,
 } from "../../ui-components";
@@ -110,6 +111,7 @@ const Form: React.FunctionComponent = () => {
         disabled={!formEnable}
         errors={formValidator.errors["password"]}
       />
+      <DoggoPasswordValidator value={password} />
       <DoggoInput
         label={intl.formatMessage({ id: "user.confirm_password" })}
         value={passwordConfirm}

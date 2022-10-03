@@ -19,8 +19,8 @@ const Auth: React.FunctionComponent<Props> = ({ children, title, description }) 
     <DoggoBox padding={{ y: SizesEnum.Large }}>
       <DoggoContainer fullWidth>
         <DoggoBox width={BoxWidth.Full} padding={{ y: SizesEnum.Large }}>
-          <DoggoButton onClick={() => router.push("/")} variant="indigo">
-            ⬅ <FormattedMessage id="common.back" />
+          <DoggoButton onClick={() => router.push("/")}>
+            <FormattedMessage id="common.back" />
           </DoggoButton>
         </DoggoBox>
 
@@ -41,7 +41,7 @@ const Auth: React.FunctionComponent<Props> = ({ children, title, description }) 
               <FormattedMessage id={description} />
             </DoggoText>
           </DoggoBox>
-          <DoggoBox alignX={FlexAlign.Center} column>
+          <DoggoBox width={BoxWidth.Full} alignX={FlexAlign.Center} column>
             {children}
           </DoggoBox>
         </DoggoBox>

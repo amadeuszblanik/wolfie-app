@@ -30,7 +30,9 @@ const useSignIn = () => {
 
       if (data.success) {
         localStorage.setItem("accessToken", data.success.accessToken);
-        localStorage.setItem("refreshToken", data.success.refreshToken);
+        if (data.success.refreshToken) {
+          localStorage.setItem("refreshToken", data.success.refreshToken);
+        }
       }
     },
     onError: (err) => {

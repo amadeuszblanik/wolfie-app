@@ -5,6 +5,7 @@ import { SizesEnum } from "../../settings/sizes";
 import { DoggoTextVariant } from "../../ui-components/text";
 import { DoggoIcons } from "../../ui-components/icon";
 import { ButtonSizes } from "../../ui-components/button";
+import Link from "next/link";
 
 interface ItemProps {
   active: boolean;
@@ -47,10 +48,12 @@ const Component = () => {
       background="backgroundSecondary"
     >
       <DoggoContainer fullWidth>
-        <DoggoBox alignX={FlexAlign.SpaceBetween} width={BoxWidth.Full}>
-          <Item icon="apps" name="Pets" active={true} />
-          <Item icon="book" name="GDPR" active={false} />
-          <Item icon="cog" name="Settings" active={false} />
+        <DoggoBox alignX={FlexAlign.Center} width={BoxWidth.Full}>
+          <Link href="/app">
+            <a>
+              <Item icon="apps" name="Pets" active={true} />
+            </a>
+          </Link>
         </DoggoBox>
       </DoggoContainer>
     </StyledBottomBar>

@@ -28,7 +28,6 @@ const StyledStatus = styled.div<StyledStatusProps>`
   justify-content: center;
   width: ${sizeMixin(SizesEnum.ExtraLarge)};
   height: ${sizeMixin(SizesEnum.ExtraLarge)};
-
   background: ${({ theme, value }) => (value ? theme.palette.green : theme.palette.red)};
   border-radius: 50%;
 `;

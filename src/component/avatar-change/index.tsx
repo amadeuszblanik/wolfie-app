@@ -16,10 +16,11 @@ interface Props {
 }
 
 const Component: React.FunctionComponent<Props> = ({ onClose, onSave, petId }) => {
-  const { results: fileListBase64, setFileList } = useFileToBase64();
-  const { result, setDataUrl, setFileName } = useBase64ToFile();
+  const [uploadedImage, setUploadedImage] = useState<FileList | null>(null);
   const [croppedImage, setCroppedImage] = useState<string>();
-  const imageToCrop = firstElement(fileListBase64);
+
+  const [imageToCrop] = useFileToBase64(uploadedImage);
+  const [imageToUpload] = useBase64ToFile(imageToCrop ? [imageToCrop] : []);
 
   const {
     status: petsAvatarChangeStatus,
@@ -28,11 +29,7 @@ const Component: React.FunctionComponent<Props> = ({ onClose, onSave, petId }) =
   } = usePetsAvatarChange();
 
   const handleChangeFile = (nextValue: FileList | null) => {
-    const fileName = nextValue && firstElement(Array.from(nextValue))?.name;
-    if (fileName) {
-      setFileName(fileName);
-    }
-    setFileList(nextValue);
+    setUploadedImage(nextValue);
   };
 
   const handleCrop = (nextValue: string) => {
@@ -40,28 +37,18 @@ const Component: React.FunctionComponent<Props> = ({ onClose, onSave, petId }) =
   };
 
   const handleSave = () => {
-    if (!croppedImage) {
+    if (!imageToUpload) {
       return;
     }
 
-    setDataUrl(croppedImage);
+    petsAvatarChangeMutate({
+      id: petId,
+      body: {
+        file: imageToUpload,
+        description: "Avatar",
+      },
+    });
   };
-
-  const submitForm = () => {
-    if (!result) {
-      return;
-    }
-
-    petsAvatarChangeMutate({ id: petId, body: { description: "Avatar", file: result } });
-  };
-
-  useEffect(() => {
-    if (!result) {
-      return;
-    }
-
-    submitForm();
-  }, [result]);
 
   useEffect(() => {
     switch (petsAvatarChangeStatus) {
@@ -72,18 +59,24 @@ const Component: React.FunctionComponent<Props> = ({ onClose, onSave, petId }) =
 
   return (
     <DoggoModal onClose={onClose}>
-      <ComponentApiWrapper error={petsAvatarChangeError} status={petsAvatarChangeStatus} onTryAgain={submitForm}>
+      <ComponentApiWrapper error={petsAvatarChangeError} status={petsAvatarChangeStatus} onTryAgain={handleSave}>
         <DoggoBox alignX={FlexAlign.Center} column>
+          {imageToCrop && (
+            <DoggoBox padding={{ bottom: SizesEnum.Large }}>
+              <DoggoAvatarCrop
+                width={512}
+                height={512}
+                componentWidth={300}
+                src={imageToCrop.uri}
+                onCrop={handleCrop}
+              />
+            </DoggoBox>
+          )}
           <DoggoInputFile
             onChange={handleChangeFile}
             accept={["image/png", "image/jpg", "image/jpeg"]}
           ></DoggoInputFile>
-          {imageToCrop && (
-            <DoggoBox padding={{ bottom: SizesEnum.Medium }}>
-              <DoggoAvatarCrop width={512} height={512} componentWidth={300} src={imageToCrop} onCrop={handleCrop} />
-            </DoggoBox>
-          )}
-          <DoggoButton variant="green" onClick={handleSave} disabled={isEmpty(imageToCrop)}>
+          <DoggoButton variant="green" onClick={handleSave} disabled={!imageToUpload}>
             <FormattedMessage id="common.save" />
           </DoggoButton>
         </DoggoBox>

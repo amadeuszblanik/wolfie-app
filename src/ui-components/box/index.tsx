@@ -32,6 +32,7 @@ interface StyledViewProps {
 }
 
 const StyledView = styled.div<StyledViewProps>`
+  position: relative;
   display: ${({ inline }) => (inline ? "inline-flex" : "flex")};
   flex-direction: ${({ column }) => (column ? "column" : "row")};
   ${({ justifyContent }) => (justifyContent ? `justify-content: ${justifyContent}` : "")};

@@ -24,6 +24,7 @@ import getGdprDto from "../dto/get-gdpr.dto";
 import { ConfirmEmailPayload } from "../payload/confirm-email.payload";
 import { SignInPayload } from "../payload/sign-in.payload";
 import { SignInResponseModel } from "../response-model/sign-in.response-model";
+import { ResetPasswordStep1Payload } from "../payload/reset-password-step-1.payload";
 
 type HTTP_METHOD = "GET" | "POST" | "PUT" | "DELETE";
 
@@ -46,20 +47,34 @@ export default class ApiClient {
   constructor(private readonly language: string) {}
 
   public signIn = async (body: SignInPayload): Promise<ApiResponse<SignInResponseModel>> => {
-    return this.post("/auth/sign-in", body).then((response) =>
-      responseDto<SignInResponseModel>(response as SignInResponseModel),
+    return this.post<SignInResponseModel, SignInPayload>("/auth/sign-in", body).then((response) =>
+      responseDto(response),
     );
   };
 
   public signUp = async (body: SignUpPayload): Promise<ApiResponse<CommonMessageResponseModel>> => {
-    return this.post("/auth/sign-up", body).then((response) =>
-      responseDto<CommonMessageResponseModel>(response as CommonMessageResponseModel),
+    return this.post<CommonMessageResponseModel, SignUpPayload>("/auth/sign-up", body).then((response) =>
+      responseDto(response),
     );
   };
 
   public confirmEmail = async (body: ConfirmEmailPayload): Promise<ApiResponse<CommonMessageResponseModel>> => {
-    return this.post("/auth/confirm-email", body).then((response) =>
-      responseDto<CommonMessageResponseModel>(response as CommonMessageResponseModel),
+    return this.post<CommonMessageResponseModel, ConfirmEmailPayload>("/auth/confirm-email", body).then((response) =>
+      responseDto(response),
+    );
+  };
+
+  public resetPasswordStep0 = async (userEmail: string): Promise<ApiResponse<CommonMessageResponseModel>> => {
+    return this.get<CommonMessageResponseModel>(`/auth/reset-password?user-email=${userEmail}`).then((response) =>
+      responseDto(response),
+    );
+  };
+
+  public resetPasswordStep1 = async (
+    body: ResetPasswordStep1Payload,
+  ): Promise<ApiResponse<CommonMessageResponseModel>> => {
+    return this.put<CommonMessageResponseModel, ResetPasswordStep1Payload>("/auth/reset-password", body).then(
+      (response) => responseDto<CommonMessageResponseModel>(response as CommonMessageResponseModel),
     );
   };
 

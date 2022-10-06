@@ -1,6 +1,7 @@
 {
   "common.sign_in": "Sign in",
   "common.sign_up": "Sign up",
+  "common.forgot_password": "Forgot password?",
   "common.open_app": "Open app",
   "common.soon": "Soon…",
   "common.back": "Back",
@@ -73,6 +74,10 @@
   "page.email_verification.missing_token_title": "Missing token",
   "page.email_verification.missing_token_message": "Please, check your email for the verification link.",
   "page.email_verification.failed_title": "Verification failed",
+  "page.forgot_password.header": "Forgot password",
+  "page.forgot_password.description": "Reset your password",
+  "page.forgot_password.send_email": "Send email to reset password",
+  "page.forgot_password.set_password": "Set new password",
   "page.app.header": "My pets",
   "page.pet.header": "Pet dashboard",
   "page.pet_weight.header": "Pet weight",

@@ -1,5 +1,6 @@
 import { css, DefaultTheme, ThemePalette } from "styled-components";
 import { firstElement } from "bme-utils";
+import { darkenColorMixin } from "./index";
 
 const GRADIENT_ELEMENTS_LENGTH = 2;
 
@@ -16,6 +17,20 @@ const background = (colors: ThemePalette | ThemePalette[]) => {
         45deg,
         ${({ theme }) => colors.map((color: keyof DefaultTheme["palette"]) => theme.palette[color]).join(", ")}
       );
+      --color-background-hover: linear-gradient(
+        45deg,
+        ${({ theme }) =>
+          colors
+            .map((color: keyof DefaultTheme["palette"]) => darkenColorMixin(theme.palette[color], theme.darken.hover))
+            .join(", ")}
+      );
+      --color-background-active: linear-gradient(
+        45deg,
+        ${({ theme }) =>
+          colors
+            .map((color: keyof DefaultTheme["palette"]) => darkenColorMixin(theme.palette[color], theme.darken.active))
+            .join(", ")}
+      );
     `;
   }
 
@@ -24,6 +39,8 @@ const background = (colors: ThemePalette | ThemePalette[]) => {
   return css`
     background: ${({ theme }) => theme.palette[color]};
     --color-background: ${({ theme }) => theme.palette[color]};
+    --color-background-hover: ${({ theme }) => darkenColorMixin(theme.palette[color], theme.darken.hover)};
+    --color-background-active: ${({ theme }) => darkenColorMixin(theme.palette[color], theme.darken.active)};
   `;
 };
 

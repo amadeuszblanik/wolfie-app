@@ -9,6 +9,7 @@ import useFormValidator, { FormValidators } from "../../form-validator";
 import { useRouter } from "next/router";
 import useSignIn from "../../api/queries/sign-in";
 import { useDeviceName } from "../../hooks";
+import Link from "next/link";
 
 const Form: React.FunctionComponent = () => {
   const intl = useIntl();
@@ -91,7 +92,25 @@ const Form: React.FunctionComponent = () => {
           alignY={FlexAlign.Center}
           padding={{ bottom: SizesEnum.Large }}
         >
-          <DoggoButton variant="blue" type="submit" disabled={!submitEnable}>
+          <DoggoBox padding={{ right: SizesEnum.Medium }}>
+            <Link href="/app/auth/sign-up">
+              <a>
+                <DoggoButton>
+                  <FormattedMessage id="common.sign_up" />
+                </DoggoButton>
+              </a>
+            </Link>
+          </DoggoBox>
+          <DoggoBox padding={{ right: SizesEnum.Medium }}>
+            <Link href="/app/auth/forgot-password">
+              <a>
+                <DoggoButton>
+                  <FormattedMessage id="common.forgot_password" />
+                </DoggoButton>
+              </a>
+            </Link>
+          </DoggoBox>
+          <DoggoButton variant="green" type="submit" disabled={!submitEnable}>
             <FormattedMessage id="common.sign_in" />
           </DoggoButton>
         </DoggoBox>

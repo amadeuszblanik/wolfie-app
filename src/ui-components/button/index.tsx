@@ -25,9 +25,6 @@ interface ButtonProps {
   type?: "submit" | "reset" | "button" | undefined;
 }
 
-const HOVER_BACKGROUND_DARKEN_VALUE = 13;
-const CLICK_BACKGROUND_DARKEN_VALUE = 33;
-
 const PADDING_SIZES: { [key in ButtonSizes]: { x: SizesEnum; y: SizesEnum } } = {
   [ButtonSizes.Small]: { x: SizesEnum.Medium, y: SizesEnum.Small },
   [ButtonSizes.Normal]: { x: SizesEnum.ExtraLarge, y: SizesEnum.Medium },
@@ -48,12 +45,12 @@ const StyledButton = styled.button<StyledButtonProps>`
 
   &:hover {
     background: ${({ theme, variant }) =>
-      variant ? darkenColorMixin(theme.palette[variant], HOVER_BACKGROUND_DARKEN_VALUE) : `var(--color-background)`};
+      variant ? darkenColorMixin(theme.palette[variant], theme.darken.hover) : `var(--color-background-hover)`};
   }
 
   &:active {
     background: ${({ theme, variant }) =>
-      variant ? darkenColorMixin(theme.palette[variant], CLICK_BACKGROUND_DARKEN_VALUE) : `var(--color-background)`};
+      variant ? darkenColorMixin(theme.palette[variant], theme.darken.active) : `var(--color-background-active)`};
   }
 `;
 

@@ -1,6 +1,7 @@
 {
   "common.sign_in": "Zaloguj się",
   "common.sign_up": "Zarejestruj się",
+  "common.forgot_password": "Zapomniałeś hasła?",
   "common.open_app": "Otwórz aplikację",
   "common.soon": "Wkrótce…",
   "common.back": "Wróć",
@@ -73,6 +74,10 @@
   "page.email_verification.missing_token_title": "Brak tokena",
   "page.email_verification.missing_token_message": "Sprawdź swój adres e-mail i kliknij w link weryfikacyjny",
   "page.email_verification.failed_title": "Błąd weryfikacji",
+  "page.forgot_password.header": "Zapomniałeś hasła?",
+  "page.forgot_password.description": "Wpisz swój adres e-mail, a wyślemy Ci link do zresetowania hasła",
+  "page.forgot_password.send_email": "Wyślij e-mail z linkiem do resetowania hasła",
+  "page.forgot_password.set_password": "Ustaw nowe hasło",
   "page.app.header": "Moje zwierzaki",
   "page.pet.header": "Mój zwierzak",
   "page.pet_weight.header": "Waga zwierzaka",

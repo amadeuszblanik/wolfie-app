@@ -6,12 +6,12 @@ import { getQueryStatus } from "../../utils";
 import { CommonMessageResponseModel } from "../response-model/common-message.response-model";
 import { CommonErrorResponseModel } from "../response-model/common-error.response-model";
 import { useIntl } from "react-intl";
-import { SignUpPayload } from "../payload/sign-up.payload";
-import { ConfirmEmailPayload } from "../payload/confirm-email.payload";
+import { ResetPasswordStep1Payload } from "../payload/reset-password-step-1.payload";
 
-const useConfirmEmail = () => {
+const useResetPasswordStep1 = () => {
   const intl = useIntl();
   const queryClient = useQueryClient();
+
   const [status, setStatus] = useState(ApiStatesTypes.Init);
   const [response, setResponse] = useState<CommonMessageResponseModel>();
   const [error, setError] = useState<CommonErrorResponseModel>();
@@ -23,7 +23,7 @@ const useConfirmEmail = () => {
     isSuccess,
     isIdle,
     isPaused,
-  } = useMutation((body: ConfirmEmailPayload) => new ApiClient(intl.locale).confirmEmail(body), {
+  } = useMutation((body: ResetPasswordStep1Payload) => new ApiClient(intl.locale).resetPasswordStep1(body), {
     onSuccess: (data) => {
       setResponse(data.success);
       setError(data.error);
@@ -36,7 +36,7 @@ const useConfirmEmail = () => {
       });
     },
     onSettled: () => {
-      void queryClient.invalidateQueries("confirmEmail");
+      void queryClient.invalidateQueries("resetPasswordStep1");
     },
   });
 
@@ -47,4 +47,4 @@ const useConfirmEmail = () => {
   return { post, status, response, error };
 };
 
-export default useConfirmEmail;
+export default useResetPasswordStep1;

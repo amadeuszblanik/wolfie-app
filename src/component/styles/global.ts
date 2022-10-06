@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import reset from "react-style-reset";
-import { isDarkMixin } from "../../ui-components/mixins";
+import { darkenColorMixin, isDarkMixin } from "../../ui-components/mixins";
 
 const Global = createGlobalStyle`
   ${reset};
@@ -14,6 +14,8 @@ const Global = createGlobalStyle`
   :root {
     --color-text: ${({ theme }) => theme.palette.text};
     --color-background: ${({ theme }) => theme.palette.background};
+    --color-background-active: ${({ theme }) => darkenColorMixin(theme.palette.background, theme.darken.hover)};
+    --color-background-hover: ${({ theme }) => darkenColorMixin(theme.palette.background, theme.darken.active)};
     --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   }
   

@@ -6,6 +6,10 @@ const shared = {
   opacity: {
     modal: 0.5,
   },
+  darken: {
+    hover: 13,
+    active: 33,
+  },
 };
 
 const dark: DefaultTheme = {

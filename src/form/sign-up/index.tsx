@@ -18,6 +18,7 @@ import useSignUp from "../../api/queries/sign-up";
 import { ApiStatesTypes } from "../../types/api-states.types";
 import { SizesEnum } from "../../settings/sizes";
 import useFormValidator, { FormValidators } from "../../form-validator";
+import Link from "next/link";
 
 const Form: React.FunctionComponent = () => {
   const intl = useIntl();
@@ -142,6 +143,15 @@ const Form: React.FunctionComponent = () => {
           alignY={FlexAlign.Center}
           padding={{ bottom: SizesEnum.Large }}
         >
+          <DoggoBox padding={{ right: SizesEnum.Medium }}>
+            <Link href="/app/auth/sign-in">
+              <a>
+                <DoggoButton>
+                  <FormattedMessage id="common.sign_in" />
+                </DoggoButton>
+              </a>
+            </Link>
+          </DoggoBox>
           <DoggoButton variant="blue" type="submit" disabled={!submitEnable}>
             <FormattedMessage id="common.sign_up" />
           </DoggoButton>

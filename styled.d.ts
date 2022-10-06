@@ -8,6 +8,10 @@ declare module "styled-components" {
     opacity: {
       modal: number;
     };
+    darken: {
+      hover: number;
+      active: number;
+    };
     palette: {
       primary: string;
       red: string;

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { SizesEnum } from "../../settings/sizes";
-import { paddingMixin } from "../mixins";
+import { backgroundMixin, paddingMixin } from "../mixins";
 import { DoggoText } from "../index";
 import Box from "../box";
 import { DoggoTextVariant, DoggoTextWeight } from "../text";
@@ -17,7 +17,7 @@ const StyledForm = styled.form`
   flex-direction: column;
   width: 100%;
   ${paddingMixin({ x: SizesEnum.ExtraLarge, y: SizesEnum.Large })}
-  background: ${({ theme }) => theme.palette.backgroundSecondary};
+  ${backgroundMixin("backgroundSecondary")};
   border-radius: ${({ theme }) => theme.borderRadius};
 `;
 

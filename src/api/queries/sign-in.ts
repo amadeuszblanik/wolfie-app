@@ -35,11 +35,15 @@ const useSignIn = () => {
         }
       }
     },
-    onError: (err) => {
-      console.error("signUp()::onError:", err);
+    onError: () => {
+      setError({
+        statusCode: NaN,
+        error: intl.formatMessage({ id: "error.api_unknown_error" }),
+        message: intl.formatMessage({ id: "error.api_unknown_message" }),
+      });
     },
     onSettled: () => {
-      void queryClient.invalidateQueries("signUp");
+      void queryClient.invalidateQueries("signIn");
     },
   });
 

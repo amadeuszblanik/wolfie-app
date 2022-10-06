@@ -22,6 +22,7 @@ import { CommonMessageResponseModel } from "../response-model/common-message.res
 import { SignUpPayload } from "../payload/sign-up.payload";
 import { GdprResponseModel } from "../response-model/gdpr.response-model";
 import getGdprDto from "../dto/get-gdpr.dto";
+import { ConfirmEmailPayload } from "../payload/confirm-email.payload";
 
 type HTTP_METHOD = "GET" | "POST" | "PUT" | "DELETE";
 
@@ -49,6 +50,12 @@ export default class ApiClient {
 
   public signUp = async (body: SignUpPayload): Promise<ApiResponse<CommonMessageResponseModel>> => {
     return this.post("/auth/sign-up", body).then((response) =>
+      responseDto<CommonMessageResponseModel>(response as CommonMessageResponseModel),
+    );
+  };
+
+  public confirmEmail = async (body: ConfirmEmailPayload): Promise<ApiResponse<CommonMessageResponseModel>> => {
+    return this.post("/auth/confirm-email", body).then((response) =>
       responseDto<CommonMessageResponseModel>(response as CommonMessageResponseModel),
     );
   };

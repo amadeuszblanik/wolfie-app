@@ -9,7 +9,7 @@ interface Props {
   error: CommonErrorResponseModel | undefined;
   status: ApiStatesTypes | ApiStatesTypes[];
   idleLoader?: boolean;
-  onTryAgain: () => void;
+  onTryAgain?: () => void;
 }
 
 const Component: React.FunctionComponent<Props> = ({ children, status, error, idleLoader, onTryAgain }) => {

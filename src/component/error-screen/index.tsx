@@ -8,10 +8,11 @@ import { FormattedMessage } from "react-intl";
 interface Props {
   title?: string;
   message?: string;
+  tryAgain?: string;
   onTryAgain?: () => void;
 }
 
-const Component: React.FunctionComponent<Props> = ({ title, message, onTryAgain }) => {
+const Component: React.FunctionComponent<Props> = ({ title, message, tryAgain, onTryAgain }) => {
   return (
     <DoggoBox alignX={FlexAlign.Center} column>
       <DoggoBox padding={{ bottom: SizesEnum.Medium }}>
@@ -30,7 +31,7 @@ const Component: React.FunctionComponent<Props> = ({ title, message, onTryAgain 
       {onTryAgain && (
         <DoggoBox padding={{ top: SizesEnum.Large }}>
           <DoggoButton variant="blue" onClick={onTryAgain}>
-            <FormattedMessage id="common.try_again" />
+            {tryAgain || <FormattedMessage id="common.try_again" />}
           </DoggoButton>
         </DoggoBox>
       )}

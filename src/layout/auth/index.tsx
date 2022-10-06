@@ -8,7 +8,7 @@ import { DoggoTextVariant } from "../../ui-components/text";
 
 interface Props {
   title: string;
-  description: string;
+  description?: string;
   children: React.ReactNode;
 }
 
@@ -37,9 +37,11 @@ const Auth: React.FunctionComponent<Props> = ({ children, title, description }) 
                 <FormattedMessage id={title} />
               </DoggoText>
             </DoggoBox>
-            <DoggoText variant={DoggoTextVariant.Headline}>
-              <FormattedMessage id={description} />
-            </DoggoText>
+            {description && (
+              <DoggoText variant={DoggoTextVariant.Headline}>
+                <FormattedMessage id={description} />
+              </DoggoText>
+            )}
           </DoggoBox>
           <DoggoBox width={BoxWidth.Full} alignX={FlexAlign.Center} column>
             {children}

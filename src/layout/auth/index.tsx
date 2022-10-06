@@ -29,7 +29,6 @@ const Auth: React.FunctionComponent<Props> = ({ children, title, description }) 
           alignX={FlexAlign.Center}
           width={BoxWidth.Full}
           padding={{ x: SizesEnum.ExtraLarge, y: SizesEnum.Large }}
-          background="backgroundSecondary"
         >
           <DoggoBox alignX={FlexAlign.Center} padding={{ bottom: SizesEnum.Large }} column>
             <DoggoBox padding={{ bottom: SizesEnum.Small }}>

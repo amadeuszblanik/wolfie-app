@@ -86,6 +86,7 @@
   "user.confirm_password": "Confirm password",
   "user.weight_unit": "Weight unit",
   "user.gdpr": "I agree to the processing of my personal data",
+  "user.keep_sign_in": "Keep me signed in",
   "pet.name": "Name",
   "pet.kind": "Kind",
   "pet.age": "Age",

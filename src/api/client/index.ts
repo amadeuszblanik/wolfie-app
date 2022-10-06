@@ -1,4 +1,3 @@
-import { AuthSignInBody, AuthSignInResponse } from "../types/auth-sign-in.types";
 import { PetSingleResponseModel } from "../response-model/pet-single.response-model";
 import myPetsDto from "../dto/my-pets.dto";
 import { CommonErrorResponseModel } from "../response-model/common-error.response-model";
@@ -23,6 +22,8 @@ import { SignUpPayload } from "../payload/sign-up.payload";
 import { GdprResponseModel } from "../response-model/gdpr.response-model";
 import getGdprDto from "../dto/get-gdpr.dto";
 import { ConfirmEmailPayload } from "../payload/confirm-email.payload";
+import { SignInPayload } from "../payload/sign-in.payload";
+import { SignInResponseModel } from "../response-model/sign-in.response-model";
 
 type HTTP_METHOD = "GET" | "POST" | "PUT" | "DELETE";
 
@@ -44,8 +45,10 @@ export default class ApiClient {
 
   constructor(private readonly language: string) {}
 
-  public signIn = async (body: AuthSignInBody): Promise<AuthSignInResponse | CommonErrorResponseModel> => {
-    return this.post("/auth/sign-in", body);
+  public signIn = async (body: SignInPayload): Promise<ApiResponse<SignInResponseModel>> => {
+    return this.post("/auth/sign-in", body).then((response) =>
+      responseDto<SignInResponseModel>(response as SignInResponseModel),
+    );
   };
 
   public signUp = async (body: SignUpPayload): Promise<ApiResponse<CommonMessageResponseModel>> => {

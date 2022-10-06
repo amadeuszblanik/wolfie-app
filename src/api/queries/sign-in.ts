@@ -1,74 +1,51 @@
-import { useEffect, useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import ApiClient from "../client";
+import { useEffect, useState } from "react";
 import { ApiStatesTypes } from "../../types/api-states.types";
-import { AuthSignInBody } from "../types/auth-sign-in.types";
-import { useDeviceName } from "../../hooks";
+import { getQueryStatus } from "../../utils";
+import { CommonErrorResponseModel } from "../response-model/common-error.response-model";
 import { useIntl } from "react-intl";
+import { SignInPayload } from "../payload/sign-in.payload";
+import { SignInResponseModel } from "../response-model/sign-in.response-model";
 
 const useSignIn = () => {
-  const queryClient = useQueryClient();
-  const deviceName = useDeviceName();
   const intl = useIntl();
+  const queryClient = useQueryClient();
 
-  const [accessToken, setAccessToken] = useState<string>();
-  const [refreshToken, setRefreshToken] = useState<string>();
-  const [errorMessage, setErrorMessage] = useState<string>();
-  const [status, setStatus] = useState<ApiStatesTypes>(ApiStatesTypes.Idle);
+  const [status, setStatus] = useState(ApiStatesTypes.Init);
+  const [response, setResponse] = useState<SignInResponseModel>();
+  const [error, setError] = useState<CommonErrorResponseModel>();
 
-  const { isLoading, isError, isSuccess, mutate } = useMutation(
-    (body: AuthSignInBody) => {
-      return new ApiClient(intl.locale).signIn({ ...body, device: deviceName });
+  const {
+    mutate: post,
+    isLoading,
+    isError,
+    isSuccess,
+    isIdle,
+    isPaused,
+  } = useMutation((body: SignInPayload) => new ApiClient(intl.locale).signIn(body), {
+    onSuccess: (data) => {
+      setResponse(data.success);
+      setError(data.error);
+
+      if (data.success) {
+        localStorage.setItem("accessToken", data.success.accessToken);
+        localStorage.setItem("refreshToken", data.success.refreshToken);
+      }
     },
-    {
-      onSuccess: (response) => {
-        queryClient.invalidateQueries(["signIn"]);
-
-        if ("accessToken" in response) {
-          setAccessToken(response.accessToken);
-        } else {
-          setAccessToken(undefined);
-        }
-
-        if ("refreshToken" in response) {
-          setRefreshToken(response.refreshToken);
-        } else {
-          setRefreshToken(undefined);
-        }
-
-        if ("error" in response && "message" in response) {
-          setErrorMessage(response.message);
-        } else {
-          setErrorMessage(undefined);
-        }
-      },
-      onError: (error) => {
-        setAccessToken(undefined);
-        setRefreshToken(undefined);
-      },
+    onError: (err) => {
+      console.error("signUp()::onError:", err);
     },
-  );
+    onSettled: () => {
+      void queryClient.invalidateQueries("signUp");
+    },
+  });
 
   useEffect(() => {
-    if (isLoading) {
-      setStatus(ApiStatesTypes.Loading);
-      return;
-    }
+    setStatus(getQueryStatus(isLoading, isError, isSuccess, isIdle, isPaused, response, error));
+  }, [isLoading, isError, isSuccess, isIdle, isPaused, response, error]);
 
-    if (isError) {
-      setStatus(ApiStatesTypes.Error);
-      return;
-    }
-
-    if (isSuccess) {
-      setStatus(errorMessage ? ApiStatesTypes.Error : ApiStatesTypes.Success);
-      return;
-    }
-
-    setStatus(ApiStatesTypes.Idle);
-  }, [isLoading, isError, isSuccess, errorMessage]);
-
-  return { accessToken, refreshToken, mutate, isLoading, isError, isSuccess, status, errorMessage };
+  return { post, status, response, error };
 };
 
 export default useSignIn;

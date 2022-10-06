@@ -138,11 +138,10 @@ const Form: React.FunctionComponent = () => {
       <DoggoBox column>
         <DoggoBox
           width={BoxWidth.Full}
-          alignX={FlexAlign.SpaceBetween}
+          alignX={FlexAlign.Right}
           alignY={FlexAlign.Center}
           padding={{ bottom: SizesEnum.Large }}
         >
-          <DoggoText>{status}</DoggoText>
           <DoggoButton variant="blue" type="submit" disabled={!submitEnable}>
             <FormattedMessage id="common.sign_up" />
           </DoggoButton>

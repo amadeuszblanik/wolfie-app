@@ -1,2 +1,2 @@
-export { default as FormEmailVerification } from "./email-verification";
+export { default as FormSignIn } from "./sign-in";
 export { default as FormSignUp } from "./sign-up";

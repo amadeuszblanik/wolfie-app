@@ -49,6 +49,7 @@
   "error.password_length": "Password must be at least 8 characters long",
   "error.api_unknown_error": "Unknown error",
   "error.api_unknown_message": "Could not complete the request. Please, try again later.",
+  "error.no_results": "No results found",
   "page.home.head.title": "Hello Hooman!",
   "page.home.head.description": "I am Doggo, your pet companion app. I will help you to take care of your pet.",
   "page.home.main.current_features": "Current features:",

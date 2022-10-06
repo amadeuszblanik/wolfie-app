@@ -1,3 +1,4 @@
+export { default as DoggoAutocomplete } from "./autocomplete";
 export { default as DoggoAvatar } from "./avatar";
 export { default as DoggoAvatarCrop } from "./avatar-crop";
 export { default as DoggoBox } from "./box";

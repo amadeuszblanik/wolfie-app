@@ -49,6 +49,7 @@
   "error.password_length": "Hasło musi mieć co najmniej 8 znaków",
   "error.api_unknown_error": "Wystąpił nieznany błąd",
   "error.api_unknown_message": "Nie udało się wykonać żądania. Proszę, spróbuj ponownie później.",
+  "error.no_results": "Brak wyników",
   "page.home.head.title": "Witaj Człowieku!",
   "page.home.head.description": "Jestem Twoim asystentem w codziennych zwierzęcych sprawach.",
   "page.home.main.current_features": "Lista obecnych funkcji:",

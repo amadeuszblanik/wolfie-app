@@ -13,7 +13,7 @@ import {
   ComponentErrorScreen,
   ComponentPetCard,
 } from "../../../../src/component";
-import { DoggoBox, DoggoButton, DoggoInput, DoggoModal, DoggoSelect } from "../../../../src/ui-components";
+import { DoggoAutocomplete, DoggoBox, DoggoButton, DoggoInput, DoggoModal } from "../../../../src/ui-components";
 import { SizesEnum } from "../../../../src/settings/sizes";
 import { InputTypes } from "../../../../src/ui-components/input";
 import { FlexAlign } from "../../../../src/ui-components/box";
@@ -150,11 +150,11 @@ const App: NextPage = () => {
             label={intl.formatMessage({ id: "pet.name" })}
             errors={nameErrors}
           />
-          <DoggoSelect
+          <DoggoAutocomplete
             value={breedId}
             onChange={(nextValue) => setBreedId(nextValue)}
             label={intl.formatMessage({ id: "pet.breed" })}
-            list={configPublic?.breeds.map(({ name: label, id }) => ({ id, label })) || []}
+            list={configPublic?.breeds.map(({ name: label, id }) => ({ id: String(id), label })) || []}
             errors={breedIdErrors}
           />
           <DoggoInput

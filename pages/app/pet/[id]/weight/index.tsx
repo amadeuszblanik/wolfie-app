@@ -13,6 +13,7 @@ import useConfigPrivate from "../../../../../src/api/queries/config-private";
 import usePetWeightAdd from "../../../../../src/api/queries/pet-weight-add";
 import { ApiStatesTypes } from "../../../../../src/types/api-states.types";
 import { ButtonSizes } from "../../../../../src/ui-components/button";
+import { isEmpty } from "bme-utils";
 
 interface AddButtonProps {
   onClick: () => void;
@@ -76,11 +77,18 @@ const App: NextPage = () => {
           <>
             <DoggoGrid mobile={1} desktop={1} onSizeChange={handleChangeContainerWidth}>
               <ComponentPetCard {...pet} />
-              <DoggoLineChart width={containerWidth} data={petsWeight.map(({ raw, date }) => ({ x: date, y: raw }))} />
-              <DoggoList
-                label={configPrivate.weightUnits}
-                items={petsWeight.map((weight) => [weight.formatted, pipeDate(weight.date)]) ?? []}
-              />
+              {!isEmpty(petsWeight) && (
+                <>
+                  <DoggoLineChart
+                    width={containerWidth}
+                    data={petsWeight.map(({ raw, date }) => ({ x: date, y: raw }))}
+                  />
+                  <DoggoList
+                    label={configPrivate.weightUnits}
+                    items={petsWeight.map((weight) => [weight.formatted, pipeDate(weight.date)]) ?? []}
+                  />
+                </>
+              )}
             </DoggoGrid>
             {isOpenAddWeight && (
               <ComponentAddWeight

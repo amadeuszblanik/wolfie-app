@@ -5,6 +5,7 @@ const withPWA = require("next-pwa")({
   runtimeCaching,
 });
 const withSvgr = require('next-plugin-svgr');
+const {withSentryConfig} = require("@sentry/nextjs");
 
 const nextConfig = {
   reactStrictMode: true,
@@ -21,4 +22,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withPWA(withSvgr(nextConfig));
+module.exports = withSentryConfig(withPWA(withSvgr(nextConfig)));

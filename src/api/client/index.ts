@@ -28,6 +28,7 @@ import { ResetPasswordStep1Payload } from "../payload/reset-password-step-1.payl
 import { HealthLogResponseModel } from "../response-model/health-log-single.response-model";
 import getHealthLogDto from "../dto/get-health-log.dto";
 import { ShortMedicineResponseModel } from "../response-model/short-medicine.response-model";
+import { HealthLogAddPayload } from "../payload/health-log-add.payload";
 
 type HTTP_METHOD = "GET" | "POST" | "PUT" | "DELETE";
 
@@ -134,6 +135,15 @@ export default class ApiClient {
   public petsHealthLog = async (id: string): Promise<ApiResponse<HealthLogResponseModel[]>> => {
     return this.get<HealthLogResponseModel[]>(`/pets/${id}/healthLog`).then((response) =>
       responseDto(response, getHealthLogDto),
+    );
+  };
+
+  public petsHealthLogAdd = async (
+    id: string,
+    payload: HealthLogAddPayload,
+  ): Promise<ApiResponse<HealthLogResponseModel>> => {
+    return this.post<HealthLogResponseModel, HealthLogAddPayload>(`/pets/${id}/healthLog`, payload).then((response) =>
+      responseDto(response),
     );
   };
 

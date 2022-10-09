@@ -1,19 +1,17 @@
 import React from "react";
-import useHealthLogPet from "../../api/queries/health-log-pet";
 import { DoggoBox, DoggoList } from "../../ui-components";
-import { pipeDate } from "../../pipe";
 import { SizesEnum } from "../../settings/sizes";
 import { ComponentApiWrapper } from "../../component";
+import { CommonErrorResponseModel } from "../../api/response-model/common-error.response-model";
+import { ApiStatesTypes } from "../../types/api-states.types";
 
 interface Props {
-  petId: string;
+  status: ApiStatesTypes;
+  error: CommonErrorResponseModel | undefined;
+  items: string[][];
 }
 
-const DataDisplay: React.FunctionComponent<Props> = ({ petId }) => {
-  const { response, error, status } = useHealthLogPet(petId);
-
-  const items = response?.map(({ kind, date }) => [String(kind), pipeDate(date)]) || [];
-
+const DataDisplay: React.FunctionComponent<Props> = ({ items, error, status }) => {
   return (
     <ComponentApiWrapper error={error} status={status}>
       <DoggoBox padding={{ top: SizesEnum.Large }}>

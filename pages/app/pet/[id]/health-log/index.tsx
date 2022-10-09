@@ -8,6 +8,8 @@ import { DoggoButton } from "../../../../../src/ui-components";
 import { ButtonSizes } from "../../../../../src/ui-components/button";
 import { DataDisplayHealthLog } from "../../../../../src/data-display";
 import { ComponentAddHealthLog } from "../../../../../src/component";
+import useHealthLogPet from "../../../../../src/api/queries/health-log-pet";
+import { pipeDate } from "../../../../../src/pipe";
 
 interface AddButtonProps {
   onClick: () => void;
@@ -24,8 +26,19 @@ const App: NextPage = () => {
   const intl = useIntl();
 
   const { id } = router.query;
+  const refresh = () => {
+    return;
+  };
 
   const [isOpenAdd, setIsOpenAdd] = useState(true);
+  const { response, error, status } = useHealthLogPet(String(id));
+
+  const handleOnSuccess = () => {
+    setIsOpenAdd(false);
+    refresh();
+  };
+
+  const healthLogItems = response?.map(({ kind, date }) => [String(kind), pipeDate(date)]) || [];
 
   return (
     <>
@@ -41,8 +54,10 @@ const App: NextPage = () => {
         petId={String(id)}
         right={<AddButton onClick={() => setIsOpenAdd(true)} />}
       >
-        <DataDisplayHealthLog petId={String(id)} />
-        {isOpenAdd && <ComponentAddHealthLog />}
+        <DataDisplayHealthLog items={healthLogItems} error={error} status={status} />
+        {isOpenAdd && (
+          <ComponentAddHealthLog petId={String(id)} onClose={() => setIsOpenAdd(false)} onSuccess={handleOnSuccess} />
+        )}
       </LayoutPet>
     </>
   );

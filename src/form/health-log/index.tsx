@@ -17,20 +17,25 @@ import { ApiStatesTypes } from "../../types/api-states.types";
 import { SizesEnum } from "../../settings/sizes";
 import useFormValidator, { FormValidators } from "../../form-validator";
 import { useRouter } from "next/router";
-import useSignIn from "../../api/queries/sign-in";
 import { ComponentSelectMedicines } from "../../component";
 import { ListItem } from "../../types/list-item.types";
 import { HealthLogKindTypes } from "../../types/healt-log-kind.types";
-import { DEFAULT_LONG_VARCHAR_LENGTH } from "../../settings/globals";
+import { DEFAULT_LONG_VARCHAR_LENGTH, DEFAULT_ON_SUCCESS_TIMEOUT } from "../../settings/globals";
 import { isEmpty } from "bme-utils";
+import useHealthLogAdd from "../../api/queries/health-log-add";
 
-const Form: React.FunctionComponent = () => {
+interface Props {
+  petId: string;
+  onSuccess: () => void;
+}
+
+const Form: React.FunctionComponent<Props> = ({ petId, onSuccess }) => {
   const intl = useIntl();
   const router = useRouter();
-  const { post, status, response, error } = useSignIn();
+  const { post, status, response, error } = useHealthLogAdd(petId);
 
-  const kindItems: ListItem[] = Object.entries(HealthLogKindTypes).map(([key, value]) => ({
-    id: key,
+  const kindItems: ListItem[] = Object.values(HealthLogKindTypes).map((value) => ({
+    id: value,
     label: intl.formatMessage({ id: `health-log.kind.${value}` }),
   }));
 
@@ -39,7 +44,7 @@ const Form: React.FunctionComponent = () => {
   const [kind, setKind] = useState<HealthLogKindTypes>(HealthLogKindTypes.Treatment);
   const [date, setDate] = useState<string>();
   const [medicines, setMedicines] = useState<string[]>([]);
-  const [additionalMedicines, setAdditionalMedicines] = useState<string[]>([]);
+  const [additionalMedicines, setAdditionalMedicines] = useState("");
   const [diagnosis, setDiagnosis] = useState("");
   const [nextVisit, setNextVisit] = useState<Date>();
   const [veterinary, setVeterinary] = useState("");
@@ -48,7 +53,7 @@ const Form: React.FunctionComponent = () => {
   const formValidator = useFormValidator([
     { name: "date", value: date, validator: [FormValidators.Required] },
     // { name: "medicines", value: medicines, validator: [FormValidators.Required] },
-    // { name: "additionalMedicines", value: additionalMedicines, validator: [FormValidators.Required] },
+    { name: "additionalMedicines", value: additionalMedicines, validator: [] },
     { name: "diagnosis", value: diagnosis, validator: [] },
     // { name: "nextVisit", value: nextVisit, validator: [] },
     { name: "veterinary", value: veterinary, validator: [] },
@@ -60,18 +65,13 @@ const Form: React.FunctionComponent = () => {
   }, [formValidator.formValid]);
 
   useEffect(() => {
-    if (response && status === ApiStatesTypes.Success) {
-      void router.push("/app");
-    }
-  }, [response, status, router]);
-
-  useEffect(() => {
     switch (status) {
       case ApiStatesTypes.Loading:
         setFormEnable(false);
         break;
       case ApiStatesTypes.Success:
         setFormEnable(false);
+        setTimeout(() => onSuccess(), DEFAULT_ON_SUCCESS_TIMEOUT);
         break;
       default:
         setFormEnable(true);
@@ -79,12 +79,16 @@ const Form: React.FunctionComponent = () => {
   }, [status]);
 
   const handleSubmit = () => {
-    // post({
-    //   username,
-    //   password,
-    //   keepSignIn,
-    //   device,
-    // });
+    post({
+      kind,
+      date: date!,
+      medicines,
+      additionalMedicines,
+      diagnosis,
+      nextVisit,
+      veterinary,
+      description,
+    });
   };
 
   return (
@@ -106,8 +110,8 @@ const Form: React.FunctionComponent = () => {
         errors={formValidator.errors["additionalMedicines"]}
       >
         <DoggoInputText
-          value={additionalMedicines.join(",")}
-          onChange={(nextValue) => setAdditionalMedicines(nextValue.split(","))}
+          value={additionalMedicines}
+          onChange={setAdditionalMedicines}
           disabled={!formEnable}
           error={!isEmpty(formValidator.errors["additionalMedicines"])}
         />

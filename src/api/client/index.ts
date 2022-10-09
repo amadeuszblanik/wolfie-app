@@ -193,6 +193,11 @@ export default class ApiClient {
           localStorage.removeItem("accessToken");
           localStorage.removeItem("refreshToken");
 
+          // @TODO: Refactor it later
+          if (location) {
+            location.href = "/unauthorized";
+          }
+
           return response;
         }
 

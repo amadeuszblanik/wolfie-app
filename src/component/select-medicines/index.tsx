@@ -5,6 +5,7 @@ import { DoggoAutocomplete, DoggoBox, DoggoPill } from "../../ui-components";
 import { ListItem } from "../../types/list-item.types";
 import { uniqueArray } from "../../utils";
 import { SizesEnum } from "../../settings/sizes";
+import useMedicineShortList from "../../api/queries/medicine-short-list";
 
 interface Props {
   value?: string[];
@@ -16,16 +17,9 @@ const Component: React.FunctionComponent<Props> = ({ value, onChange }) => {
 
   const [selectedMedicines, setSelectedMedicines] = useState<string[]>(value || []);
 
-  const medicines: ListItem[] = [
-    {
-      id: "123",
-      label: "Medicine 1",
-    },
-    {
-      id: "456",
-      label: "Medicine 2",
-    },
-  ];
+  const { response } = useMedicineShortList();
+
+  const medicines: ListItem[] = response?.map(({ name, productNumber }) => ({ id: productNumber, label: name })) || [];
 
   const handleAdd = (id: string | undefined) => {
     if (!id) {

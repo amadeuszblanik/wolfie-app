@@ -27,6 +27,7 @@ import { SignInResponseModel } from "../response-model/sign-in.response-model";
 import { ResetPasswordStep1Payload } from "../payload/reset-password-step-1.payload";
 import { HealthLogResponseModel } from "../response-model/health-log-single.response-model";
 import getHealthLogDto from "../dto/get-health-log.dto";
+import { ShortMedicineResponseModel } from "../response-model/short-medicine.response-model";
 
 type HTTP_METHOD = "GET" | "POST" | "PUT" | "DELETE";
 
@@ -96,6 +97,10 @@ export default class ApiClient {
 
   public petsMy = async (): Promise<ApiResponse<PetSingleResponseModel[]>> => {
     return this.get<PetSingleResponseModel[]>("/pets/my").then((response) => responseDto(response, myPetsDto));
+  };
+
+  public medicineShortList = async (): Promise<ApiResponse<ShortMedicineResponseModel[]>> => {
+    return this.get<ShortMedicineResponseModel[]>("/medicine").then((response) => responseDto(response));
   };
 
   public petsAdd = async (body: PetsAddPayload): Promise<ApiResponse<PetsAddResponseModel>> => {

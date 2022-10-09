@@ -8,7 +8,7 @@ const getHealthLogSingleDto = (data: HealthLogResponseModel): HealthLogResponseM
   additionalMedicines: data.additionalMedicines,
   veterinary: data.veterinary,
   diagnosis: data.diagnosis,
-  nextVisit: data.nextVisit,
+  nextVisit: data.nextVisit ? new Date(data.nextVisit) : null,
   description: data.description,
   addedBy: data.addedBy,
   createdAt: new Date(data.createdAt),

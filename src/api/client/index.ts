@@ -25,6 +25,8 @@ import { ConfirmEmailPayload } from "../payload/confirm-email.payload";
 import { SignInPayload } from "../payload/sign-in.payload";
 import { SignInResponseModel } from "../response-model/sign-in.response-model";
 import { ResetPasswordStep1Payload } from "../payload/reset-password-step-1.payload";
+import { HealthLogResponseModel } from "../response-model/health-log-single.response-model";
+import getHealthLogDto from "../dto/get-health-log.dto";
 
 type HTTP_METHOD = "GET" | "POST" | "PUT" | "DELETE";
 
@@ -121,6 +123,12 @@ export default class ApiClient {
   public petsWeight = (id: string) => async (): Promise<ApiResponse<WeightValueResponseModel[]>> => {
     return this.get<WeightValueResponseModel[]>(`/pets/${id}/weight?last=ALL`).then((response) =>
       responseDto(response, getPetsWeightDto),
+    );
+  };
+
+  public petsHealthLog = async (id: string): Promise<ApiResponse<HealthLogResponseModel[]>> => {
+    return this.get<HealthLogResponseModel[]>(`/pets/${id}/healthLog`).then((response) =>
+      responseDto(response, getHealthLogDto),
     );
   };
 

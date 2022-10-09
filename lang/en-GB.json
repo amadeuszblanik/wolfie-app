@@ -82,6 +82,7 @@
   "page.app.header": "My pets",
   "page.pet.header": "Pet dashboard",
   "page.pet_weight.header": "Pet weight",
+  "page.pet_health_log.header": "Pet health log",
   "component.footer.header": "Doggo © {year}",
   "component.footer.author": "Made with ❤️ by",
   "component.footer.link_privacy_policy": "Privacy Policy",
@@ -101,6 +102,5 @@
   "pet.breed": "Breed",
   "pet.breed.mixed": "Mixed",
   "pet.weight": "Weight",
-  "pet.vaccinations": "Vaccinations",
-  "pet.medications": "Medication"
+  "pet.health_log": "Health log"
 }

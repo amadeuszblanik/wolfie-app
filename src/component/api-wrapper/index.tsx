@@ -4,9 +4,11 @@ import { ComponentErrorScreen } from "../index";
 import { CommonErrorResponseModel } from "../../api/response-model/common-error.response-model";
 import { DoggoLoader } from "../../ui-components";
 
+type ErrorArraySingle = CommonErrorResponseModel | undefined;
+
 interface Props {
   children: React.ReactNode;
-  error: CommonErrorResponseModel | undefined;
+  error: CommonErrorResponseModel | ErrorArraySingle[] | undefined;
   status: ApiStatesTypes | ApiStatesTypes[];
   idleLoader?: boolean;
   onTryAgain?: () => void;
@@ -14,6 +16,7 @@ interface Props {
 
 const Component: React.FunctionComponent<Props> = ({ children, status, error, idleLoader, onTryAgain }) => {
   const statuses: ApiStatesTypes[] = Array.isArray(status) ? status : [status];
+  const errors: ErrorArraySingle[] = Array.isArray(error) ? error : [error];
 
   if (statuses.some((apiStatus) => apiStatus === ApiStatesTypes.Loading)) {
     return <DoggoLoader fullScreen />;
@@ -24,7 +27,13 @@ const Component: React.FunctionComponent<Props> = ({ children, status, error, id
   }
 
   if (statuses.some((apiStatus) => apiStatus === ApiStatesTypes.Error)) {
-    return <ComponentErrorScreen message={error?.message} onTryAgain={onTryAgain} />;
+    return (
+      <>
+        {errors.filter(Boolean).map((errorData, index) => (
+          <ComponentErrorScreen key={index} message={errorData?.message} onTryAgain={onTryAgain} />
+        ))}
+      </>
+    );
   }
 
   if (!idleLoader) {

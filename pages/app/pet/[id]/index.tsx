@@ -55,17 +55,18 @@ const App: NextPage = () => {
             </StyledPetCard>
             <Link href={`/app/pet/${id}/weight`}>
               <a>
-                <ComponentCardItem icon="barbell" value={pet.currentWeight?.formatted ?? "—"} background="orange">
+                <ComponentCardItem icon="barbell" value={pet.currentWeight?.formatted ?? "—"} background="blue">
                   <FormattedMessage id="pet.weight" />
                 </ComponentCardItem>
               </a>
             </Link>
-            <ComponentCardItem icon="medical" value={pet.vaccinations ?? "—"} background="blue">
-              <FormattedMessage id="pet.vaccinations" />
-            </ComponentCardItem>
-            <ComponentCardItem icon="medkit" value={pet.medicines ?? "—"} background="green">
-              <FormattedMessage id="pet.medications" />
-            </ComponentCardItem>
+            <Link href={`/app/pet/${id}/health-log`}>
+              <a>
+                <ComponentCardItem icon="heart" value={pet.healthLog ?? "—"} background="red">
+                  <FormattedMessage id="pet.health_log" />
+                </ComponentCardItem>
+              </a>
+            </Link>
           </DoggoGrid>
         )}
         {petError && <ComponentErrorScreen message={petError?.message} onTryAgain={refetch} />}

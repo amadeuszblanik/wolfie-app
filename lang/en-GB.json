@@ -86,6 +86,7 @@
   "component.footer.header": "Doggo © {year}",
   "component.footer.author": "Made with ❤️ by",
   "component.footer.link_privacy_policy": "Privacy Policy",
+  "component.selected_medicines.label": "Select medicines",
   "user.email": "E-mail",
   "user.first_name": "First name",
   "user.last_name": "Last name",
@@ -102,5 +103,19 @@
   "pet.breed": "Breed",
   "pet.breed.mixed": "Mixed",
   "pet.weight": "Weight",
-  "pet.health_log": "Health log"
+  "pet.health_log": "Health log",
+  "health_log.kind": "Kind",
+  "health-log.kind.VACCINATION_RABIES": "Rabies vaccination",
+  "health-log.kind.VACCINATION": "Vaccination",
+  "health-log.kind.DEWORMING": "Deworming",
+  "health-log.kind.EXTERNAL_PARASITE": "External parasite",
+  "health-log.kind.REGULATIONS_OF_BREEDING": "Regulations of breeding",
+  "health-log.kind.USE_OF_GAMAGLOBULIN": "Use of gamaglobulin",
+  "health-log.kind.TREATMENT": "Treatment",
+  "health_log.date": "Date",
+  "health_log.additional_medicines": "Additional medicines",
+  "health_log.diagnosis": "Diagnosis",
+  "health_log.next_visit": "Next visit",
+  "health_log.veterinary": "Veterinary",
+  "health_log.description": "Description"
 }

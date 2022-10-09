@@ -2,11 +2,12 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
 import { LayoutPet } from "../../../../../src/layout";
 import { DoggoButton } from "../../../../../src/ui-components";
 import { ButtonSizes } from "../../../../../src/ui-components/button";
 import { DataDisplayHealthLog } from "../../../../../src/data-display";
+import { ComponentAddHealthLog } from "../../../../../src/component";
 
 interface AddButtonProps {
   onClick: () => void;
@@ -24,6 +25,8 @@ const App: NextPage = () => {
 
   const { id } = router.query;
 
+  const [isOpenAdd, setIsOpenAdd] = useState(true);
+
   return (
     <>
       <Head>
@@ -32,8 +35,14 @@ const App: NextPage = () => {
         <link rel="icon" href="/Users/ablanik/Projects/Blanik.me/doggo/web-react/doggo-web-react/public/favicon.ico" />
       </Head>
 
-      <LayoutPet title={intl.formatMessage({ id: "page.pet_health_log.header" })} back petId={String(id)}>
+      <LayoutPet
+        title={intl.formatMessage({ id: "page.pet_health_log.header" })}
+        back
+        petId={String(id)}
+        right={<AddButton onClick={() => setIsOpenAdd(true)} />}
+      >
         <DataDisplayHealthLog petId={String(id)} />
+        {isOpenAdd && <ComponentAddHealthLog />}
       </LayoutPet>
     </>
   );

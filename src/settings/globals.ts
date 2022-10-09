@@ -1,0 +1,2 @@
+export const DEFAULT_VARCHAR_LENGTH = 255;
+export const DEFAULT_LONG_VARCHAR_LENGTH = 500;

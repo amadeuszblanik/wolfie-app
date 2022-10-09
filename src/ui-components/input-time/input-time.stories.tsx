@@ -1,18 +1,18 @@
 /* eslint-disable no-magic-numbers */
-import React from "react";
+import React, { useState } from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import Component from "./index";
 
 export default {
-  title: "UI-Components/Input File",
+  title: "UI-Components/Input Time",
   component: Component,
   argTypes: {
-    label: { control: "text" },
+    value: { control: "text" },
     onChange: { action: "onChange()" },
-    errors: { control: "array" },
+    max: { control: "text" },
+    min: { control: "text" },
     plain: { control: "boolean" },
-    multiple: { control: "boolean" },
-    accept: { control: "array" },
+    disabled: { control: "boolean" },
   },
 } as ComponentMeta<typeof Component>;
 
@@ -20,7 +20,4 @@ const Template: ComponentStory<typeof Component> = (props) => <Component {...pro
 
 export const Playground = Template.bind({});
 
-Playground.args = {
-  label: "Select file",
-  accept: ["image/png", "image/jpg", "image/jpeg"],
-};
+Playground.args = {};

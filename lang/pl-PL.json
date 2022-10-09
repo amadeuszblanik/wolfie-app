@@ -83,6 +83,7 @@
   "page.pet.header": "Mój zwierzak",
   "page.pet_weight.header": "Waga zwierzaka",
   "page.pet_health_log.header": "Dziennik zdrowia zwierzaka",
+  "page.pet_health_log_single.header": "Dziennik zdrowia zwierzaka",
   "component.footer.header": "Doggo &copy; {year}",
   "component.footer.author": "Stworzone z ❤️ przez",
   "component.footer.link_privacy_policy": "Polityka prywatności",
@@ -113,9 +114,11 @@
   "health-log.kind.USE_OF_GAMAGLOBULIN": "Użycie gamaglobuliny",
   "health-log.kind.TREATMENT": "Leczenie",
   "health_log.date": "Data",
+  "health_log.medicines": "Leki",
   "health_log.additional_medicines": "Dodatkowe leki",
   "health_log.diagnosis": "Diagnoza",
   "health_log.next_visit": "Następna wizyta",
   "health_log.veterinary": "Weterynarz",
-  "health_log.description": "Opis"
+  "health_log.description": "Opis",
+  "health_log.added_by": "Dodane przez"
 }

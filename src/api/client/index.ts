@@ -29,6 +29,7 @@ import { HealthLogResponseModel } from "../response-model/health-log-single.resp
 import getHealthLogDto from "../dto/get-health-log.dto";
 import { ShortMedicineResponseModel } from "../response-model/short-medicine.response-model";
 import { HealthLogAddPayload } from "../payload/health-log-add.payload";
+import getHealthLogSingleDto from "../dto/get-health-log-single.dto";
 
 type HTTP_METHOD = "GET" | "POST" | "PUT" | "DELETE";
 
@@ -135,6 +136,15 @@ export default class ApiClient {
   public petsHealthLog = async (id: string): Promise<ApiResponse<HealthLogResponseModel[]>> => {
     return this.get<HealthLogResponseModel[]>(`/pets/${id}/healthLog`).then((response) =>
       responseDto(response, getHealthLogDto),
+    );
+  };
+
+  public petsHealthLogSingle = async (
+    id: string,
+    healthLogId: string,
+  ): Promise<ApiResponse<HealthLogResponseModel>> => {
+    return this.get<HealthLogResponseModel>(`/pets/${id}/healthLog/${healthLogId}`).then((response) =>
+      responseDto(response, getHealthLogSingleDto),
     );
   };
 

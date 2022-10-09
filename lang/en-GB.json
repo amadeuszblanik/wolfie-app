@@ -83,6 +83,7 @@
   "page.pet.header": "Pet dashboard",
   "page.pet_weight.header": "Pet weight",
   "page.pet_health_log.header": "Pet health log",
+  "page.pet_health_log_single.header": "Pet health log",
   "component.footer.header": "Doggo © {year}",
   "component.footer.author": "Made with ❤️ by",
   "component.footer.link_privacy_policy": "Privacy Policy",
@@ -113,9 +114,11 @@
   "health-log.kind.USE_OF_GAMAGLOBULIN": "Use of gamaglobulin",
   "health-log.kind.TREATMENT": "Treatment",
   "health_log.date": "Date",
+  "health_log.medicines": "Medicines",
   "health_log.additional_medicines": "Additional medicines",
   "health_log.diagnosis": "Diagnosis",
   "health_log.next_visit": "Next visit",
   "health_log.veterinary": "Veterinary",
-  "health_log.description": "Description"
+  "health_log.description": "Description",
+  "health_log.added_by": "Added by"
 }

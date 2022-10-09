@@ -10,6 +10,8 @@ import { DataDisplayHealthLog } from "../../../../../src/data-display";
 import { ComponentAddHealthLog } from "../../../../../src/component";
 import useHealthLogPet from "../../../../../src/api/queries/health-log-pet";
 import { pipeDate } from "../../../../../src/pipe";
+import { ListItem } from "../../../../../src/ui-components/list";
+import Link from "next/link";
 
 interface AddButtonProps {
   onClick: () => void;
@@ -26,19 +28,25 @@ const App: NextPage = () => {
   const intl = useIntl();
 
   const { id } = router.query;
-  const refresh = () => {
-    return;
-  };
 
-  const [isOpenAdd, setIsOpenAdd] = useState(true);
-  const { response, error, status } = useHealthLogPet(String(id));
+  const [isOpenAdd, setIsOpenAdd] = useState(false);
+  const { response, error, status, get } = useHealthLogPet(String(id));
 
   const handleOnSuccess = () => {
     setIsOpenAdd(false);
-    refresh();
+    get();
   };
 
-  const healthLogItems = response?.map(({ kind, date }) => [String(kind), pipeDate(date)]) || [];
+  const healthLogItems: ListItem[] = Array.isArray(response)
+    ? response.map(({ id: healthLogId, kind, date }) => [
+        <Link key={healthLogId} href={`/app/pet/${String(id)}/health-log/${healthLogId}`}>
+          <a>
+            <DoggoButton size={ButtonSizes.Small}>{kind}</DoggoButton>
+          </a>
+        </Link>,
+        pipeDate(date),
+      ])
+    : [];
 
   return (
     <>

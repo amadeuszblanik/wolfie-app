@@ -9,7 +9,7 @@ import { ListItem } from "../../ui-components/list";
 interface Props {
   status: ApiStatesTypes;
   error: CommonErrorResponseModel | undefined;
-  items: ListItem[];
+  items: ListItem[][];
 }
 
 const DataDisplay: React.FunctionComponent<Props> = ({ items, error, status }) => {

@@ -22,14 +22,13 @@ const StyledModalBackdrop = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 100;
+  z-index: 10020;
   display: flex;
   align-items: flex-end;
   justify-content: center;
   width: 100%;
   height: 100%;
   background-color: ${({ theme }) => toRgba(theme.palette.background, theme.modalBackgroundOpacity)};
-  backdrop-filter: blur(5px);
 `;
 
 const StyledModalWindow = styled(Box)`

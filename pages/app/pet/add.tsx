@@ -124,7 +124,7 @@ const App: NextPage = () => {
             value={breedId}
             onChange={(nextValue) => setBreedId(nextValue)}
             label={intl.formatMessage({ id: "pet.breed" })}
-            list={configPublic?.breeds.map(({ name: label, id }) => ({ id, label })) || []}
+            list={configPublic?.breeds.map(({ name: label, id }) => ({ id: String(id), label })) || []}
             errors={breedIdErrors}
           />
           <DoggoInput

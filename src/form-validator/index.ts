@@ -9,8 +9,9 @@ import phoneValidator from "./validators/phone.validator";
 import { useIntl } from "react-intl";
 
 // @TODO: Fix validations after change;
+// @TODO: Add validator for arrays;
 
-export type FormValidatorValue = string | boolean;
+export type FormValidatorValue = string | boolean | undefined;
 
 export enum FormValidators {
   Required = "required",

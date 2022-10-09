@@ -27,6 +27,9 @@ import { SignInResponseModel } from "../response-model/sign-in.response-model";
 import { ResetPasswordStep1Payload } from "../payload/reset-password-step-1.payload";
 import { HealthLogResponseModel } from "../response-model/health-log-single.response-model";
 import getHealthLogDto from "../dto/get-health-log.dto";
+import { ShortMedicineResponseModel } from "../response-model/short-medicine.response-model";
+import { HealthLogAddPayload } from "../payload/health-log-add.payload";
+import getHealthLogSingleDto from "../dto/get-health-log-single.dto";
 
 type HTTP_METHOD = "GET" | "POST" | "PUT" | "DELETE";
 
@@ -98,6 +101,10 @@ export default class ApiClient {
     return this.get<PetSingleResponseModel[]>("/pets/my").then((response) => responseDto(response, myPetsDto));
   };
 
+  public medicineShortList = async (): Promise<ApiResponse<ShortMedicineResponseModel[]>> => {
+    return this.get<ShortMedicineResponseModel[]>("/medicine").then((response) => responseDto(response));
+  };
+
   public petsAdd = async (body: PetsAddPayload): Promise<ApiResponse<PetsAddResponseModel>> => {
     return this.post<PetsAddResponseModel, PetsAddPayload>("/pets/add", body).then((response) =>
       responseDto(response, getPetsDto),
@@ -129,6 +136,24 @@ export default class ApiClient {
   public petsHealthLog = async (id: string): Promise<ApiResponse<HealthLogResponseModel[]>> => {
     return this.get<HealthLogResponseModel[]>(`/pets/${id}/healthLog`).then((response) =>
       responseDto(response, getHealthLogDto),
+    );
+  };
+
+  public petsHealthLogSingle = async (
+    id: string,
+    healthLogId: string,
+  ): Promise<ApiResponse<HealthLogResponseModel>> => {
+    return this.get<HealthLogResponseModel>(`/pets/${id}/healthLog/${healthLogId}`).then((response) =>
+      responseDto(response, getHealthLogSingleDto),
+    );
+  };
+
+  public petsHealthLogAdd = async (
+    id: string,
+    payload: HealthLogAddPayload,
+  ): Promise<ApiResponse<HealthLogResponseModel>> => {
+    return this.post<HealthLogResponseModel, HealthLogAddPayload>(`/pets/${id}/healthLog`, payload).then((response) =>
+      responseDto(response),
     );
   };
 

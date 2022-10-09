@@ -4,15 +4,14 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import Component from "./index";
 
 export default {
-  title: "UI-Components/Input File",
+  title: "UI-Components/Input Textarea",
   component: Component,
   argTypes: {
-    label: { control: "text" },
+    value: { control: "text" },
     onChange: { action: "onChange()" },
-    errors: { control: "array" },
+    maxLength: { control: "number" },
     plain: { control: "boolean" },
-    multiple: { control: "boolean" },
-    accept: { control: "array" },
+    disabled: { control: "boolean" },
   },
 } as ComponentMeta<typeof Component>;
 
@@ -20,7 +19,4 @@ const Template: ComponentStory<typeof Component> = (props) => <Component {...pro
 
 export const Playground = Template.bind({});
 
-Playground.args = {
-  label: "Select file",
-  accept: ["image/png", "image/jpg", "image/jpeg"],
-};
+Playground.args = {};

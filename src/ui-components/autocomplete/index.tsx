@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { paddingMixin, sizeMixin } from "../mixins";
 import { SizesEnum } from "../../settings/sizes";
@@ -11,7 +11,7 @@ import { FormattedMessage } from "react-intl";
 import Icon from "../icon";
 
 interface Props {
-  value: string | undefined;
+  value?: string | undefined;
   onChange: (nextValue: string | undefined) => void;
   list: ListItem[];
   label?: string;
@@ -103,8 +103,8 @@ const Component: React.FunctionComponent<Props> = ({
   const [inputValue, setInputValue] = React.useState<string>(value || "");
   const [inputFocus, setInputFocus] = React.useState<boolean>(false);
   const [dropdownFocus, setDropdownFocus] = React.useState<boolean>(false);
+  const [valid, setValid] = React.useState<boolean>(false);
 
-  const itemSelected = list.find(({ label: itemLabel }) => itemLabel === inputValue);
   const dropdownOpen = inputFocus || dropdownFocus;
 
   const filteredList = list.filter(({ label: itemLabel }) =>
@@ -115,11 +115,27 @@ const Component: React.FunctionComponent<Props> = ({
     setInputValue(item.label);
     setInputFocus(false);
     setDropdownFocus(false);
+    onChange(item.id);
+    setValid(true);
   };
 
-  useEffect(() => {
-    onChange(itemSelected?.id);
-  }, [itemSelected, onChange]);
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value: nextValue } = event.target;
+    setInputValue(nextValue);
+    onChange(undefined);
+    const selectedItem = list.find(({ label: itemLabel }) => itemLabel === nextValue);
+    setValid(!!selectedItem);
+  };
+
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      const nextValue = (event.target as HTMLInputElement).value;
+      setInputValue(nextValue);
+      const selectedItem = list.find(({ label: itemLabel }) => itemLabel === nextValue);
+      onChange(selectedItem?.id);
+      setValid(!!selectedItem);
+    }
+  };
 
   return (
     <Box width={plain ? BoxWidth.Full : undefined} padding={{ bottom: SizesEnum.Medium }} column>
@@ -132,14 +148,15 @@ const Component: React.FunctionComponent<Props> = ({
         <StyledInput
           placeholder={placeholder}
           value={inputValue}
-          onChange={({ target: { value: nextValue } }) => setInputValue(nextValue)}
+          onChange={handleChange}
+          onKeyPress={handleKeyPress}
           onFocus={() => setInputFocus(true)}
           onBlur={() => setInputFocus(false)}
           plain={plain}
           disabled={disabled}
         />
         <StyledSelectIcon>
-          <Icon icon={itemSelected ? "checkmark" : "close"} color={itemSelected ? "green" : "red"} />
+          <Icon icon={valid ? "checkmark" : "close"} color={valid ? "green" : "red"} />
         </StyledSelectIcon>
         {dropdownOpen && (
           <StyledDropdown

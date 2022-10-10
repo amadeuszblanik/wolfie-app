@@ -7,6 +7,7 @@ import { DoggoIcons } from "../../ui-components/icon";
 import { ButtonSizes } from "../../ui-components/button";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useIntl } from "react-intl";
 
 interface ItemProps {
   active: boolean;
@@ -41,6 +42,7 @@ const Item = ({ active, icon, name }: ItemProps) => (
 
 const Component = () => {
   const router = useRouter();
+  const intl = useIntl();
   const { pathname } = router;
 
   return (
@@ -55,12 +57,20 @@ const Component = () => {
         <DoggoBox alignX={FlexAlign.SpaceBetween} width={BoxWidth.Full}>
           <Link href="/app">
             <a>
-              <Item icon="apps" name="Pets" active={pathname.startsWith("/app")} />
+              <Item
+                icon="apps"
+                name={intl.formatMessage({ id: "component.bottom_bar.pets" })}
+                active={pathname.startsWith("/app")}
+              />
             </a>
           </Link>
           <Link href="/settings">
             <a>
-              <Item icon="cog" name="Settings" active={pathname.startsWith("/settings")} />
+              <Item
+                icon="cog"
+                name={intl.formatMessage({ id: "component.bottom_bar.settings" })}
+                active={pathname.startsWith("/settings")}
+              />
             </a>
           </Link>
         </DoggoBox>

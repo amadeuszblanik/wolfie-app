@@ -6,6 +6,7 @@ import { ConfigContext } from "../src/context";
 import { GlobalStyles } from "../src/component/styles";
 import en_GB from "../lang/en-GB.json";
 import pl_PL from "../lang/pl-PL.json";
+import fr_FR from "../lang/fr-FR.json";
 import { useRouter } from "next/router";
 import { IntlProvider } from "react-intl";
 import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
@@ -15,6 +16,7 @@ import { ComponentFooter } from "../src/component";
 
 const MESSAGES = {
   "en-GB": en_GB,
+  "fr-FR": fr_FR,
   "pl-PL": pl_PL,
 };
 

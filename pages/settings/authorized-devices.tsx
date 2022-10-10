@@ -15,7 +15,7 @@ const App: NextPage = () => {
         <link rel="icon" href="/Users/ablanik/Projects/Blanik.me/doggo/web-react/doggo-web-react/public/favicon.ico" />
       </Head>
 
-      <LayoutApp title={intl.formatMessage({ id: "page.settings.authorized_devices.header" })}>
+      <LayoutApp title={intl.formatMessage({ id: "page.settings.authorized_devices.header" })} back>
         <FormattedMessage id="common.soon" />
       </LayoutApp>
     </>

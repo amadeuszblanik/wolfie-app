@@ -6,6 +6,7 @@ import { DoggoTextVariant } from "../../ui-components/text";
 import { DoggoIcons } from "../../ui-components/icon";
 import { ButtonSizes } from "../../ui-components/button";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 interface ItemProps {
   active: boolean;
@@ -39,6 +40,9 @@ const Item = ({ active, icon, name }: ItemProps) => (
 );
 
 const Component = () => {
+  const router = useRouter();
+  const { pathname } = router;
+
   return (
     <StyledBottomBar
       alignX={FlexAlign.Center}
@@ -48,10 +52,15 @@ const Component = () => {
       background="backgroundSecondary"
     >
       <DoggoContainer fullWidth>
-        <DoggoBox alignX={FlexAlign.Center} width={BoxWidth.Full}>
+        <DoggoBox alignX={FlexAlign.SpaceBetween} width={BoxWidth.Full}>
           <Link href="/app">
             <a>
-              <Item icon="apps" name="Pets" active={true} />
+              <Item icon="apps" name="Pets" active={pathname.startsWith("/app")} />
+            </a>
+          </Link>
+          <Link href="/settings">
+            <a>
+              <Item icon="cog" name="Settings" active={pathname.startsWith("/settings")} />
             </a>
           </Link>
         </DoggoBox>

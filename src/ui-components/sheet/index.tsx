@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import Container from "../container";
 import Box, { BoxWidth } from "../box";
@@ -10,6 +10,7 @@ import Grid, { GridAlign } from "../grid";
 import { DoggoText } from "../index";
 import { DoggoTextVariant } from "../text";
 import { FormattedMessage } from "react-intl";
+import { ConfigContext, ConfigContextType } from "../../context/config.context";
 
 interface Props {
   children: React.ReactNode;
@@ -36,6 +37,10 @@ const StyledModalWindow = styled(Box)`
   height: 95vh;
 `;
 
+const StyledModalWindowBody = styled(Box)`
+  overflow-y: auto;
+`;
+
 const StyledTopBar = styled(Grid)`
   width: 100%;
 `;
@@ -51,8 +56,18 @@ const StyledTopBarRight = styled.div`
 const MIN_SWIPE_DISTANCE = 30;
 
 const Component: React.FunctionComponent<Props> = ({ children, onClose, title, right }) => {
+  const { setScrollEnabled } = useContext<ConfigContextType>(ConfigContext);
+
   const [touchStart, setTouchStart] = React.useState<number | null>(null);
   const [touchEnd, setTouchEnd] = React.useState<number | null>(null);
+
+  useEffect(() => {
+    setScrollEnabled(false);
+
+    return () => {
+      setScrollEnabled(true);
+    };
+  }, []);
 
   const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
     setTouchEnd(null);
@@ -98,7 +113,7 @@ const Component: React.FunctionComponent<Props> = ({ children, onClose, title, r
               <StyledTopBarRight>{right}</StyledTopBarRight>
             </StyledTopBar>
           </Box>
-          {children}
+          <StyledModalWindowBody>{children}</StyledModalWindowBody>
         </StyledModalWindow>
       </Container>
     </StyledModalBackdrop>

@@ -1,8 +1,7 @@
 import type { AppProps } from "next/app";
 import { ThemeProvider } from "styled-components";
-import theme, { ThemeVariants } from "../src/settings/theme";
-import { useEffect, useState } from "react";
-import { ConfigContext } from "../src/context";
+import theme from "../src/settings/theme";
+import { useContext, useState } from "react";
 import { GlobalStyles } from "../src/component/styles";
 import en_GB from "../lang/en-GB.json";
 import pl_PL from "../lang/pl-PL.json";
@@ -13,6 +12,8 @@ import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import Head from "next/head";
 import { ComponentFooter } from "../src/component";
+import { ConfigContext, ConfigContextType } from "../src/context/config.context";
+import { ConfigStore } from "../src/context";
 
 const MESSAGES = {
   "en-GB": en_GB,
@@ -21,23 +22,16 @@ const MESSAGES = {
 };
 
 function MyApp({ Component, pageProps }: AppProps<{ dehydratedState: any }>) {
-  const [selectedTheme, setSelectedTheme] = useState<ThemeVariants>(ThemeVariants.Dark);
   const [queryClient] = useState(() => new QueryClient());
+  const { selectedTheme } = useContext<ConfigContextType>(ConfigContext);
 
   const locale = useRouter().locale as keyof typeof MESSAGES;
-
-  useEffect(() => {
-    // @TODO: Remove on production
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    window.setSelectedTheme = setSelectedTheme;
-  });
 
   return (
     <IntlProvider locale={locale} messages={MESSAGES[locale]}>
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
-          <ConfigContext.Provider value={{ selectedTheme, setSelectedTheme }}>
+          <ConfigStore>
             <ThemeProvider theme={theme[selectedTheme]}>
               <Head>
                 <meta charSet="utf-8" />
@@ -60,7 +54,7 @@ function MyApp({ Component, pageProps }: AppProps<{ dehydratedState: any }>) {
               <Component {...pageProps} />
               <ComponentFooter />
             </ThemeProvider>
-          </ConfigContext.Provider>
+          </ConfigStore>
           <ReactQueryDevtools initialIsOpen />
         </Hydrate>
       </QueryClientProvider>

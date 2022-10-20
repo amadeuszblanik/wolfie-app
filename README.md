@@ -31,8 +31,8 @@ Please make sure to update tests as appropriate.
 * [x] Decide about final technology stack
 * [x] Create a Next.JS application for the web application
 * [x] Create a custom built-in UI library for the web application
-* [ ] Implement all features from the proof of concept Angular application into Next.JS application
-* [ ] Implement photo uploading and displaying
+* [x] Implement all features from the proof of concept Angular application into Next.JS application
+* [x] Implement photo uploading and displaying
 * [ ] Refactor code to be more readable and maintainable
 * [ ] Create a alpha stage of the web application
 * [ ] Implement dog tinder

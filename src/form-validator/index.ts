@@ -53,7 +53,7 @@ const removeError = (errors: { [key: string]: FormValidators[] }, fieldName: str
 const useFormValidator = (formFields: FormField[]): FormValidatorResponse => {
   const intl = useIntl();
 
-  const [formValid, setFormValid] = useState<boolean>(false);
+  const [formValid, setFormValid] = useState<boolean>(true);
   const [errors, setErrors] = useState<{ [key: string]: FormValidators[] }>({});
 
   useEffect(() => {

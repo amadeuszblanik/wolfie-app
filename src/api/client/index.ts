@@ -30,6 +30,9 @@ import getHealthLogDto from "../dto/get-health-log.dto";
 import { ShortMedicineResponseModel } from "../response-model/short-medicine.response-model";
 import { HealthLogAddPayload } from "../payload/health-log-add.payload";
 import getHealthLogSingleDto from "../dto/get-health-log-single.dto";
+import profileDto from "../dto/profile.dto";
+import { ProfileResponseModel } from "../response-model/profile.response-model";
+import { ProfilePayload } from "../payload/profile.payload";
 
 type HTTP_METHOD = "GET" | "POST" | "PUT" | "DELETE";
 
@@ -85,6 +88,16 @@ export default class ApiClient {
 
   public gdpr = async (): Promise<ApiResponse<GdprResponseModel>> => {
     return this.get<GdprResponseModel>("/gdpr").then((response) => responseDto(response, getGdprDto));
+  };
+
+  public profile = async (): Promise<ApiResponse<ProfileResponseModel>> => {
+    return this.get<ProfileResponseModel>(`/auth/profile`).then((response) => responseDto(response, profileDto));
+  };
+
+  public updateProfile = async (body: ProfilePayload): Promise<ApiResponse<ProfileResponseModel>> => {
+    return this.put<ProfileResponseModel, ProfilePayload>(`/auth/profile`, body).then((response) =>
+      responseDto(response, profileDto),
+    );
   };
 
   public configPublic = async (): Promise<ApiResponse<ConfigPublicResponseModel>> => {

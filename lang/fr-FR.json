@@ -37,6 +37,7 @@
   "common.file_size.gigabytes": "{value} Go",
   "common.go_home": "Aller à l'accueil",
   "common.change_language": "Changer de langue",
+  "common.change_theme": "Changer de thème",
   "error.load_fail": "Impossible de charger les données",
   "error.required": "Ce champ est obligatoire",
   "error.name": "Le nom doit contenir au moins 2 caractères",

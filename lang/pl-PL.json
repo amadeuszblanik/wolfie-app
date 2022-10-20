@@ -36,6 +36,7 @@
   "common.file_size.megabytes": "{value} MB",
   "common.file_size.gigabytes": "{value} GB",
   "common.change_language": "Zmień język",
+  "common.change_theme": "Zmień motyw",
   "error.load_fail": "Nie udało się załadować danych. Proszę, spróbuj ponownie później.",
   "error.required": "To pole jest wymagane",
   "error.name": "To pole może zawierać tylko litery, cyfry, spacje i znaki: . , - _",

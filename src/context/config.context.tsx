@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
+// @TODO REFACTOR
 import React, { createContext, useEffect, useState } from "react";
 import { ThemeVariants } from "../settings/theme";
 
@@ -16,9 +17,25 @@ export const ConfigContext = createContext<ConfigContextType>({
   setScrollEnabled: () => {},
 });
 
+const DEFAULT_COUNTER = 0;
+const COUNTER_INCREMENT = 1;
+
 const Component: React.FunctionComponent<{ children: React.ReactNode }> = ({ children }) => {
   const [selectedTheme, setSelectedTheme] = useState<ThemeVariants>(ThemeVariants.Dark);
   const [scrollEnabled, setScrollEnabled] = useState<boolean>(true);
+  const [counterRender, setCounterRender] = useState<number>(DEFAULT_COUNTER);
+
+  useEffect(() => {
+    setCounterRender(counterRender + COUNTER_INCREMENT);
+  }, [selectedTheme, scrollEnabled]);
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("selectedTheme") as ThemeVariants | null;
+
+    if (savedTheme) {
+      setSelectedTheme(savedTheme);
+    }
+  }, []);
 
   useEffect(() => {
     if (scrollEnabled) {
@@ -28,6 +45,14 @@ const Component: React.FunctionComponent<{ children: React.ReactNode }> = ({ chi
 
     document.body.style.overflow = "hidden";
   }, [scrollEnabled]);
+
+  useEffect(() => {
+    console.warn("change theme to ", selectedTheme, counterRender);
+
+    if (counterRender) {
+      localStorage.setItem("selectedTheme", selectedTheme);
+    }
+  }, [selectedTheme]);
 
   useEffect(() => {
     // @TODO: Remove on production

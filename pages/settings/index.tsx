@@ -6,7 +6,7 @@ import { LayoutApp } from "../../src/layout";
 import { DoggoButton, DoggoList } from "../../src/ui-components";
 import { ButtonSizes } from "../../src/ui-components/button";
 import Link from "next/link";
-import { ComponentChangeLanguage } from "../../src/component";
+import { ComponentChangeLanguage, ComponentChangeTheme } from "../../src/component";
 
 const App: NextPage = () => {
   const intl = useIntl();
@@ -36,6 +36,10 @@ const App: NextPage = () => {
     [
       <FormattedMessage key="change-language-key" id="common.change_language" />,
       <ComponentChangeLanguage key="change-language-value" />,
+    ],
+    [
+      <FormattedMessage key="change-theme" id="common.change_theme" />,
+      <ComponentChangeTheme key="change-theme-value" />,
     ],
   ];
 

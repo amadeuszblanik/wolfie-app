@@ -34,6 +34,8 @@ import profileDto from "../dto/profile.dto";
 import { ProfileResponseModel } from "../response-model/profile.response-model";
 import { ProfilePayload } from "../payload/profile.payload";
 import { ChangePasswordPayload } from "../payload/change-password.payload";
+import { RefreshTokenResponseModel } from "../response-model/refresh-token.response-model";
+import refreshTokenDto from "../dto/refresh-token.dto";
 
 type HTTP_METHOD = "GET" | "POST" | "PUT" | "DELETE";
 
@@ -104,6 +106,12 @@ export default class ApiClient {
   public changePassword = async (body: ChangePasswordPayload): Promise<ApiResponse<CommonMessageResponseModel>> => {
     return this.put<CommonMessageResponseModel, ChangePasswordPayload>(`/auth/change-password`, body).then((response) =>
       responseDto(response),
+    );
+  };
+
+  public authorizedDevices = async (): Promise<ApiResponse<RefreshTokenResponseModel>> => {
+    return this.get<RefreshTokenResponseModel>(`/auth/refresh-token`).then((response) =>
+      responseDto(response, refreshTokenDto),
     );
   };
 

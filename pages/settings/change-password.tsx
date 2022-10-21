@@ -1,8 +1,9 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { FormattedMessage, useIntl } from "react-intl";
+import { useIntl } from "react-intl";
 import React from "react";
 import { LayoutApp } from "../../src/layout";
+import { FormChangePassword } from "../../src/form";
 
 const App: NextPage = () => {
   const intl = useIntl();
@@ -16,7 +17,7 @@ const App: NextPage = () => {
       </Head>
 
       <LayoutApp title={intl.formatMessage({ id: "page.settings.change_password.header" })} back>
-        <FormattedMessage id="common.soon" />
+        <FormChangePassword />
       </LayoutApp>
     </>
   );

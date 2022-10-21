@@ -1,3 +1,4 @@
+export { default as FormChangePassword } from "./change-password";
 export { default as FormForgotPasswordStep0 } from "./forgot-password-step-0";
 export { default as FormForgotPasswordStep1 } from "./forgot-password-step-1";
 export { default as FormHealthLog } from "./health-log";

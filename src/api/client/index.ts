@@ -33,6 +33,7 @@ import getHealthLogSingleDto from "../dto/get-health-log-single.dto";
 import profileDto from "../dto/profile.dto";
 import { ProfileResponseModel } from "../response-model/profile.response-model";
 import { ProfilePayload } from "../payload/profile.payload";
+import { ChangePasswordPayload } from "../payload/change-password.payload";
 
 type HTTP_METHOD = "GET" | "POST" | "PUT" | "DELETE";
 
@@ -97,6 +98,12 @@ export default class ApiClient {
   public updateProfile = async (body: ProfilePayload): Promise<ApiResponse<ProfileResponseModel>> => {
     return this.put<ProfileResponseModel, ProfilePayload>(`/auth/profile`, body).then((response) =>
       responseDto(response, profileDto),
+    );
+  };
+
+  public changePassword = async (body: ChangePasswordPayload): Promise<ApiResponse<CommonMessageResponseModel>> => {
+    return this.put<CommonMessageResponseModel, ChangePasswordPayload>(`/auth/change-password`, body).then((response) =>
+      responseDto(response),
     );
   };
 

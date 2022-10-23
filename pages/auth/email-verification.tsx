@@ -28,27 +28,19 @@ const EmailVerification: NextPage = () => {
   console.warn("error", error);
 
   return (
-    <div>
-      <Head>
-        <title>Wolfie.app - Your pet companion app</title>
-        <meta name="description" content="Pet companion app" />
-        <link rel="icon" href="/Users/ablanik/Projects/Blanik.me/doggo/web-react/doggo-web-react/public/favicon.ico" />
-      </Head>
-
-      <LayoutAuth title="page.email_verification.header">
-        {token && (
-          <ApiWrapper error={error} status={status}>
-            <SuccessScreen message={response?.message} />
-          </ApiWrapper>
-        )}
-        {!token && (
-          <ErrorScreen
-            title={intl.formatMessage({ id: "page.email_verification.missing_token_title" })}
-            message={intl.formatMessage({ id: "page.email_verification.missing_token_message" })}
-          />
-        )}
-      </LayoutAuth>
-    </div>
+    <LayoutAuth title="page.email_verification.header">
+      {token && (
+        <ApiWrapper error={error} status={status}>
+          <SuccessScreen message={response?.message} />
+        </ApiWrapper>
+      )}
+      {!token && (
+        <ErrorScreen
+          title={intl.formatMessage({ id: "page.email_verification.missing_token_title" })}
+          message={intl.formatMessage({ id: "page.email_verification.missing_token_message" })}
+        />
+      )}
+    </LayoutAuth>
   );
 };
 

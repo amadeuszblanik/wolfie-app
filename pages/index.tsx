@@ -14,13 +14,7 @@ const Home: NextPage = () => {
   const signedIn = useSignedIn();
 
   return (
-    <div>
-      <Head>
-        <title>Wolfie.app - Your pet companion app</title>
-        <meta name="description" content="Pet companion app" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
+    <>
       <header>
         <DoggoBox column alignX={FlexAlign.Center}>
           <DoggoBox padding={{ y: SizesEnum.ExtraLarge }}>
@@ -97,7 +91,7 @@ const Home: NextPage = () => {
           </DoggoContainer>
         </DoggoBox>
       </main>
-    </div>
+    </>
   );
 };
 

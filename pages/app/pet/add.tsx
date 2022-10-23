@@ -102,57 +102,49 @@ const App: NextPage = () => {
   };
 
   return (
-    <>
-      <Head>
-        <title>Wolfie.app - Your pet companion app</title>
-        <meta name="description" content="Pet companion app" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <LayoutApp title={intl.formatMessage({ id: "page.app.header" })} back>
-        <ComponentApiWrapper status={[configPublicStatus]} error={configPublicError} onTryAgain={handleTryAgain}>
-          <DoggoBox padding={{ bottom: SizesEnum.ExtraLarge }}>
-            <ComponentPetCard name={name} birthDate={new Date(birthDate)} microchip={microchip} image={image} />
-          </DoggoBox>
-          <DoggoInput
-            value={name}
-            onChange={setName}
-            label={intl.formatMessage({ id: "pet.name" })}
-            errors={nameErrors}
-          />
-          <DoggoSelect
-            value={breedId}
-            onChange={(nextValue) => setBreedId(nextValue)}
-            label={intl.formatMessage({ id: "pet.breed" })}
-            list={configPublic?.breeds.map(({ name: label, id }) => ({ id: String(id), label })) || []}
-            errors={breedIdErrors}
-          />
-          <DoggoInput
-            value={microchip}
-            onChange={setMicrochip}
-            label={intl.formatMessage({ id: "pet.microchip" })}
-            errors={microchipErrors}
-          />
-          <DoggoInput
-            value={birthDate}
-            onChange={setBirthDate}
-            label={intl.formatMessage({ id: "pet.birthday" })}
-            type={InputTypes.Date}
-            errors={birthDateErrors}
-          />
-          <DoggoBox alignX={FlexAlign.Right}>
-            <DoggoButton onClick={handleAddPet} variant="green">
-              <FormattedMessage id="common.add" />
-            </DoggoButton>
-          </DoggoBox>
-          {errorModal && (
-            <DoggoModal onClose={() => setErrorModal(false)}>
-              <ComponentErrorScreen message={petsAddError?.message} onTryAgain={handleAddPet} />
-            </DoggoModal>
-          )}
-        </ComponentApiWrapper>
-      </LayoutApp>
-    </>
+    <LayoutApp title={intl.formatMessage({ id: "page.app.header" })} back>
+      <ComponentApiWrapper status={[configPublicStatus]} error={configPublicError} onTryAgain={handleTryAgain}>
+        <DoggoBox padding={{ bottom: SizesEnum.ExtraLarge }}>
+          <ComponentPetCard name={name} birthDate={new Date(birthDate)} microchip={microchip} image={image} />
+        </DoggoBox>
+        <DoggoInput
+          value={name}
+          onChange={setName}
+          label={intl.formatMessage({ id: "pet.name" })}
+          errors={nameErrors}
+        />
+        <DoggoSelect
+          value={breedId}
+          onChange={(nextValue) => setBreedId(nextValue)}
+          label={intl.formatMessage({ id: "pet.breed" })}
+          list={configPublic?.breeds.map(({ name: label, id }) => ({ id: String(id), label })) || []}
+          errors={breedIdErrors}
+        />
+        <DoggoInput
+          value={microchip}
+          onChange={setMicrochip}
+          label={intl.formatMessage({ id: "pet.microchip" })}
+          errors={microchipErrors}
+        />
+        <DoggoInput
+          value={birthDate}
+          onChange={setBirthDate}
+          label={intl.formatMessage({ id: "pet.birthday" })}
+          type={InputTypes.Date}
+          errors={birthDateErrors}
+        />
+        <DoggoBox alignX={FlexAlign.Right}>
+          <DoggoButton onClick={handleAddPet} variant="green">
+            <FormattedMessage id="common.add" />
+          </DoggoButton>
+        </DoggoBox>
+        {errorModal && (
+          <DoggoModal onClose={() => setErrorModal(false)}>
+            <ComponentErrorScreen message={petsAddError?.message} onTryAgain={handleAddPet} />
+          </DoggoModal>
+        )}
+      </ComponentApiWrapper>
+    </LayoutApp>
   );
 };
 

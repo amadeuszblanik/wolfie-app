@@ -122,78 +122,70 @@ const App: NextPage = () => {
   };
 
   return (
-    <>
-      <Head>
-        <title>Wolfie.app - Your pet companion app</title>
-        <meta name="description" content="Pet companion app" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <LayoutApp title={intl.formatMessage({ id: "page.app.header" })} back>
-        <ComponentApiWrapper
-          status={[configPublicStatus || petStatus]}
-          error={configPublicError || petError}
-          onTryAgain={handleTryAgain}
-        >
-          <DoggoBox padding={{ bottom: SizesEnum.ExtraLarge }}>
-            <ComponentPetCard
-              name={name}
-              birthDate={new Date(birthDate)}
-              microchip={microchip}
-              image={pet?.image}
-              onAvatarEdit={() => setAvatarChangeModal(true)}
-            />
-          </DoggoBox>
-          <DoggoInput
-            value={name}
-            onChange={setName}
-            label={intl.formatMessage({ id: "pet.name" })}
-            errors={nameErrors}
+    <LayoutApp title={intl.formatMessage({ id: "page.app.header" })} back>
+      <ComponentApiWrapper
+        status={[configPublicStatus || petStatus]}
+        error={configPublicError || petError}
+        onTryAgain={handleTryAgain}
+      >
+        <DoggoBox padding={{ bottom: SizesEnum.ExtraLarge }}>
+          <ComponentPetCard
+            name={name}
+            birthDate={new Date(birthDate)}
+            microchip={microchip}
+            image={pet?.image}
+            onAvatarEdit={() => setAvatarChangeModal(true)}
           />
-          <DoggoAutocomplete
-            value={breedId}
-            onChange={(nextValue) => setBreedId(nextValue)}
-            label={intl.formatMessage({ id: "pet.breed" })}
-            list={configPublic?.breeds.map(({ name: label, id }) => ({ id: String(id), label })) || []}
-            errors={breedIdErrors}
+        </DoggoBox>
+        <DoggoInput
+          value={name}
+          onChange={setName}
+          label={intl.formatMessage({ id: "pet.name" })}
+          errors={nameErrors}
+        />
+        <DoggoAutocomplete
+          value={breedId}
+          onChange={(nextValue) => setBreedId(nextValue)}
+          label={intl.formatMessage({ id: "pet.breed" })}
+          list={configPublic?.breeds.map(({ name: label, id }) => ({ id: String(id), label })) || []}
+          errors={breedIdErrors}
+        />
+        <DoggoInput
+          value={microchip}
+          onChange={setMicrochip}
+          label={intl.formatMessage({ id: "pet.microchip" })}
+          errors={microchipErrors}
+        />
+        <DoggoInput
+          value={birthDate}
+          onChange={setBirthDate}
+          label={intl.formatMessage({ id: "pet.birthday" })}
+          type={InputTypes.Date}
+          errors={birthDateErrors}
+          max={toDate(new Date())}
+        />
+        <DoggoBox alignX={FlexAlign.Right}>
+          <DoggoButton onClick={handleUpdatePet} variant="green">
+            <FormattedMessage id="common.save" />
+          </DoggoButton>
+        </DoggoBox>
+        {errorModal && (
+          <DoggoModal onClose={() => setErrorModal(false)}>
+            <ComponentErrorScreen message={petsAddError?.message} onTryAgain={handleUpdatePet} />
+          </DoggoModal>
+        )}
+        {avatarChangeModal && (
+          <ComponentAvatarChange
+            petId={petId as string}
+            onSave={() => {
+              setAvatarChangeModal(false);
+              refetchPet();
+            }}
+            onClose={() => setAvatarChangeModal(false)}
           />
-          <DoggoInput
-            value={microchip}
-            onChange={setMicrochip}
-            label={intl.formatMessage({ id: "pet.microchip" })}
-            errors={microchipErrors}
-          />
-          <DoggoInput
-            value={birthDate}
-            onChange={setBirthDate}
-            label={intl.formatMessage({ id: "pet.birthday" })}
-            type={InputTypes.Date}
-            errors={birthDateErrors}
-            max={toDate(new Date())}
-          />
-          <DoggoBox alignX={FlexAlign.Right}>
-            <DoggoButton onClick={handleUpdatePet} variant="green">
-              <FormattedMessage id="common.save" />
-            </DoggoButton>
-          </DoggoBox>
-          {errorModal && (
-            <DoggoModal onClose={() => setErrorModal(false)}>
-              <ComponentErrorScreen message={petsAddError?.message} onTryAgain={handleUpdatePet} />
-            </DoggoModal>
-          )}
-          {avatarChangeModal && (
-            <ComponentAvatarChange
-              petId={petId as string}
-              onSave={() => {
-                setAvatarChangeModal(false);
-                refetchPet();
-              }}
-              onClose={() => setAvatarChangeModal(false)}
-            />
-          )}
-        </ComponentApiWrapper>
-      </LayoutApp>
-    </>
+        )}
+      </ComponentApiWrapper>
+    </LayoutApp>
   );
 };
 

@@ -9,18 +9,10 @@ const ForgotPassword: NextPage = () => {
   const { token } = router.query;
 
   return (
-    <div>
-      <Head>
-        <title>Wolfie.app - Your pet companion app</title>
-        <meta name="description" content="Pet companion app" />
-        <link rel="icon" href="/Users/ablanik/Projects/Blanik.me/doggo/web-react/doggo-web-react/public/favicon.ico" />
-      </Head>
-
-      <LayoutAuth title="page.forgot_password.header" description="page.forgot_password.description">
-        {!token && <FormForgotPasswordStep0 />}
-        {token && <FormForgotPasswordStep1 token={token as string} />}
-      </LayoutAuth>
-    </div>
+    <LayoutAuth title="page.forgot_password.header" description="page.forgot_password.description">
+      {!token && <FormForgotPasswordStep0 />}
+      {token && <FormForgotPasswordStep1 token={token as string} />}
+    </LayoutAuth>
   );
 };
 

@@ -42,6 +42,8 @@ const StyledText = styled.p<StyledTextProps>`
   font-weight: ${({ weight }) => weight};
   font-size: ${({ size }) => size}px;
   text-transform: ${({ textTransform }) => textTransform};
+  --placeholder-height: ${({ size }) => size}px;
+  --placeholder-offset-y: 3px;
 `;
 
 const variantSize: {

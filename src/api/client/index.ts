@@ -125,7 +125,7 @@ export default class ApiClient {
     );
   };
 
-  public petsMy = async (): Promise<ApiResponse<PetSingleResponseModel[]>> => {
+  public getPetsMy = async (): Promise<ApiResponse<PetSingleResponseModel[]>> => {
     return this.get<PetSingleResponseModel[]>("/pets/my").then((response) => responseDto(response, myPetsDto));
   };
 

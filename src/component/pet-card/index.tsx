@@ -1,4 +1,4 @@
-import { DoggoAvatar, DoggoBox, DoggoText } from "../../ui-components";
+import { DoggoAvatar, DoggoBox, DoggoPlaceholder, DoggoText } from "../../ui-components";
 import { BoxWidth, FlexAlign } from "../../ui-components/box";
 import { SizesEnum } from "../../settings/sizes";
 import React from "react";
@@ -9,32 +9,18 @@ import { ThemePalette } from "styled-components";
 import { Breed } from "../../types/breed.types";
 
 interface Props {
-  name: string;
-  microchip: string;
-  image?: string;
-  birthDate: Date;
-  breed?: Breed;
+  data: {
+    name: string;
+    microchip: string;
+    image?: string;
+    birthDate: Date;
+    breed?: Breed;
+  } | null;
   background?: [ThemePalette, ThemePalette];
   onAvatarEdit?: () => void;
 }
 
-// const availableBackgrounds: ThemePalette[][] = [
-//   ["indigo", "blue"],
-//   ["red", "indigo"],
-//   ["red", "purple"],
-//   ["indigo", "purple"],
-//   ["blue", "cyan"],
-// ];
-
-const Component: React.FunctionComponent<Props> = ({
-  name,
-  birthDate,
-  microchip,
-  breed,
-  image,
-  background,
-  onAvatarEdit,
-}) => (
+const Component: React.FunctionComponent<Props> = ({ data, background, onAvatarEdit }) => (
   <DoggoBox
     width={BoxWidth.Full}
     padding={{ y: SizesEnum.ExtraLarge, x: SizesEnum.ExtraLarge }}
@@ -42,23 +28,24 @@ const Component: React.FunctionComponent<Props> = ({
     column
   >
     <DoggoBox alignX={FlexAlign.SpaceBetween} padding={{ bottom: SizesEnum.Medium }}>
-      <DoggoText variant={DoggoTextVariant.LargeTitle}>{name}</DoggoText>
+      <DoggoText variant={DoggoTextVariant.LargeTitle}>{data?.name || <DoggoPlaceholder />}</DoggoText>
       <DoggoAvatar alt="Avatar" size={SizesEnum.ExtraLarge} onEdit={onAvatarEdit}>
-        {image}
+        {data?.image}
       </DoggoAvatar>
     </DoggoBox>
     <DoggoBox width={BoxWidth.Full} column>
       <DoggoText>
-        <FormattedMessage id="pet.age" />: {pipeAge(birthDate)}
+        <FormattedMessage id="pet.age" />: {data ? pipeAge(data.birthDate) : <DoggoPlaceholder />}
       </DoggoText>
       <DoggoText>
-        <FormattedMessage id="pet.birthday" />: {pipeDate(birthDate)}
+        <FormattedMessage id="pet.birthday" />: {data ? pipeDate(data.birthDate) : <DoggoPlaceholder />}
       </DoggoText>
       <DoggoText>
-        <FormattedMessage id="pet.microchip" />: {microchip}
+        <FormattedMessage id="pet.microchip" />: {data?.microchip || <DoggoPlaceholder />}
       </DoggoText>
       <DoggoText>
-        <FormattedMessage id="pet.breed" />: {breed?.name ?? <FormattedMessage id="pet.breed.mixed" />}
+        <FormattedMessage id="pet.breed" />:{" "}
+        {data ? data.breed?.name ?? <FormattedMessage id="pet.breed.mixed" /> : <DoggoPlaceholder />}
       </DoggoText>
     </DoggoBox>
   </DoggoBox>

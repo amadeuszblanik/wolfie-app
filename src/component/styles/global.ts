@@ -17,6 +17,9 @@ const Global = createGlobalStyle`
     --color-background-active: ${({ theme }) => darkenColorMixin(theme.palette.background, theme.darken.hover)};
     --color-background-hover: ${({ theme }) => darkenColorMixin(theme.palette.background, theme.darken.active)};
     --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    --placeholder-width: 100px;
+    --placeholder-height: 100%;
+    --placeholder-offset-y: 0;
   }
   
   * {

@@ -23,6 +23,7 @@ export { default as DoggoLoader } from "./loader";
 export { default as DoggoModal } from "./modal";
 export { default as DoggoPasswordValidator } from "./password-validator";
 export { default as DoggoPill } from "./pill";
+export { default as DoggoPlaceholder } from "./placeholder";
 export { default as DoggoSelect } from "./select";
 export { default as DoggoSheet } from "./sheet";
 export { default as DoggoText } from "./text";

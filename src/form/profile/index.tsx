@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { FormattedMessage, useIntl } from "react-intl";
 import {
   DoggoBox,
   DoggoButton,
@@ -9,12 +10,8 @@ import {
   DoggoSelect,
   DoggoText,
 } from "../../ui-components";
-import { FormattedMessage, useIntl } from "react-intl";
-import { BoxWidth, FlexAlign } from "../../ui-components/box";
 import { ApiStatesTypes } from "../../types/api-states.types";
-import { SizesEnum } from "../../settings/sizes";
 import useFormValidator, { FormValidators } from "../../form-validator";
-import { useRouter } from "next/router";
 import useUpdateProfile from "../../api/queries/update-profile";
 import { WeightUnits } from "../../api/types/weight-units.types";
 import { enumToList } from "../../utils";
@@ -26,7 +23,6 @@ interface Props {
 
 const Form: React.FunctionComponent<Props> = ({ initialValues }) => {
   const intl = useIntl();
-  const router = useRouter();
   const { post, status, response, error } = useUpdateProfile();
 
   const [formEnable, setFormEnable] = useState(true);

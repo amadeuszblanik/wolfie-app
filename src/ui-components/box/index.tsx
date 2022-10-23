@@ -1,9 +1,9 @@
 import styled, { ThemePalette } from "styled-components";
-import type React from "react";
-import Sizes, { SizesEnum } from "../../settings/sizes";
-import type { Padding } from "../types/padding";
-import { backgroundMixin, colorTextMixin, paddingMixin } from "../mixins";
 import { useEffect, useRef } from "react";
+import Sizes, { SizesEnum } from "../../settings/sizes";
+import { backgroundMixin, colorTextMixin, paddingMixin } from "../mixins";
+import type React from "react";
+import type { Padding } from "../types/padding";
 
 export enum FlexAlign {
   Left = "flex-start",
@@ -82,10 +82,11 @@ const Component = ({ children, border, column, alignX, alignY, onSizeChange, ...
     return () => window.removeEventListener("resize", handleResize);
   });
 
+  // @TODO Verify that this is the correct way to handle this — Border radius
   return (
     <StyledView
       ref={ref}
-      borderRadius={Sizes[border!]}
+      borderRadius={Sizes[border || SizesEnum.Small]}
       justifyContent={justifyContent}
       alignItems={alignItems}
       column={column}

@@ -1,8 +1,8 @@
 import React from "react";
+import { useIntl } from "react-intl";
 import { DoggoSelect } from "../../ui-components";
 import { ListItem } from "../../types/list-item.types";
 import { useGetBreed } from "../../api/queries";
-import { useIntl } from "react-intl";
 
 interface Props {
   value?: number;

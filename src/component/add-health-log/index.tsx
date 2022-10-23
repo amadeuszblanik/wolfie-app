@@ -9,8 +9,6 @@ interface Props {
   onSuccess: () => void;
 }
 
-const DEFAULT_WEIGHT = 15;
-
 const Component: React.FunctionComponent<Props> = ({ onClose, onSuccess, petId }) => {
   const intl = useIntl();
 

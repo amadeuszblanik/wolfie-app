@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import type React from "react";
 import { useState } from "react";
 import { SizesEnum } from "../../settings/sizes";
 import Box, { FlexAlign } from "../box";
 import { sizeMixin } from "../mixins";
 import Loader from "../loader";
 import { DoggoButton, DoggoIcon } from "../index";
+import type React from "react";
 
 const AVATAR_SIZES: { [key in SizesEnum]: number } = {
   [SizesEnum.ExtraSmall2]: 16,

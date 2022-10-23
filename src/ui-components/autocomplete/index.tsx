@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import { isEmpty } from "bme-utils";
+import { FormattedMessage } from "react-intl";
 import { paddingMixin, sizeMixin } from "../mixins";
 import { SizesEnum } from "../../settings/sizes";
 import Box, { BoxWidth, FlexAlign } from "../box";
 import { DoggoText } from "../index";
 import { DoggoTextVariant } from "../text";
 import { ListItem } from "../../types/list-item.types";
-import { isEmpty } from "bme-utils";
-import { FormattedMessage } from "react-intl";
 import Icon from "../icon";
 
 interface Props {

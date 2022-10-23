@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useIntl } from "react-intl";
 import { DoggoAutocomplete, DoggoBox, DoggoPill } from "../../ui-components";
-
 import { ListItem } from "../../types/list-item.types";
 import { uniqueArray } from "../../utils";
 import { SizesEnum } from "../../settings/sizes";
@@ -27,7 +26,13 @@ const Component: React.FunctionComponent<Props> = ({ value, onChange }) => {
     }
 
     const nextSelectedMedicines = [...selectedMedicines];
-    nextSelectedMedicines.push(medicines.find(({ id: medicineId }) => medicineId === id)!.id);
+    const medicineToAdd = medicines.find(({ id: medicineId }) => medicineId === id);
+
+    if (!medicineToAdd) {
+      return;
+    }
+
+    nextSelectedMedicines.push(medicineToAdd.id);
     setSelectedMedicines(uniqueArray(nextSelectedMedicines));
   };
   const handleRemove = (id: string) => {
@@ -36,9 +41,8 @@ const Component: React.FunctionComponent<Props> = ({ value, onChange }) => {
     setSelectedMedicines(nextSelectedMedicines);
   };
 
-  const getMedicineById = (id: string): ListItem | undefined => {
-    return medicines.find(({ id: medicineId }) => medicineId === id);
-  };
+  const getMedicineById = (id: string): ListItem | undefined =>
+    medicines.find(({ id: medicineId }) => medicineId === id);
 
   useEffect(() => {
     onChange(selectedMedicines);

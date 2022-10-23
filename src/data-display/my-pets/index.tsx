@@ -1,7 +1,7 @@
 import React from "react";
+import Link from "next/link";
 import { DoggoGrid } from "../../ui-components";
 import { ComponentErrorScreen, ComponentPetCard } from "../../component";
-import Link from "next/link";
 import { useGetPetsMy } from "../../api/queries";
 
 const PLACEHOLDER_COMPONENTS = 3;

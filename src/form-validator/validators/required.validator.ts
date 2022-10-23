@@ -1,5 +1,5 @@
-import { FormValidatorValue } from "../index";
 import { isEmpty } from "bme-utils";
+import { FormValidatorValue } from "../index";
 
 const requiredValidator = (value: FormValidatorValue): boolean => {
   switch (typeof value) {

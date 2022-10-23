@@ -1,8 +1,7 @@
-import type { NextPage } from "next";
-import Head from "next/head";
+import { useRouter } from "next/router";
 import { FormForgotPasswordStep0, FormForgotPasswordStep1 } from "../../src/form";
 import { LayoutAuth } from "../../src/layout";
-import { useRouter } from "next/router";
+import type { NextPage } from "next";
 
 const ForgotPassword: NextPage = () => {
   const router = useRouter();

@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import { useIntl } from "react-intl";
+import { isEmpty } from "bme-utils";
 import { paddingMixin } from "../mixins";
 import Sizes, { SizesEnum } from "../../settings/sizes";
 import Box from "../box";
 import { DoggoListDeprecated, DoggoText } from "../index";
 import { DoggoTextVariant } from "../text";
-import { useIntl } from "react-intl";
-import { isEmpty } from "bme-utils";
 import { pipeFileSize } from "../../pipe";
 
 interface Props {

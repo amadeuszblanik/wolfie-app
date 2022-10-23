@@ -1,5 +1,4 @@
 import styled, { DefaultTheme } from "styled-components";
-import Sizes, { SizesEnum } from "../../settings/sizes";
 import React from "react";
 import AppsIcon from "./icons/apps-outline.svg";
 import BarbellIcon from "./icons/barbell-outline.svg";
@@ -15,6 +14,7 @@ import HeartIcon from "./icons/heart-outline.svg";
 import MedicalIcon from "./icons/medical-outline.svg";
 import MedkitIcon from "./icons/medkit-outline.svg";
 import WarningIcon from "./icons/warning-outline.svg";
+import Sizes, { SizesEnum } from "../../settings/sizes";
 
 export const Icons = [
   "apps",

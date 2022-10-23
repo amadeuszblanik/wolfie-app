@@ -1,3 +1,4 @@
+import FormData from "form-data";
 import { PetSingleResponseModel } from "../response-model/pet-single.response-model";
 import myPetsDto from "../dto/my-pets.dto";
 import { CommonErrorResponseModel } from "../response-model/common-error.response-model";
@@ -16,7 +17,6 @@ import { PetsAddPayload } from "../payload/pets-add.payload";
 import { PetsUpdatePayload } from "../payload/pets-update.payload";
 import { PetsEditResponseModel } from "../response-model/pets-edit.response-model";
 import { PetsAvatarChangePayload } from "../payload/pets-avatar-change.payload";
-import FormData from "form-data";
 import { CommonMessageResponseModel } from "../response-model/common-message.response-model";
 import { SignUpPayload } from "../payload/sign-up.payload";
 import { GdprResponseModel } from "../response-model/gdpr.response-model";
@@ -37,7 +37,6 @@ import { ChangePasswordPayload } from "../payload/change-password.payload";
 import { RefreshTokenResponseModel } from "../response-model/refresh-token.response-model";
 import refreshTokenDto from "../dto/refresh-token.dto";
 import { Breed } from "../../types/breed.types";
-import breedDto from "../dto/breed.dto";
 import breedsDto from "../dto/breeds.dto";
 
 type HTTP_METHOD = "GET" | "POST" | "PUT" | "DELETE";
@@ -60,149 +59,119 @@ export default class ApiClient {
 
   constructor(private readonly language: string) {}
 
-  public signIn = async (body: SignInPayload): Promise<ApiResponse<SignInResponseModel>> => {
-    return this.post<SignInResponseModel, SignInPayload>("/auth/sign-in", body).then((response) =>
-      responseDto(response),
-    );
-  };
+  public signIn = async (body: SignInPayload): Promise<ApiResponse<SignInResponseModel>> =>
+    this.post<SignInResponseModel, SignInPayload>("/auth/sign-in", body).then((response) => responseDto(response));
 
-  public signUp = async (body: SignUpPayload): Promise<ApiResponse<CommonMessageResponseModel>> => {
-    return this.post<CommonMessageResponseModel, SignUpPayload>("/auth/sign-up", body).then((response) =>
+  public signUp = async (body: SignUpPayload): Promise<ApiResponse<CommonMessageResponseModel>> =>
+    this.post<CommonMessageResponseModel, SignUpPayload>("/auth/sign-up", body).then((response) =>
       responseDto(response),
     );
-  };
 
-  public confirmEmail = async (body: ConfirmEmailPayload): Promise<ApiResponse<CommonMessageResponseModel>> => {
-    return this.post<CommonMessageResponseModel, ConfirmEmailPayload>("/auth/confirm-email", body).then((response) =>
+  public confirmEmail = async (body: ConfirmEmailPayload): Promise<ApiResponse<CommonMessageResponseModel>> =>
+    this.post<CommonMessageResponseModel, ConfirmEmailPayload>("/auth/confirm-email", body).then((response) =>
       responseDto(response),
     );
-  };
 
-  public resetPasswordStep0 = async (userEmail: string): Promise<ApiResponse<CommonMessageResponseModel>> => {
-    return this.get<CommonMessageResponseModel>(`/auth/reset-password?user-email=${userEmail}`).then((response) =>
+  public resetPasswordStep0 = async (userEmail: string): Promise<ApiResponse<CommonMessageResponseModel>> =>
+    this.get<CommonMessageResponseModel>(`/auth/reset-password?user-email=${userEmail}`).then((response) =>
       responseDto(response),
     );
-  };
 
   public resetPasswordStep1 = async (
     body: ResetPasswordStep1Payload,
-  ): Promise<ApiResponse<CommonMessageResponseModel>> => {
-    return this.put<CommonMessageResponseModel, ResetPasswordStep1Payload>("/auth/reset-password", body).then(
-      (response) => responseDto<CommonMessageResponseModel>(response as CommonMessageResponseModel),
+  ): Promise<ApiResponse<CommonMessageResponseModel>> =>
+    this.put<CommonMessageResponseModel, ResetPasswordStep1Payload>("/auth/reset-password", body).then((response) =>
+      responseDto<CommonMessageResponseModel>(response as CommonMessageResponseModel),
     );
-  };
 
-  public gdpr = async (): Promise<ApiResponse<GdprResponseModel>> => {
-    return this.get<GdprResponseModel>("/gdpr").then((response) => responseDto(response, getGdprDto));
-  };
+  public gdpr = async (): Promise<ApiResponse<GdprResponseModel>> =>
+    this.get<GdprResponseModel>("/gdpr").then((response) => responseDto(response, getGdprDto));
 
-  public profile = async (): Promise<ApiResponse<ProfileResponseModel>> => {
-    return this.get<ProfileResponseModel>(`/auth/profile`).then((response) => responseDto(response, profileDto));
-  };
+  public profile = async (): Promise<ApiResponse<ProfileResponseModel>> =>
+    this.get<ProfileResponseModel>(`/auth/profile`).then((response) => responseDto(response, profileDto));
 
-  public updateProfile = async (body: ProfilePayload): Promise<ApiResponse<ProfileResponseModel>> => {
-    return this.put<ProfileResponseModel, ProfilePayload>(`/auth/profile`, body).then((response) =>
+  public updateProfile = async (body: ProfilePayload): Promise<ApiResponse<ProfileResponseModel>> =>
+    this.put<ProfileResponseModel, ProfilePayload>(`/auth/profile`, body).then((response) =>
       responseDto(response, profileDto),
     );
-  };
 
-  public changePassword = async (body: ChangePasswordPayload): Promise<ApiResponse<CommonMessageResponseModel>> => {
-    return this.put<CommonMessageResponseModel, ChangePasswordPayload>(`/auth/change-password`, body).then((response) =>
+  public changePassword = async (body: ChangePasswordPayload): Promise<ApiResponse<CommonMessageResponseModel>> =>
+    this.put<CommonMessageResponseModel, ChangePasswordPayload>(`/auth/change-password`, body).then((response) =>
       responseDto(response),
     );
-  };
 
-  public authorizedDevices = async (): Promise<ApiResponse<RefreshTokenResponseModel>> => {
-    return this.get<RefreshTokenResponseModel>(`/auth/refresh-token`).then((response) =>
+  public authorizedDevices = async (): Promise<ApiResponse<RefreshTokenResponseModel>> =>
+    this.get<RefreshTokenResponseModel>(`/auth/refresh-token`).then((response) =>
       responseDto(response, refreshTokenDto),
     );
-  };
 
-  public configPublic = async (): Promise<ApiResponse<ConfigPublicResponseModel>> => {
-    return this.get<ConfigPublicResponseModel>("/config").then((response) => responseDto(response, getConfigPublicDto));
-  };
+  public configPublic = async (): Promise<ApiResponse<ConfigPublicResponseModel>> =>
+    this.get<ConfigPublicResponseModel>("/config").then((response) => responseDto(response, getConfigPublicDto));
 
-  public configPrivate = async (): Promise<ApiResponse<ConfigPrivateResponseModel>> => {
-    return this.get<ConfigPrivateResponseModel>("/config/private").then((response) =>
+  public configPrivate = async (): Promise<ApiResponse<ConfigPrivateResponseModel>> =>
+    this.get<ConfigPrivateResponseModel>("/config/private").then((response) =>
       responseDto(response, getConfigPrivateDto),
     );
-  };
 
-  public getPetsMy = async (): Promise<ApiResponse<PetSingleResponseModel[]>> => {
-    return this.get<PetSingleResponseModel[]>("/pets/my").then((response) => responseDto(response, myPetsDto));
-  };
+  public getPetsMy = async (): Promise<ApiResponse<PetSingleResponseModel[]>> =>
+    this.get<PetSingleResponseModel[]>("/pets/my").then((response) => responseDto(response, myPetsDto));
 
-  public medicineShortList = async (): Promise<ApiResponse<ShortMedicineResponseModel[]>> => {
-    return this.get<ShortMedicineResponseModel[]>("/medicine").then((response) => responseDto(response));
-  };
+  public medicineShortList = async (): Promise<ApiResponse<ShortMedicineResponseModel[]>> =>
+    this.get<ShortMedicineResponseModel[]>("/medicine").then((response) => responseDto(response));
 
-  public getBreed = async (): Promise<ApiResponse<Breed[]>> => {
-    return this.get<Breed[]>("/breed").then((response) => responseDto(response, breedsDto));
-  };
+  public getBreed = async (): Promise<ApiResponse<Breed[]>> =>
+    this.get<Breed[]>("/breed").then((response) => responseDto(response, breedsDto));
 
-  public getPetsById = (id: string): Promise<ApiResponse<PetSingleResponseModel>> => {
-    return this.get<PetSingleResponseModel>(`/pets/${id}`).then((response) => responseDto(response, getPetsDto));
-  };
+  public getPetsById = (id: string): Promise<ApiResponse<PetSingleResponseModel>> =>
+    this.get<PetSingleResponseModel>(`/pets/${id}`).then((response) => responseDto(response, getPetsDto));
 
-  public petsAvatarChange = async (id: string, body: PetsAvatarChangePayload): Promise<ApiResponse<string>> => {
-    return this.postForm<string, PetsAvatarChangePayload>(`/pets/${id}/avatar`, body).then((response) =>
+  public petsAvatarChange = async (id: string, body: PetsAvatarChangePayload): Promise<ApiResponse<string>> =>
+    this.postForm<string, PetsAvatarChangePayload>(`/pets/${id}/avatar`, body).then((response) =>
       responseDto(response),
     );
-  };
 
-  public postPetsAdd = async (body: PetsAddPayload): Promise<ApiResponse<PetsAddResponseModel>> => {
-    return this.post<PetsAddResponseModel, PetsAddPayload>("/pets/add", body).then((response) =>
+  public postPetsAdd = async (body: PetsAddPayload): Promise<ApiResponse<PetsAddResponseModel>> =>
+    this.post<PetsAddResponseModel, PetsAddPayload>("/pets/add", body).then((response) =>
       responseDto(response, getPetsDto),
     );
-  };
 
-  public putPetsById = async (id: string, body: PetsUpdatePayload): Promise<ApiResponse<PetsEditResponseModel>> => {
-    return this.put<PetsEditResponseModel, PetsUpdatePayload>(`/pets/${id}`, body).then((response) =>
+  public putPetsById = async (id: string, body: PetsUpdatePayload): Promise<ApiResponse<PetsEditResponseModel>> =>
+    this.put<PetsEditResponseModel, PetsUpdatePayload>(`/pets/${id}`, body).then((response) =>
       responseDto(response, getPetsDto),
     );
-  };
 
-  public petsWeight = (id: string) => async (): Promise<ApiResponse<WeightValueResponseModel[]>> => {
-    return this.get<WeightValueResponseModel[]>(`/pets/${id}/weight?last=ALL`).then((response) =>
+  public petsWeight = (id: string) => async (): Promise<ApiResponse<WeightValueResponseModel[]>> =>
+    this.get<WeightValueResponseModel[]>(`/pets/${id}/weight?last=ALL`).then((response) =>
       responseDto(response, getPetsWeightDto),
     );
-  };
 
-  public petsHealthLog = async (id: string): Promise<ApiResponse<HealthLogResponseModel[]>> => {
-    return this.get<HealthLogResponseModel[]>(`/pets/${id}/healthLog`).then((response) =>
+  public petsHealthLog = async (id: string): Promise<ApiResponse<HealthLogResponseModel[]>> =>
+    this.get<HealthLogResponseModel[]>(`/pets/${id}/healthLog`).then((response) =>
       responseDto(response, getHealthLogDto),
     );
-  };
 
-  public petsHealthLogSingle = async (
-    id: string,
-    healthLogId: string,
-  ): Promise<ApiResponse<HealthLogResponseModel>> => {
-    return this.get<HealthLogResponseModel>(`/pets/${id}/healthLog/${healthLogId}`).then((response) =>
+  public petsHealthLogSingle = async (id: string, healthLogId: string): Promise<ApiResponse<HealthLogResponseModel>> =>
+    this.get<HealthLogResponseModel>(`/pets/${id}/healthLog/${healthLogId}`).then((response) =>
       responseDto(response, getHealthLogSingleDto),
     );
-  };
 
   public petsHealthLogAdd = async (
     id: string,
     payload: HealthLogAddPayload,
-  ): Promise<ApiResponse<HealthLogResponseModel>> => {
-    return this.post<HealthLogResponseModel, HealthLogAddPayload>(`/pets/${id}/healthLog`, payload).then((response) =>
+  ): Promise<ApiResponse<HealthLogResponseModel>> =>
+    this.post<HealthLogResponseModel, HealthLogAddPayload>(`/pets/${id}/healthLog`, payload).then((response) =>
       responseDto(response),
     );
-  };
 
   public petsWeightAdd =
     (id: string) =>
-    async (body: PetWeightAddBody): Promise<PetWeightAddResponse | CommonErrorResponseModel> => {
-      return this.post(`/pets/${id}/weight`, body);
-    };
+    async (body: PetWeightAddBody): Promise<PetWeightAddResponse | CommonErrorResponseModel> =>
+      this.post(`/pets/${id}/weight`, body);
 
-  public refreshToken = (body: AuthRefreshTokenBody) => async (): Promise<ApiResponse<AuthRefreshTokenResponse>> => {
-    return this.post<AuthRefreshTokenResponse, AuthRefreshTokenBody>(`/auth/refresh-token`, body).then((response) =>
+  public refreshToken = (body: AuthRefreshTokenBody) => async (): Promise<ApiResponse<AuthRefreshTokenResponse>> =>
+    this.post<AuthRefreshTokenResponse, AuthRefreshTokenBody>(`/auth/refresh-token`, body).then((response) =>
       responseDto(response),
     );
-  };
 
   private getHeaders(contentType?: string): Headers {
     const headers = new Headers();
@@ -211,6 +180,7 @@ export default class ApiClient {
       headers.append("Content-Type", contentType);
     }
     headers.append("Authorization", `Bearer ${localStorage.getItem("accessToken")}`);
+
     return headers;
   }
 
@@ -265,6 +235,7 @@ export default class ApiClient {
 
     const response = await fetch(url, { headers: this.getHeaders() });
     const interceptResponse = await this.interceptors(response, "GET", path);
+
     return interceptResponse.json();
   }
 
@@ -275,6 +246,7 @@ export default class ApiClient {
       body: JSON.stringify(body),
     });
     const interceptResponse = await this.interceptors(response, "POST", path, JSON.stringify(body));
+
     return interceptResponse.json();
   }
 
@@ -293,6 +265,7 @@ export default class ApiClient {
       body: formData as unknown as BodyInit,
     });
     const interceptResponse = await this.interceptors(response, "POST", path, JSON.stringify(body));
+
     return interceptResponse.json();
   }
 
@@ -303,6 +276,7 @@ export default class ApiClient {
       body: JSON.stringify(body),
     });
     const interceptResponse = await this.interceptors(response, "POST", path, JSON.stringify(body));
+
     return interceptResponse.json();
   }
 }

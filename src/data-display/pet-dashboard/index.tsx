@@ -1,9 +1,9 @@
 import React from "react";
+import Link from "next/link";
+import { FormattedMessage } from "react-intl";
 import { DoggoGrid, DoggoGridItem } from "../../ui-components";
 import { ComponentCardItem, ComponentErrorScreen, ComponentPetCard } from "../../component";
 import { useGetPetsById } from "../../api/queries";
-import Link from "next/link";
-import { FormattedMessage } from "react-intl";
 
 interface Props {
   petId: string;

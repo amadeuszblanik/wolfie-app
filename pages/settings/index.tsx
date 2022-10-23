@@ -1,12 +1,11 @@
-import type { NextPage } from "next";
-import Head from "next/head";
 import { FormattedMessage, useIntl } from "react-intl";
 import React from "react";
+import Link from "next/link";
 import { LayoutApp } from "../../src/layout";
 import { DoggoButton, DoggoListDeprecated } from "../../src/ui-components";
 import { ButtonSizes } from "../../src/ui-components/button";
-import Link from "next/link";
 import { ComponentChangeLanguage, ComponentChangeTheme, ComponentSignOff } from "../../src/component";
+import type { NextPage } from "next";
 
 const App: NextPage = () => {
   const intl = useIntl();

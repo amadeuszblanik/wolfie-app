@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import Item, { ItemProps } from "./item";
 import { SizesEnum } from "../../settings/sizes";
 import Text, { DoggoTextVariant } from "../text";
 import { backgroundMixin, paddingMixin } from "../mixins";
 import Box from "../box";
-import Item, { ItemProps } from "./item";
 
 export interface Props {
   label?: string;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { FormattedMessage, useIntl } from "react-intl";
 import { DoggoBox, DoggoButton, DoggoForm, DoggoGrid, DoggoInput, DoggoText } from "../../ui-components";
 import { InputTypes } from "../../ui-components/input";
-import { FormattedMessage, useIntl } from "react-intl";
 import { ApiStatesTypes } from "../../types/api-states.types";
 import useFormValidator, { FormValidators } from "../../form-validator";
 import useResetPasswordStep0 from "../../api/queries/reset-password-step-0";
@@ -48,7 +48,7 @@ const Form: React.FunctionComponent = () => {
         onChange={setUserEmail}
         type={InputTypes.Email}
         disabled={!formEnable}
-        errors={formValidator.errors["userEmail"]}
+        errors={formValidator.errors.userEmail}
       />
       <DoggoBox column>
         <DoggoGrid mobile={1} desktop={1}>

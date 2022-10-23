@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useIntl } from "react-intl";
+import { useRouter } from "next/router";
 import { DoggoSelect } from "../../ui-components";
 import { ListItem } from "../../types/list-item.types";
-import { useRouter } from "next/router";
 
 const Component: React.FunctionComponent = () => {
   const router = useRouter();

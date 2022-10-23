@@ -1,8 +1,8 @@
 /* eslint-disable no-magic-numbers */
 import React, { useState } from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import Component from "./index";
 import Input from "../input";
+import Component from "./index";
 
 export default {
   title: "UI-Components/Form control",

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { FormattedMessage, useIntl } from "react-intl";
 import {
   DoggoBox,
   DoggoButton,
@@ -10,10 +11,7 @@ import {
   DoggoLoader,
   DoggoText,
 } from "../../ui-components";
-import { FormattedMessage, useIntl } from "react-intl";
-import { BoxWidth, FlexAlign } from "../../ui-components/box";
 import { ApiStatesTypes } from "../../types/api-states.types";
-import { SizesEnum } from "../../settings/sizes";
 import useFormValidator, { FormValidators } from "../../form-validator";
 import { useGetPetsById, usePostPetsNew, usePutPetsById } from "../../api/queries";
 import { toDate } from "../../utils";
@@ -28,9 +26,11 @@ interface Props {
 
 const Form: React.FunctionComponent<Props> = ({ petId }) => {
   const intl = useIntl();
+  // @TODO - Verify if there is a better way to handle this
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const { put: updatePut, status: updateStatus, response: updateResponse, error: updateError } = usePutPetsById(petId!);
   const { post: addPost, status: addStatus, response: addResponse, error: addError } = usePostPetsNew();
-  const { response: petResponse, error: petError, status: petStatus, get: petGet } = useGetPetsById(petId || "", false);
+  const { response: petResponse, status: petStatus, get: petGet } = useGetPetsById(petId || "", false);
 
   const status = petId ? updateStatus : addStatus;
   const response = petId ? updateResponse : addResponse;
@@ -77,9 +77,11 @@ const Form: React.FunctionComponent<Props> = ({ petId }) => {
     switch (status) {
       case ApiStatesTypes.Success:
         setSubmitEnable(!!petId);
+
         return;
       case ApiStatesTypes.Loading:
         setSubmitEnable(false);
+
         return;
     }
 
@@ -111,11 +113,16 @@ const Form: React.FunctionComponent<Props> = ({ petId }) => {
       return;
     }
 
+    // @TODO Add error handling
+    if (!birthDate) {
+      return;
+    }
+
     void addPost({
       name,
       breed: breedId,
       microchip,
-      birthDate: new Date(birthDate!),
+      birthDate: new Date(birthDate),
       kind: PetKind.Dog,
     });
   };
@@ -125,16 +132,16 @@ const Form: React.FunctionComponent<Props> = ({ petId }) => {
       {(petStatus === ApiStatesTypes.Loading || status === ApiStatesTypes.Loading) && (
         <DoggoLoader fullScreen="component" />
       )}
-      <DoggoFormControl label={intl.formatMessage({ id: "pet.name" })} errors={formValidator.errors["name"]}>
+      <DoggoFormControl label={intl.formatMessage({ id: "pet.name" })} errors={formValidator.errors.name}>
         <DoggoInputText value={name} onChange={setName} disabled={!formEnable} />
       </DoggoFormControl>
-      <DoggoFormControl label={intl.formatMessage({ id: "pet.breed" })} errors={formValidator.errors["breedId"]}>
+      <DoggoFormControl label={intl.formatMessage({ id: "pet.breed" })} errors={formValidator.errors.breedId}>
         <ComponentSelectBreed value={breedId} onChange={setBreedId} />
       </DoggoFormControl>
-      <DoggoFormControl label={intl.formatMessage({ id: "pet.microchip" })} errors={formValidator.errors["microchip"]}>
+      <DoggoFormControl label={intl.formatMessage({ id: "pet.microchip" })} errors={formValidator.errors.microchip}>
         <DoggoInputText value={microchip} onChange={setMicrochip} disabled={!formEnable} />
       </DoggoFormControl>
-      <DoggoFormControl label={intl.formatMessage({ id: "pet.microchip" })} errors={formValidator.errors["birthDate"]}>
+      <DoggoFormControl label={intl.formatMessage({ id: "pet.microchip" })} errors={formValidator.errors.birthDate}>
         <DoggoInputDate value={birthDate} onChange={setBirthDate} disabled={!formEnable} max={toDate(new Date())} />
       </DoggoFormControl>
       <DoggoBox column>

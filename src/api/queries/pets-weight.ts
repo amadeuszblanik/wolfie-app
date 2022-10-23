@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
+import { useIntl } from "react-intl";
 import ApiClient from "../client";
 import { ApiStatesTypes } from "../../types/api-states.types";
-import { useIntl } from "react-intl";
 import { CommonErrorResponseModel } from "../response-model/common-error.response-model";
 import { WeightValueResponseModel } from "../response-model/weight-value.response-model";
 
@@ -20,11 +20,13 @@ const usePetsWeight = (id: string) => {
   useEffect(() => {
     if (isLoading) {
       setStatus(ApiStatesTypes.Loading);
+
       return;
     }
 
     if (isError) {
       setStatus(ApiStatesTypes.Error);
+
       return;
     }
 
@@ -32,6 +34,7 @@ const usePetsWeight = (id: string) => {
       setStatus(petsWeightError ? ApiStatesTypes.Error : ApiStatesTypes.Success);
       setPetsWeight(data?.success ?? undefined);
       setPetsWeightError(data?.error ?? undefined);
+
       return;
     }
 

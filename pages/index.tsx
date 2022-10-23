@@ -1,11 +1,11 @@
-import type { NextPage } from "next";
+import { useRouter } from "next/router";
+import { FormattedMessage, useIntl } from "react-intl";
 import { DoggoBox, DoggoButton, DoggoContainer, DoggoListDeprecated, DoggoText } from "../src/ui-components";
 import { DoggoTextVariant } from "../src/ui-components/text";
 import { SizesEnum } from "../src/settings/sizes";
 import { BoxWidth, FlexAlign } from "../src/ui-components/box";
-import { useRouter } from "next/router";
-import { FormattedMessage, useIntl } from "react-intl";
 import { useSignedIn } from "../src/hooks";
+import type { NextPage } from "next";
 
 const Home: NextPage = () => {
   const intl = useIntl();

@@ -1,4 +1,3 @@
-import type { NextPage } from "next";
 import { useIntl } from "react-intl";
 import React from "react";
 import { useRouter } from "next/router";
@@ -7,6 +6,7 @@ import { DoggoBox } from "../../../../src/ui-components";
 import { SizesEnum } from "../../../../src/settings/sizes";
 import { DataDisplayPet } from "../../../../src/data-display";
 import { FormPet } from "../../../../src/form";
+import type { NextPage } from "next";
 
 const App: NextPage = () => {
   const router = useRouter();

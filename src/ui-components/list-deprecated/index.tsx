@@ -6,6 +6,8 @@ import { backgroundMixin, paddingMixin } from "../mixins";
 import Box, { BoxWidth, FlexAlign } from "../box";
 import { getIndexes, isText } from "../../utils";
 
+// @TODO Deprecated
+
 export type ListItem = string | React.ReactNode;
 
 const FIRST_INDEX = 0;

@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { compareObjects, isEmpty } from "bme-utils";
+import { useIntl } from "react-intl";
 import requiredValidator from "./validators/required.validator";
 import emailValidator from "./validators/email.validator";
 import nameValidator from "./validators/name.validator";
 import passwordValidator from "./validators/password.validator";
 import passwordConfirmValidator from "./validators/password-confirm.validator";
 import phoneValidator from "./validators/phone.validator";
-import { useIntl } from "react-intl";
 
 // @TODO: Fix validations after change;
 // @TODO: Add validator for arrays;
@@ -63,36 +63,48 @@ const useFormValidator = (formFields: FormField[]): FormValidatorResponse => {
       validator.forEach((validatorType) => {
         switch (validatorType) {
           case FormValidators.Required:
+            // @TODO Refactor this later;
+            // eslint-disable-next-line @typescript-eslint/no-unused-expressions
             requiredValidator(value)
               ? removeError(nextErrors, name, FormValidators.Required)
               : addError(nextErrors, name, FormValidators.Required);
             break;
 
           case FormValidators.Name:
+            // @TODO Refactor this later;
+            // eslint-disable-next-line @typescript-eslint/no-unused-expressions
             nameValidator(value)
               ? removeError(nextErrors, name, FormValidators.Name)
               : addError(nextErrors, name, FormValidators.Name);
             break;
 
           case FormValidators.Email:
+            // @TODO Refactor this later;
+            // eslint-disable-next-line @typescript-eslint/no-unused-expressions
             emailValidator(value)
               ? removeError(nextErrors, name, FormValidators.Email)
               : addError(nextErrors, name, FormValidators.Email);
             break;
 
           case FormValidators.Phone:
+            // @TODO Refactor this later;
+            // eslint-disable-next-line @typescript-eslint/no-unused-expressions
             phoneValidator(value)
               ? removeError(nextErrors, name, FormValidators.Phone)
               : addError(nextErrors, name, FormValidators.Phone);
             break;
 
           case FormValidators.Password:
+            // @TODO Refactor this later;
+            // eslint-disable-next-line @typescript-eslint/no-unused-expressions
             passwordValidator(value)
               ? removeError(nextErrors, name, FormValidators.Password)
               : addError(nextErrors, name, FormValidators.Password);
             break;
 
           case FormValidators.PasswordConfirm:
+            // @TODO Refactor this later;
+            // eslint-disable-next-line @typescript-eslint/no-unused-expressions
             passwordConfirmValidator(value, additionalValues)
               ? removeError(nextErrors, name, FormValidators.PasswordConfirm)
               : addError(nextErrors, name, FormValidators.PasswordConfirm);

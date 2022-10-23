@@ -1,29 +1,13 @@
-import type { NextPage } from "next";
-import Head from "next/head";
-import { FormattedMessage, useIntl } from "react-intl";
+import { useIntl } from "react-intl";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React from "react";
+import { isEmpty } from "bme-utils";
 import { LayoutPet } from "../../../../../src/layout";
-import { DoggoButton } from "../../../../../src/ui-components";
-import { ButtonSizes } from "../../../../../src/ui-components/button";
-import { DataDisplayHealthLog, DataDisplayHealthLogSingle } from "../../../../../src/data-display";
-import { ComponentAddHealthLog } from "../../../../../src/component";
-import useHealthLogPet from "../../../../../src/api/queries/health-log-pet";
+import { DataDisplayHealthLogSingle } from "../../../../../src/data-display";
 import { pipeDate } from "../../../../../src/pipe";
 import { ListItem } from "../../../../../src/ui-components/list-deprecated";
-import Link from "next/link";
 import useHealthLogPetSingle from "../../../../../src/api/queries/health-log-pet-single";
-import { isEmpty } from "bme-utils";
-
-interface AddButtonProps {
-  onClick: () => void;
-}
-
-const AddButton: React.FunctionComponent<AddButtonProps> = ({ onClick }) => (
-  <DoggoButton onClick={onClick} size={ButtonSizes.Small}>
-    <FormattedMessage id="common.add" />
-  </DoggoButton>
-);
+import type { NextPage } from "next";
 
 const App: NextPage = () => {
   const router = useRouter();

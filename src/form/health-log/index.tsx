@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { FormattedMessage, useIntl } from "react-intl";
+import { isEmpty } from "bme-utils";
 import {
   DoggoBox,
   DoggoButton,
@@ -12,15 +14,12 @@ import {
   DoggoSelect,
   DoggoText,
 } from "../../ui-components";
-import { FormattedMessage, useIntl } from "react-intl";
 import { ApiStatesTypes } from "../../types/api-states.types";
 import useFormValidator, { FormValidators } from "../../form-validator";
-import { useRouter } from "next/router";
 import { ComponentSelectMedicines } from "../../component";
 import { ListItem } from "../../types/list-item.types";
 import { HealthLogKindTypes } from "../../types/healt-log-kind.types";
 import { DEFAULT_LONG_VARCHAR_LENGTH, DEFAULT_ON_SUCCESS_TIMEOUT } from "../../settings/globals";
-import { isEmpty } from "bme-utils";
 import useHealthLogAdd from "../../api/queries/health-log-add";
 
 interface Props {
@@ -30,8 +29,7 @@ interface Props {
 
 const Form: React.FunctionComponent<Props> = ({ petId, onSuccess }) => {
   const intl = useIntl();
-  const router = useRouter();
-  const { post, status, response, error } = useHealthLogAdd(petId);
+  const { post, status, error } = useHealthLogAdd(petId);
 
   const kindItems: ListItem[] = Object.values(HealthLogKindTypes).map((value) => ({
     id: value,
@@ -78,9 +76,14 @@ const Form: React.FunctionComponent<Props> = ({ petId, onSuccess }) => {
   }, [status]);
 
   const handleSubmit = () => {
+    if (!date) {
+      // @TODO Add error message
+      return;
+    }
+
     post({
       kind,
-      date: date!,
+      date,
       medicines,
       additionalMedicines,
       diagnosis,
@@ -95,71 +98,71 @@ const Form: React.FunctionComponent<Props> = ({ petId, onSuccess }) => {
       <DoggoFormControl label={intl.formatMessage({ id: "health_log.kind" })}>
         <DoggoSelect value={kind} onChange={(nextValue) => setKind(nextValue as HealthLogKindTypes)} list={kindItems} />
       </DoggoFormControl>
-      <DoggoFormControl label={intl.formatMessage({ id: "health_log.date" })} errors={formValidator.errors["date"]}>
+      <DoggoFormControl label={intl.formatMessage({ id: "health_log.date" })} errors={formValidator.errors.date}>
         <DoggoInputDate
           value={date}
           onChange={setDate}
           disabled={!formEnable}
-          error={!isEmpty(formValidator.errors["date"])}
+          error={!isEmpty(formValidator.errors.date)}
         />
       </DoggoFormControl>
       <ComponentSelectMedicines value={medicines} onChange={setMedicines} />
       <DoggoFormControl
         label={intl.formatMessage({ id: "health_log.additional_medicines" })}
-        errors={formValidator.errors["additionalMedicines"]}
+        errors={formValidator.errors.additionalMedicines}
       >
         <DoggoInputText
           value={additionalMedicines}
           onChange={setAdditionalMedicines}
           disabled={!formEnable}
-          error={!isEmpty(formValidator.errors["additionalMedicines"])}
+          error={!isEmpty(formValidator.errors.additionalMedicines)}
         />
       </DoggoFormControl>
       <DoggoFormControl
         label={intl.formatMessage({ id: "health_log.diagnosis" })}
-        errors={formValidator.errors["diagnosis"]}
+        errors={formValidator.errors.diagnosis}
       >
         <DoggoInputTextarea
           value={diagnosis}
           onChange={setDiagnosis}
           disabled={!formEnable}
           maxLength={DEFAULT_LONG_VARCHAR_LENGTH}
-          error={!isEmpty(formValidator.errors["diagnosis"])}
+          error={!isEmpty(formValidator.errors.diagnosis)}
         />
       </DoggoFormControl>
       <DoggoFormControl
         label={intl.formatMessage({ id: "health_log.next_visit" })}
-        errors={formValidator.errors["nextVisit"]}
+        errors={formValidator.errors.nextVisit}
       >
         <DoggoInputDatetime
           value={nextVisit}
           onChange={setNextVisit}
           min={new Date()}
           disabled={!formEnable}
-          error={!isEmpty(formValidator.errors["nextVisit"])}
+          error={!isEmpty(formValidator.errors.nextVisit)}
         />
       </DoggoFormControl>
       <DoggoFormControl
         label={intl.formatMessage({ id: "health_log.veterinary" })}
-        errors={formValidator.errors["veterinary"]}
+        errors={formValidator.errors.veterinary}
       >
         <DoggoInputText
           value={veterinary}
           onChange={setVeterinary}
           disabled={!formEnable}
-          error={!isEmpty(formValidator.errors["veterinary"])}
+          error={!isEmpty(formValidator.errors.veterinary)}
         />
       </DoggoFormControl>
       <DoggoFormControl
         label={intl.formatMessage({ id: "health_log.description" })}
-        errors={formValidator.errors["description"]}
+        errors={formValidator.errors.description}
       >
         <DoggoInputTextarea
           value={description}
           onChange={setDescription}
           disabled={!formEnable}
           maxLength={DEFAULT_LONG_VARCHAR_LENGTH}
-          error={!isEmpty(formValidator.errors["description"])}
+          error={!isEmpty(formValidator.errors.description)}
         />
       </DoggoFormControl>
 

@@ -40,6 +40,7 @@ const Component: React.FunctionComponent<{ children: React.ReactNode }> = ({ chi
   useEffect(() => {
     if (scrollEnabled) {
       document.body.style.overflow = "auto";
+
       return;
     }
 

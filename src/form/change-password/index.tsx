@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { FormattedMessage, useIntl } from "react-intl";
 import {
   DoggoBox,
   DoggoButton,
@@ -9,10 +10,7 @@ import {
   DoggoText,
 } from "../../ui-components";
 import { InputTypes } from "../../ui-components/input";
-import { FormattedMessage, useIntl } from "react-intl";
-import { BoxWidth, FlexAlign } from "../../ui-components/box";
 import { ApiStatesTypes } from "../../types/api-states.types";
-import { SizesEnum } from "../../settings/sizes";
 import useFormValidator, { FormValidators } from "../../form-validator";
 import useChangePassword from "../../api/queries/change-password";
 
@@ -41,6 +39,7 @@ const Form: React.FunctionComponent = () => {
   useEffect(() => {
     if (status === ApiStatesTypes.Success) {
       setSubmitEnable(false);
+
       return;
     }
 
@@ -76,7 +75,7 @@ const Form: React.FunctionComponent = () => {
         onChange={setCurrentPassword}
         type={InputTypes.Password}
         disabled={!formEnable}
-        errors={formValidator.errors["currentPassword"]}
+        errors={formValidator.errors.currentPassword}
       />
       <DoggoInput
         label={intl.formatMessage({ id: "user.new_password" })}
@@ -84,7 +83,7 @@ const Form: React.FunctionComponent = () => {
         onChange={setNewPassword}
         type={InputTypes.Password}
         disabled={!formEnable}
-        errors={formValidator.errors["newPassword"]}
+        errors={formValidator.errors.newPassword}
       />
       <DoggoPasswordValidator value={newPassword} />
       <DoggoInput
@@ -93,7 +92,7 @@ const Form: React.FunctionComponent = () => {
         onChange={setNewPasswordConfirm}
         type={InputTypes.Password}
         disabled={!formEnable}
-        errors={formValidator.errors["newPasswordConfirm"]}
+        errors={formValidator.errors.newPasswordConfirm}
       />
       <DoggoBox column>
         <DoggoGrid mobile={1} desktop={1}>

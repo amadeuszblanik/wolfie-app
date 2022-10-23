@@ -1,11 +1,11 @@
 import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
+import { toRgba } from "bme-utils";
 import Container from "../container";
 import Box, { BoxWidth, FlexAlign } from "../box";
 import { SizesEnum } from "../../settings/sizes";
 import Icon from "../icon";
 import Button from "../button";
-import { toRgba } from "bme-utils";
 import { ConfigContext, ConfigContextType } from "../../context/config.context";
 
 interface Props {

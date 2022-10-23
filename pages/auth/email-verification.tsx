@@ -1,13 +1,12 @@
-import type { NextPage } from "next";
-import Head from "next/head";
-import { LayoutAuth } from "../../src/layout";
 import { useRouter } from "next/router";
-import ErrorScreen from "../../src/component/error-screen";
 import { useIntl } from "react-intl";
-import useConfirmEmail from "../../src/api/queries/confirm-email";
 import { useEffect } from "react";
+import { LayoutAuth } from "../../src/layout";
+import ErrorScreen from "../../src/component/error-screen";
+import useConfirmEmail from "../../src/api/queries/confirm-email";
 import SuccessScreen from "../../src/component/success-screen";
 import ApiWrapper from "../../src/component/api-wrapper";
+import type { NextPage } from "next";
 
 const EmailVerification: NextPage = () => {
   const router = useRouter();
@@ -19,7 +18,9 @@ const EmailVerification: NextPage = () => {
   const { response, post, status, error } = useConfirmEmail();
 
   useEffect(() => {
-    if (!token) return;
+    if (!token) {
+      return;
+    }
 
     post({ token: token as string });
   }, [token]);

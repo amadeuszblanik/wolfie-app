@@ -11,6 +11,7 @@ const useFileToBase64 = (fileList: FileList | null): Base64File[] => {
     setBase64List((prev) => {
       const newList = [...prev];
       newList[index] = { uri: base64 as string, name };
+
       return newList;
     });
   };

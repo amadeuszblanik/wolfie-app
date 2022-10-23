@@ -1,13 +1,13 @@
 import styled from "styled-components";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useIntl } from "react-intl";
 import { DoggoBox, DoggoButton, DoggoContainer, DoggoIcon, DoggoText } from "../../ui-components";
 import { BoxWidth, FlexAlign } from "../../ui-components/box";
 import { SizesEnum } from "../../settings/sizes";
 import { DoggoTextVariant } from "../../ui-components/text";
 import { DoggoIcons } from "../../ui-components/icon";
 import { ButtonSizes } from "../../ui-components/button";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { useIntl } from "react-intl";
 
 interface ItemProps {
   active: boolean;

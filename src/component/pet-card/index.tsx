@@ -1,11 +1,11 @@
+import React from "react";
+import { FormattedMessage } from "react-intl";
+import { ThemePalette } from "styled-components";
 import { DoggoAvatar, DoggoBox, DoggoPlaceholder, DoggoText } from "../../ui-components";
 import { BoxWidth, FlexAlign } from "../../ui-components/box";
 import { SizesEnum } from "../../settings/sizes";
-import React from "react";
 import { DoggoTextVariant } from "../../ui-components/text";
-import { FormattedMessage } from "react-intl";
 import { pipeAge, pipeDate } from "../../pipe";
-import { ThemePalette } from "styled-components";
 import { Breed } from "../../types/breed.types";
 
 interface Props {

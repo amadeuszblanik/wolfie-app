@@ -1,6 +1,6 @@
+import breedDto from "./breed.dto";
 import { PetSingleResponseModel } from "../response-model/pet-single.response-model";
 import { PetKind } from "../../types/pet-kind.types";
-import breedDto from "./breed.dto";
 
 const myPetsDto = (data: PetSingleResponseModel[]): PetSingleResponseModel[] =>
   data.map((entry) => ({

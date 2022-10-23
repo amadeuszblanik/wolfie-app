@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { FormattedMessage, useIntl } from "react-intl";
+import { useRouter } from "next/router";
+import Link from "next/link";
 import { DoggoBox, DoggoButton, DoggoCheckbox, DoggoForm, DoggoGrid, DoggoInput, DoggoText } from "../../ui-components";
 import { InputTypes } from "../../ui-components/input";
-import { FormattedMessage, useIntl } from "react-intl";
-import { BoxWidth, FlexAlign } from "../../ui-components/box";
 import { ApiStatesTypes } from "../../types/api-states.types";
-import { SizesEnum } from "../../settings/sizes";
 import useFormValidator, { FormValidators } from "../../form-validator";
-import { useRouter } from "next/router";
 import useSignIn from "../../api/queries/sign-in";
 import { useDeviceName } from "../../hooks";
-import Link from "next/link";
 import { ButtonSizes } from "../../ui-components/button";
 
 const Form: React.FunctionComponent = () => {
@@ -70,7 +68,7 @@ const Form: React.FunctionComponent = () => {
         onChange={setUsername}
         type={InputTypes.Email}
         disabled={!formEnable}
-        errors={formValidator.errors["username"]}
+        errors={formValidator.errors.username}
       />
       <DoggoInput
         label={intl.formatMessage({ id: "user.password" })}
@@ -78,13 +76,13 @@ const Form: React.FunctionComponent = () => {
         onChange={setPassword}
         type={InputTypes.Password}
         disabled={!formEnable}
-        errors={formValidator.errors["password"]}
+        errors={formValidator.errors.password}
       />
       <DoggoCheckbox
         label={intl.formatMessage({ id: "user.keep_sign_in" })}
         value={keepSignIn}
         onChange={setKeepSignIn}
-        errors={formValidator.errors["keepMeSignIn"]}
+        errors={formValidator.errors.keepMeSignIn}
       />
       <DoggoBox column>
         <DoggoGrid mobile={1} desktop={3}>

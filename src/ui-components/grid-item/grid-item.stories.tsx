@@ -1,8 +1,8 @@
 /* eslint-disable no-magic-numbers */
 import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import Component from "./index";
 import { DoggoContainer } from "../../ui-components";
+import Component from "./index";
 
 export default {
   title: "UI Components/Grid Item",

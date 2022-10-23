@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import type React from "react";
-import { SizesEnum } from "../../settings/sizes";
-import Box, { BoxWidth, FlexAlign } from "../box";
-import { sizeMixin } from "../mixins";
 import { animated, useSpring } from "react-spring";
 import { toRgba } from "bme-utils";
+import { SizesEnum } from "../../settings/sizes";
+import Box, { FlexAlign } from "../box";
+import { sizeMixin } from "../mixins";
+import type React from "react";
 
 const LOADER_SIZES: { [key in SizesEnum]: number } = {
   [SizesEnum.ExtraSmall2]: 16,
@@ -49,8 +49,15 @@ const Component = ({ size, fullScreen }: Props) => {
     from: { opacity: 0.3, transform: "scale(0.8)" },
   });
 
+  // @TODO Verify if this is the best way to do this - size
   return (
-    <StyledBox inline alignX={FlexAlign.Center} alignY={FlexAlign.Center} size={size!} fullScreen={fullScreen!}>
+    <StyledBox
+      inline
+      alignX={FlexAlign.Center}
+      alignY={FlexAlign.Center}
+      size={size || SizesEnum.Medium}
+      fullScreen={fullScreen || false}
+    >
       <animated.div style={styles}>🐶</animated.div>
     </StyledBox>
   );

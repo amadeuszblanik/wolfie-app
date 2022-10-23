@@ -1,9 +1,8 @@
-import type { NextPage } from "next";
-import Head from "next/head";
 import { useIntl } from "react-intl";
 import React from "react";
 import { LayoutApp } from "../../src/layout";
 import { FormChangePassword } from "../../src/form";
+import type { NextPage } from "next";
 
 const App: NextPage = () => {
   const intl = useIntl();

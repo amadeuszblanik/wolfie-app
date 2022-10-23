@@ -1,7 +1,7 @@
-import type { NextPage } from "next";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import { isEmpty } from "bme-utils";
 import usePetsSingle from "../../../../../src/api/queries/get-pets-by-id";
 import usePetsWeight from "../../../../../src/api/queries/pets-weight";
 import { ComponentAddWeight, ComponentErrorScreen } from "../../../../../src/component";
@@ -12,8 +12,8 @@ import useConfigPrivate from "../../../../../src/api/queries/config-private";
 import usePetWeightAdd from "../../../../../src/api/queries/pet-weight-add";
 import { ApiStatesTypes } from "../../../../../src/types/api-states.types";
 import { ButtonSizes } from "../../../../../src/ui-components/button";
-import { isEmpty } from "bme-utils";
 import { DataDisplayPet } from "../../../../../src/data-display";
+import type { NextPage } from "next";
 
 interface AddButtonProps {
   onClick: () => void;
@@ -74,7 +74,7 @@ const App: NextPage = () => {
             <DataDisplayPet petId={String(id)} />
             {!isEmpty(petsWeight) && (
               <>
-                {petsWeight!.length >= REQUIRED_ELEMENTS_FOR_CHART && (
+                {petsWeight.length >= REQUIRED_ELEMENTS_FOR_CHART && (
                   <DoggoLineChart
                     width={containerWidth}
                     data={petsWeight.map(({ raw, date }) => ({ x: date, y: raw }))}

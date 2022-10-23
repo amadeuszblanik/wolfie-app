@@ -1,9 +1,9 @@
 /* eslint-disable no-magic-numbers */
 import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import Component, { Props } from "./index";
-import Button, { ButtonSizes } from "../button";
 import { ItemProps } from "./item";
+import Button, { ButtonSizes } from "../button";
+import Component, { Props } from "./index";
 
 export default {
   title: "UI-Components/List",

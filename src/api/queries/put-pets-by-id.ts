@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
+import { useIntl } from "react-intl";
 import ApiClient from "../client";
 import { ApiStatesTypes } from "../../types/api-states.types";
-import { useIntl } from "react-intl";
 import { CommonErrorResponseModel } from "../response-model/common-error.response-model";
 import { PetsUpdatePayload } from "../payload/pets-update.payload";
 import { getQueryStatus } from "../../utils";

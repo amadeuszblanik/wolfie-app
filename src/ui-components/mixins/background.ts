@@ -1,7 +1,7 @@
 import { css, DefaultTheme, ThemePalette } from "styled-components";
 import { firstElement } from "bme-utils";
-import { darkenColorMixin } from "./index";
 import isDark from "./isDark";
+import { darkenColorMixin } from "./index";
 
 const GRADIENT_ELEMENTS_LENGTH = 2;
 

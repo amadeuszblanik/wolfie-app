@@ -1,9 +1,9 @@
 /* eslint-disable no-magic-numbers */
 import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import Component, { Icons } from "./index";
 import { SizesEnum } from "../../settings/sizes";
 import Theme from "../../settings/theme";
+import Component, { Icons } from "./index";
 
 export default {
   title: "UI-Components/Icon",

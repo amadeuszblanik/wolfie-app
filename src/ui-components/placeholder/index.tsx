@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import type React from "react";
 
 const StyledPlaceholder = styled.span<{ width?: string; height?: string }>`
   @keyframes placeholder {

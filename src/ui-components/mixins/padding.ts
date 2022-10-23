@@ -1,5 +1,7 @@
-import type { Padding } from "../types/padding";
+// @TODO - Deprecate this in favor of padding
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import Sizes from "../../settings/sizes";
+import type { Padding } from "../types/padding";
 
 const padding = (values: Padding): string => {
   if (typeof values === "string") {

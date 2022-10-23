@@ -8,6 +8,7 @@ import { isText } from "../../utils";
 export enum ButtonSizes {
   Small = "small",
   Normal = "normal",
+  FullWidth = "full-width",
 }
 
 interface StyledButtonProps {
@@ -28,11 +29,18 @@ interface ButtonProps {
 const PADDING_SIZES: { [key in ButtonSizes]: { x: SizesEnum; y: SizesEnum } } = {
   [ButtonSizes.Small]: { x: SizesEnum.Medium, y: SizesEnum.Small },
   [ButtonSizes.Normal]: { x: SizesEnum.ExtraLarge, y: SizesEnum.Medium },
+  [ButtonSizes.FullWidth]: { x: SizesEnum.ExtraLarge, y: SizesEnum.Medium },
 };
 
 const StyledButton = styled.button<StyledButtonProps>`
+  ${({ size }) => size === ButtonSizes.FullWidth && "width: 100%"};
   ${({ size }) => paddingMixin(PADDING_SIZES[size])};
-  ${({ variant, disabled }) => variant && backgroundMixin(!disabled ? variant : "gray")};
+  ${({ variant, disabled }) =>
+    disabled
+      ? backgroundMixin("gray")
+      : !variant
+      ? "background: var(--color-background)"
+      : backgroundMixin(!disabled ? variant : "gray")};
   border: none;
   border-radius: var(--button-radius);
   cursor: pointer;

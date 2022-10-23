@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { DoggoBox, DoggoButton, DoggoForm, DoggoInput, DoggoPasswordValidator, DoggoText } from "../../ui-components";
+import {
+  DoggoBox,
+  DoggoButton,
+  DoggoForm,
+  DoggoGrid,
+  DoggoInput,
+  DoggoPasswordValidator,
+  DoggoText,
+} from "../../ui-components";
 import { InputTypes } from "../../ui-components/input";
 import { FormattedMessage, useIntl } from "react-intl";
 import { BoxWidth, FlexAlign } from "../../ui-components/box";
@@ -83,16 +91,11 @@ const Form: React.FunctionComponent<Props> = ({ token }) => {
         errors={formValidator.errors["passwordConfirm"]}
       />
       <DoggoBox column>
-        <DoggoBox
-          width={BoxWidth.Full}
-          alignX={FlexAlign.Right}
-          alignY={FlexAlign.Center}
-          padding={{ bottom: SizesEnum.Large }}
-        >
+        <DoggoGrid mobile={1} desktop={1}>
           <DoggoButton variant="blue" type="submit" disabled={!submitEnable}>
             <FormattedMessage id="page.forgot_password.set_password" />
           </DoggoButton>
-        </DoggoBox>
+        </DoggoGrid>
         {response && (
           <DoggoBox column>
             <DoggoText color="green">{response.message}</DoggoText>

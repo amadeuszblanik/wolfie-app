@@ -1,20 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { WeightUnits } from "../../api/types/weight-units.types";
-import {
-  DoggoBox,
-  DoggoButton,
-  DoggoCheckbox,
-  DoggoForm,
-  DoggoInput,
-  DoggoPasswordValidator,
-  DoggoSelect,
-  DoggoText,
-} from "../../ui-components";
+import { DoggoBox, DoggoButton, DoggoForm, DoggoGrid, DoggoInput, DoggoText } from "../../ui-components";
 import { InputTypes } from "../../ui-components/input";
 import { FormattedMessage, useIntl } from "react-intl";
-import { BoxWidth, FlexAlign } from "../../ui-components/box";
 import { ApiStatesTypes } from "../../types/api-states.types";
-import { SizesEnum } from "../../settings/sizes";
 import useFormValidator, { FormValidators } from "../../form-validator";
 import useResetPasswordStep0 from "../../api/queries/reset-password-step-0";
 
@@ -63,16 +51,11 @@ const Form: React.FunctionComponent = () => {
         errors={formValidator.errors["userEmail"]}
       />
       <DoggoBox column>
-        <DoggoBox
-          width={BoxWidth.Full}
-          alignX={FlexAlign.Right}
-          alignY={FlexAlign.Center}
-          padding={{ bottom: SizesEnum.Large }}
-        >
+        <DoggoGrid mobile={1} desktop={1}>
           <DoggoButton variant="blue" type="submit" disabled={!submitEnable}>
             <FormattedMessage id="page.forgot_password.send_email" />
           </DoggoButton>
-        </DoggoBox>
+        </DoggoGrid>
         {response && (
           <DoggoBox>
             <DoggoText color="green">{response.message}</DoggoText>

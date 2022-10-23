@@ -4,6 +4,7 @@ import {
   DoggoButton,
   DoggoForm,
   DoggoFormControl,
+  DoggoGrid,
   DoggoInputText,
   DoggoSelect,
   DoggoText,
@@ -84,16 +85,11 @@ const Form: React.FunctionComponent<Props> = ({ initialValues }) => {
         />
       </DoggoFormControl>
       <DoggoBox column>
-        <DoggoBox
-          width={BoxWidth.Full}
-          alignX={FlexAlign.Right}
-          alignY={FlexAlign.Center}
-          padding={{ bottom: SizesEnum.Large }}
-        >
+        <DoggoGrid mobile={1} desktop={1}>
           <DoggoButton variant="green" type="submit" disabled={!submitEnable}>
             <FormattedMessage id="common.update" />
           </DoggoButton>
-        </DoggoBox>
+        </DoggoGrid>
         {error && (
           <DoggoBox>
             <DoggoText color="red">{error.message}</DoggoText>

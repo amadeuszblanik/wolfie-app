@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { DoggoBox, DoggoButton, DoggoCheckbox, DoggoForm, DoggoInput, DoggoText } from "../../ui-components";
+import { DoggoBox, DoggoButton, DoggoCheckbox, DoggoForm, DoggoGrid, DoggoInput, DoggoText } from "../../ui-components";
 import { InputTypes } from "../../ui-components/input";
 import { FormattedMessage, useIntl } from "react-intl";
 import { BoxWidth, FlexAlign } from "../../ui-components/box";
@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import useSignIn from "../../api/queries/sign-in";
 import { useDeviceName } from "../../hooks";
 import Link from "next/link";
+import { ButtonSizes } from "../../ui-components/button";
 
 const Form: React.FunctionComponent = () => {
   const intl = useIntl();
@@ -86,34 +87,25 @@ const Form: React.FunctionComponent = () => {
         errors={formValidator.errors["keepMeSignIn"]}
       />
       <DoggoBox column>
-        <DoggoBox
-          width={BoxWidth.Full}
-          alignX={FlexAlign.Right}
-          alignY={FlexAlign.Center}
-          padding={{ bottom: SizesEnum.Large }}
-        >
-          <DoggoBox padding={{ right: SizesEnum.Medium }}>
-            <Link href="/auth/sign-up">
-              <a>
-                <DoggoButton>
-                  <FormattedMessage id="common.sign_up" />
-                </DoggoButton>
-              </a>
-            </Link>
-          </DoggoBox>
-          <DoggoBox padding={{ right: SizesEnum.Medium }}>
-            <Link href="/auth/forgot-password">
-              <a>
-                <DoggoButton>
-                  <FormattedMessage id="common.forgot_password" />
-                </DoggoButton>
-              </a>
-            </Link>
-          </DoggoBox>
-          <DoggoButton variant="green" type="submit" disabled={!submitEnable}>
+        <DoggoGrid mobile={1} desktop={3}>
+          <Link href="/auth/sign-up">
+            <a>
+              <DoggoButton size={ButtonSizes.FullWidth}>
+                <FormattedMessage id="common.sign_up" />
+              </DoggoButton>
+            </a>
+          </Link>
+          <Link href="/auth/forgot-password">
+            <a>
+              <DoggoButton size={ButtonSizes.FullWidth}>
+                <FormattedMessage id="common.forgot_password" />
+              </DoggoButton>
+            </a>
+          </Link>
+          <DoggoButton size={ButtonSizes.FullWidth} variant="green" type="submit" disabled={!submitEnable}>
             <FormattedMessage id="common.sign_in" />
           </DoggoButton>
-        </DoggoBox>
+        </DoggoGrid>
         {error && (
           <DoggoBox>
             <DoggoText color="red">{error.message}</DoggoText>

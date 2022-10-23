@@ -4,6 +4,7 @@ import {
   DoggoButton,
   DoggoForm,
   DoggoFormControl,
+  DoggoGrid,
   DoggoInputDate,
   DoggoInputText,
   DoggoLoader,
@@ -137,16 +138,11 @@ const Form: React.FunctionComponent<Props> = ({ petId }) => {
         <DoggoInputDate value={birthDate} onChange={setBirthDate} disabled={!formEnable} max={toDate(new Date())} />
       </DoggoFormControl>
       <DoggoBox column>
-        <DoggoBox
-          width={BoxWidth.Full}
-          alignX={FlexAlign.Right}
-          alignY={FlexAlign.Center}
-          padding={{ bottom: SizesEnum.Large }}
-        >
+        <DoggoGrid mobile={1} desktop={1}>
           <DoggoButton variant="blue" type="submit" disabled={!submitEnable}>
             <FormattedMessage id={`common.${petId ? "save" : "add"}`} />
           </DoggoButton>
-        </DoggoBox>
+        </DoggoGrid>
         {response && (
           <DoggoBox column>
             <DoggoText color="green">

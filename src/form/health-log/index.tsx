@@ -4,6 +4,7 @@ import {
   DoggoButton,
   DoggoForm,
   DoggoFormControl,
+  DoggoGrid,
   DoggoInputDate,
   DoggoInputDatetime,
   DoggoInputText,
@@ -12,9 +13,7 @@ import {
   DoggoText,
 } from "../../ui-components";
 import { FormattedMessage, useIntl } from "react-intl";
-import { BoxWidth, FlexAlign } from "../../ui-components/box";
 import { ApiStatesTypes } from "../../types/api-states.types";
-import { SizesEnum } from "../../settings/sizes";
 import useFormValidator, { FormValidators } from "../../form-validator";
 import { useRouter } from "next/router";
 import { ComponentSelectMedicines } from "../../component";
@@ -165,16 +164,11 @@ const Form: React.FunctionComponent<Props> = ({ petId, onSuccess }) => {
       </DoggoFormControl>
 
       <DoggoBox column>
-        <DoggoBox
-          width={BoxWidth.Full}
-          alignX={FlexAlign.Right}
-          alignY={FlexAlign.Center}
-          padding={{ bottom: SizesEnum.Large }}
-        >
+        <DoggoGrid mobile={1} desktop={1}>
           <DoggoButton variant="green" type="submit" disabled={!submitEnable}>
             <FormattedMessage id="common.add" />
           </DoggoButton>
-        </DoggoBox>
+        </DoggoGrid>
         {error && (
           <DoggoBox>
             <DoggoText color="red">{error.message}</DoggoText>

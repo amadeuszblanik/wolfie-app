@@ -14,7 +14,7 @@ const App: NextPage = () => {
   const items = [
     <Link key="profile" href="/settings/profile">
       <a>
-        <DoggoButton size={ButtonSizes.Small} disabled>
+        <DoggoButton size={ButtonSizes.Small}>
           <FormattedMessage id="page.settings.items.profile" />
         </DoggoButton>
       </a>

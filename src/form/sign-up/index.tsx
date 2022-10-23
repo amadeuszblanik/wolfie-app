@@ -5,6 +5,7 @@ import {
   DoggoButton,
   DoggoCheckbox,
   DoggoForm,
+  DoggoGrid,
   DoggoInput,
   DoggoPasswordValidator,
   DoggoSelect,
@@ -19,6 +20,7 @@ import { ApiStatesTypes } from "../../types/api-states.types";
 import { SizesEnum } from "../../settings/sizes";
 import useFormValidator, { FormValidators } from "../../form-validator";
 import Link from "next/link";
+import { ButtonSizes } from "../../ui-components/button";
 
 const Form: React.FunctionComponent = () => {
   const intl = useIntl();
@@ -136,26 +138,19 @@ const Form: React.FunctionComponent = () => {
         disabled={!formEnable}
         errors={formValidator.errors["gdprConsent"]}
       />
-      <DoggoBox column>
-        <DoggoBox
-          width={BoxWidth.Full}
-          alignX={FlexAlign.Right}
-          alignY={FlexAlign.Center}
-          padding={{ bottom: SizesEnum.Large }}
-        >
-          <DoggoBox padding={{ right: SizesEnum.Medium }}>
-            <Link href="/auth/sign-in">
-              <a>
-                <DoggoButton>
-                  <FormattedMessage id="common.sign_in" />
-                </DoggoButton>
-              </a>
-            </Link>
-          </DoggoBox>
-          <DoggoButton variant="blue" type="submit" disabled={!submitEnable}>
+      <DoggoBox>
+        <DoggoGrid mobile={1} desktop={2}>
+          <Link href="/auth/sign-in">
+            <a>
+              <DoggoButton size={ButtonSizes.FullWidth}>
+                <FormattedMessage id="common.sign_in" />
+              </DoggoButton>
+            </a>
+          </Link>
+          <DoggoButton variant="blue" type="submit" disabled={!submitEnable} size={ButtonSizes.FullWidth}>
             <FormattedMessage id="common.sign_up" />
           </DoggoButton>
-        </DoggoBox>
+        </DoggoGrid>
         {response && (
           <DoggoBox>
             <DoggoText color="green">{response.message}</DoggoText>

@@ -1,7 +1,7 @@
 import React from "react";
-import { DoggoList } from "../../ui-components";
+import { DoggoListDeprecated } from "../../ui-components";
 import { ComponentApiWrapper } from "../../component";
-import { ListItem } from "../../ui-components/list";
+import { ListItem } from "../../ui-components/list-deprecated";
 import useAuthorizedDevices from "../../api/queries/authorized-devices";
 import { pipeDate } from "../../pipe";
 
@@ -12,7 +12,7 @@ const DataDisplay: React.FunctionComponent = () => {
 
   return (
     <ComponentApiWrapper error={error} status={status}>
-      <DoggoList items={items} />
+      <DoggoListDeprecated items={items} />
     </ComponentApiWrapper>
   );
 };

@@ -1,6 +1,6 @@
 import React from "react";
-import styled, { DefaultTheme } from "styled-components";
-import { darkenColorMixin, isDarkMixin, paddingMixin } from "../mixins";
+import styled, { ThemePalette } from "styled-components";
+import { backgroundMixin, darkenColorMixin, paddingMixin } from "../mixins";
 import { SizesEnum } from "../../settings/sizes";
 import Text from "../text";
 import { isText } from "../../utils";
@@ -11,13 +11,13 @@ export enum ButtonSizes {
 }
 
 interface StyledButtonProps {
-  variant?: keyof DefaultTheme["palette"];
+  variant?: ThemePalette;
   disabled?: boolean;
   size: ButtonSizes;
 }
 
 interface ButtonProps {
-  variant?: keyof DefaultTheme["palette"];
+  variant?: ThemePalette;
   size?: ButtonSizes;
   children: React.ReactNode;
   onClick?: () => void;
@@ -32,12 +32,9 @@ const PADDING_SIZES: { [key in ButtonSizes]: { x: SizesEnum; y: SizesEnum } } = 
 
 const StyledButton = styled.button<StyledButtonProps>`
   ${({ size }) => paddingMixin(PADDING_SIZES[size])};
-  color: ${({ theme, variant }) =>
-    variant ? (isDarkMixin(theme.palette[variant]) ? theme.palette.light : theme.palette.dark) : `var(--color-text)`};
-  background: ${({ theme, variant, disabled }) =>
-    variant ? (!disabled ? theme.palette[variant] : theme.palette.gray) : `var(--color-background)`};
+  ${({ variant, disabled }) => variant && backgroundMixin(!disabled ? variant : "gray")};
   border: none;
-  border-radius: ${({ theme }) => theme.borderRadius};
+  border-radius: var(--button-radius);
   cursor: pointer;
   ${({ disabled }) => disabled && "pointer-events: none"};
   transition: background 0.2s ease-in-out;

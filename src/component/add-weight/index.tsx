@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
-import { DoggoButton, DoggoInput, DoggoList, DoggoSheet } from "../../ui-components";
+import { DoggoButton, DoggoInput, DoggoListDeprecated, DoggoSheet } from "../../ui-components";
 import { toDate, toTime } from "../../utils";
 import { InputTypes } from "../../ui-components/input";
 import { PetWeightAddBody } from "../../api/types/pet-weight-add.types";
@@ -37,7 +37,7 @@ const Component: React.FunctionComponent<Props> = ({ onClose, onAdd, unit }) => 
       }
       title={intl.formatMessage({ id: "page.pet_weight.header" })}
     >
-      <DoggoList
+      <DoggoListDeprecated
         items={[
           [
             <FormattedMessage key="dateLabel" id="common.date" />,

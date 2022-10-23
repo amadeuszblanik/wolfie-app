@@ -1,6 +1,7 @@
 import { css, DefaultTheme, ThemePalette } from "styled-components";
 import { firstElement } from "bme-utils";
 import { darkenColorMixin } from "./index";
+import isDark from "./isDark";
 
 const GRADIENT_ELEMENTS_LENGTH = 2;
 
@@ -31,6 +32,8 @@ const background = (colors: ThemePalette | ThemePalette[]) => {
             .map((color: keyof DefaultTheme["palette"]) => darkenColorMixin(theme.palette[color], theme.darken.active))
             .join(", ")}
       );
+      --color-text: ${({ theme }) =>
+        colors.some((color) => isDark(theme.palette[color])) ? theme.palette.light : theme.palette.dark};
     `;
   }
 
@@ -41,6 +44,7 @@ const background = (colors: ThemePalette | ThemePalette[]) => {
     --color-background: ${({ theme }) => theme.palette[color]};
     --color-background-hover: ${({ theme }) => darkenColorMixin(theme.palette[color], theme.darken.hover)};
     --color-background-active: ${({ theme }) => darkenColorMixin(theme.palette[color], theme.darken.active)};
+    --color-text: ${({ theme }) => (isDark(theme.palette[color]) ? theme.palette.light : theme.palette.dark)};
   `;
 };
 

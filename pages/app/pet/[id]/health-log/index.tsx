@@ -9,7 +9,7 @@ import { DataDisplayHealthLog } from "../../../../../src/data-display";
 import { ComponentAddHealthLog } from "../../../../../src/component";
 import useHealthLogPet from "../../../../../src/api/queries/health-log-pet";
 import { pipeDate } from "../../../../../src/pipe";
-import { ListItem } from "../../../../../src/ui-components/list";
+import { ListItem } from "../../../../../src/ui-components/list-deprecated";
 import Link from "next/link";
 
 interface AddButtonProps {

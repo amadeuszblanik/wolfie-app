@@ -6,6 +6,7 @@ import BarbellIcon from "./icons/barbell-outline.svg";
 import BookIcon from "./icons/book-outline.svg";
 import CheckmarkIcon from "./icons/checkmark-outline.svg";
 import ChevronDownIcon from "./icons/chevron-down-outline.svg";
+import ChevronRightIcon from "./icons/chevron-forward-outline.svg";
 import CloseCircleIcon from "./icons/close-circle-outline.svg";
 import CloseIcon from "./icons/close-outline.svg";
 import CogIcon from "./icons/cog-outline.svg";
@@ -21,6 +22,7 @@ export const Icons = [
   "book",
   "checkmark",
   "chevron-down",
+  "chevron-right",
   "close-circle",
   "close",
   "cog",
@@ -66,6 +68,8 @@ const Component: React.FunctionComponent<Props> = ({ icon, size, ...props }) => 
         return <CheckmarkIcon />;
       case "chevron-down":
         return <ChevronDownIcon />;
+      case "chevron-right":
+        return <ChevronRightIcon />;
       case "close-circle":
         return <CloseCircleIcon />;
       case "close":

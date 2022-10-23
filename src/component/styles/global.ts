@@ -20,6 +20,7 @@ const Global = createGlobalStyle`
     --placeholder-width: 100px;
     --placeholder-height: 100%;
     --placeholder-offset-y: 0;
+    --button-radius: ${({ theme }) => theme.borderRadius};
   }
   
   * {

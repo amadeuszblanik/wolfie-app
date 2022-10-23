@@ -26,6 +26,7 @@
         ]
       }
     ],
+    "no-descending-specificity": null,
     "color-no-invalid-hex": true,
     "color-hex-case": [
       "lower",

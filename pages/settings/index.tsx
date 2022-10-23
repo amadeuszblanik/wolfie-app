@@ -3,7 +3,7 @@ import Head from "next/head";
 import { FormattedMessage, useIntl } from "react-intl";
 import React from "react";
 import { LayoutApp } from "../../src/layout";
-import { DoggoButton, DoggoList } from "../../src/ui-components";
+import { DoggoButton, DoggoListDeprecated } from "../../src/ui-components";
 import { ButtonSizes } from "../../src/ui-components/button";
 import Link from "next/link";
 import { ComponentChangeLanguage, ComponentChangeTheme, ComponentSignOff } from "../../src/component";
@@ -46,7 +46,7 @@ const App: NextPage = () => {
 
   return (
     <LayoutApp title={intl.formatMessage({ id: "page.settings.header" })}>
-      <DoggoList items={items} />
+      <DoggoListDeprecated items={items} />
     </LayoutApp>
   );
 };

@@ -1,6 +1,5 @@
 import type { NextPage } from "next";
-import Head from "next/head";
-import { DoggoBox, DoggoButton, DoggoContainer, DoggoList, DoggoText } from "../src/ui-components";
+import { DoggoBox, DoggoButton, DoggoContainer, DoggoListDeprecated, DoggoText } from "../src/ui-components";
 import { DoggoTextVariant } from "../src/ui-components/text";
 import { SizesEnum } from "../src/settings/sizes";
 import { BoxWidth, FlexAlign } from "../src/ui-components/box";
@@ -14,44 +13,44 @@ const Home: NextPage = () => {
   const signedIn = useSignedIn();
 
   return (
-    <>
-      <header>
-        <DoggoBox column alignX={FlexAlign.Center}>
-          <DoggoBox padding={{ y: SizesEnum.ExtraLarge }}>
-            <img src="/logo.svg" alt="Doggo logo" width={200} />
-          </DoggoBox>
-          <DoggoBox padding={{ bottom: SizesEnum.Large }}>
-            <DoggoText variant={DoggoTextVariant.LargeTitle} leading>
-              <FormattedMessage id="page.home.head.title" />
+    <DoggoContainer>
+      <>
+        <header>
+          <DoggoBox column alignX={FlexAlign.Center}>
+            <DoggoBox padding={{ y: SizesEnum.ExtraLarge }}>
+              <img src="/logo.svg" alt="Doggo logo" width={200} />
+            </DoggoBox>
+            <DoggoBox padding={{ bottom: SizesEnum.Large }}>
+              <DoggoText variant={DoggoTextVariant.LargeTitle} leading>
+                <FormattedMessage id="page.home.head.title" />
+              </DoggoText>
+            </DoggoBox>
+            <DoggoText>
+              <FormattedMessage id="page.home.head.description" />
             </DoggoText>
           </DoggoBox>
-          <DoggoText>
-            <FormattedMessage id="page.home.head.description" />
-          </DoggoText>
-        </DoggoBox>
-      </header>
+        </header>
 
-      <main>
-        <DoggoBox padding={{ top: SizesEnum.Medium, bottom: SizesEnum.ExtraLarge }}>
-          <DoggoContainer>
+        <main>
+          <DoggoBox padding={{ top: SizesEnum.Medium, bottom: SizesEnum.ExtraLarge }} column>
             <DoggoBox column alignX={FlexAlign.Center} width={BoxWidth.Full}>
               <DoggoText noBottomMargin>
                 <FormattedMessage id="page.home.main.current_features" />
               </DoggoText>
               <DoggoBox width={BoxWidth.Full} padding={{ y: SizesEnum.Medium }}>
-                <DoggoList
+                <DoggoListDeprecated
                   items={[
                     intl.formatMessage({ id: "page.home.main.features_list.weight" }),
                     intl.formatMessage({ id: "page.home.main.features_list.medications" }),
                     intl.formatMessage({ id: "page.home.main.features_list.vaccination" }),
                   ]}
-                ></DoggoList>
+                ></DoggoListDeprecated>
               </DoggoBox>
               <DoggoText noBottomMargin>
                 <FormattedMessage id="page.home.main.planned_features_list" />
               </DoggoText>
               <DoggoBox width={BoxWidth.Full} padding={{ y: SizesEnum.Medium }}>
-                <DoggoList
+                <DoggoListDeprecated
                   items={[
                     intl.formatMessage({ id: "page.home.main.features_list.dog_park" }),
                     intl.formatMessage({ id: "page.home.main.features_list.walk_tinder" }),
@@ -59,7 +58,7 @@ const Home: NextPage = () => {
                     intl.formatMessage({ id: "page.home.main.features_list.ai_enhanced" }),
                     intl.formatMessage({ id: "page.home.main.features_list.more" }),
                   ]}
-                ></DoggoList>
+                ></DoggoListDeprecated>
               </DoggoBox>
               <DoggoText variant={DoggoTextVariant.Title3}>
                 <FormattedMessage id="page.home.main.price" />
@@ -88,10 +87,10 @@ const Home: NextPage = () => {
                 </>
               )}
             </DoggoBox>
-          </DoggoContainer>
-        </DoggoBox>
-      </main>
-    </>
+          </DoggoBox>
+        </main>
+      </>
+    </DoggoContainer>
   );
 };
 

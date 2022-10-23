@@ -10,5 +10,6 @@ export { default as ComponentErrorScreen } from "./error-screen";
 export { default as ComponentFooter } from "./footer";
 export { default as ComponentPetCard } from "./pet-card";
 export { default as ComponentSelectMedicines } from "./select-medicines";
+export { default as ComponentSignOff } from "./sign-off";
 export { default as ComponentSuccessScreen } from "./success-screen";
 export { default as ComponentTopbar } from "./topbar";

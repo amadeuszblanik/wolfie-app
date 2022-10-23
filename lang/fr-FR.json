@@ -126,7 +126,7 @@
   "page.settings.profile.header": "Profil",
   "page.settings.authorized_devices.header": "Appareils autorisés",
   "page.settings.change_password.header": "Changer le mot de passe",
-  "component.footer.header": "Doggo © {year}",
+  "component.footer.header": "Wolfie.app © {year}",
   "component.footer.author": "Créé avec ❤️ par}",
   "component.footer.link_privacy_policy": "Politique de confidentialité",
   "component.selected_medicines.label": "Médicaments sélectionnés",

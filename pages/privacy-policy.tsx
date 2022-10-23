@@ -37,7 +37,7 @@ const PrivacyPolicy: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>Doggo - Your pet companion app</title>
+        <title>Wolfie.app - Your pet companion app</title>
         <meta name="description" content="Pet companion app" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

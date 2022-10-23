@@ -1,13 +1,13 @@
-# Doggo
+# Wolfie.app
 
 Doggo is a Next.JS web application for dealing with pet management.
 
 _THIS APPLICATION IS IN DEVELOPMENT._
 
 ## Official website
-[Stable build](https://doggo.rocks)
-[Development build](https://next.doggo.rocks)
-[Doggo Open API](https://doggo.rocks/api)
+[Stable build](https://wolfie.app)
+[Development build](https://next.wolfie.app)
+[Wolfie.app Open API](https://api.wolfie.app)
 
 ## Installation
 Use the package manager [yarn](https://yarnpkg.com) to install all dependencies.
@@ -25,9 +25,9 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 Please make sure to update tests as appropriate.
 
-## Stages for Doggo development:
+## Stages for Wolfie.app development:
 * [x] Create a Nest.JS application for the API
-* [x] Create a proof of concept web application based on Angular [repo](https://github.com/amadeuszblanik/doggo-frontend-poc)
+* [x] Create a proof of concept web application based on Angular
 * [x] Decide about final technology stack
 * [x] Create a Next.JS application for the web application
 * [x] Create a custom built-in UI library for the web application

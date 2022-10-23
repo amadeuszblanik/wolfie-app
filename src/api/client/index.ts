@@ -139,6 +139,10 @@ export default class ApiClient {
     );
   };
 
+  public getPetsById = (id: string): Promise<ApiResponse<PetSingleResponseModel>> => {
+    return this.get<PetSingleResponseModel>(`/pets/${id}`).then((response) => responseDto(response, getPetsDto));
+  };
+
   public petsAvatarChange = async (id: string, body: PetsAvatarChangePayload): Promise<ApiResponse<string>> => {
     return this.postForm<string, PetsAvatarChangePayload>(`/pets/${id}/avatar`, body).then((response) =>
       responseDto(response),
@@ -149,10 +153,6 @@ export default class ApiClient {
     return this.put<PetsEditResponseModel, PetsUpdatePayload>(`/pets/${id}`, body).then((response) =>
       responseDto(response, getPetsDto),
     );
-  };
-
-  public petsSingle = (id: string) => async (): Promise<ApiResponse<PetSingleResponseModel>> => {
-    return this.get<PetSingleResponseModel>(`/pets/${id}`).then((response) => responseDto(response, getPetsDto));
   };
 
   public petsWeight = (id: string) => async (): Promise<ApiResponse<WeightValueResponseModel[]>> => {

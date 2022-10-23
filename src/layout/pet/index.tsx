@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { useRouter } from "next/router";
 import { FormattedMessage } from "react-intl";
 import { ButtonSizes } from "../../ui-components/button";
-import usePetsSingle from "../../api/queries/pets-single";
+import usePetsSingle from "../../api/queries/get-pets-by-id";
 
 interface Props {
   children: React.ReactNode;

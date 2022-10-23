@@ -1,4 +1,4 @@
-import { DoggoBox, DoggoIcon, DoggoText } from "../../ui-components";
+import { DoggoBox, DoggoIcon, DoggoPlaceholder, DoggoText } from "../../ui-components";
 import { BoxWidth, FlexAlign } from "../../ui-components/box";
 import { SizesEnum } from "../../settings/sizes";
 import React from "react";
@@ -11,13 +11,14 @@ interface Props {
   icon: DoggoIcons;
   value: number | string;
   background: ThemePalette | ThemePalette[];
+  loading?: boolean;
 }
 
 const StyledLabels = styled(DoggoBox)`
   overflow: hidden;
 `;
 
-const Component: React.FunctionComponent<Props> = ({ children, icon, value, background }) => {
+const Component: React.FunctionComponent<Props> = ({ children, icon, value, background, loading }) => {
   return (
     <DoggoBox
       width={BoxWidth.Full}
@@ -31,7 +32,7 @@ const Component: React.FunctionComponent<Props> = ({ children, icon, value, back
       <StyledLabels alignX={FlexAlign.Right} alignY={FlexAlign.Bottom} width={BoxWidth.Full}>
         <DoggoText noBottomMargin>{children}</DoggoText>&nbsp;&nbsp;
         <DoggoText variant={DoggoTextVariant.LargeTitle} noBottomMargin>
-          {value}
+          {!loading ? value : <DoggoPlaceholder />}
         </DoggoText>
       </StyledLabels>
     </DoggoBox>

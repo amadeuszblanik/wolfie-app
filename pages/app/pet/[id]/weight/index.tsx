@@ -3,7 +3,7 @@ import Head from "next/head";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import usePetsSingle from "../../../../../src/api/queries/pets-single";
+import usePetsSingle from "../../../../../src/api/queries/get-pets-by-id";
 import usePetsWeight from "../../../../../src/api/queries/pets-weight";
 import { ComponentAddWeight, ComponentErrorScreen, ComponentPetCard } from "../../../../../src/component";
 import { LayoutApp } from "../../../../../src/layout";

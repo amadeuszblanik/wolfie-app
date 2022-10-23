@@ -17,7 +17,7 @@ import { DoggoAutocomplete, DoggoBox, DoggoButton, DoggoInput, DoggoModal } from
 import { SizesEnum } from "../../../../src/settings/sizes";
 import { InputTypes } from "../../../../src/ui-components/input";
 import { FlexAlign } from "../../../../src/ui-components/box";
-import usePetsSingle from "../../../../src/api/queries/pets-single";
+import usePetsSingle from "../../../../src/api/queries/get-pets-by-id";
 import { toDate } from "../../../../src/utils";
 import usePetsEdit from "../../../../src/api/queries/pets-edit";
 

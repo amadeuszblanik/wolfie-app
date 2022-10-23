@@ -8,6 +8,7 @@ export { default as DoggoContainer } from "./container";
 export { default as DoggoForm } from "./form";
 export { default as DoggoFormControl } from "./form-control";
 export { default as DoggoGrid } from "./grid";
+export { default as DoggoGridItem } from "./grid-item";
 export { default as DoggoIcon } from "./icon";
 export { default as DoggoInput } from "./input";
 export { default as DoggoInputDate } from "./input-date";

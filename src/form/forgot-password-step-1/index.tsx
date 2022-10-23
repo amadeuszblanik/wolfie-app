@@ -97,7 +97,7 @@ const Form: React.FunctionComponent<Props> = ({ token }) => {
           <DoggoBox column>
             <DoggoText color="green">{response.message}</DoggoText>
             <DoggoBox alignX={FlexAlign.Right} padding={{ top: SizesEnum.Medium }}>
-              <Link href="/app/auth/sign-in">
+              <Link href="/auth/sign-in">
                 <a>
                   <DoggoButton variant="blue">
                     <FormattedMessage id="common.sign_in" />

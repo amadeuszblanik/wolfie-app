@@ -1,13 +1,13 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { LayoutAuth } from "../../../src/layout";
+import { LayoutAuth } from "../../src/layout";
 import { useRouter } from "next/router";
-import ErrorScreen from "../../../src/component/error-screen";
+import ErrorScreen from "../../src/component/error-screen";
 import { useIntl } from "react-intl";
-import useConfirmEmail from "../../../src/api/queries/confirm-email";
+import useConfirmEmail from "../../src/api/queries/confirm-email";
 import { useEffect } from "react";
-import SuccessScreen from "../../../src/component/success-screen";
-import ApiWrapper from "../../../src/component/api-wrapper";
+import SuccessScreen from "../../src/component/success-screen";
+import ApiWrapper from "../../src/component/api-wrapper";
 
 const EmailVerification: NextPage = () => {
   const router = useRouter();
@@ -32,7 +32,7 @@ const EmailVerification: NextPage = () => {
       <Head>
         <title>Wolfie.app - Your pet companion app</title>
         <meta name="description" content="Pet companion app" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/Users/ablanik/Projects/Blanik.me/doggo/web-react/doggo-web-react/public/favicon.ico" />
       </Head>
 
       <LayoutAuth title="page.email_verification.header">

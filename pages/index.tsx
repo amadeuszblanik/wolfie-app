@@ -82,12 +82,12 @@ const Home: NextPage = () => {
               ) : (
                 <>
                   <DoggoBox inline padding={{ x: SizesEnum.Small }}>
-                    <DoggoButton variant="blue" onClick={() => router.push("/app/auth/sign-in")}>
+                    <DoggoButton variant="blue" onClick={() => router.push("/auth/sign-in")}>
                       <FormattedMessage id="common.sign_in" />
                     </DoggoButton>
                   </DoggoBox>
                   <DoggoBox inline padding={{ x: SizesEnum.Small }}>
-                    <DoggoButton variant="green" onClick={() => router.push("/app/auth/sign-up")}>
+                    <DoggoButton variant="green" onClick={() => router.push("/auth/sign-up")}>
                       <FormattedMessage id="common.sign_up" />
                     </DoggoButton>
                   </DoggoBox>

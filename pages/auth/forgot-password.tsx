@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { FormForgotPasswordStep0, FormForgotPasswordStep1 } from "../../../src/form";
-import { LayoutAuth } from "../../../src/layout";
+import { FormForgotPasswordStep0, FormForgotPasswordStep1 } from "../../src/form";
+import { LayoutAuth } from "../../src/layout";
 import { useRouter } from "next/router";
 
 const ForgotPassword: NextPage = () => {
@@ -13,7 +13,7 @@ const ForgotPassword: NextPage = () => {
       <Head>
         <title>Wolfie.app - Your pet companion app</title>
         <meta name="description" content="Pet companion app" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/Users/ablanik/Projects/Blanik.me/doggo/web-react/doggo-web-react/public/favicon.ico" />
       </Head>
 
       <LayoutAuth title="page.forgot_password.header" description="page.forgot_password.description">

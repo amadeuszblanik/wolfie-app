@@ -14,13 +14,7 @@ const Home: NextPage = () => {
   const signedIn = useSignedIn();
 
   return (
-    <div>
-      <Head>
-        <title>Wolfie.app - Your pet companion app</title>
-        <meta name="description" content="Pet companion app" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
+    <>
       <header>
         <DoggoBox column alignX={FlexAlign.Center}>
           <DoggoBox padding={{ y: SizesEnum.ExtraLarge }}>
@@ -82,12 +76,12 @@ const Home: NextPage = () => {
               ) : (
                 <>
                   <DoggoBox inline padding={{ x: SizesEnum.Small }}>
-                    <DoggoButton variant="blue" onClick={() => router.push("/app/auth/sign-in")}>
+                    <DoggoButton variant="blue" onClick={() => router.push("/auth/sign-in")}>
                       <FormattedMessage id="common.sign_in" />
                     </DoggoButton>
                   </DoggoBox>
                   <DoggoBox inline padding={{ x: SizesEnum.Small }}>
-                    <DoggoButton variant="green" onClick={() => router.push("/app/auth/sign-up")}>
+                    <DoggoButton variant="green" onClick={() => router.push("/auth/sign-up")}>
                       <FormattedMessage id="common.sign_up" />
                     </DoggoButton>
                   </DoggoBox>
@@ -97,7 +91,7 @@ const Home: NextPage = () => {
           </DoggoContainer>
         </DoggoBox>
       </main>
-    </div>
+    </>
   );
 };
 

@@ -1,6 +1,7 @@
 {
   "common.sign_in": "S'identifier",
   "common.sign_up": "S'inscrire",
+  "common.sign_off": "Se déconnecter",
   "common.forgot_password": "Mot de passe oublié?",
   "common.open_app": "Ouvrir l'application",
   "common.soon": "Bientôt",

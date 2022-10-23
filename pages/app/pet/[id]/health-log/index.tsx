@@ -1,5 +1,4 @@
 import type { NextPage } from "next";
-import Head from "next/head";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
@@ -49,25 +48,17 @@ const App: NextPage = () => {
     : [];
 
   return (
-    <>
-      <Head>
-        <title>Wolfie.app - Your pet companion app</title>
-        <meta name="description" content="Pet companion app" />
-        <link rel="icon" href="/Users/ablanik/Projects/Blanik.me/doggo/web-react/doggo-web-react/public/favicon.ico" />
-      </Head>
-
-      <LayoutPet
-        title={intl.formatMessage({ id: "page.pet_health_log.header" })}
-        back
-        petId={String(id)}
-        right={<AddButton onClick={() => setIsOpenAdd(true)} />}
-      >
-        <DataDisplayHealthLog items={healthLogItems} error={error} status={status} />
-        {isOpenAdd && (
-          <ComponentAddHealthLog petId={String(id)} onClose={() => setIsOpenAdd(false)} onSuccess={handleOnSuccess} />
-        )}
-      </LayoutPet>
-    </>
+    <LayoutPet
+      title={intl.formatMessage({ id: "page.pet_health_log.header" })}
+      back
+      petId={String(id)}
+      right={<AddButton onClick={() => setIsOpenAdd(true)} />}
+    >
+      <DataDisplayHealthLog items={healthLogItems} error={error} status={status} />
+      {isOpenAdd && (
+        <ComponentAddHealthLog petId={String(id)} onClose={() => setIsOpenAdd(false)} onSuccess={handleOnSuccess} />
+      )}
+    </LayoutPet>
   );
 };
 

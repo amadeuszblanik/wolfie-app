@@ -61,48 +61,40 @@ const App: NextPage = () => {
   const isError = !isFetchedData || petError || petsWeightError || configPrivateError;
 
   return (
-    <>
-      <Head>
-        <title>Wolfie.app - Your pet companion app</title>
-        <meta name="description" content="Pet companion app" />
-        <link rel="icon" href="/Users/ablanik/Projects/Blanik.me/doggo/web-react/doggo-web-react/public/favicon.ico" />
-      </Head>
-
-      <LayoutApp
-        title={intl.formatMessage({ id: "page.pet_weight.header" })}
-        back
-        right={<AddButton onClick={() => setIsOpenAddWeight(true)} />}
-      >
-        {!isError ? (
-          <>
-            <DoggoGrid mobile={1} desktop={1} onSizeChange={handleChangeContainerWidth}>
-              <ComponentPetCard {...pet} />
-              {!isEmpty(petsWeight) && (
-                <>
-                  <DoggoLineChart
-                    width={containerWidth}
-                    data={petsWeight.map(({ raw, date }) => ({ x: date, y: raw }))}
-                  />
-                  <DoggoList
-                    label={configPrivate.weightUnits}
-                    items={petsWeight.map((weight) => [weight.formatted, pipeDate(weight.date)]) ?? []}
-                  />
-                </>
-              )}
-            </DoggoGrid>
-            {isOpenAddWeight && (
-              <ComponentAddWeight
-                onClose={() => setIsOpenAddWeight(false)}
-                onAdd={(body) => mutatePetWeightAdd(body)}
-                unit={configPrivate.weightUnits}
-              />
+    <LayoutApp
+      title={intl.formatMessage({ id: "page.pet_weight.header" })}
+      back
+      right={<AddButton onClick={() => setIsOpenAddWeight(true)} />}
+    >
+      {!isError ? (
+        <>
+          <DoggoGrid mobile={1} desktop={1} onSizeChange={handleChangeContainerWidth}>
+            <ComponentPetCard {...pet} />
+            {!isEmpty(petsWeight) && (
+              <>
+                <DoggoLineChart
+                  width={containerWidth}
+                  data={petsWeight.map(({ raw, date }) => ({ x: date, y: raw }))}
+                />
+                <DoggoList
+                  label={configPrivate.weightUnits}
+                  items={petsWeight.map((weight) => [weight.formatted, pipeDate(weight.date)]) ?? []}
+                />
+              </>
             )}
-          </>
-        ) : (
-          <ComponentErrorScreen message={petError?.message} onTryAgain={handleTryAgain} />
-        )}
-      </LayoutApp>
-    </>
+          </DoggoGrid>
+          {isOpenAddWeight && (
+            <ComponentAddWeight
+              onClose={() => setIsOpenAddWeight(false)}
+              onAdd={(body) => mutatePetWeightAdd(body)}
+              unit={configPrivate.weightUnits}
+            />
+          )}
+        </>
+      ) : (
+        <ComponentErrorScreen message={petError?.message} onTryAgain={handleTryAgain} />
+      )}
+    </LayoutApp>
   );
 };
 

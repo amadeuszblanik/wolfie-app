@@ -1,7 +1,7 @@
 import type { AppProps } from "next/app";
 import { ThemeProvider } from "styled-components";
 import theme from "../src/settings/theme";
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { GlobalStyles } from "../src/component/styles";
 import en_GB from "../lang/en-GB.json";
 import pl_PL from "../lang/pl-PL.json";
@@ -35,6 +35,8 @@ function MyApp({ Component, pageProps }: AppProps<{ dehydratedState: any }>) {
               {({ selectedTheme }) => (
                 <ThemeProvider theme={theme[selectedTheme]}>
                   <Head>
+                    <title>Wolfie.app - Your pet companion app</title>
+                    <meta name="description" content="Pet companion app" />
                     <meta charSet="utf-8" />
                     <meta name="viewport" content="width=device-width, initial-scale=1" />
                     <link rel="icon" type="image/x-icon" href="/favicon.ico" />

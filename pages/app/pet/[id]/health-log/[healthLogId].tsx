@@ -25,21 +25,6 @@ const AddButton: React.FunctionComponent<AddButtonProps> = ({ onClick }) => (
   </DoggoButton>
 );
 
-// export interface HealthLogResponseModel {
-//     id: string;
-//     kind: HealthLogKindTypes;
-//     date: string;
-//     medicines: ShortMedicineResponseModel[];
-//     additionalMedicines: string[];
-//     veterinary: string | null;
-//     diagnosis: string | null;
-//     nextVisit: Date | null;
-//     description: string | null;
-//     addedBy: UserResponseModel;
-//     createdAt: Date;
-//     updatedAt: Date;
-// }
-
 const App: NextPage = () => {
   const router = useRouter();
   const intl = useIntl();
@@ -102,17 +87,9 @@ const App: NextPage = () => {
   }
 
   return (
-    <>
-      <Head>
-        <title>Wolfie.app - Your pet companion app</title>
-        <meta name="description" content="Pet companion app" />
-        <link rel="icon" href="/Users/ablanik/Projects/Blanik.me/doggo/web-react/doggo-web-react/public/favicon.ico" />
-      </Head>
-
-      <LayoutPet title={intl.formatMessage({ id: "page.pet_health_log_single.header" })} back petId={String(id)}>
-        <DataDisplayHealthLogSingle items={healthLogItems} error={error} status={status} />
-      </LayoutPet>
-    </>
+    <LayoutPet title={intl.formatMessage({ id: "page.pet_health_log_single.header" })} back petId={String(id)}>
+      <DataDisplayHealthLogSingle items={healthLogItems} error={error} status={status} />
+    </LayoutPet>
   );
 };
 

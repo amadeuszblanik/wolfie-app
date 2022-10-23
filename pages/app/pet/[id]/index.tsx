@@ -36,42 +36,34 @@ const App: NextPage = () => {
   const { pet, petError, refetch } = usePetsSingle(id as string);
 
   return (
-    <>
-      <Head>
-        <title>Wolfie.app - Your pet companion app</title>
-        <meta name="description" content="Pet companion app" />
-        <link rel="icon" href="/Users/ablanik/Projects/Blanik.me/doggo/web-react/doggo-web-react/public/favicon.ico" />
-      </Head>
-
-      <LayoutApp
-        title={intl.formatMessage({ id: "page.pet.header" })}
-        back
-        right={<EditButton onClick={() => router.push(`/app/pet/${id}/edit`)} />}
-      >
-        {pet && (
-          <DoggoGrid mobile={1}>
-            <StyledPetCard>
-              <ComponentPetCard {...pet} />
-            </StyledPetCard>
-            <Link href={`/app/pet/${id}/weight`}>
-              <a>
-                <ComponentCardItem icon="barbell" value={pet.currentWeight?.formatted ?? "—"} background="blue">
-                  <FormattedMessage id="pet.weight" />
-                </ComponentCardItem>
-              </a>
-            </Link>
-            <Link href={`/app/pet/${id}/health-log`}>
-              <a>
-                <ComponentCardItem icon="heart" value={pet.healthLog ?? "—"} background="red">
-                  <FormattedMessage id="pet.health_log" />
-                </ComponentCardItem>
-              </a>
-            </Link>
-          </DoggoGrid>
-        )}
-        {petError && <ComponentErrorScreen message={petError?.message} onTryAgain={refetch} />}
-      </LayoutApp>
-    </>
+    <LayoutApp
+      title={intl.formatMessage({ id: "page.pet.header" })}
+      back
+      right={<EditButton onClick={() => router.push(`/app/pet/${id}/edit`)} />}
+    >
+      {pet && (
+        <DoggoGrid mobile={1}>
+          <StyledPetCard>
+            <ComponentPetCard {...pet} />
+          </StyledPetCard>
+          <Link href={`/app/pet/${id}/weight`}>
+            <a>
+              <ComponentCardItem icon="barbell" value={pet.currentWeight?.formatted ?? "—"} background="blue">
+                <FormattedMessage id="pet.weight" />
+              </ComponentCardItem>
+            </a>
+          </Link>
+          <Link href={`/app/pet/${id}/health-log`}>
+            <a>
+              <ComponentCardItem icon="heart" value={pet.healthLog ?? "—"} background="red">
+                <FormattedMessage id="pet.health_log" />
+              </ComponentCardItem>
+            </a>
+          </Link>
+        </DoggoGrid>
+      )}
+      {petError && <ComponentErrorScreen message={petError?.message} onTryAgain={refetch} />}
+    </LayoutApp>
   );
 };
 

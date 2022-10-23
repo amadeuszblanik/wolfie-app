@@ -28,32 +28,24 @@ const App: NextPage = () => {
   const { myPets, myPetsError, refetch, isLoading } = usePetsMy();
 
   return (
-    <>
-      <Head>
-        <title>Wolfie.app - Your pet companion app</title>
-        <meta name="description" content="Pet companion app" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <LayoutApp
-        title={intl.formatMessage({ id: "page.app.header" })}
-        right={<AddButton onClick={() => router.push("/app/pet/add")} />}
-      >
-        {isLoading && <DoggoLoader fullScreen size={SizesEnum.ExtraLarge} />}
-        {myPets && (
-          <DoggoGrid mobile={1} desktop={2}>
-            {myPets.map((pet) => (
-              <Link href={`/app/pet/${pet.id}`} key={pet.id}>
-                <a>
-                  <ComponentPetCard {...pet} />
-                </a>
-              </Link>
-            ))}
-          </DoggoGrid>
-        )}
-        {myPetsError && <ComponentErrorScreen message={myPetsError.message} onTryAgain={refetch} />}
-      </LayoutApp>
-    </>
+    <LayoutApp
+      title={intl.formatMessage({ id: "page.app.header" })}
+      right={<AddButton onClick={() => router.push("/app/pet/add")} />}
+    >
+      {isLoading && <DoggoLoader fullScreen size={SizesEnum.ExtraLarge} />}
+      {myPets && (
+        <DoggoGrid mobile={1} desktop={2}>
+          {myPets.map((pet) => (
+            <Link href={`/app/pet/${pet.id}`} key={pet.id}>
+              <a>
+                <ComponentPetCard {...pet} />
+              </a>
+            </Link>
+          ))}
+        </DoggoGrid>
+      )}
+      {myPetsError && <ComponentErrorScreen message={myPetsError.message} onTryAgain={refetch} />}
+    </LayoutApp>
   );
 };
 

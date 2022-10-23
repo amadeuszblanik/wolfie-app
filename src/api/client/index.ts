@@ -53,7 +53,7 @@ const STATUS_CODES = {
 
 export default class ApiClient {
   private readonly baseUrl: string =
-    process.env.NODE_ENV === "production" ? "https://api.wolfie.app/v1" : "http://192.168.1.50:3000/api";
+    process.env.NODE_ENV === "production" ? "https://api.wolfie.app/v1" : "http://192.168.1.50:3000/v1";
 
   constructor(private readonly language: string) {}
 

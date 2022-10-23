@@ -93,7 +93,7 @@ const Form: React.FunctionComponent = () => {
           padding={{ bottom: SizesEnum.Large }}
         >
           <DoggoBox padding={{ right: SizesEnum.Medium }}>
-            <Link href="/app/auth/sign-up">
+            <Link href="/auth/sign-up">
               <a>
                 <DoggoButton>
                   <FormattedMessage id="common.sign_up" />
@@ -102,7 +102,7 @@ const Form: React.FunctionComponent = () => {
             </Link>
           </DoggoBox>
           <DoggoBox padding={{ right: SizesEnum.Medium }}>
-            <Link href="/app/auth/forgot-password">
+            <Link href="/auth/forgot-password">
               <a>
                 <DoggoButton>
                   <FormattedMessage id="common.forgot_password" />

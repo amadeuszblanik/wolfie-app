@@ -35,13 +35,7 @@ const PrivacyPolicy: NextPage = () => {
   const { response, error } = useGdpr();
 
   return (
-    <div>
-      <Head>
-        <title>Wolfie.app - Your pet companion app</title>
-        <meta name="description" content="Pet companion app" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
+    <>
       <header>
         <DoggoBox column alignX={FlexAlign.Center} padding={{ bottom: SizesEnum.ExtraLarge2 }}>
           <DoggoBox padding={{ y: SizesEnum.ExtraLarge }}>
@@ -72,7 +66,7 @@ const PrivacyPolicy: NextPage = () => {
           )}
         </DoggoBox>
       </DoggoContainer>
-    </div>
+    </>
   );
 };
 

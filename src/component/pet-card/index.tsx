@@ -45,7 +45,7 @@ const Component: React.FunctionComponent<Props> = ({ data, background, onAvatarE
       </DoggoText>
       <DoggoText>
         <FormattedMessage id="pet.breed" />:{" "}
-        {data ? data.breed?.name ?? <FormattedMessage id="pet.breed.mixed" /> : <DoggoPlaceholder />}
+        {data ? <FormattedMessage id={`pet.breed.${data.breed?.name ?? "mixed"}`} /> : <DoggoPlaceholder />}
       </DoggoText>
     </DoggoBox>
   </DoggoBox>

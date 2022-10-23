@@ -7,7 +7,7 @@ import { PetSingleResponseModel } from "../response-model/pet-single.response-mo
 import { CommonErrorResponseModel } from "../response-model/common-error.response-model";
 import { getQueryStatus } from "../../utils";
 
-const useQueries = (id: string) => {
+const useQueries = (id: string, enabled = true) => {
   const intl = useIntl();
 
   const [status, setStatus] = useState(ApiStatesTypes.Init);
@@ -24,7 +24,9 @@ const useQueries = (id: string) => {
     isIdle,
     data,
     error: queryError,
-  } = useQuery(["[GET] pets/:id", id], () => apiClient.getPetsById(id));
+  } = useQuery(["[GET] pets/:id", id], () => apiClient.getPetsById(id), {
+    enabled,
+  });
 
   useEffect(() => {
     setResponse(data?.success);
@@ -48,7 +50,6 @@ const useQueries = (id: string) => {
   }, [isLoading, isError, isSuccess, isIdle, response, error]);
 
   const get = () => {
-    setStatus(ApiStatesTypes.Loading);
     setResponse(undefined);
     setError(undefined);
 

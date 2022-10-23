@@ -36,6 +36,9 @@ import { ProfilePayload } from "../payload/profile.payload";
 import { ChangePasswordPayload } from "../payload/change-password.payload";
 import { RefreshTokenResponseModel } from "../response-model/refresh-token.response-model";
 import refreshTokenDto from "../dto/refresh-token.dto";
+import { Breed } from "../../types/breed.types";
+import breedDto from "../dto/breed.dto";
+import breedsDto from "../dto/breeds.dto";
 
 type HTTP_METHOD = "GET" | "POST" | "PUT" | "DELETE";
 
@@ -133,10 +136,8 @@ export default class ApiClient {
     return this.get<ShortMedicineResponseModel[]>("/medicine").then((response) => responseDto(response));
   };
 
-  public petsAdd = async (body: PetsAddPayload): Promise<ApiResponse<PetsAddResponseModel>> => {
-    return this.post<PetsAddResponseModel, PetsAddPayload>("/pets/add", body).then((response) =>
-      responseDto(response, getPetsDto),
-    );
+  public getBreed = async (): Promise<ApiResponse<Breed[]>> => {
+    return this.get<Breed[]>("/breed").then((response) => responseDto(response, breedsDto));
   };
 
   public getPetsById = (id: string): Promise<ApiResponse<PetSingleResponseModel>> => {
@@ -149,7 +150,13 @@ export default class ApiClient {
     );
   };
 
-  public petsEdit = async (id: string, body: PetsUpdatePayload): Promise<ApiResponse<PetsEditResponseModel>> => {
+  public postPetsAdd = async (body: PetsAddPayload): Promise<ApiResponse<PetsAddResponseModel>> => {
+    return this.post<PetsAddResponseModel, PetsAddPayload>("/pets/add", body).then((response) =>
+      responseDto(response, getPetsDto),
+    );
+  };
+
+  public putPetsById = async (id: string, body: PetsUpdatePayload): Promise<ApiResponse<PetsEditResponseModel>> => {
     return this.put<PetsEditResponseModel, PetsUpdatePayload>(`/pets/${id}`, body).then((response) =>
       responseDto(response, getPetsDto),
     );

@@ -15,7 +15,6 @@ import { SizesEnum } from "../../settings/sizes";
 import useFormValidator, { FormValidators } from "../../form-validator";
 import { useRouter } from "next/router";
 import useUpdateProfile from "../../api/queries/update-profile";
-import Link from "next/link";
 import { WeightUnits } from "../../api/types/weight-units.types";
 import { enumToList } from "../../utils";
 import { ProfilePayload } from "../../api/payload/profile.payload";

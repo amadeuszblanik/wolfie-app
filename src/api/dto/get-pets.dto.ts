@@ -1,5 +1,6 @@
 import { PetSingleResponseModel } from "../response-model/pet-single.response-model";
 import { PetKind } from "../../types/pet-kind.types";
+import breedDto from "./breed.dto";
 
 const getPetsDto = (data: PetSingleResponseModel): PetSingleResponseModel => ({
   id: data.id,
@@ -10,7 +11,7 @@ const getPetsDto = (data: PetSingleResponseModel): PetSingleResponseModel => ({
   currentWeight: data.currentWeight,
   birthDate: new Date(data.birthDate),
   healthLog: data.healthLog,
-  breed: data.breed,
+  breed: data.breed && breedDto(data.breed),
   createdAt: new Date(data.createdAt),
   updatedAt: new Date(data.updatedAt),
 });

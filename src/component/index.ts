@@ -9,6 +9,7 @@ export { default as ComponentChangeTheme } from "./change-theme";
 export { default as ComponentErrorScreen } from "./error-screen";
 export { default as ComponentFooter } from "./footer";
 export { default as ComponentPetCard } from "./pet-card";
+export { default as ComponentSelectBreed } from "./select-breed";
 export { default as ComponentSelectMedicines } from "./select-medicines";
 export { default as ComponentSignOff } from "./sign-off";
 export { default as ComponentSuccessScreen } from "./success-screen";

@@ -19,11 +19,11 @@ const LOADER_SIZES: { [key in SizesEnum]: number } = {
 
 interface StyledBoxProps {
   size?: SizesEnum;
-  fullScreen: boolean;
+  fullScreen: boolean | "component";
 }
 
 const StyledBox = styled(Box)<StyledBoxProps>`
-  position: ${({ fullScreen }) => (fullScreen ? "fixed" : "relative")};
+  position: ${({ fullScreen }) => (fullScreen ? (fullScreen === "component" ? "absolute" : "fixed") : "relative")};
   top: 0;
   left: 0;
   ${({ fullScreen }) => fullScreen && `z-index: 1020; width: 100%; height: 100%;`}
@@ -36,7 +36,7 @@ const StyledBox = styled(Box)<StyledBoxProps>`
 interface Props {
   alt?: string;
   size?: SizesEnum;
-  fullScreen?: boolean;
+  fullScreen?: boolean | "component";
 }
 
 const Component = ({ size, fullScreen }: Props) => {

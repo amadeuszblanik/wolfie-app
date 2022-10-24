@@ -7,7 +7,7 @@
     "build": "next build",
     "export": "next export",
     "start": "next start --port 3100",
-    "lint": "next lint && stylelint './src/**/*.{css,scss,js,jsx,ts,tsx}'",
+    "lint": "next lint && stylelint './**/*.{css,scss,js,jsx,ts,tsx}'",
     "lint:ts": "next lint",
     "lint:css": "stylelint './src/**/*.tsx'",
     "storybook": "start-storybook -p 6006",

@@ -7,8 +7,8 @@ const Global = createGlobalStyle`
 
   body {
     color: ${({ theme }) => theme.palette.text};
-    background: ${({ theme }) => theme.palette.background};
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    background: ${({ theme }) => theme.palette.background};
   }
 
   :root {
@@ -24,8 +24,8 @@ const Global = createGlobalStyle`
   }
   
   * {
-    user-select: none;
     box-sizing: border-box;
+    user-select: none;
     color-scheme: ${({ theme }) => (isDarkMixin(theme.palette.dark) ? "dark" : "light")};
   }
   

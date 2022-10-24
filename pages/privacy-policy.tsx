@@ -1,6 +1,7 @@
 import { FormattedMessage, useIntl } from "react-intl";
 import Link from "next/link";
 import styled from "styled-components";
+import Image from "next/image";
 import { DoggoBox, DoggoButton, DoggoContainer, DoggoText } from "../src/ui-components";
 import useGdpr from "../src/api/queries/gdpr";
 import { BoxWidth, FlexAlign } from "../src/ui-components/box";
@@ -38,7 +39,7 @@ const PrivacyPolicy: NextPage = () => {
       <header>
         <DoggoBox column alignX={FlexAlign.Center} padding={{ bottom: SizesEnum.ExtraLarge2 }}>
           <DoggoBox padding={{ y: SizesEnum.ExtraLarge }}>
-            <img src="/logo.svg" alt="Doggo logo" width={200} />
+            <Image src="/logo.svg" alt="Doggo logo" width={200} />
           </DoggoBox>
           <DoggoBox padding={{ bottom: SizesEnum.Large }}>
             <DoggoText variant={DoggoTextVariant.LargeTitle} leading>

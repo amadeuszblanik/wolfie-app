@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { FormattedMessage, useIntl } from "react-intl";
+import Image from "next/image";
 import { DoggoBox, DoggoButton, DoggoContainer, DoggoListDeprecated, DoggoText } from "../src/ui-components";
 import { DoggoTextVariant } from "../src/ui-components/text";
 import { SizesEnum } from "../src/settings/sizes";
@@ -18,7 +19,7 @@ const Home: NextPage = () => {
         <header>
           <DoggoBox column alignX={FlexAlign.Center}>
             <DoggoBox padding={{ y: SizesEnum.ExtraLarge }}>
-              <img src="/logo.svg" alt="Doggo logo" width={200} />
+              <Image src="/logo.svg" alt="Doggo logo" width={200} />
             </DoggoBox>
             <DoggoBox padding={{ bottom: SizesEnum.Large }}>
               <DoggoText variant={DoggoTextVariant.LargeTitle} leading>

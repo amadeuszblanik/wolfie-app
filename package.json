@@ -8,6 +8,7 @@
     "export": "next export",
     "start": "next start --port 3100",
     "lint": "next lint && stylelint './src/**/*.tsx*'",
+    "lint:quiet": "next lint --quiet && stylelint './src/**/*.tsx*'",
     "lint:ts": "next lint",
     "lint:css": "stylelint './src/**/*.tsx'",
     "storybook": "start-storybook -p 6006",

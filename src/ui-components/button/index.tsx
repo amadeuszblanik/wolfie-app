@@ -59,17 +59,25 @@ const StyledButton = styled.button<StyledButtonProps>`
   }
 `;
 
-const Button: React.FunctionComponent<ButtonProps> = ({ children, variant, size, onClick, disabled, type }) => (
-  <StyledButton
-    variant={variant}
-    onClick={!disabled ? onClick : () => console.warn("Button disabled")}
-    disabled={disabled}
-    size={size || ButtonSizes.Normal}
-    type={type}
-  >
-    {isText(children) ? <Text noBottomMargin>{children}</Text> : children}
-  </StyledButton>
-);
+const Button: React.FunctionComponent<ButtonProps> = ({ children, variant, size, onClick, disabled, type }) => {
+  const handleClick = () => {
+    if (!disabled && onClick) {
+      onClick();
+    }
+  };
+
+  return (
+    <StyledButton
+      variant={variant}
+      onClick={handleClick}
+      disabled={disabled}
+      size={size || ButtonSizes.Normal}
+      type={type}
+    >
+      {isText(children) ? <Text noBottomMargin>{children}</Text> : children}
+    </StyledButton>
+  );
+};
 
 Button.defaultProps = {
   type: "button",

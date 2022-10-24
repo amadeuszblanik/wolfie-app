@@ -98,8 +98,6 @@ const Component: React.FunctionComponent<Props> = ({
   errors,
   disabled,
 }) => {
-  console.error(value);
-
   const [inputValue, setInputValue] = React.useState<string>(value || "");
   const [inputFocus, setInputFocus] = React.useState<boolean>(false);
   const [dropdownFocus, setDropdownFocus] = React.useState<boolean>(false);

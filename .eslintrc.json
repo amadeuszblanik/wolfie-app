@@ -241,15 +241,8 @@
     "@next/next/no-title-in-document-head": "error",
     "@next/next/no-typos": "error",
     "@next/next/no-unwanted-polyfillio": "error",
-    "no-console": [
-      "error",
-      {
-        "allow": [
-          "warn",
-          "error"
-        ]
-      }
-    ],
+    "react-hooks/exhaustive-deps": "warn",
+    "no-console": "error",
     "no-magic-numbers": [
       "error",
       {

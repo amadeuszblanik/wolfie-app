@@ -38,8 +38,6 @@ const Form: React.FunctionComponent<Props> = ({ initialValues }) => {
   ]);
 
   useEffect(() => {
-    console.warn("FormProfile:useEffect:formValidator", formValidator);
-
     setSubmitEnable(formValidator.formValid);
   }, [formValidator.formValid]);
 

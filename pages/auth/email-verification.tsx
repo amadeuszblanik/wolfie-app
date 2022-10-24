@@ -13,8 +13,6 @@ const EmailVerification: NextPage = () => {
   const intl = useIntl();
   const { token } = router.query;
 
-  console.warn("router", router.query);
-
   const { response, post, status, error } = useConfirmEmail();
 
   useEffect(() => {
@@ -24,9 +22,6 @@ const EmailVerification: NextPage = () => {
 
     post({ token: token as string });
   }, [token]);
-
-  console.warn("response", response);
-  console.warn("error", error);
 
   return (
     <LayoutAuth title="page.email_verification.header">

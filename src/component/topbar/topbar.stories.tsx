@@ -1,4 +1,4 @@
-/* eslint-disable no-magic-numbers */
+/* eslint-disable no-magic-numbers,no-console */
 import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { FormattedMessage } from "react-intl";

@@ -23,12 +23,7 @@ const StyledBottomBar = styled(DoggoBox)`
 `;
 
 const Item = ({ active, icon, name }: ItemProps) => (
-  // eslint-disable-next-line no-console
-  <DoggoButton
-    onClick={() => console.warn("Button clicked")}
-    variant={active ? "background" : "backgroundSecondary"}
-    size={ButtonSizes.Small}
-  >
+  <DoggoButton variant={active ? "background" : "backgroundSecondary"} size={ButtonSizes.Small}>
     <DoggoBox alignX={FlexAlign.Center} column>
       <DoggoBox padding={{ bottom: SizesEnum.Small }}>
         <DoggoIcon icon={icon} size={SizesEnum.Large2} color={active ? "blue" : undefined} />

@@ -48,8 +48,6 @@ const Component: React.FunctionComponent<{ children: React.ReactNode }> = ({ chi
   }, [scrollEnabled]);
 
   useEffect(() => {
-    console.warn("change theme to ", selectedTheme, counterRender);
-
     if (counterRender) {
       localStorage.setItem("selectedTheme", selectedTheme);
     }

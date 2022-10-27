@@ -1,5 +1,5 @@
-import { GdprResponseModel } from "../response-model/gdpr.response-model";
 import sanitizeHtml from "sanitize-html";
+import { GdprResponseModel } from "../response-model/gdpr.response-model";
 
 const SANITIZE_OPTIONS: sanitizeHtml.IOptions = {
   allowedAttributes: {

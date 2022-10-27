@@ -1,5 +1,5 @@
 import React from "react";
-import { DoggoBox, DoggoList, DoggoLoader } from "../../ui-components";
+import { DoggoBox, DoggoLoader } from "../../ui-components";
 import { SizesEnum } from "../../settings/sizes";
 import { ComponentApiWrapper } from "../../component";
 import useProfile from "../../api/queries/profile";

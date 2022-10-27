@@ -1,19 +1,19 @@
-import type { AppProps } from "next/app";
 import { ThemeProvider } from "styled-components";
-import theme from "../src/settings/theme";
-import React, { useContext, useEffect, useState } from "react";
-import { GlobalStyles } from "../src/component/styles";
-import en_GB from "../lang/en-GB.json";
-import pl_PL from "../lang/pl-PL.json";
-import fr_FR from "../lang/fr-FR.json";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { IntlProvider } from "react-intl";
 import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import Head from "next/head";
+import fr_FR from "../lang/fr-FR.json";
+import pl_PL from "../lang/pl-PL.json";
+import en_GB from "../lang/en-GB.json";
+import { GlobalStyles } from "../src/component/styles";
+import theme from "../src/settings/theme";
 import { ComponentFooter } from "../src/component";
-import { ConfigContext, ConfigContextType } from "../src/context/config.context";
+import { ConfigContext } from "../src/context/config.context";
 import { ConfigStore } from "../src/context";
+import type { AppProps } from "next/app";
 
 const MESSAGES = {
   "en-GB": en_GB,

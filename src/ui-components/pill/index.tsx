@@ -1,11 +1,11 @@
-import type React from "react";
-import Text from "../text";
 import styled, { ThemePalette } from "styled-components";
+import Text from "../text";
 import { backgroundMixin, paddingMixin } from "../mixins";
 import { SizesEnum } from "../../settings/sizes";
 import Button, { ButtonSizes } from "../button";
 import Icon from "../icon";
 import Box from "../box";
+import type React from "react";
 
 interface StyledPillProps {
   variant: ThemePalette | ThemePalette[];
@@ -25,17 +25,15 @@ const StyledPill = styled.div<StyledPillProps>`
   border-radius: 100px;
 `;
 
-const Component = ({ label, variant, onRemove }: Props) => {
-  return (
-    <StyledPill variant={variant || "primary"}>
-      <Text noBottomMargin>{label}</Text>
-      <Box padding={{ left: SizesEnum.Medium }}>
-        <Button onClick={onRemove} size={ButtonSizes.Small}>
-          <Icon icon="close" />
-        </Button>
-      </Box>
-    </StyledPill>
-  );
-};
+const Component = ({ label, variant, onRemove }: Props) => (
+  <StyledPill variant={variant || "primary"}>
+    <Text noBottomMargin>{label}</Text>
+    <Box padding={{ left: SizesEnum.Medium }}>
+      <Button onClick={onRemove} size={ButtonSizes.Small}>
+        <Icon icon="close" />
+      </Button>
+    </Box>
+  </StyledPill>
+);
 
 export default Component;

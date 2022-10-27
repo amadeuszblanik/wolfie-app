@@ -1,6 +1,6 @@
 import React from "react";
-import { StyledInput } from "../input/styled";
 import { clamp } from "bme-utils";
+import { StyledInput } from "../input/styled";
 
 interface Props {
   placeholder?: string;

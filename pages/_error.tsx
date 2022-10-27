@@ -1,8 +1,8 @@
 import { NextPage, NextPageContext } from "next";
-import { ComponentErrorScreen } from "../src/component";
-import { LayoutError } from "../src/layout";
 import { useIntl } from "react-intl";
 import { useRouter } from "next/router";
+import { ComponentErrorScreen } from "../src/component";
+import { LayoutError } from "../src/layout";
 
 interface Props {
   statusCode?: number;
@@ -30,6 +30,7 @@ const Error: NextPage<Props> = ({ statusCode }) => {
 
 Error.getInitialProps = ({ res, err }: NextPageContext) => {
   const statusCode = res ? res.statusCode : err ? err.statusCode : DEFAULT_STATUS_CODE;
+
   return { statusCode };
 };
 

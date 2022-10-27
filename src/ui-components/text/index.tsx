@@ -1,7 +1,8 @@
 import styled, { DefaultTheme } from "styled-components";
-import Sizes, { SizesEnum } from "../../settings/sizes";
 import React from "react";
+import Sizes, { SizesEnum } from "../../settings/sizes";
 
+// @TODO Rename this to something more generic
 export enum DoggoTextVariant {
   LargeTitle = "LARGE_TITLE",
   Title1 = "TITLE_1",
@@ -16,6 +17,7 @@ export enum DoggoTextVariant {
   Caption2 = "CAPTION_2",
 }
 
+// @TODO Rename this to something more generic
 export enum DoggoTextWeight {
   Thin = "100",
   UltraLight = "200",
@@ -42,6 +44,8 @@ const StyledText = styled.p<StyledTextProps>`
   font-weight: ${({ weight }) => weight};
   font-size: ${({ size }) => size}px;
   text-transform: ${({ textTransform }) => textTransform};
+  --placeholder-height: ${({ size }) => size}px;
+  --placeholder-offset-y: 3px;
 `;
 
 const variantSize: {
@@ -84,7 +88,7 @@ const Component: React.FunctionComponent<Props> = ({
   return (
     <StyledText
       size={size}
-      weight={weight!}
+      weight={weight || DoggoTextWeight.Regular}
       color={color}
       textTransform={uppercase ? "uppercase" : undefined}
       {...props}

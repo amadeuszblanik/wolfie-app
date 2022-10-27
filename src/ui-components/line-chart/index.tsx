@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import type React from "react";
+import { clamp } from "bme-utils";
 import { useScreenSize } from "../../hooks";
 import Sizes, { SizesEnum } from "../../settings/sizes";
 import { getIndexes } from "../../utils";
 import { pipeDate, pipeNumber } from "../../pipe";
-import { clamp } from "bme-utils";
+import type React from "react";
 
 const CHART_RATIO = 1.799;
 
@@ -97,6 +97,7 @@ const Component = ({ data, width: componentWidth }: Props) => {
     .fill(null)
     .map((_, index) => {
       const value = minYValue + (rangeY / labelsYToShow) * index;
+
       return {
         value: clamp(value, minYValue, maxYValue),
         label: pipeNumber(value),
@@ -117,9 +118,7 @@ const Component = ({ data, width: componentWidth }: Props) => {
     .reverse();
   const labelsXIndexes = getIndexes(labelsX);
 
-  const calculatePointX = (index: number) => {
-    return (index / dataIndexes) * availableWidth + paddingX;
-  };
+  const calculatePointX = (index: number) => (index / dataIndexes) * availableWidth + paddingX;
 
   const calculatePointY = (index: number) => {
     const value = dataChart[index].y;
@@ -127,25 +126,15 @@ const Component = ({ data, width: componentWidth }: Props) => {
     return availableHeight - ((value - minYValue) / rangeY) * availableHeight + paddingY;
   };
 
-  const calculateLineX1 = (index: number) => {
-    return calculatePointX(index);
-  };
+  const calculateLineX1 = (index: number) => calculatePointX(index);
 
-  const calculateLineX2 = (index: number) => {
-    return calculatePointX(index + X_Y_2_INDEX_DIFFERENCE);
-  };
+  const calculateLineX2 = (index: number) => calculatePointX(index + X_Y_2_INDEX_DIFFERENCE);
 
-  const calculateLineY1 = (index: number) => {
-    return calculatePointY(index);
-  };
+  const calculateLineY1 = (index: number) => calculatePointY(index);
 
-  const calculateLineY2 = (index: number) => {
-    return calculatePointY(index + X_Y_2_INDEX_DIFFERENCE);
-  };
+  const calculateLineY2 = (index: number) => calculatePointY(index + X_Y_2_INDEX_DIFFERENCE);
 
-  const calculateLabelYX = () => {
-    return width - paddingY - labelYWidth + paddingLabelX;
-  };
+  const calculateLabelYX = () => width - paddingY - labelYWidth + paddingLabelX;
 
   const calculateLabelYY = (index: number) => {
     const value = labelsY[index].value;
@@ -153,21 +142,13 @@ const Component = ({ data, width: componentWidth }: Props) => {
     return availableHeight - ((value - minYValue) / rangeY) * availableHeight + paddingY;
   };
 
-  const calculateLabelLineYY = () => {
-    return availableWidth + paddingX;
-  };
+  const calculateLabelLineYY = () => availableWidth + paddingX;
 
-  const calculateLabelXX = (index: number) => {
-    return (index / labelsXIndexes) * availableWidth + paddingX;
-  };
+  const calculateLabelXX = (index: number) => (index / labelsXIndexes) * availableWidth + paddingX;
 
-  const calculateLabelXY = () => {
-    return height - paddingLabelY;
-  };
+  const calculateLabelXY = () => height - paddingLabelY;
 
-  const calculateLabelLineXY = () => {
-    return availableHeight + paddingY;
-  };
+  const calculateLabelLineXY = () => availableHeight + paddingY;
 
   return (
     <StyledChartWrapper viewBox={`0 0 ${width} ${height}`}>

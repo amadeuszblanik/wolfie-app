@@ -1,15 +1,14 @@
 import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
+import { firstElement, toRgba } from "bme-utils";
+import { FormattedMessage } from "react-intl";
 import Container from "../container";
 import Box, { BoxWidth } from "../box";
 import { SizesEnum } from "../../settings/sizes";
-import Icon from "../icon";
 import Button from "../button";
-import { firstElement, toRgba } from "bme-utils";
 import Grid, { GridAlign } from "../grid";
 import { DoggoText } from "../index";
 import { DoggoTextVariant } from "../text";
-import { FormattedMessage } from "react-intl";
 import { ConfigContext, ConfigContextType } from "../../context/config.context";
 
 interface Props {

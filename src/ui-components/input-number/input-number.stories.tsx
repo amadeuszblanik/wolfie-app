@@ -1,5 +1,5 @@
 /* eslint-disable no-magic-numbers */
-import React, { useState } from "react";
+import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import Component from "./index";
 

@@ -1,13 +1,10 @@
 /* eslint-disable no-magic-numbers */
 import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import Component, { DoggoTextWeight, Props } from "./index";
 import { DoggoTextVariant } from "../text";
-import { DoggoBox, DoggoText } from "../index";
-import { BoxWidth } from "../box";
-import { SizesEnum } from "../../settings/sizes";
-import { DefaultTheme } from "styled-components";
+import { DoggoText } from "../index";
 import Theme from "../../settings/theme";
+import Component, { DoggoTextWeight, Props } from "./index";
 
 type ComponentType = React.FunctionComponent<Props & { sampleText: string }>;
 

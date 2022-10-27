@@ -7,6 +7,7 @@ const darkenColor = (rgb: string, amount: number) => {
   }
 
   const [r, g, b] = rgbMatch[1].split(/ *, */).map(Number);
+
   return `rgb(${r - amount}, ${g - amount}, ${b - amount})`;
 };
 

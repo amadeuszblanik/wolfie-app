@@ -1,21 +1,18 @@
 import React, { useEffect, useState } from "react";
+import { FormattedMessage, useIntl } from "react-intl";
 import {
   DoggoBox,
   DoggoButton,
   DoggoForm,
   DoggoFormControl,
+  DoggoGrid,
   DoggoInputText,
   DoggoSelect,
   DoggoText,
 } from "../../ui-components";
-import { FormattedMessage, useIntl } from "react-intl";
-import { BoxWidth, FlexAlign } from "../../ui-components/box";
 import { ApiStatesTypes } from "../../types/api-states.types";
-import { SizesEnum } from "../../settings/sizes";
 import useFormValidator, { FormValidators } from "../../form-validator";
-import { useRouter } from "next/router";
 import useUpdateProfile from "../../api/queries/update-profile";
-import Link from "next/link";
 import { WeightUnits } from "../../api/types/weight-units.types";
 import { enumToList } from "../../utils";
 import { ProfilePayload } from "../../api/payload/profile.payload";
@@ -26,7 +23,6 @@ interface Props {
 
 const Form: React.FunctionComponent<Props> = ({ initialValues }) => {
   const intl = useIntl();
-  const router = useRouter();
   const { post, status, response, error } = useUpdateProfile();
 
   const [formEnable, setFormEnable] = useState(true);
@@ -42,8 +38,6 @@ const Form: React.FunctionComponent<Props> = ({ initialValues }) => {
   ]);
 
   useEffect(() => {
-    console.warn("FormProfile:useEffect:formValidator", formValidator);
-
     setSubmitEnable(formValidator.formValid);
   }, [formValidator.formValid]);
 
@@ -85,16 +79,11 @@ const Form: React.FunctionComponent<Props> = ({ initialValues }) => {
         />
       </DoggoFormControl>
       <DoggoBox column>
-        <DoggoBox
-          width={BoxWidth.Full}
-          alignX={FlexAlign.Right}
-          alignY={FlexAlign.Center}
-          padding={{ bottom: SizesEnum.Large }}
-        >
+        <DoggoGrid mobile={1} desktop={1}>
           <DoggoButton variant="green" type="submit" disabled={!submitEnable}>
             <FormattedMessage id="common.update" />
           </DoggoButton>
-        </DoggoBox>
+        </DoggoGrid>
         {error && (
           <DoggoBox>
             <DoggoText color="red">{error.message}</DoggoText>

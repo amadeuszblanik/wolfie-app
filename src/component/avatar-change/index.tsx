@@ -4,7 +4,6 @@ import { DoggoAvatarCrop, DoggoBox, DoggoButton, DoggoInputFile, DoggoModal } fr
 import { SizesEnum } from "../../settings/sizes";
 import { FlexAlign } from "../../ui-components/box";
 import { useBase64ToFile, useFileToBase64 } from "../../hooks";
-import { firstElement, isEmpty } from "bme-utils";
 import usePetsAvatarChange from "../../api/queries/pets-avatar-change";
 import { ApiStatesTypes } from "../../types/api-states.types";
 import { ComponentApiWrapper } from "../index";
@@ -17,6 +16,8 @@ interface Props {
 
 const Component: React.FunctionComponent<Props> = ({ onClose, onSave, petId }) => {
   const [uploadedImage, setUploadedImage] = useState<FileList | null>(null);
+  // @TODO: Verify if this is the best way to do this
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [croppedImage, setCroppedImage] = useState<string>();
 
   const [imageToCrop] = useFileToBase64(uploadedImage);

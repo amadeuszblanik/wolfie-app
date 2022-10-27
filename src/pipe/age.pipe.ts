@@ -1,5 +1,5 @@
-import { dateDifference } from "../utils";
 import { useIntl } from "react-intl";
+import { dateDifference } from "../utils";
 
 const EMPTY_VALUE = 0;
 const MANY_VALUE = 1;

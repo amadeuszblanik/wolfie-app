@@ -1,9 +1,9 @@
 import React from "react";
-import Box, { BoxWidth, FlexAlign } from "../box";
 import styled from "styled-components";
+import { isEmpty } from "bme-utils";
+import Box, { BoxWidth } from "../box";
 import Text, { DoggoTextVariant } from "../text";
 import { SizesEnum } from "../../settings/sizes";
-import { isEmpty } from "bme-utils";
 
 interface Props {
   label: string;

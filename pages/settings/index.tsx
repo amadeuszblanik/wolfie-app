@@ -1,12 +1,11 @@
-import type { NextPage } from "next";
-import Head from "next/head";
 import { FormattedMessage, useIntl } from "react-intl";
 import React from "react";
-import { LayoutApp } from "../../src/layout";
-import { DoggoButton, DoggoList } from "../../src/ui-components";
-import { ButtonSizes } from "../../src/ui-components/button";
 import Link from "next/link";
+import { LayoutApp } from "../../src/layout";
+import { DoggoButton, DoggoListDeprecated } from "../../src/ui-components";
+import { ButtonSizes } from "../../src/ui-components/button";
 import { ComponentChangeLanguage, ComponentChangeTheme, ComponentSignOff } from "../../src/component";
+import type { NextPage } from "next";
 
 const App: NextPage = () => {
   const intl = useIntl();
@@ -14,7 +13,7 @@ const App: NextPage = () => {
   const items = [
     <Link key="profile" href="/settings/profile">
       <a>
-        <DoggoButton size={ButtonSizes.Small} disabled>
+        <DoggoButton size={ButtonSizes.Small}>
           <FormattedMessage id="page.settings.items.profile" />
         </DoggoButton>
       </a>
@@ -46,7 +45,7 @@ const App: NextPage = () => {
 
   return (
     <LayoutApp title={intl.formatMessage({ id: "page.settings.header" })}>
-      <DoggoList items={items} />
+      <DoggoListDeprecated items={items} />
     </LayoutApp>
   );
 };

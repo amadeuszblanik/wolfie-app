@@ -7,8 +7,8 @@ const Global = createGlobalStyle`
 
   body {
     color: ${({ theme }) => theme.palette.text};
-    background: ${({ theme }) => theme.palette.background};
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    background: ${({ theme }) => theme.palette.background};
   }
 
   :root {
@@ -17,11 +17,15 @@ const Global = createGlobalStyle`
     --color-background-active: ${({ theme }) => darkenColorMixin(theme.palette.background, theme.darken.hover)};
     --color-background-hover: ${({ theme }) => darkenColorMixin(theme.palette.background, theme.darken.active)};
     --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    --placeholder-width: 100px;
+    --placeholder-height: 100%;
+    --placeholder-offset-y: 0;
+    --button-radius: ${({ theme }) => theme.borderRadius};
   }
   
   * {
-    user-select: none;
     box-sizing: border-box;
+    user-select: none;
     color-scheme: ${({ theme }) => (isDarkMixin(theme.palette.dark) ? "dark" : "light")};
   }
   

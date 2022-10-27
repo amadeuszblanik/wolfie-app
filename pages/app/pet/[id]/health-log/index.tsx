@@ -1,16 +1,16 @@
-import type { NextPage } from "next";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
+import Link from "next/link";
 import { LayoutPet } from "../../../../../src/layout";
-import { DoggoButton } from "../../../../../src/ui-components";
 import { ButtonSizes } from "../../../../../src/ui-components/button";
 import { DataDisplayHealthLog } from "../../../../../src/data-display";
 import { ComponentAddHealthLog } from "../../../../../src/component";
 import useHealthLogPet from "../../../../../src/api/queries/health-log-pet";
 import { pipeDate } from "../../../../../src/pipe";
-import { ListItem } from "../../../../../src/ui-components/list";
-import Link from "next/link";
+import { ListItem } from "../../../../../src/ui-components/list-deprecated";
+import { DoggoButton } from "../../../../../src/ui-components";
+import type { NextPage } from "next";
 
 interface AddButtonProps {
   onClick: () => void;

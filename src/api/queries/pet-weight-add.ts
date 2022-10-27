@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
+import { useIntl } from "react-intl";
 import ApiClient from "../client";
 import { ApiStatesTypes } from "../../types/api-states.types";
-import { useIntl } from "react-intl";
 import { PetWeightAddBody } from "../types/pet-weight-add.types";
 
 const usePetWeightAdd = (id: string) => {
@@ -14,15 +14,14 @@ const usePetWeightAdd = (id: string) => {
   const [status, setStatus] = useState<ApiStatesTypes>(ApiStatesTypes.Idle);
 
   const { isLoading, isError, isSuccess, mutate } = useMutation(
-    (body: PetWeightAddBody) => {
-      return new ApiClient(intl.locale).petsWeightAdd(id)(body);
-    },
+    (body: PetWeightAddBody) => new ApiClient(intl.locale).petsWeightAdd(id)(body),
     {
       onSuccess: (response) => {
         queryClient.invalidateQueries(["signIn"]);
 
         if (response instanceof Boolean) {
           setData(true);
+
           return;
         }
 
@@ -32,7 +31,7 @@ const usePetWeightAdd = (id: string) => {
           setErrorMessage(undefined);
         }
       },
-      onError: (error) => {
+      onError: () => {
         setData(false);
       },
     },
@@ -41,16 +40,19 @@ const usePetWeightAdd = (id: string) => {
   useEffect(() => {
     if (isLoading) {
       setStatus(ApiStatesTypes.Loading);
+
       return;
     }
 
     if (isError) {
       setStatus(ApiStatesTypes.Error);
+
       return;
     }
 
     if (isSuccess) {
       setStatus(errorMessage ? ApiStatesTypes.Error : ApiStatesTypes.Success);
+
       return;
     }
 

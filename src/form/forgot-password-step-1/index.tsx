@@ -1,13 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { DoggoBox, DoggoButton, DoggoForm, DoggoInput, DoggoPasswordValidator, DoggoText } from "../../ui-components";
-import { InputTypes } from "../../ui-components/input";
 import { FormattedMessage, useIntl } from "react-intl";
-import { BoxWidth, FlexAlign } from "../../ui-components/box";
+import Link from "next/link";
+import {
+  DoggoBox,
+  DoggoButton,
+  DoggoForm,
+  DoggoGrid,
+  DoggoInput,
+  DoggoPasswordValidator,
+  DoggoText,
+} from "../../ui-components";
+import { InputTypes } from "../../ui-components/input";
+import { FlexAlign } from "../../ui-components/box";
 import { ApiStatesTypes } from "../../types/api-states.types";
 import { SizesEnum } from "../../settings/sizes";
 import useFormValidator, { FormValidators } from "../../form-validator";
 import useResetPasswordStep1 from "../../api/queries/reset-password-step-1";
-import Link from "next/link";
 
 interface Props {
   token: string;
@@ -36,6 +44,7 @@ const Form: React.FunctionComponent<Props> = ({ token }) => {
   useEffect(() => {
     if (status === ApiStatesTypes.Success) {
       setSubmitEnable(false);
+
       return;
     }
 
@@ -71,7 +80,7 @@ const Form: React.FunctionComponent<Props> = ({ token }) => {
         onChange={setPassword}
         type={InputTypes.Password}
         disabled={!formEnable}
-        errors={formValidator.errors["password"]}
+        errors={formValidator.errors.password}
       />
       <DoggoPasswordValidator value={password} />
       <DoggoInput
@@ -80,19 +89,14 @@ const Form: React.FunctionComponent<Props> = ({ token }) => {
         onChange={setPasswordConfirm}
         type={InputTypes.Password}
         disabled={!formEnable}
-        errors={formValidator.errors["passwordConfirm"]}
+        errors={formValidator.errors.passwordConfirm}
       />
       <DoggoBox column>
-        <DoggoBox
-          width={BoxWidth.Full}
-          alignX={FlexAlign.Right}
-          alignY={FlexAlign.Center}
-          padding={{ bottom: SizesEnum.Large }}
-        >
+        <DoggoGrid mobile={1} desktop={1}>
           <DoggoButton variant="blue" type="submit" disabled={!submitEnable}>
             <FormattedMessage id="page.forgot_password.set_password" />
           </DoggoButton>
-        </DoggoBox>
+        </DoggoGrid>
         {response && (
           <DoggoBox column>
             <DoggoText color="green">{response.message}</DoggoText>

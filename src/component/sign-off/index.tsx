@@ -1,7 +1,7 @@
 import React from "react";
-import { DoggoButton } from "../../ui-components";
 import { FormattedMessage } from "react-intl";
 import { useRouter } from "next/router";
+import { DoggoButton } from "../../ui-components";
 
 const Component: React.FunctionComponent = () => {
   const router = useRouter();

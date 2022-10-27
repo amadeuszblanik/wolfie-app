@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
+import { useIntl } from "react-intl";
 import ApiClient from "../client";
 import { ApiStatesTypes } from "../../types/api-states.types";
-import { useIntl } from "react-intl";
 import { CommonErrorResponseModel } from "../response-model/common-error.response-model";
 import { ConfigPrivateResponseModel } from "../response-model/config-private.response-model";
 
@@ -20,11 +20,13 @@ const useConfigPrivate = () => {
   useEffect(() => {
     if (isLoading) {
       setStatus(ApiStatesTypes.Loading);
+
       return;
     }
 
     if (isError) {
       setStatus(ApiStatesTypes.Error);
+
       return;
     }
 
@@ -32,6 +34,7 @@ const useConfigPrivate = () => {
       setStatus(configPrivateError ? ApiStatesTypes.Error : ApiStatesTypes.Success);
       setConfigPrivate(data?.success ?? undefined);
       setConfigPrivateError(data?.error ?? undefined);
+
       return;
     }
 

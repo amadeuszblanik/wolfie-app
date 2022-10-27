@@ -1,9 +1,9 @@
 import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import Component from "./index";
 import { DoggoBox } from "../index";
 import { BoxWidth } from "../box";
 import { SizesEnum } from "../../settings/sizes";
+import Component from "./index";
 
 export default {
   title: "UI-Components/Container",

@@ -1,13 +1,13 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import Component from "./index";
 import Theme from "../../settings/theme";
+import Component from "./index";
 
 export default {
   title: "UI-Components/Button",
   component: Component,
   argTypes: {
-    variant: { options: Object.keys(Theme.dark["palette"]), control: "select" },
+    variant: { options: Object.keys(Theme.dark.palette), control: "select" },
     disabled: { control: "boolean" },
     onClick: { action: "onClick()" },
   },

@@ -75,8 +75,9 @@ const DESKTOP_BREAKPOINT = 900;
 const MINIMUM_DATA_REQUIRED = 3;
 
 const Component = ({ data, width: componentWidth, loading }: Props) => {
-  const dataIndexes = getIndexes(data);
   const { width: screenWidth } = useScreenSize();
+
+  const dataIndexes = getIndexes(data);
   const width = componentWidth ?? screenWidth;
   const height = width * CHART_RATIO;
 

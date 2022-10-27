@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --port 3100",
+    "dev": "NODE_OPTIONS='--inspect' next dev --port 3100",
     "build": "next build",
     "export": "next export",
     "start": "next start --port 3100",

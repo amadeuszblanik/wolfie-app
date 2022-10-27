@@ -1,5 +1,5 @@
 import { ThemeProvider } from "styled-components";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { IntlProvider } from "react-intl";
 import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
@@ -25,6 +25,10 @@ function MyApp({ Component, pageProps }: AppProps<{ dehydratedState: any }>) {
   const [queryClient] = useState(() => new QueryClient());
 
   const locale = useRouter().locale as keyof typeof MESSAGES;
+
+  useEffect(() => {
+    localStorage.setItem("locale", locale);
+  }, [locale]);
 
   return (
     <IntlProvider locale={locale} messages={MESSAGES[locale]}>

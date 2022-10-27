@@ -1,7 +1,6 @@
 import FormData from "form-data";
 import { PetSingleResponseModel } from "../response-model/pet-single.response-model";
 import myPetsDto from "../dto/my-pets.dto";
-import { CommonErrorResponseModel } from "../response-model/common-error.response-model";
 import responseDto, { ApiResponse } from "../dto/response.dto";
 import getPetsDto from "../dto/get-pets.dto";
 import { AuthRefreshTokenBody, AuthRefreshTokenResponse } from "../types/auth-refresh-token.types";
@@ -9,7 +8,6 @@ import { WeightValueResponseModel } from "../response-model/weight-value.respons
 import getPetsWeightDto from "../dto/get-pets-weight.dto";
 import { ConfigPrivateResponseModel } from "../response-model/config-private.response-model";
 import getConfigPrivateDto from "../dto/get-config-private.dto";
-import { PetWeightAddBody, PetWeightAddResponse } from "../types/pet-weight-add.types";
 import { ConfigPublicResponseModel } from "../response-model/config-public.response-model";
 import getConfigPublicDto from "../dto/get-config-public.dto";
 import { PetsAddResponseModel } from "../response-model/pets-add.response-model";
@@ -38,6 +36,7 @@ import { RefreshTokenResponseModel } from "../response-model/refresh-token.respo
 import refreshTokenDto from "../dto/refresh-token.dto";
 import { Breed } from "../../types/breed.types";
 import breedsDto from "../dto/breeds.dto";
+import { PetWeightAddPayload } from "../payload/pet-weight-add.payload";
 
 type HTTP_METHOD = "GET" | "POST" | "PUT" | "DELETE";
 
@@ -163,10 +162,13 @@ export default class ApiClient {
       responseDto(response),
     );
 
-  public petsWeightAdd =
-    (id: string) =>
-    async (body: PetWeightAddBody): Promise<PetWeightAddResponse | CommonErrorResponseModel> =>
-      this.post(`/pets/${id}/weight`, body);
+  public postPetsWeightById = async (
+    id: string,
+    payload: PetWeightAddPayload,
+  ): Promise<ApiResponse<WeightValueResponseModel>> =>
+    this.post<WeightValueResponseModel, PetWeightAddPayload>(`/pets/${id}/weight`, payload).then((response) =>
+      responseDto(response),
+    );
 
   public refreshToken = (body: AuthRefreshTokenBody) => async (): Promise<ApiResponse<AuthRefreshTokenResponse>> =>
     this.post<AuthRefreshTokenResponse, AuthRefreshTokenBody>(`/auth/refresh-token`, body).then((response) =>

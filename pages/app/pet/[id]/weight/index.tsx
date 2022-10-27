@@ -36,7 +36,7 @@ const App: NextPage = () => {
         <DataDisplayPet petId={String(id)} />
         <DataDisplayPetWeights petId={String(id)} />
       </DoggoGrid>
-      {isOpenAddWeight && <ComponentAddWeight onClose={() => setIsOpenAddWeight(false)} />}
+      {isOpenAddWeight && <ComponentAddWeight petId={String(id)} onClose={() => setIsOpenAddWeight(false)} />}
     </LayoutApp>
   );
 };

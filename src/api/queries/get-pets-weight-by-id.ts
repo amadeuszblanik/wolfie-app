@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { useIntl } from "react-intl";
 import ApiClient from "../client";
@@ -6,6 +6,7 @@ import { ApiStatesTypes } from "../../types/api-states.types";
 import { CommonErrorResponseModel } from "../response-model/common-error.response-model";
 import { WeightValueResponseModel } from "../response-model/weight-value.response-model";
 import { getQueryStatus } from "../../utils";
+import { rsPetWeight } from "../../reactive-store";
 
 const useQueries = (id: string) => {
   const intl = useIntl();
@@ -47,12 +48,18 @@ const useQueries = (id: string) => {
     setStatus(getQueryStatus(isLoading, isError, isSuccess, isIdle, false, response, error));
   }, [isLoading, isError, isSuccess, isIdle, response, error]);
 
-  const get = () => {
+  const get = useCallback(() => {
     setResponse(undefined);
     setError(undefined);
 
     void refetch();
-  };
+  }, [setResponse, setError, refetch]);
+
+  useEffect(() => {
+    rsPetWeight.update.subscribe(() => {
+      get();
+    });
+  }, [get]);
 
   return { get, status, response, error };
 };

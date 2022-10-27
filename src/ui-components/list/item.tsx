@@ -40,13 +40,22 @@ const StyledItem = styled.div<StyledItemProps>`
   display: flex;
   justify-content: space-between;
   width: 100%;
+  text-align: center;
   cursor: ${({ clickable }) => (clickable ? "pointer" : "default")};
   opacity: ${({ actionsVisible }) => (actionsVisible ? "0.66" : "1")};
   transition: opacity 0.2s ease-in-out;
   will-change: opacity;
 
-  *:nth-child(2) {
+  *:nth-child(n + 2) {
     --color-text: ${({ theme }) => theme.palette.gray2};
+  }
+
+  :first-child {
+    text-align: left;
+  }
+
+  :last-child {
+    text-align: right;
   }
 `;
 

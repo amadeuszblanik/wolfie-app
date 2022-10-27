@@ -4,16 +4,21 @@ import { DoggoButton, DoggoInput, DoggoListDeprecated, DoggoSheet } from "../../
 import { toDate, toTime } from "../../utils";
 import { InputTypes } from "../../ui-components/input";
 import { PetWeightAddBody } from "../../api/types/pet-weight-add.types";
+import { WeightUnits } from "../../api/types/weight-units.types";
 
 interface Props {
   onClose: () => void;
-  onAdd: (data: PetWeightAddBody) => void;
-  unit: string;
 }
 
 const DEFAULT_WEIGHT = 15;
 
-const Component: React.FunctionComponent<Props> = ({ onClose, onAdd, unit }) => {
+const Component: React.FunctionComponent<Props> = ({ onClose }) => {
+  const unit = WeightUnits.Kilogram;
+  const onAdd = (_data: PetWeightAddBody) => {
+    // @TODO Handle this one
+    onClose();
+  };
+
   const intl = useIntl();
 
   const [date, setDate] = useState(toDate(new Date()));

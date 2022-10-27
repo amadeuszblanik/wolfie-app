@@ -21,7 +21,7 @@ const useScreenSize = (): { width: number; height: number } => {
     window.addEventListener("resize", handleWindowResize);
 
     return () => window.removeEventListener("resize", handleWindowResize);
-  }, [window.innerWidth, window.innerHeight]);
+  }, []);
 
   return { width, height };
 };

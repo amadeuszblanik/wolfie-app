@@ -140,7 +140,7 @@ export default class ApiClient {
       responseDto(response, getPetsDto),
     );
 
-  public petsWeight = (id: string) => async (): Promise<ApiResponse<WeightValueResponseModel[]>> =>
+  public getPetWeightById = (id: string): Promise<ApiResponse<WeightValueResponseModel[]>> =>
     this.get<WeightValueResponseModel[]>(`/pets/${id}/weight?last=ALL`).then((response) =>
       responseDto(response, getPetsWeightDto),
     );

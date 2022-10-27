@@ -12,7 +12,7 @@ const Gdpr: NextPage = () => (
     <header>
       <DoggoBox column alignX={FlexAlign.Center} padding={{ bottom: SizesEnum.ExtraLarge2 }}>
         <DoggoBox padding={{ y: SizesEnum.ExtraLarge }}>
-          <Image src="/logo.svg" alt="Doggo logo" width={200} />
+          <Image src="/logo.svg" alt="Doggo logo" width={200} height={200} />
         </DoggoBox>
         <DoggoBox padding={{ bottom: SizesEnum.Large }}>
           <DoggoText variant={DoggoTextVariant.LargeTitle} leading>

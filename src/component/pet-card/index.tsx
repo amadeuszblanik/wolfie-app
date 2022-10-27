@@ -41,7 +41,7 @@ const Component: React.FunctionComponent<Props> = ({ data, background, onAvatarE
         <FormattedMessage id="pet.birthday" />: {data ? pipeDate(data.birthDate) : <DoggoPlaceholder />}
       </DoggoText>
       <DoggoText>
-        <FormattedMessage id="pet.microchip" />: {data?.microchip || <DoggoPlaceholder />}
+        <FormattedMessage id="pet.microchip" />: {data ? data.microchip : <DoggoPlaceholder />}
       </DoggoText>
       <DoggoText>
         <FormattedMessage id="pet.breed" />:{" "}

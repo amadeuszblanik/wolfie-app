@@ -2,7 +2,6 @@ import React from "react";
 import { ComponentErrorScreen } from "../../component";
 import { useGetPetsWeightSingleById } from "../../api/queries";
 import { FormPetWeight } from "../../form";
-import { WeightUnits } from "../../api/types/weight-units.types";
 import { ApiStatesTypes } from "../../types/api-states.types";
 
 interface Props {
@@ -22,7 +21,6 @@ const DataDisplay: React.FunctionComponent<Props> = ({ petId, weightId }) => {
           petId={petId}
           weightId={weightId}
           initialData={response}
-          weightUnit={WeightUnits.Kilogram}
           loading={status !== ApiStatesTypes.Success}
         />
       );

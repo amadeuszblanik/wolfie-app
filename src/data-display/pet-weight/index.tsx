@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { isEmpty } from "bme-utils";
+import { FormattedMessage } from "react-intl";
 import { ComponentErrorScreen } from "../../component";
 import { useGetPetsWeightById } from "../../api/queries";
 import { DoggoBox, DoggoLineChart, DoggoList, DoggoPlaceholder, DoggoText } from "../../ui-components";
@@ -10,14 +12,25 @@ import { BoxWidth } from "../../ui-components/box";
 
 interface Props {
   petId: string;
+  onEmpty?: () => void;
 }
 
 const PLACEHOLDER_COMPONENTS = 6;
 
-const DataDisplay: React.FunctionComponent<Props> = ({ petId }) => {
+const DataDisplay: React.FunctionComponent<Props> = ({ petId, onEmpty }) => {
   const router = useRouter();
   const { response, error, status, get } = useGetPetsWeightById(petId);
   const [containerWidth, setContainerWidth] = useState<number>();
+
+  const isEmptyResponse = response && isEmpty(response);
+
+  useEffect(() => {
+    if (!isEmptyResponse || !onEmpty) {
+      return;
+    }
+
+    onEmpty();
+  }, [response, onEmpty, isEmptyResponse]);
 
   switch (status) {
     case "error":
@@ -32,7 +45,7 @@ const DataDisplay: React.FunctionComponent<Props> = ({ petId }) => {
               loading={status !== ApiStatesTypes.Success}
             />
           </DoggoBox>
-          <DoggoList label="KG">
+          <DoggoList label="KG" emptyMessage={<FormattedMessage id="data_display.pet_weight.empty" />}>
             {response?.map((item) => (
               <DoggoList.Item key={item.id} onClick={() => router.push(`/app/pet/${petId}/weight/${item.id}`)}>
                 <DoggoText noBottomMargin>{item.raw}</DoggoText>

@@ -137,6 +137,7 @@
   "component.selected_medicines.label": "Select medicines",
   "component.bottom_bar.pets": "Pets",
   "component.bottom_bar.settings": "Settings",
+  "component.list.empty": "No items",
   "user.email": "E-mail",
   "user.first_name": "First name",
   "user.last_name": "Last name",
@@ -528,5 +529,6 @@
   "health_log.description": "Description",
   "health_log.added_by": "Added by",
   "form.pet.updated": "Your pet has been updated",
-  "form.pet.created": "Your pet has been created"
+  "form.pet.created": "Your pet has been created",
+  "data_display.pet_weight.empty": "No weight data"
 }

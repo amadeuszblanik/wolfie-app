@@ -26,6 +26,10 @@ const App: NextPage = () => {
 
   const [isOpenAddWeight, setIsOpenAddWeight] = useState(false);
 
+  const handleEmpty = () => {
+    setIsOpenAddWeight(true);
+  };
+
   return (
     <LayoutApp
       title={intl.formatMessage({ id: "page.pet_weight.header" })}
@@ -34,7 +38,7 @@ const App: NextPage = () => {
     >
       <DoggoGrid mobile={1} desktop={1}>
         <DataDisplayPet petId={String(id)} />
-        <DataDisplayPetWeight petId={String(id)} />
+        <DataDisplayPetWeight petId={String(id)} onEmpty={handleEmpty} />
       </DoggoGrid>
       {isOpenAddWeight && <ComponentAddWeight petId={String(id)} onClose={() => setIsOpenAddWeight(false)} />}
     </LayoutApp>

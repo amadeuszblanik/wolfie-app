@@ -30,12 +30,19 @@ export enum DoggoTextWeight {
   Black = "900",
 }
 
+export enum TextAlignment {
+  Left = "left",
+  Center = "center",
+  Right = "right",
+}
+
 export interface StyledTextProps {
   size: number;
   weight: string;
   color?: keyof DefaultTheme["palette"];
   noBottomMargin?: boolean;
   textTransform?: string;
+  align?: TextAlignment;
 }
 
 const StyledText = styled.p<StyledTextProps>`
@@ -43,6 +50,7 @@ const StyledText = styled.p<StyledTextProps>`
   color: ${({ theme, color }) => (color ? theme.palette[color] : "var(--color-text)")};
   font-weight: ${({ weight }) => weight};
   font-size: ${({ size }) => size}px;
+  text-align: ${({ align }) => align || "inherit"};
   text-transform: ${({ textTransform }) => textTransform};
   --placeholder-height: ${({ size }) => size}px;
   --placeholder-offset-y: 3px;
@@ -72,6 +80,7 @@ export interface Props {
   noBottomMargin?: boolean;
   color?: keyof DefaultTheme["palette"];
   uppercase?: boolean;
+  align?: TextAlignment;
 }
 
 const Component: React.FunctionComponent<Props> = ({

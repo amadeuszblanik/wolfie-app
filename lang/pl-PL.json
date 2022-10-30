@@ -135,6 +135,7 @@
   "component.selected_medicines.label": "Wybierz leki",
   "component.bottom_bar.pets": "Moje zwierzaki",
   "component.bottom_bar.settings": "Ustawienia",
+  "component.list.empty": "Brak danych",
   "user.email": "Email",
   "user.first_name": "Imię",
   "user.last_name": "Nazwisko",
@@ -526,5 +527,6 @@
   "health_log.description": "Opis",
   "health_log.added_by": "Dodane przez",
   "form.pet.updated": "Twój zwierzak został zaktualizowany",
-  "form.pet.created": "Twój zwierzak został dodany"
+  "form.pet.created": "Twój zwierzak został dodany",
+  "data_display.pet_weight.empty": "Brak danych"
 }

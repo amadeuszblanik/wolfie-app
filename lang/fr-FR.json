@@ -136,6 +136,7 @@
   "component.selected_medicines.label": "Médicaments sélectionnés",
   "component.bottom_bar.pets": "Animaux de compagnie",
   "component.bottom_bar.settings": "Paramètres",
+  "component.list.empty": "Liste vide",
   "user.email": "E-mail",
   "user.first_name": "Prénom",
   "user.last_name": "Nom de famille",
@@ -527,5 +528,6 @@
   "health_log.description": "La description",
   "health_log.added_by": "Ajouté par",
   "form.pet.updated": "Votre animal de compagnie a été mis à jour avec succès",
-  "form.pet.created": "Votre animal de compagnie a été créé avec succès"
+  "form.pet.created": "Votre animal de compagnie a été créé avec succès",
+  "data_display.pet_weight.empty": "Pas de poids"
 }

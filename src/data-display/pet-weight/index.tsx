@@ -30,7 +30,7 @@ const DataDisplay: React.FunctionComponent<Props> = ({ petId, onEmpty }) => {
     }
 
     onEmpty();
-  }, [response, onEmpty, isEmptyResponse]);
+  }, [onEmpty, isEmptyResponse]);
 
   switch (status) {
     case "error":

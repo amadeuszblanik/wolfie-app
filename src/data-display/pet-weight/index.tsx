@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { isEmpty } from "bme-utils";
 import { FormattedMessage } from "react-intl";
@@ -9,6 +9,7 @@ import { pipeDate } from "../../pipe";
 import { ApiStatesTypes } from "../../types/api-states.types";
 import { SizesEnum } from "../../settings/sizes";
 import { BoxWidth } from "../../ui-components/box";
+import { ConfigContext, ConfigContextType } from "../../context/config.context";
 
 interface Props {
   petId: string;
@@ -21,6 +22,7 @@ const DataDisplay: React.FunctionComponent<Props> = ({ petId, onEmpty }) => {
   const router = useRouter();
   const { response, error, status, get } = useGetPetsWeightById(petId);
   const [containerWidth, setContainerWidth] = useState<number>();
+  const { userConfig } = useContext<ConfigContextType>(ConfigContext);
 
   const isEmptyResponse = response && isEmpty(response);
 
@@ -45,7 +47,10 @@ const DataDisplay: React.FunctionComponent<Props> = ({ petId, onEmpty }) => {
               loading={status !== ApiStatesTypes.Success}
             />
           </DoggoBox>
-          <DoggoList label="KG" emptyMessage={<FormattedMessage id="data_display.pet_weight.empty" />}>
+          <DoggoList
+            label={userConfig?.weightUnits}
+            emptyMessage={<FormattedMessage id="data_display.pet_weight.empty" />}
+          >
             {response?.map((item) => (
               <DoggoList.Item key={item.id} onClick={() => router.push(`/app/pet/${petId}/weight/${item.id}`)}>
                 <DoggoText noBottomMargin>{item.raw}</DoggoText>

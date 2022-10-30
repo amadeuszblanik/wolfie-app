@@ -1,4 +1,5 @@
 export { default as useGetBreed } from "./get-breed";
+export { default as useGetConfig } from "./get-config";
 export { default as useGetPetsById } from "./get-pets-by-id";
 export { default as useGetPetsMy } from "./get-pets-my";
 export { default as useGetPetsWeightById } from "./get-pets-weight-by-id";

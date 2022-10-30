@@ -6,10 +6,6 @@ import getPetsDto from "../dto/get-pets.dto";
 import { AuthRefreshTokenBody, AuthRefreshTokenResponse } from "../types/auth-refresh-token.types";
 import { WeightValueResponseModel } from "../response-model/weight-value.response-model";
 import getPetsWeightDto from "../dto/get-pets-weight.dto";
-import { ConfigPrivateResponseModel } from "../response-model/config-private.response-model";
-import getConfigPrivateDto from "../dto/get-config-private.dto";
-import { ConfigPublicResponseModel } from "../response-model/config-public.response-model";
-import getConfigPublicDto from "../dto/get-config-public.dto";
 import { PetsAddResponseModel } from "../response-model/pets-add.response-model";
 import { PetsAddPayload } from "../payload/pets-add.payload";
 import { PetsUpdatePayload } from "../payload/pets-update.payload";
@@ -38,6 +34,8 @@ import { Breed } from "../../types/breed.types";
 import breedsDto from "../dto/breeds.dto";
 import { PetWeightAddPayload } from "../payload/pet-weight-add.payload";
 import getPetsWeightSingleDto from "../dto/get-pets-weight-single.dto";
+import { ConfigResponseModel } from "../response-model/config.response-model";
+import getConfigDto from "../dto/get-config.dto";
 
 type HTTP_METHOD = "GET" | "POST" | "PUT" | "DELETE";
 
@@ -105,13 +103,8 @@ export default class ApiClient {
       responseDto(response, refreshTokenDto),
     );
 
-  public configPublic = async (): Promise<ApiResponse<ConfigPublicResponseModel>> =>
-    this.get<ConfigPublicResponseModel>("/config").then((response) => responseDto(response, getConfigPublicDto));
-
-  public configPrivate = async (): Promise<ApiResponse<ConfigPrivateResponseModel>> =>
-    this.get<ConfigPrivateResponseModel>("/config/private").then((response) =>
-      responseDto(response, getConfigPrivateDto),
-    );
+  public getConfig = async (): Promise<ApiResponse<ConfigResponseModel>> =>
+    this.get<ConfigResponseModel>("/config").then((response) => responseDto(response, getConfigDto));
 
   public getPetsMy = async (): Promise<ApiResponse<PetSingleResponseModel[]>> =>
     this.get<PetSingleResponseModel[]>("/pets/my").then((response) => responseDto(response, myPetsDto));

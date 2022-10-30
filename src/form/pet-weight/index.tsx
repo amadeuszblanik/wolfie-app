@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import {
   DoggoBox,
@@ -15,10 +15,10 @@ import {
 import { ApiStatesTypes } from "../../types/api-states.types";
 import useFormValidator, { FormValidators } from "../../form-validator";
 import { toDate, toTime } from "../../utils";
-import { WeightUnits } from "../../api/types/weight-units.types";
 import { usePatchPetWeightSingleById, usePostPetWeightById } from "../../api/queries";
 import { DEFAULT_ON_SUCCESS_TIMEOUT } from "../../settings/globals";
 import { WeightValueResponseModel } from "../../api/response-model/weight-value.response-model";
+import { ConfigContext, ConfigContextType } from "../../context/config.context";
 
 const LOWEST_WEIGHT = 0.1;
 
@@ -26,12 +26,11 @@ interface Props {
   petId: string;
   weightId?: string;
   initialData?: WeightValueResponseModel;
-  weightUnit: WeightUnits;
   onSuccess?: () => void;
   loading?: boolean;
 }
 
-const Form: React.FunctionComponent<Props> = ({ petId, weightId, initialData, weightUnit, onSuccess, loading }) => {
+const Form: React.FunctionComponent<Props> = ({ petId, weightId, initialData, onSuccess, loading }) => {
   const intl = useIntl();
   const { post: addPost, status: addStatus, response: addResponse, error: addError } = usePostPetWeightById(petId);
   const {
@@ -40,6 +39,7 @@ const Form: React.FunctionComponent<Props> = ({ petId, weightId, initialData, we
     response: updateResponse,
     error: updateError,
   } = usePatchPetWeightSingleById(petId, weightId || "null");
+  const { userConfig } = useContext<ConfigContextType>(ConfigContext);
 
   const status = weightId ? updateStatus : addStatus;
   const response = weightId ? updateResponse : addResponse;
@@ -127,7 +127,7 @@ const Form: React.FunctionComponent<Props> = ({ petId, weightId, initialData, we
       <DoggoFormControl
         label={intl.formatMessage({ id: "common.weight" })}
         errors={formValidator.errors.weight}
-        suffix={weightUnit}
+        suffix={userConfig?.weightUnits}
       >
         {!loading ? (
           <DoggoInputNumber value={weight} onChange={setWeight} disabled={!formEnable} />

@@ -7,6 +7,7 @@ import { getQueryStatus } from "../../utils";
 import { CommonErrorResponseModel } from "../response-model/common-error.response-model";
 import { ProfileResponseModel } from "../response-model/profile.response-model";
 import { ProfilePayload } from "../payload/profile.payload";
+import { rsConfig } from "../../reactive-store";
 
 const useUpdateProfile = () => {
   const intl = useIntl();
@@ -27,6 +28,8 @@ const useUpdateProfile = () => {
     onSuccess: (data) => {
       setResponse(data.success);
       setError(data.error);
+
+      rsConfig.update.next();
     },
     onError: () => {
       setError({

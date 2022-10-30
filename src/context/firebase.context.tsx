@@ -27,7 +27,12 @@ const Component: React.FunctionComponent<{ children: React.ReactNode }> = ({ chi
   const [messaging, setMessaging] = useState<Messaging | null>(null);
 
   useEffect(() => {
-    setApp(initializeApp(DEFAULT_FIREBASE_CONFIG));
+    try {
+      setApp(initializeApp(DEFAULT_FIREBASE_CONFIG));
+    } catch (error) {
+      console.error(error);
+      Sentry.captureException(error);
+    }
   }, []);
 
   useEffect(() => {
@@ -35,7 +40,12 @@ const Component: React.FunctionComponent<{ children: React.ReactNode }> = ({ chi
       return;
     }
 
-    setMessaging(getMessaging(app));
+    try {
+      setMessaging(getMessaging(app));
+    } catch (error) {
+      console.error("Firebase messaging already initialized");
+      Sentry.captureException(error);
+    }
   }, [app]);
 
   useEffect(() => {
@@ -45,25 +55,30 @@ const Component: React.FunctionComponent<{ children: React.ReactNode }> = ({ chi
 
     const deviceToken = localStorage.getItem("refreshToken");
 
-    getToken(messaging, {
-      vapidKey: process.env.NEXT_PUBLIC_FIREBASE_FCM_VAPID_KEY,
-    })
-      .then((fcmToken) => {
-        if (fcmToken && deviceToken) {
-          new ApiClient("en-GB").postFcmToken({ deviceToken, fcmToken });
-
-          if (process.env.NODE_ENV !== "production") {
-            // eslint-disable-next-line no-console
-            console.debug("FCM token: ", fcmToken);
-          }
-        } else {
-          console.error("No registration token available. Request permission to generate one.");
-          Sentry.captureMessage("No registration token available. Request permission to generate one.");
-        }
+    try {
+      getToken(messaging, {
+        vapidKey: process.env.NEXT_PUBLIC_FIREBASE_FCM_VAPID_KEY,
       })
-      .catch((err) => {
-        Sentry.captureMessage("No registration token available. Request permission to generate one. " + String(err));
-      });
+        .then((fcmToken) => {
+          if (fcmToken && deviceToken) {
+            new ApiClient("en-GB").postFcmToken({ deviceToken, fcmToken });
+
+            if (process.env.NODE_ENV !== "production") {
+              // eslint-disable-next-line no-console
+              console.debug("FCM token: ", fcmToken);
+            }
+          } else {
+            console.error("No registration token available. Request permission to generate one.");
+            Sentry.captureMessage("No registration token available. Request permission to generate one.");
+          }
+        })
+        .catch((err) => {
+          Sentry.captureMessage("No registration token available. Request permission to generate one. " + String(err));
+        });
+    } catch (err) {
+      console.error("Error getting FCM token: ", err);
+      Sentry.captureException(err);
+    }
   }, [messaging]);
 
   return (

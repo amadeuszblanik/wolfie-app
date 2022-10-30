@@ -60,7 +60,7 @@ const useQueries = () => {
     setError(undefined);
 
     void refetch();
-  }, [refetch, setResponse, setError]);
+  }, [refetch]);
 
   useEffect(() => {
     rsConfig.update.subscribe(() => {

@@ -32,7 +32,7 @@ const Component: React.FunctionComponent<{ children: React.ReactNode }> = ({ chi
 
   useEffect(() => {
     setCounterRender(counterRender + COUNTER_INCREMENT);
-  }, [selectedTheme, scrollEnabled, counterRender]);
+  }, [selectedTheme, scrollEnabled]);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("selectedTheme") as ThemeVariants | null;

@@ -70,36 +70,30 @@ const Component: React.FunctionComponent<{ children: React.ReactNode }> = ({ chi
 
     const deviceToken = localStorage.getItem("refreshToken");
 
-    Notification.requestPermission().then((permission) => {
-      if (permission === "granted") {
-        try {
-          getToken(messaging, {
-            vapidKey: process.env.NEXT_PUBLIC_FIREBASE_FCM_VAPID_KEY,
-          })
-            .then((fcmToken) => {
-              if (fcmToken && deviceToken) {
-                new ApiClient("en-GB").postFcmToken({ deviceToken, fcmToken });
+    try {
+      getToken(messaging, {
+        vapidKey: process.env.NEXT_PUBLIC_FIREBASE_FCM_VAPID_KEY,
+      })
+        .then((fcmToken) => {
+          if (fcmToken && deviceToken) {
+            new ApiClient("en-GB").postFcmToken({ deviceToken, fcmToken });
 
-                if (process.env.NODE_ENV !== "production") {
-                  // eslint-disable-next-line no-console
-                  console.debug("FCM token: ", fcmToken);
-                }
-              } else {
-                console.error("No registration token available. Request permission to generate one.");
-                Sentry.captureMessage("No registration token available. Request permission to generate one.");
-              }
-            })
-            .catch((err) => {
-              Sentry.captureMessage(
-                "No registration token available. Request permission to generate one. " + String(err),
-              );
-            });
-        } catch (err) {
-          console.error("Error getting FCM token: ", err);
-          Sentry.captureException(err);
-        }
-      }
-    });
+            if (process.env.NODE_ENV !== "production") {
+              // eslint-disable-next-line no-console
+              console.debug("FCM token: ", fcmToken);
+            }
+          } else {
+            console.error("No registration token available. Request permission to generate one.");
+            Sentry.captureMessage("No registration token available. Request permission to generate one.");
+          }
+        })
+        .catch((err) => {
+          Sentry.captureMessage("No registration token available. Request permission to generate one. " + String(err));
+        });
+    } catch (err) {
+      console.error("Error getting FCM token: ", err);
+      Sentry.captureException(err);
+    }
   }, [messaging]);
 
   return (

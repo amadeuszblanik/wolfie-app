@@ -221,8 +221,8 @@ export default class ApiClient {
           localStorage.removeItem("refreshToken");
 
           // @TODO: Refactor it later
-          if (location) {
-            location.href = "/unauthorized";
+          if (location && !location.pathname.startsWith("/auth")) {
+            location.href = "/auth/sign-in?unauthorized";
           }
 
           return response;

@@ -16,8 +16,13 @@ interface Props {
 
 const StyledLabel = styled.label``;
 
+const StyledFormControlWrapper = styled(Box)`
+  --placeholder-width: 100%;
+  --placeholder-height: 32px;
+`;
+
 const Component: React.FunctionComponent<Props> = ({ label, hint, errors, children, suffix }) => (
-  <Box width={BoxWidth.Full} padding={{ y: SizesEnum.Medium }} column>
+  <StyledFormControlWrapper width={BoxWidth.Full} padding={{ y: SizesEnum.Medium }} column>
     <Box width={BoxWidth.Full} padding={{ bottom: SizesEnum.Medium }}>
       <StyledLabel>
         <Text variant={DoggoTextVariant.Callout}>{label}</Text>
@@ -43,7 +48,7 @@ const Component: React.FunctionComponent<Props> = ({ label, hint, errors, childr
         </Text>
       </Box>
     )}
-  </Box>
+  </StyledFormControlWrapper>
 );
 
 Component.displayName = "DoggoUI/FormControl";

@@ -5,7 +5,7 @@ import { ComponentAddWeight } from "../../../../../src/component";
 import { LayoutApp } from "../../../../../src/layout";
 import { DoggoButton, DoggoGrid } from "../../../../../src/ui-components";
 import { ButtonSizes } from "../../../../../src/ui-components/button";
-import { DataDisplayPet, DataDisplayPetWeights } from "../../../../../src/data-display";
+import { DataDisplayPet, DataDisplayPetWeight } from "../../../../../src/data-display";
 import type { NextPage } from "next";
 
 interface AddButtonProps {
@@ -34,7 +34,7 @@ const App: NextPage = () => {
     >
       <DoggoGrid mobile={1} desktop={1}>
         <DataDisplayPet petId={String(id)} />
-        <DataDisplayPetWeights petId={String(id)} />
+        <DataDisplayPetWeight petId={String(id)} />
       </DoggoGrid>
       {isOpenAddWeight && <ComponentAddWeight petId={String(id)} onClose={() => setIsOpenAddWeight(false)} />}
     </LayoutApp>

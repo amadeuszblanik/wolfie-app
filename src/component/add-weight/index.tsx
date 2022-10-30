@@ -2,7 +2,7 @@ import React from "react";
 import { useIntl } from "react-intl";
 import { DoggoSheet } from "../../ui-components";
 import { WeightUnits } from "../../api/types/weight-units.types";
-import { FormAddPetWeight } from "../../form";
+import { FormPetWeight } from "../../form";
 
 interface Props {
   petId: string;
@@ -15,7 +15,7 @@ const Component: React.FunctionComponent<Props> = ({ petId, onClose }) => {
 
   return (
     <DoggoSheet onClose={onClose} title={intl.formatMessage({ id: "page.pet_weight.header" })}>
-      <FormAddPetWeight petId={petId} weightUnit={unit} onSuccess={onClose} />
+      <FormPetWeight petId={petId} weightUnit={unit} onSuccess={onClose} />
     </DoggoSheet>
   );
 };

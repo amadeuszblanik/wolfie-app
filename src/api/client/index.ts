@@ -37,6 +37,7 @@ import refreshTokenDto from "../dto/refresh-token.dto";
 import { Breed } from "../../types/breed.types";
 import breedsDto from "../dto/breeds.dto";
 import { PetWeightAddPayload } from "../payload/pet-weight-add.payload";
+import getPetsWeightSingleDto from "../dto/get-pets-weight-single.dto";
 
 type HTTP_METHOD = "GET" | "POST" | "PUT" | "DELETE";
 
@@ -142,6 +143,20 @@ export default class ApiClient {
   public getPetWeightById = (id: string): Promise<ApiResponse<WeightValueResponseModel[]>> =>
     this.get<WeightValueResponseModel[]>(`/pets/${id}/weight?last=ALL`).then((response) =>
       responseDto(response, getPetsWeightDto),
+    );
+
+  public getPetWeightSingleById = (id: string, weightId: string): Promise<ApiResponse<WeightValueResponseModel>> =>
+    this.get<WeightValueResponseModel>(`/pets/${id}/weight/${weightId}`).then((response) =>
+      responseDto(response, getPetsWeightSingleDto),
+    );
+
+  public patchPetWeightSingleById = (
+    id: string,
+    weightId: string,
+    payload: PetWeightAddPayload,
+  ): Promise<ApiResponse<WeightValueResponseModel>> =>
+    this.patch<WeightValueResponseModel, PetWeightAddPayload>(`/pets/${id}/weight/${weightId}`, payload).then(
+      (response) => responseDto(response, getPetsWeightSingleDto),
     );
 
   public petsHealthLog = async (id: string): Promise<ApiResponse<HealthLogResponseModel[]>> =>
@@ -274,6 +289,17 @@ export default class ApiClient {
   private async put<T, B>(path: string, body: B): Promise<T> {
     const response = await fetch(`${this.baseUrl}${path}`, {
       method: "PUT",
+      headers: this.getHeaders("application/json"),
+      body: JSON.stringify(body),
+    });
+    const interceptResponse = await this.interceptors(response, "POST", path, JSON.stringify(body));
+
+    return interceptResponse.json();
+  }
+
+  private async patch<T, B>(path: string, body: B): Promise<T> {
+    const response = await fetch(`${this.baseUrl}${path}`, {
+      method: "PATCH",
       headers: this.getHeaders("application/json"),
       body: JSON.stringify(body),
     });

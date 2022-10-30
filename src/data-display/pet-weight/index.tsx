@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 import { ComponentErrorScreen } from "../../component";
 import { useGetPetsWeightById } from "../../api/queries";
 import { DoggoBox, DoggoLineChart, DoggoList, DoggoPlaceholder, DoggoText } from "../../ui-components";
@@ -14,6 +15,7 @@ interface Props {
 const PLACEHOLDER_COMPONENTS = 6;
 
 const DataDisplay: React.FunctionComponent<Props> = ({ petId }) => {
+  const router = useRouter();
   const { response, error, status, get } = useGetPetsWeightById(petId);
   const [containerWidth, setContainerWidth] = useState<number>();
 
@@ -32,7 +34,7 @@ const DataDisplay: React.FunctionComponent<Props> = ({ petId }) => {
           </DoggoBox>
           <DoggoList label="KG">
             {response?.map((item) => (
-              <DoggoList.Item key={item.id}>
+              <DoggoList.Item key={item.id} onClick={() => router.push(`/app/pet/${petId}/weight/${item.id}`)}>
                 <DoggoText noBottomMargin>{item.raw}</DoggoText>
                 <DoggoText noBottomMargin>{pipeDate(item.date)}</DoggoText>
               </DoggoList.Item>

@@ -2,12 +2,15 @@
 // @TODO REFACTOR
 import React, { createContext, useEffect, useState } from "react";
 import { ThemeVariants } from "../settings/theme";
+import { ConfigResponseModel } from "../api/response-model/config.response-model";
+import { useGetConfig } from "../api/queries";
 
 export interface ConfigContextType {
   selectedTheme: ThemeVariants;
   setSelectedTheme: (theme: ThemeVariants) => void;
   scrollEnabled: boolean;
   setScrollEnabled: (enabled: boolean) => void;
+  userConfig: ConfigResponseModel | undefined;
 }
 
 export const ConfigContext = createContext<ConfigContextType>({
@@ -15,6 +18,7 @@ export const ConfigContext = createContext<ConfigContextType>({
   setSelectedTheme: () => {},
   scrollEnabled: true,
   setScrollEnabled: () => {},
+  userConfig: undefined,
 });
 
 const DEFAULT_COUNTER = 0;
@@ -24,6 +28,7 @@ const Component: React.FunctionComponent<{ children: React.ReactNode }> = ({ chi
   const [selectedTheme, setSelectedTheme] = useState<ThemeVariants>(ThemeVariants.Dark);
   const [scrollEnabled, setScrollEnabled] = useState<boolean>(true);
   const [counterRender, setCounterRender] = useState<number>(DEFAULT_COUNTER);
+  const { response: userConfig } = useGetConfig();
 
   useEffect(() => {
     setCounterRender(counterRender + COUNTER_INCREMENT);
@@ -51,7 +56,7 @@ const Component: React.FunctionComponent<{ children: React.ReactNode }> = ({ chi
     if (counterRender) {
       localStorage.setItem("selectedTheme", selectedTheme);
     }
-  }, [selectedTheme]);
+  }, [selectedTheme, counterRender]);
 
   useEffect(() => {
     // @TODO: Remove on production
@@ -67,6 +72,7 @@ const Component: React.FunctionComponent<{ children: React.ReactNode }> = ({ chi
         setSelectedTheme,
         scrollEnabled,
         setScrollEnabled,
+        userConfig,
       }}
     >
       {children}

@@ -30,7 +30,7 @@ const Form: React.FunctionComponent<Props> = ({ petId }) => {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const { put: updatePut, status: updateStatus, response: updateResponse, error: updateError } = usePutPetsById(petId!);
   const { post: addPost, status: addStatus, response: addResponse, error: addError } = usePostPetsNew();
-  const { response: petResponse, status: petStatus, get: petGet } = useGetPetsById(petId || "", false);
+  const { response: petResponse, status: petStatus, get: petGet } = useGetPetsById(petId || "null", false);
 
   const status = petId ? updateStatus : addStatus;
   const response = petId ? updateResponse : addResponse;

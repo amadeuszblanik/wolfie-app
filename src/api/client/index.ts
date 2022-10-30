@@ -1,17 +1,11 @@
 import FormData from "form-data";
 import { PetSingleResponseModel } from "../response-model/pet-single.response-model";
 import myPetsDto from "../dto/my-pets.dto";
-import { CommonErrorResponseModel } from "../response-model/common-error.response-model";
 import responseDto, { ApiResponse } from "../dto/response.dto";
 import getPetsDto from "../dto/get-pets.dto";
 import { AuthRefreshTokenBody, AuthRefreshTokenResponse } from "../types/auth-refresh-token.types";
 import { WeightValueResponseModel } from "../response-model/weight-value.response-model";
 import getPetsWeightDto from "../dto/get-pets-weight.dto";
-import { ConfigPrivateResponseModel } from "../response-model/config-private.response-model";
-import getConfigPrivateDto from "../dto/get-config-private.dto";
-import { PetWeightAddBody, PetWeightAddResponse } from "../types/pet-weight-add.types";
-import { ConfigPublicResponseModel } from "../response-model/config-public.response-model";
-import getConfigPublicDto from "../dto/get-config-public.dto";
 import { PetsAddResponseModel } from "../response-model/pets-add.response-model";
 import { PetsAddPayload } from "../payload/pets-add.payload";
 import { PetsUpdatePayload } from "../payload/pets-update.payload";
@@ -38,8 +32,12 @@ import { RefreshTokenResponseModel } from "../response-model/refresh-token.respo
 import refreshTokenDto from "../dto/refresh-token.dto";
 import { Breed } from "../../types/breed.types";
 import breedsDto from "../dto/breeds.dto";
+import { PetWeightAddPayload } from "../payload/pet-weight-add.payload";
+import getPetsWeightSingleDto from "../dto/get-pets-weight-single.dto";
+import { ConfigResponseModel } from "../response-model/config.response-model";
+import getConfigDto from "../dto/get-config.dto";
 
-type HTTP_METHOD = "GET" | "POST" | "PUT" | "DELETE";
+type HTTP_METHOD = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 
 const STATUS_CODES = {
   OK: 200,
@@ -105,13 +103,8 @@ export default class ApiClient {
       responseDto(response, refreshTokenDto),
     );
 
-  public configPublic = async (): Promise<ApiResponse<ConfigPublicResponseModel>> =>
-    this.get<ConfigPublicResponseModel>("/config").then((response) => responseDto(response, getConfigPublicDto));
-
-  public configPrivate = async (): Promise<ApiResponse<ConfigPrivateResponseModel>> =>
-    this.get<ConfigPrivateResponseModel>("/config/private").then((response) =>
-      responseDto(response, getConfigPrivateDto),
-    );
+  public getConfig = async (): Promise<ApiResponse<ConfigResponseModel>> =>
+    this.get<ConfigResponseModel>("/config").then((response) => responseDto(response, getConfigDto));
 
   public getPetsMy = async (): Promise<ApiResponse<PetSingleResponseModel[]>> =>
     this.get<PetSingleResponseModel[]>("/pets/my").then((response) => responseDto(response, myPetsDto));
@@ -140,9 +133,26 @@ export default class ApiClient {
       responseDto(response, getPetsDto),
     );
 
-  public petsWeight = (id: string) => async (): Promise<ApiResponse<WeightValueResponseModel[]>> =>
+  public getPetWeightById = (id: string): Promise<ApiResponse<WeightValueResponseModel[]>> =>
     this.get<WeightValueResponseModel[]>(`/pets/${id}/weight?last=ALL`).then((response) =>
       responseDto(response, getPetsWeightDto),
+    );
+
+  public deletePetWeightById = (id: string, weightId: string): Promise<ApiResponse<CommonMessageResponseModel>> =>
+    this.delete<CommonMessageResponseModel>(`/pets/${id}/weight/${weightId}`).then((response) => responseDto(response));
+
+  public getPetWeightSingleById = (id: string, weightId: string): Promise<ApiResponse<WeightValueResponseModel>> =>
+    this.get<WeightValueResponseModel>(`/pets/${id}/weight/${weightId}`).then((response) =>
+      responseDto(response, getPetsWeightSingleDto),
+    );
+
+  public patchPetWeightSingleById = (
+    id: string,
+    weightId: string,
+    payload: PetWeightAddPayload,
+  ): Promise<ApiResponse<WeightValueResponseModel>> =>
+    this.patch<WeightValueResponseModel, PetWeightAddPayload>(`/pets/${id}/weight/${weightId}`, payload).then(
+      (response) => responseDto(response, getPetsWeightSingleDto),
     );
 
   public petsHealthLog = async (id: string): Promise<ApiResponse<HealthLogResponseModel[]>> =>
@@ -163,10 +173,13 @@ export default class ApiClient {
       responseDto(response),
     );
 
-  public petsWeightAdd =
-    (id: string) =>
-    async (body: PetWeightAddBody): Promise<PetWeightAddResponse | CommonErrorResponseModel> =>
-      this.post(`/pets/${id}/weight`, body);
+  public postPetsWeightById = async (
+    id: string,
+    payload: PetWeightAddPayload,
+  ): Promise<ApiResponse<WeightValueResponseModel>> =>
+    this.post<WeightValueResponseModel, PetWeightAddPayload>(`/pets/${id}/weight`, payload).then((response) =>
+      responseDto(response),
+    );
 
   public refreshToken = (body: AuthRefreshTokenBody) => async (): Promise<ApiResponse<AuthRefreshTokenResponse>> =>
     this.post<AuthRefreshTokenResponse, AuthRefreshTokenBody>(`/auth/refresh-token`, body).then((response) =>
@@ -276,6 +289,26 @@ export default class ApiClient {
       body: JSON.stringify(body),
     });
     const interceptResponse = await this.interceptors(response, "POST", path, JSON.stringify(body));
+
+    return interceptResponse.json();
+  }
+
+  private async patch<T, B>(path: string, body: B): Promise<T> {
+    const response = await fetch(`${this.baseUrl}${path}`, {
+      method: "PATCH",
+      headers: this.getHeaders("application/json"),
+      body: JSON.stringify(body),
+    });
+    const interceptResponse = await this.interceptors(response, "PATCH", path, JSON.stringify(body));
+
+    return interceptResponse.json();
+  }
+
+  private async delete<T>(path: string): Promise<T> {
+    const url = `${this.baseUrl}${path}`;
+
+    const response = await fetch(url, { headers: this.getHeaders(), method: "DELETE" });
+    const interceptResponse = await this.interceptors(response, "DELETE", path);
 
     return interceptResponse.json();
   }

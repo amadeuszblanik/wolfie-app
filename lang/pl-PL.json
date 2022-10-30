@@ -28,6 +28,8 @@
   "common.week": "tydzień",
   "common.days": "dni",
   "common.day": "dzień",
+  "common.on_date": "w dniu",
+  "common.weight": "Waga",
   "common.just_born": "noworodek",
   "common.not_born": "nie urodzony",
   "common.selected_file_list": "Lista wybranych plików",
@@ -134,6 +136,9 @@
   "component.selected_medicines.label": "Wybierz leki",
   "component.bottom_bar.pets": "Moje zwierzaki",
   "component.bottom_bar.settings": "Ustawienia",
+  "component.list.empty": "Brak danych",
+  "component.remove_entry_modal.title": "Usuń wpis",
+  "component.remove_entry_modal.description": "Czy na pewno chcesz usunąć ten wpis",
   "user.email": "Email",
   "user.first_name": "Imię",
   "user.last_name": "Nazwisko",
@@ -525,5 +530,6 @@
   "health_log.description": "Opis",
   "health_log.added_by": "Dodane przez",
   "form.pet.updated": "Twój zwierzak został zaktualizowany",
-  "form.pet.created": "Twój zwierzak został dodany"
+  "form.pet.created": "Twój zwierzak został dodany",
+  "data_display.pet_weight.empty": "Brak danych"
 }

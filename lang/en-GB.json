@@ -28,6 +28,8 @@
   "common.week": "week",
   "common.days": "days",
   "common.day": "day",
+  "common.on_date": "on",
+  "common.weight": "Weight",
   "common.just_born": "Just born",
   "common.not_born": "Not born yet",
   "common.selected_file_list": "Selected files",
@@ -44,6 +46,7 @@
   "error.name": "Please enter a valid name",
   "error.email": "Please enter a valid email",
   "error.phone": "Please enter a valid phone number",
+  "error.more_than": "Please enter a value greater than {value}",
   "error.password": "Please enter a valid password",
   "error.password_confirm": "Please enter a valid password confirmation",
   "error.password_lower_letters": "Password must contain lower letter",
@@ -135,6 +138,9 @@
   "component.selected_medicines.label": "Select medicines",
   "component.bottom_bar.pets": "Pets",
   "component.bottom_bar.settings": "Settings",
+  "component.list.empty": "No items",
+  "component.remove_entry_modal.title": "Remove entry",
+  "component.remove_entry_modal.description": "Are you sure you want to remove this entry",
   "user.email": "E-mail",
   "user.first_name": "First name",
   "user.last_name": "Last name",
@@ -526,5 +532,6 @@
   "health_log.description": "Description",
   "health_log.added_by": "Added by",
   "form.pet.updated": "Your pet has been updated",
-  "form.pet.created": "Your pet has been created"
+  "form.pet.created": "Your pet has been created",
+  "data_display.pet_weight.empty": "No weight data"
 }

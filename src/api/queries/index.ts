@@ -1,3 +1,4 @@
+export { default as useDeletePetWeightSingleById } from "./delete-pet-weight-single-by-id";
 export { default as useGetBreed } from "./get-breed";
 export { default as useGetConfig } from "./get-config";
 export { default as useGetPetsById } from "./get-pets-by-id";

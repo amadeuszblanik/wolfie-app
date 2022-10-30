@@ -37,7 +37,7 @@ import getPetsWeightSingleDto from "../dto/get-pets-weight-single.dto";
 import { ConfigResponseModel } from "../response-model/config.response-model";
 import getConfigDto from "../dto/get-config.dto";
 
-type HTTP_METHOD = "GET" | "POST" | "PUT" | "DELETE";
+type HTTP_METHOD = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 
 const STATUS_CODES = {
   OK: 200,
@@ -137,6 +137,9 @@ export default class ApiClient {
     this.get<WeightValueResponseModel[]>(`/pets/${id}/weight?last=ALL`).then((response) =>
       responseDto(response, getPetsWeightDto),
     );
+
+  public deletePetWeightById = (id: string, weightId: string): Promise<ApiResponse<CommonMessageResponseModel>> =>
+    this.delete<CommonMessageResponseModel>(`/pets/${id}/weight/${weightId}`).then((response) => responseDto(response));
 
   public getPetWeightSingleById = (id: string, weightId: string): Promise<ApiResponse<WeightValueResponseModel>> =>
     this.get<WeightValueResponseModel>(`/pets/${id}/weight/${weightId}`).then((response) =>
@@ -296,7 +299,16 @@ export default class ApiClient {
       headers: this.getHeaders("application/json"),
       body: JSON.stringify(body),
     });
-    const interceptResponse = await this.interceptors(response, "POST", path, JSON.stringify(body));
+    const interceptResponse = await this.interceptors(response, "PATCH", path, JSON.stringify(body));
+
+    return interceptResponse.json();
+  }
+
+  private async delete<T>(path: string): Promise<T> {
+    const url = `${this.baseUrl}${path}`;
+
+    const response = await fetch(url, { headers: this.getHeaders(), method: "DELETE" });
+    const interceptResponse = await this.interceptors(response, "DELETE", path);
 
     return interceptResponse.json();
   }

@@ -2,3 +2,13 @@ export const DEFAULT_VARCHAR_LENGTH = 255;
 export const DEFAULT_LONG_VARCHAR_LENGTH = 500;
 export const DEFAULT_ON_SUCCESS_TIMEOUT = 3000;
 export const DEFAULT_CONFIG_REFETCH = 300000;
+export const DEFAULT_FIREBASE_CONFIG = {
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
+};
+export const DEFAULT_NOTIFICATION_ON_SCREEN_TIME = 15000;

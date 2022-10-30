@@ -242,7 +242,6 @@
     "@next/next/no-typos": "error",
     "@next/next/no-unwanted-polyfillio": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "no-console": "error",
     "no-magic-numbers": [
       "error",
       {

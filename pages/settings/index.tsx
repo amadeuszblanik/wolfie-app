@@ -5,6 +5,7 @@ import { LayoutApp } from "../../src/layout";
 import { DoggoButton, DoggoListDeprecated } from "../../src/ui-components";
 import { ButtonSizes } from "../../src/ui-components/button";
 import { ComponentChangeLanguage, ComponentChangeTheme, ComponentSignOff } from "../../src/component";
+import ApiClient from "../../src/api/client";
 import type { NextPage } from "next";
 
 const App: NextPage = () => {
@@ -41,6 +42,12 @@ const App: NextPage = () => {
       <ComponentChangeTheme key="change-theme-value" />,
     ],
     [<FormattedMessage key="change-theme" id="common.sign_off" />, <ComponentSignOff key="change-theme-value" />],
+    [
+      <FormattedMessage key="test-notification" id="page.settings.test_notification" />,
+      <DoggoButton key="test-notification-value" onClick={() => new ApiClient("en-GB").postTestNotification()}>
+        <FormattedMessage id="common.send" />
+      </DoggoButton>,
+    ],
   ];
 
   return (

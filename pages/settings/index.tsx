@@ -48,6 +48,16 @@ const App: NextPage = () => {
         <FormattedMessage id="common.send" />
       </DoggoButton>,
     ],
+    [
+      <FormattedMessage key="privacy-policy" id="page.settings.privacy-policy" />,
+      <Link key="privacy-policy-value" href="/privacy-policy">
+        <a>
+          <DoggoButton>
+            <FormattedMessage id="common.read" />
+          </DoggoButton>
+        </a>
+      </Link>,
+    ],
   ];
 
   return (

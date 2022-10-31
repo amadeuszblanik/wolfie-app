@@ -5,7 +5,7 @@ import { FormattedMessage, useIntl } from "react-intl";
 import { ComponentErrorScreen } from "../../component";
 import { useGetPetsWeightById } from "../../api/queries";
 import { DoggoBox, DoggoButton, DoggoLineChart, DoggoList, DoggoPlaceholder, DoggoText } from "../../ui-components";
-import { pipeDate } from "../../pipe";
+import { pipeDate, pipeNumber } from "../../pipe";
 import { ApiStatesTypes } from "../../types/api-states.types";
 import { SizesEnum } from "../../settings/sizes";
 import { BoxWidth } from "../../ui-components/box";
@@ -70,7 +70,7 @@ const DataDisplay: React.FunctionComponent<Props> = ({ petId, onEmpty }) => {
                     </DoggoButton>
                   }
                 >
-                  <DoggoText noBottomMargin>{item.raw}</DoggoText>
+                  <DoggoText noBottomMargin>{pipeNumber(item.raw)}</DoggoText>
                   <DoggoText noBottomMargin>{pipeDate(item.date)}</DoggoText>
                 </DoggoList.Item>
               ))}

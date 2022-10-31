@@ -8,6 +8,7 @@ declare module "styled-components" {
     opacity: {
       modal: number;
       boxShadows: number;
+      disabled: number;
     };
     darken: {
       hover: number;

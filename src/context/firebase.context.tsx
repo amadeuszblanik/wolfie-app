@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-// @TODO REFACTOR
+// @TODO REFACTOR – Waiting for iOS 16 Web Push Notifications WORKING Support
 import React, { createContext, useEffect, useState } from "react";
 import { FirebaseApp } from "@firebase/app";
-import { getMessaging, getToken, Messaging } from "@firebase/messaging";
+import { getMessaging, getToken, isSupported, Messaging } from "@firebase/messaging";
 import { initializeApp } from "firebase/app";
 import * as Sentry from "@sentry/nextjs";
 import { DEFAULT_FIREBASE_CONFIG } from "../settings/globals";
@@ -36,31 +36,38 @@ const Component: React.FunctionComponent<{ children: React.ReactNode }> = ({ chi
   }, []);
 
   useEffect(() => {
-    if (!app) {
-      return;
-    }
+    const asyncEffect = async () => {
+      const isMessagingSupported = await isSupported();
 
-    try {
-      Notification.requestPermission().then((permission) => {
-        if (permission === "granted") {
-          try {
-            setMessaging(getMessaging(app));
-          } catch (error) {
-            console.error("Firebase messaging already initialized");
-            Sentry.captureException(error);
-          }
-        }
-      });
-    } catch (error) {
-      if (error instanceof TypeError) {
-        Notification.requestPermission(() => {
-          setMessaging(getMessaging(app));
-        });
-      } else {
-        console.error("Firebase messaging not initialized");
-        Sentry.captureException(error);
+      if (!isMessagingSupported || !app) {
+        return;
       }
-    }
+
+      try {
+        Notification.requestPermission().then((permission) => {
+          if (permission === "granted") {
+            try {
+              setMessaging(getMessaging(app));
+            } catch (error) {
+              console.error("Firebase messaging already initialized");
+              Sentry.captureException(error);
+            }
+          }
+        });
+      } catch (error) {
+        if (error instanceof TypeError) {
+          // Safari Fix
+          Notification.requestPermission(() => {
+            setMessaging(getMessaging(app));
+          });
+        } else {
+          console.error("Firebase messaging not initialized");
+          Sentry.captureException(error);
+        }
+      }
+    };
+
+    void asyncEffect();
   }, [app]);
 
   useEffect(() => {

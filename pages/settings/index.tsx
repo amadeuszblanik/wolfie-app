@@ -39,7 +39,7 @@ const App: NextPage = () => {
           <FormattedMessage id="page.settings.test_notification" />
         </DoggoList.Item>
         <DoggoList.Item onClick={() => router.push("/privacy-policy")}>
-          <FormattedMessage id="page.settings.privacy-policy" />,
+          <FormattedMessage id="page.settings.privacy-policy" />
         </DoggoList.Item>
       </DoggoList>
     </LayoutApp>

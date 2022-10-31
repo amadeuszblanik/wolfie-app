@@ -38,6 +38,7 @@ const StyledLi = styled.li`
 
 const StyledItem = styled.div<StyledItemProps>`
   display: flex;
+  align-items: center;
   justify-content: space-between;
   width: 100%;
   text-align: center;

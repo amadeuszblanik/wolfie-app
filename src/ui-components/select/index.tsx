@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { paddingMixin } from "../mixins";
-import Sizes, { SizesEnum } from "../../settings/sizes";
-import Box, { BoxWidth } from "../box";
+import { SizesEnum } from "../../settings/sizes";
+import Box from "../box";
 import { DoggoText } from "../index";
 import { DoggoTextVariant } from "../text";
 import Icon from "../icon";
@@ -53,7 +53,6 @@ const StyledSelect = styled.select<StyledInputProps>`
 
 const StyledSelectWrapper = styled.div`
   position: relative;
-  margin-bottom: ${Sizes[SizesEnum.Medium]}px;
 `;
 
 const StyledSelectIcon = styled.div`
@@ -74,7 +73,7 @@ const Component: React.FunctionComponent<Props> = ({
   errors,
   disabled,
 }) => (
-  <Box width={plain ? BoxWidth.Full : undefined} padding={{ bottom: SizesEnum.Medium }} column>
+  <Box padding={{ bottom: SizesEnum.Medium }} column>
     {!plain && label && (
       <Box padding={{ bottom: SizesEnum.Medium }}>
         <DoggoText variant={DoggoTextVariant.Callout}>{label}</DoggoText>
@@ -88,9 +87,7 @@ const Component: React.FunctionComponent<Props> = ({
         plain={plain}
         disabled={disabled}
       >
-        <option disabled={!nullable} selected={!value}>
-          {label}
-        </option>
+        {nullable && <option>{label}</option>}
         {list.map(({ id, label: itemLabel }) => (
           <option key={id} value={id} selected={value === id}>
             {itemLabel}
@@ -101,7 +98,7 @@ const Component: React.FunctionComponent<Props> = ({
         <Icon icon="chevron-down" />
       </StyledSelectIcon>
     </StyledSelectWrapper>
-    {!plain && (
+    {!plain && errors && (
       <Box padding={{ bottom: SizesEnum.Medium }}>
         <DoggoText color="red" variant={DoggoTextVariant.Caption1}>
           {(errors || []).map((error) => error).join(", ")}

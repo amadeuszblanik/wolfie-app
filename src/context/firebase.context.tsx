@@ -2,15 +2,18 @@
 // @TODO REFACTOR – Waiting for iOS 16 Web Push Notifications WORKING Support
 import React, { createContext, useEffect, useState } from "react";
 import { FirebaseApp } from "@firebase/app";
-import { getMessaging, getToken, isSupported, Messaging } from "@firebase/messaging";
+import { getMessaging, getToken, Messaging, isSupported as isMessagingSupported } from "@firebase/messaging";
 import { initializeApp } from "firebase/app";
 import * as Sentry from "@sentry/nextjs";
+import { Analytics, getAnalytics, isSupported as isAnalyticsSupported } from "@firebase/analytics";
 import { DEFAULT_FIREBASE_CONFIG } from "../settings/globals";
 import ApiClient from "../api/client";
 
 export interface FirebaseContextType {
   app: FirebaseApp | null;
   setApp: (app: FirebaseApp | null) => void;
+  analytics: Analytics | null;
+  setAnalytics: (analytics: Analytics | null) => void;
   messaging: Messaging | null;
   setMessaging: (messaging: Messaging | null) => void;
 }
@@ -18,12 +21,15 @@ export interface FirebaseContextType {
 export const FirebaseContext = createContext<FirebaseContextType>({
   app: null,
   setApp: () => {},
+  analytics: null,
+  setAnalytics: () => {},
   messaging: null,
   setMessaging: () => {},
 });
 
 const Component: React.FunctionComponent<{ children: React.ReactNode }> = ({ children }) => {
   const [app, setApp] = useState<FirebaseApp | null>(null);
+  const [analytics, setAnalytics] = useState<Analytics | null>(null);
   const [messaging, setMessaging] = useState<Messaging | null>(null);
 
   useEffect(() => {
@@ -37,9 +43,9 @@ const Component: React.FunctionComponent<{ children: React.ReactNode }> = ({ chi
 
   useEffect(() => {
     const asyncEffect = async () => {
-      const isMessagingSupported = await isSupported();
+      const isSupported = await isMessagingSupported();
 
-      if (!isMessagingSupported || !app) {
+      if (!app || !isSupported) {
         return;
       }
 
@@ -65,6 +71,20 @@ const Component: React.FunctionComponent<{ children: React.ReactNode }> = ({ chi
           Sentry.captureException(error);
         }
       }
+    };
+
+    void asyncEffect();
+  }, [app]);
+
+  useEffect(() => {
+    const asyncEffect = async () => {
+      const isSupported = await isAnalyticsSupported();
+
+      if (!app || !isSupported) {
+        return;
+      }
+
+      setAnalytics(getAnalytics(app));
     };
 
     void asyncEffect();
@@ -108,6 +128,8 @@ const Component: React.FunctionComponent<{ children: React.ReactNode }> = ({ chi
       value={{
         app,
         setApp,
+        analytics,
+        setAnalytics,
         messaging,
         setMessaging,
       }}

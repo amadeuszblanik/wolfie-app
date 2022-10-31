@@ -6,6 +6,7 @@ const shared = {
   opacity: {
     modal: 0.5,
     boxShadows: 0.66,
+    disabled: 0.33,
   },
   darken: {
     hover: 13,

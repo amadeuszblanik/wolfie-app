@@ -7,6 +7,7 @@ export { default as saveFile } from "./save-file.utils";
 export { default as Timer } from "./timer.utils";
 export { default as toDate } from "./to-date.utils";
 export { default as toDateTime } from "./to-datetime.utils";
+export { default as toNumber } from "./to-number.utils";
 export { default as toPercentage } from "./to-percentage.utils";
 export { default as toTime } from "./to-time.utils";
 export { default as uniqueArray } from "./unique-array.utils";

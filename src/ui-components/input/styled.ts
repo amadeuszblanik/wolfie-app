@@ -22,10 +22,22 @@ export const StyledInput = styled.input<StyledInputProps>`
   border-radius: ${({ theme }) => theme.borderRadius};
   box-shadow: 0 0 0 0 ${({ theme }) => theme.palette.blue};
   transition: box-shadow 0.3s ease-in-out;
+  appearance: none;
 
   &:focus {
     outline: none;
     box-shadow: 0 0 0 0.25em ${({ theme }) => theme.palette.blue};
+  }
+
+  &:disabled {
+    background: var(--color-background);
+    border: ${({ plain, error, theme }) =>
+      !plain ? `2px solid ${!error ? theme.palette.gray : theme.palette.red}` : "none"};
+    opacity: ${({ theme }) => theme.opacity.disabled};
+  }
+
+  &::-webkit-date-and-time-value {
+    text-align: ${({ plain }) => (plain ? "right" : "left")};
   }
 `;
 

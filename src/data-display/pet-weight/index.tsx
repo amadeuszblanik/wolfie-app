@@ -11,6 +11,7 @@ import { SizesEnum } from "../../settings/sizes";
 import { BoxWidth } from "../../ui-components/box";
 import { ConfigContext, ConfigContextType } from "../../context/config.context";
 import { RemoveEntryWeightById } from "../../remove-entry";
+import { ButtonSizes } from "../../ui-components/button";
 
 interface Props {
   petId: string;
@@ -65,7 +66,7 @@ const DataDisplay: React.FunctionComponent<Props> = ({ petId, onEmpty }) => {
                   key={item.id}
                   onClick={() => router.push(`/app/pet/${petId}/weight/${item.id}`)}
                   actions={
-                    <DoggoButton variant="red" onClick={() => setRemoveEntryId(item.id)}>
+                    <DoggoButton variant="red" size={ButtonSizes.Small} onClick={() => setRemoveEntryId(item.id)}>
                       <FormattedMessage id="common.delete" />
                     </DoggoButton>
                   }

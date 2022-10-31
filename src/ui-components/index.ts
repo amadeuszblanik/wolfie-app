@@ -23,6 +23,7 @@ export { default as DoggoList } from "./list";
 export { default as DoggoListDeprecated } from "./list-deprecated";
 export { default as DoggoLoader } from "./loader";
 export { default as DoggoModal } from "./modal";
+export { default as DoggoNotification } from "./notification";
 export { default as DoggoPasswordValidator } from "./password-validator";
 export { default as DoggoPill } from "./pill";
 export { default as DoggoPlaceholder } from "./placeholder";

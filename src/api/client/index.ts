@@ -36,6 +36,7 @@ import { PetWeightAddPayload } from "../payload/pet-weight-add.payload";
 import getPetsWeightSingleDto from "../dto/get-pets-weight-single.dto";
 import { ConfigResponseModel } from "../response-model/config.response-model";
 import getConfigDto from "../dto/get-config.dto";
+import { FcmTokenPayload } from "../payload/fcm-token.payload";
 
 type HTTP_METHOD = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 
@@ -101,6 +102,14 @@ export default class ApiClient {
   public authorizedDevices = async (): Promise<ApiResponse<RefreshTokenResponseModel>> =>
     this.get<RefreshTokenResponseModel>(`/auth/refresh-token`).then((response) =>
       responseDto(response, refreshTokenDto),
+    );
+
+  public postFcmToken = async (body: FcmTokenPayload): Promise<ApiResponse<PetsAddResponseModel>> =>
+    this.post<PetsAddResponseModel, FcmTokenPayload>("/auth/fcm-token", body).then((response) => responseDto(response));
+
+  public postTestNotification = async (): Promise<ApiResponse<PetsAddResponseModel>> =>
+    this.post<PetsAddResponseModel, undefined>("/auth/test-notification", undefined).then((response) =>
+      responseDto(response),
     );
 
   public getConfig = async (): Promise<ApiResponse<ConfigResponseModel>> =>
@@ -212,8 +221,8 @@ export default class ApiClient {
           localStorage.removeItem("refreshToken");
 
           // @TODO: Refactor it later
-          if (location) {
-            location.href = "/unauthorized";
+          if (location && !location.pathname.startsWith("/auth")) {
+            location.href = "/auth/sign-in?unauthorized";
           }
 
           return response;

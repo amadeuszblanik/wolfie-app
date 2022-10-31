@@ -5,6 +5,7 @@ const shared = {
   borderRadius: "8px",
   opacity: {
     modal: 0.5,
+    boxShadows: 0.66,
   },
   darken: {
     hover: 13,

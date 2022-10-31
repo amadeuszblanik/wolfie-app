@@ -4,6 +4,7 @@ export { default as getIndexes } from "./get-indexes.utils";
 export { default as getQueryStatus } from "./get-query-status.utils";
 export { default as isText } from "./is-text.utils";
 export { default as saveFile } from "./save-file.utils";
+export { default as Timer } from "./timer.utils";
 export { default as toDate } from "./to-date.utils";
 export { default as toDateTime } from "./to-datetime.utils";
 export { default as toPercentage } from "./to-percentage.utils";

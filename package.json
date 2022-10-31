@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "NODE_OPTIONS='--inspect' next dev --port 3100",
+    "dev": "NODE_OPTIONS='--inspect' NODE_ENV=development next dev --port 3100",
     "build": "next build",
     "export": "next export",
     "start": "next start --port 3100",
@@ -17,6 +17,7 @@
   "dependencies": {
     "@sentry/nextjs": "^7.14.2",
     "bme-utils": "^0.1.2-X",
+    "firebase": "^9.13.0",
     "lodash.debounce": "^4.0.8",
     "next": "12.3.0",
     "next-pwa": "^5.6.0",

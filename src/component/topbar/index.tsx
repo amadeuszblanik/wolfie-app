@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import React from "react";
+import { toRgba } from "bme-utils";
 import { DoggoBox, DoggoContainer, DoggoGrid, DoggoText } from "../../ui-components";
 import { BoxWidth, FlexAlign } from "../../ui-components/box";
 import { SizesEnum } from "../../settings/sizes";
@@ -19,6 +20,12 @@ const StyledTopBar = styled(DoggoBox)`
   left: 0;
   z-index: 1090;
   min-height: ${sizeMixin(SizesEnum.ExtraLarge2)};
+
+  @supports (backdrop-filter: blur(20px)) {
+    background: ${({ theme }) => toRgba(theme.palette.backgroundSecondary, theme.opacity.navigation)};
+    backdrop-filter: blur(20px);
+    --color-background: transparent;
+  }
 `;
 
 const StyledTopBarLeft = styled.div`

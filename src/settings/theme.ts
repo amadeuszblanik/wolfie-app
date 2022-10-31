@@ -7,6 +7,7 @@ const shared = {
     modal: 0.5,
     boxShadows: 0.66,
     disabled: 0.33,
+    navigation: 0.88,
   },
   darken: {
     hover: 13,

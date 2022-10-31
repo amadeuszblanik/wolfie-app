@@ -9,6 +9,7 @@ declare module "styled-components" {
       modal: number;
       boxShadows: number;
       disabled: number;
+      navigation: number;
     };
     darken: {
       hover: number;

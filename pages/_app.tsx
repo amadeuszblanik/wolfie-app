@@ -1,5 +1,5 @@
 import { ThemeProvider } from "styled-components";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { IntlProvider } from "react-intl";
 import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
@@ -13,6 +13,7 @@ import theme from "../src/settings/theme";
 import { ComponentFirebase, ComponentFooter } from "../src/component";
 import { ConfigContext } from "../src/context/config.context";
 import { ConfigStore, FirebaseStore } from "../src/context";
+import { cssVariable } from "../src/utils";
 import type { AppProps } from "next/app";
 
 const MESSAGES = {
@@ -29,6 +30,17 @@ function MyApp({ Component, pageProps }: AppProps<{ dehydratedState: any }>) {
   useEffect(() => {
     localStorage.setItem("locale", locale);
   }, [locale]);
+
+  const updateFullHeight = useCallback(() => {
+    cssVariable.set("full-height", `${window.innerHeight}px`);
+  }, []);
+
+  useEffect(() => {
+    updateFullHeight();
+    window.addEventListener("resize", updateFullHeight);
+
+    return () => window.removeEventListener("resize", updateFullHeight);
+  }, [updateFullHeight]);
 
   return (
     <IntlProvider locale={locale} messages={MESSAGES[locale]}>

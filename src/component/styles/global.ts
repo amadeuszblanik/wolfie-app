@@ -21,6 +21,7 @@ const Global = createGlobalStyle`
     --placeholder-height: 100%;
     --placeholder-offset-y: 0;
     --button-radius: ${({ theme }) => theme.borderRadius};
+    --full-height: 100vh;
   }
   
   * {

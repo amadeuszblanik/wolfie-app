@@ -62,4 +62,8 @@ const Component: React.FunctionComponent<Props> = ({
 
 Component.displayName = "DoggoUI/InputNumber";
 
+Component.defaultProps = {
+  inputMode: "decimal",
+};
+
 export default Component;

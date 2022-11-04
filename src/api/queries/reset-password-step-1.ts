@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useIntl } from "react-intl";
 import ApiClient from "../client";
@@ -7,6 +7,7 @@ import { getQueryStatus } from "../../utils";
 import { CommonMessageResponseModel } from "../response-model/common-message.response-model";
 import { CommonErrorResponseModel } from "../response-model/common-error.response-model";
 import { ResetPasswordStep1Payload } from "../payload/reset-password-step-1.payload";
+import { QueryKeys } from "../keys";
 
 const useResetPasswordStep1 = () => {
   const intl = useIntl();
@@ -35,9 +36,7 @@ const useResetPasswordStep1 = () => {
         message: intl.formatMessage({ id: "error.api_unknown_message" }),
       });
     },
-    onSettled: () => {
-      void queryClient.invalidateQueries("resetPasswordStep1");
-    },
+    onSettled: () => queryClient.invalidateQueries([QueryKeys.Auth]),
   });
 
   useEffect(() => {

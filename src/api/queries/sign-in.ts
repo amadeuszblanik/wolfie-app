@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useIntl } from "react-intl";
 import ApiClient from "../client";
@@ -7,6 +7,7 @@ import { getQueryStatus } from "../../utils";
 import { CommonErrorResponseModel } from "../response-model/common-error.response-model";
 import { SignInPayload } from "../payload/sign-in.payload";
 import { SignInResponseModel } from "../response-model/sign-in.response-model";
+import { QueryKeys } from "../keys";
 
 const useSignIn = () => {
   const intl = useIntl();
@@ -42,9 +43,7 @@ const useSignIn = () => {
         message: intl.formatMessage({ id: "error.api_unknown_message" }),
       });
     },
-    onSettled: () => {
-      void queryClient.invalidateQueries("signIn");
-    },
+    onSettled: () => queryClient.invalidateQueries([QueryKeys.Auth]),
   });
 
   useEffect(() => {

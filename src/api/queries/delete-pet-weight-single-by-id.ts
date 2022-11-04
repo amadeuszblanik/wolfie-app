@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useIntl } from "react-intl";
 import ApiClient from "../client";
 import { ApiStatesTypes } from "../../types/api-states.types";
 import { CommonErrorResponseModel } from "../response-model/common-error.response-model";
 import { getQueryStatus } from "../../utils";
 import { CommonMessageResponseModel } from "../response-model/common-message.response-model";
-import { rsPetWeight } from "../../reactive-store";
+import { QueryKeys } from "../keys";
 
 const useQueries = (id: string) => {
   const intl = useIntl();
@@ -22,10 +22,6 @@ const useQueries = (id: string) => {
       onSuccess: (data) => {
         setResponse(data.success);
         setError(data.error);
-
-        if (data.success) {
-          rsPetWeight.update.next();
-        }
       },
       onError: () => {
         setError({
@@ -34,9 +30,7 @@ const useQueries = (id: string) => {
           message: intl.formatMessage({ id: "error.api_unknown_message" }),
         });
       },
-      onSettled: () => {
-        void queryClient.invalidateQueries("/pets/:id/weight/:weightId");
-      },
+      onSettled: () => queryClient.invalidateQueries([QueryKeys.Pet]),
     },
   );
 

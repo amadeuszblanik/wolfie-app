@@ -2,8 +2,8 @@ import { ThemeProvider } from "styled-components";
 import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { IntlProvider } from "react-intl";
-import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
+import { Hydrate, QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Head from "next/head";
 import fr_FR from "../lang/fr-FR.json";
 import pl_PL from "../lang/pl-PL.json";
@@ -23,7 +23,19 @@ const MESSAGES = {
 };
 
 function MyApp({ Component, pageProps }: AppProps<{ dehydratedState: any }>) {
-  const [queryClient] = useState(() => new QueryClient());
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            cacheTime: 86400000, // 24 hours
+            staleTime: 2000,
+            retry: 0,
+            networkMode: "offlineFirst",
+          },
+        },
+      }),
+  );
 
   const locale = useRouter().locale as keyof typeof MESSAGES;
 

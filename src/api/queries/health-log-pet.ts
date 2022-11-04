@@ -1,11 +1,12 @@
-import { useQuery } from "react-query";
 import { useEffect, useState } from "react";
 import { useIntl } from "react-intl";
+import { useQuery } from "@tanstack/react-query";
 import ApiClient from "../client";
 import { ApiStatesTypes } from "../../types/api-states.types";
 import { getQueryStatus } from "../../utils";
 import { HealthLogResponseModel } from "../response-model/health-log-single.response-model";
 import { CommonErrorResponseModel } from "../response-model/common-error.response-model";
+import { QueryKeys } from "../keys";
 
 const useHealthLogPet = (petId: string) => {
   const intl = useIntl();
@@ -21,10 +22,10 @@ const useHealthLogPet = (petId: string) => {
     isLoading,
     isError,
     isSuccess,
-    isIdle,
+    isStale,
     data,
     error: queryError,
-  } = useQuery(["healthLogPet", petId], () => apiClient.petsHealthLog(petId));
+  } = useQuery([QueryKeys.Pet, QueryKeys.PetHealthLog, petId], () => apiClient.petsHealthLog(petId));
 
   useEffect(() => {
     setResponse(data?.success);
@@ -44,8 +45,8 @@ const useHealthLogPet = (petId: string) => {
   }, [queryError]);
 
   useEffect(() => {
-    setStatus(getQueryStatus(isLoading, isError, isSuccess, isIdle, false, response, error));
-  }, [isLoading, isError, isSuccess, isIdle, response, error]);
+    setStatus(getQueryStatus(isLoading, isError, isSuccess, isStale, false, response, error));
+  }, [isLoading, isError, isSuccess, isStale, response, error]);
 
   return { get, status, response, error };
 };

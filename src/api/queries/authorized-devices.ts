@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useIntl } from "react-intl";
 import ApiClient from "../client";
@@ -6,6 +6,7 @@ import { ApiStatesTypes } from "../../types/api-states.types";
 import { getQueryStatus } from "../../utils";
 import { CommonErrorResponseModel } from "../response-model/common-error.response-model";
 import { RefreshTokenResponseModel } from "../response-model/refresh-token.response-model";
+import { QueryKeys } from "../keys";
 
 const useAuthorizedDevices = () => {
   const intl = useIntl();
@@ -21,10 +22,10 @@ const useAuthorizedDevices = () => {
     isLoading,
     isError,
     isSuccess,
-    isIdle,
+    isStale,
     data,
     error: queryError,
-  } = useQuery(["refreshToken"], () => apiClient.authorizedDevices());
+  } = useQuery([QueryKeys.Auth, QueryKeys.AuthAuthorizedDevices], () => apiClient.authorizedDevices());
 
   useEffect(() => {
     setResponse(data?.success);
@@ -44,8 +45,8 @@ const useAuthorizedDevices = () => {
   }, [queryError]);
 
   useEffect(() => {
-    setStatus(getQueryStatus(isLoading, isError, isSuccess, isIdle, false, response, error));
-  }, [isLoading, isError, isSuccess, isIdle, response, error]);
+    setStatus(getQueryStatus(isLoading, isError, isSuccess, isStale, false, response, error));
+  }, [isLoading, isError, isSuccess, isStale, response, error]);
 
   return { get, status, response, error };
 };

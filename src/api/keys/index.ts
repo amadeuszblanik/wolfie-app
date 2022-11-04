@@ -1,0 +1,16 @@
+export enum QueryKeys {
+  Auth = "AUTH",
+  AuthResetPassword = "AUTH/RESET PASSWORD",
+  AuthAuthorizedDevices = "AUTH/AUTHORIZED DEVICES",
+  AuthProfile = "AUTH/PROFILE",
+  Breeds = "BREEDS",
+  Config = "CONFIG",
+  Gdpr = "GDPR",
+  Medicines = "MEDICINES",
+  Pet = "PET",
+  PetSingle = "PET/SINGLE",
+  PetList = "PET/LIST",
+  PetWeight = "PET/WEIGHT",
+  PetWeightSingle = "PET/WEIGHT SINGLE",
+  PetHealthLog = "PET/HEALTH LOG",
+}

@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useIntl } from "react-intl";
 import ApiClient from "../client";
@@ -7,6 +7,7 @@ import { getQueryStatus } from "../../utils";
 import { CommonErrorResponseModel } from "../response-model/common-error.response-model";
 import { HealthLogResponseModel } from "../response-model/health-log-single.response-model";
 import { HealthLogAddPayload } from "../payload/health-log-add.payload";
+import { QueryKeys } from "../keys";
 
 const useHealthLogAdd = (petId: string) => {
   const intl = useIntl();
@@ -35,9 +36,7 @@ const useHealthLogAdd = (petId: string) => {
         message: intl.formatMessage({ id: "error.api_unknown_message" }),
       });
     },
-    onSettled: () => {
-      void queryClient.invalidateQueries("signIn");
-    },
+    onSettled: () => queryClient.invalidateQueries([QueryKeys.Pet]),
   });
 
   useEffect(() => {

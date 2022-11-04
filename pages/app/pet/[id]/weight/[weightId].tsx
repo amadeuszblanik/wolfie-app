@@ -10,13 +10,14 @@ const App: NextPage = () => {
   const router = useRouter();
   const intl = useIntl();
 
-  const { id, weightId } = router.query;
+  const id = router.query.id as string;
+  const weightId = router.query.weightId as string;
 
   return (
     <LayoutApp title={intl.formatMessage({ id: "page.pet_weight.header" })} back>
       <DoggoGrid mobile={1} desktop={1}>
-        <DataDisplayPet petId={String(id)} />
-        <DataDisplayPetWeightById petId={String(id)} weightId={String(weightId)} />
+        <DataDisplayPet petId={id} />
+        <DataDisplayPetWeightById petId={id} weightId={weightId} />
       </DoggoGrid>
     </LayoutApp>
   );

@@ -13,7 +13,8 @@ const App: NextPage = () => {
   const router = useRouter();
   const intl = useIntl();
 
-  const { id, healthLogId } = router.query;
+  const id = router.query.id as string;
+  const healthLogId = router.query.healthLogId as string;
 
   const { response, error, status } = useHealthLogPetSingle(String(id), String(healthLogId));
 
@@ -71,7 +72,7 @@ const App: NextPage = () => {
   }
 
   return (
-    <LayoutPet title={intl.formatMessage({ id: "page.pet_health_log_single.header" })} back petId={String(id)}>
+    <LayoutPet title={intl.formatMessage({ id: "page.pet_health_log_single.header" })} back petId={id}>
       <DataDisplayHealthLogSingle items={healthLogItems} error={error} status={status} />
     </LayoutPet>
   );

@@ -22,7 +22,7 @@ const App: NextPage = () => {
   const router = useRouter();
   const intl = useIntl();
 
-  const { id } = router.query;
+  const id = router.query.id as string;
 
   const [isOpenAddWeight, setIsOpenAddWeight] = useState(false);
 
@@ -37,10 +37,10 @@ const App: NextPage = () => {
       right={<AddButton onClick={() => setIsOpenAddWeight(true)} />}
     >
       <DoggoGrid mobile={1} desktop={1}>
-        <DataDisplayPet petId={String(id)} />
-        <DataDisplayPetWeight petId={String(id)} onEmpty={handleEmpty} />
+        <DataDisplayPet petId={id} />
+        <DataDisplayPetWeight petId={id} onEmpty={handleEmpty} />
       </DoggoGrid>
-      {isOpenAddWeight && <ComponentAddWeight petId={String(id)} onClose={() => setIsOpenAddWeight(false)} />}
+      {isOpenAddWeight && <ComponentAddWeight petId={id} onClose={() => setIsOpenAddWeight(false)} />}
     </LayoutApp>
   );
 };

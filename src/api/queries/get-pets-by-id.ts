@@ -26,7 +26,7 @@ const useQueries = (id: string, enabled = true) => {
     data,
     error: queryError,
   } = useQuery([QueryKeys.Pet, QueryKeys.PetSingle, id], () => apiClient.getPetsById(id), {
-    enabled,
+    enabled: enabled && !!id,
   });
 
   useEffect(() => {

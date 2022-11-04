@@ -12,14 +12,14 @@ const App: NextPage = () => {
   const router = useRouter();
   const intl = useIntl();
 
-  const { id } = router.query;
+  const id = router.query.id as string;
 
   return (
     <LayoutApp title={intl.formatMessage({ id: "page.pet_edit.header" })} back>
       <DoggoBox padding={{ bottom: SizesEnum.ExtraLarge }}>
-        <DataDisplayPet petId={String(id)} />
+        <DataDisplayPet petId={id} />
       </DoggoBox>
-      <FormPet petId={String(id)} />
+      <FormPet petId={id} />
     </LayoutApp>
   );
 };

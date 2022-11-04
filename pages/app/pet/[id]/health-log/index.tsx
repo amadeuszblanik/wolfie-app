@@ -26,7 +26,7 @@ const App: NextPage = () => {
   const router = useRouter();
   const intl = useIntl();
 
-  const { id } = router.query;
+  const id = router.query.id as string;
 
   const [isOpenAdd, setIsOpenAdd] = useState(false);
   const { response, error, status, get } = useHealthLogPet(String(id));
@@ -51,12 +51,12 @@ const App: NextPage = () => {
     <LayoutPet
       title={intl.formatMessage({ id: "page.pet_health_log.header" })}
       back
-      petId={String(id)}
+      petId={id}
       right={<AddButton onClick={() => setIsOpenAdd(true)} />}
     >
       <DataDisplayHealthLog items={healthLogItems} error={error} status={status} />
       {isOpenAdd && (
-        <ComponentAddHealthLog petId={String(id)} onClose={() => setIsOpenAdd(false)} onSuccess={handleOnSuccess} />
+        <ComponentAddHealthLog petId={id} onClose={() => setIsOpenAdd(false)} onSuccess={handleOnSuccess} />
       )}
     </LayoutPet>
   );

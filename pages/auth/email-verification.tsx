@@ -11,7 +11,7 @@ import type { NextPage } from "next";
 const EmailVerification: NextPage = () => {
   const router = useRouter();
   const intl = useIntl();
-  const { token } = router.query;
+  const token = router.query.token as string;
 
   const { response, post, status, error } = useConfirmEmail();
 
@@ -20,7 +20,7 @@ const EmailVerification: NextPage = () => {
       return;
     }
 
-    post({ token: token as string });
+    post({ token });
   }, [token]);
 
   return (

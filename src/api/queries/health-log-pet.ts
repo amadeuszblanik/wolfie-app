@@ -25,7 +25,9 @@ const useHealthLogPet = (petId: string) => {
     isStale,
     data,
     error: queryError,
-  } = useQuery([QueryKeys.Pet, QueryKeys.PetHealthLog, petId], () => apiClient.petsHealthLog(petId));
+  } = useQuery([QueryKeys.Pet, QueryKeys.PetHealthLog, petId], () => apiClient.petsHealthLog(petId), {
+    enabled: !!petId,
+  });
 
   useEffect(() => {
     setResponse(data?.success);

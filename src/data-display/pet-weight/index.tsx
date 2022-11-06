@@ -1,6 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { useRouter } from "next/router";
-import { isEmpty } from "bme-utils";
 import { FormattedMessage, useIntl } from "react-intl";
 import { ComponentErrorScreen, ComponentListPlaceholder } from "../../component";
 import { useGetPetsWeightById } from "../../api/queries";
@@ -15,10 +14,9 @@ import { ButtonSizes } from "../../ui-components/button";
 
 interface Props {
   petId: string;
-  onEmpty?: () => void;
 }
 
-const DataDisplay: React.FunctionComponent<Props> = ({ petId, onEmpty }) => {
+const DataDisplay: React.FunctionComponent<Props> = ({ petId }) => {
   const intl = useIntl();
   const router = useRouter();
   const { response, error, status, get } = useGetPetsWeightById(petId);
@@ -27,20 +25,10 @@ const DataDisplay: React.FunctionComponent<Props> = ({ petId, onEmpty }) => {
   const [removeEntryId, setRemoveEntryId] = useState<string | null>(null);
   const [containerWidth, setContainerWidth] = useState<number>();
 
-  const isEmptyResponse = response && isEmpty(response);
-
   const removeEntry = (response || []).find(({ id }) => id === removeEntryId);
   const removeEntryMessage = removeEntry
     ? `${removeEntry.formatted} ${intl.formatMessage({ id: "common.on_date" })} ${pipeDate(removeEntry.date)}`
     : "";
-
-  useEffect(() => {
-    if (!isEmptyResponse || !onEmpty) {
-      return;
-    }
-
-    onEmpty();
-  }, [onEmpty, isEmptyResponse]);
 
   switch (status) {
     case "error":

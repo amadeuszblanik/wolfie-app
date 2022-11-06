@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useRouter } from "next/router";
-import { isEmpty } from "bme-utils";
 import { useGetHealthLog } from "../../api/queries";
 import { ComponentErrorScreen, ComponentListPlaceholder } from "../../component";
 import { DoggoButton, DoggoList, DoggoText } from "../../ui-components";
@@ -12,17 +11,14 @@ import { ApiStatesTypes } from "../../types/api-states.types";
 
 interface Props {
   petId: string;
-  onEmpty?: () => void;
 }
 
-const DataDisplay: React.FunctionComponent<Props> = ({ petId, onEmpty }) => {
+const DataDisplay: React.FunctionComponent<Props> = ({ petId }) => {
   const intl = useIntl();
   const router = useRouter();
   const { response, error, status, request } = useGetHealthLog(petId);
 
   const [removeEntryId, setRemoveEntryId] = useState<string | null>(null);
-
-  const isEmptyResponse = response && isEmpty(response);
 
   const removeEntry = (response || []).find(({ id }) => id === removeEntryId);
   const removeEntryMessage = removeEntry
@@ -30,14 +26,6 @@ const DataDisplay: React.FunctionComponent<Props> = ({ petId, onEmpty }) => {
         id: "common.on_date",
       })} ${pipeDate(removeEntry.date)}`
     : "";
-
-  useEffect(() => {
-    if (!isEmptyResponse || !onEmpty) {
-      return;
-    }
-
-    onEmpty();
-  }, [onEmpty, isEmptyResponse]);
 
   switch (status) {
     case ApiStatesTypes.Error:

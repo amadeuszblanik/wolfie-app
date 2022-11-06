@@ -26,7 +26,7 @@ const StyledBox = styled(Box)<StyledBoxProps>`
   position: ${({ fullScreen }) => (fullScreen ? (fullScreen === "component" ? "absolute" : "fixed") : "relative")};
   top: 0;
   left: 0;
-  ${({ fullScreen }) => fullScreen && `z-index: 1020; width: 100%; height: 100%;`}
+  ${({ fullScreen }) => fullScreen && `z-index: 9090; width: 100%; height: 100%;`}
   ${({ size }) => size && `font-size: ${sizeMixin(size, LOADER_SIZES)}`};
   background: ${({ theme, fullScreen }) =>
     fullScreen ? theme.palette.gray6 : toRgba(theme.palette.gray6, theme.opacity.modal)};

@@ -35,6 +35,6 @@ const Component: React.FunctionComponent<Props> = ({
   />
 );
 
-Component.displayName = "DoggoUI/InputDate";
+Component.displayName = "DoggoUI_InputDate";
 
 export default Component;

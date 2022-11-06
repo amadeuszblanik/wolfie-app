@@ -60,7 +60,7 @@ const Component: React.FunctionComponent<Props> = ({
   );
 };
 
-Component.displayName = "DoggoUI/InputNumber";
+Component.displayName = "DoggoUI_InputNumber";
 
 Component.defaultProps = {
   inputMode: "decimal",

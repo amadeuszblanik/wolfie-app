@@ -1,6 +1,6 @@
 import { ThemeProvider } from "styled-components";
 import React, { useCallback, useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import { Router, useRouter } from "next/router";
 import { IntlProvider } from "react-intl";
 import { Hydrate, QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
@@ -14,6 +14,7 @@ import { ComponentFirebase, ComponentFooter } from "../src/component";
 import { ConfigContext } from "../src/context/config.context";
 import { ConfigStore, FirebaseStore } from "../src/context";
 import { cssVariable } from "../src/utils";
+import { DoggoProgressBar } from "../src/ui-components";
 import type { AppProps } from "next/app";
 
 const MESSAGES = {
@@ -36,6 +37,7 @@ function MyApp({ Component, pageProps }: AppProps<{ dehydratedState: any }>) {
         },
       }),
   );
+  const [loading, setLoading] = useState(false);
 
   const locale = useRouter().locale as keyof typeof MESSAGES;
 
@@ -53,6 +55,12 @@ function MyApp({ Component, pageProps }: AppProps<{ dehydratedState: any }>) {
 
     return () => window.removeEventListener("resize", updateFullHeight);
   }, [updateFullHeight]);
+
+  useEffect(() => {
+    Router.events.on("routeChangeStart", () => setLoading(true));
+    Router.events.on("routeChangeComplete", () => setLoading(false));
+    Router.events.on("routeChangeError", () => setLoading(false));
+  }, []);
 
   return (
     <IntlProvider locale={locale} messages={MESSAGES[locale]}>
@@ -83,6 +91,7 @@ function MyApp({ Component, pageProps }: AppProps<{ dehydratedState: any }>) {
                       <meta name="HandheldFriendly" content="true" />
                     </Head>
                     <GlobalStyles />
+                    {loading && <DoggoProgressBar value={100} fixed />}
                     <Component {...pageProps} />
                     <ComponentFooter />
                     <ComponentFirebase />

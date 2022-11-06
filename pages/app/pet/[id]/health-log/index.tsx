@@ -33,7 +33,7 @@ const App: NextPage = () => {
       back
       right={<AddButton onClick={() => setIsOpenAdd(true)} />}
     >
-      <DataDisplayHealthLog petId={id} onEmpty={() => setIsOpenAdd(true)} />
+      <DataDisplayHealthLog petId={id} />
       {isOpenAdd && (
         <ComponentAddHealthLog petId={id} onClose={() => setIsOpenAdd(false)} onSuccess={() => setIsOpenAdd(false)} />
       )}

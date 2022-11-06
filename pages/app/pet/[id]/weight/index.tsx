@@ -33,7 +33,7 @@ const App: NextPage = () => {
       back
       right={<AddButton onClick={() => setIsOpenAdd(true)} />}
     >
-      <DataDisplayPetWeight petId={petId} onEmpty={() => setIsOpenAdd(true)} />
+      <DataDisplayPetWeight petId={petId} />
       {isOpenAdd && <ComponentAddWeight petId={petId} onClose={() => setIsOpenAdd(false)} />}
     </LayoutPet>
   );

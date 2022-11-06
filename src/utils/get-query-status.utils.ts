@@ -4,7 +4,7 @@ const getQueryStatusUtils = (
   isLoading: boolean,
   isError: boolean,
   isSuccess: boolean,
-  isStale: boolean,
+  isIdle: boolean,
   isPaused: boolean,
   response: any,
   error: any,
@@ -29,7 +29,7 @@ const getQueryStatusUtils = (
     return ApiStatesTypes.Success;
   }
 
-  if (isStale) {
+  if (isIdle) {
     return ApiStatesTypes.Idle;
   }
 

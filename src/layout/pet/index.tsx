@@ -2,11 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import { FormattedMessage } from "react-intl";
-import { DoggoBox, DoggoButton, DoggoContainer } from "../../ui-components";
+import { DoggoBox, DoggoButton, DoggoContainer, DoggoGrid } from "../../ui-components";
 import { SizesEnum } from "../../settings/sizes";
-import { ComponentApiWrapper, ComponentBottombar, ComponentPetCard, ComponentTopbar } from "../../component";
+import { ComponentBottombar, ComponentTopbar } from "../../component";
 import { ButtonSizes } from "../../ui-components/button";
-import usePetsSingle from "../../api/queries/get-pets-by-id";
+import { DataDisplayPet } from "../../data-display";
 
 interface Props {
   children: React.ReactNode;
@@ -30,26 +30,19 @@ const AppBackButton: React.FunctionComponent = () => {
   );
 };
 
-const App: React.FunctionComponent<Props> = ({ children, title, back, right, petId }) => {
-  const { response: pet, error: petError, status } = usePetsSingle(petId);
-
-  const errors = [petError];
-  const statuses = [status];
-
-  return (
-    <>
-      <StyledLayout padding={{ y: SizesEnum.Large }} column>
-        <ComponentTopbar title={title} left={back && <AppBackButton />} right={right} />
-        <DoggoContainer fullWidth>
-          <ComponentApiWrapper error={errors} status={statuses}>
-            {pet && <ComponentPetCard data={pet} />}
-            {children}
-          </ComponentApiWrapper>
-        </DoggoContainer>
-        <ComponentBottombar />
-      </StyledLayout>
-    </>
-  );
-};
+const App: React.FunctionComponent<Props> = ({ children, title, back, right, petId }) => (
+  <>
+    <StyledLayout padding={{ y: SizesEnum.Large }} column>
+      <ComponentTopbar title={title} left={back && <AppBackButton />} right={right} />
+      <DoggoContainer fullWidth>
+        <DoggoGrid mobile={1} desktop={1}>
+          <DataDisplayPet petId={petId} />
+          {children}
+        </DoggoGrid>
+      </DoggoContainer>
+      <ComponentBottombar />
+    </StyledLayout>
+  </>
+);
 
 export default App;

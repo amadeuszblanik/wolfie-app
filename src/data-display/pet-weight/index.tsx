@@ -2,9 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { isEmpty } from "bme-utils";
 import { FormattedMessage, useIntl } from "react-intl";
-import { ComponentErrorScreen } from "../../component";
+import { ComponentErrorScreen, ComponentListPlaceholder } from "../../component";
 import { useGetPetsWeightById } from "../../api/queries";
-import { DoggoBox, DoggoButton, DoggoLineChart, DoggoList, DoggoPlaceholder, DoggoText } from "../../ui-components";
+import { DoggoBox, DoggoButton, DoggoLineChart, DoggoList, DoggoText } from "../../ui-components";
 import { pipeDate, pipeNumber } from "../../pipe";
 import { ApiStatesTypes } from "../../types/api-states.types";
 import { SizesEnum } from "../../settings/sizes";
@@ -18,13 +18,12 @@ interface Props {
   onEmpty?: () => void;
 }
 
-const PLACEHOLDER_COMPONENTS = 6;
-
 const DataDisplay: React.FunctionComponent<Props> = ({ petId, onEmpty }) => {
   const intl = useIntl();
   const router = useRouter();
   const { response, error, status, get } = useGetPetsWeightById(petId);
   const { userConfig } = useContext<ConfigContextType>(ConfigContext);
+
   const [removeEntryId, setRemoveEntryId] = useState<string | null>(null);
   const [containerWidth, setContainerWidth] = useState<number>();
 
@@ -61,39 +60,30 @@ const DataDisplay: React.FunctionComponent<Props> = ({ petId, onEmpty }) => {
               label={userConfig?.weightUnits}
               emptyMessage={<FormattedMessage id="data_display.pet_weight.empty" />}
             >
-              {response?.map((item) => (
-                <DoggoList.Item
-                  key={item.id}
-                  onClick={() => router.push(`/app/pet/${petId}/weight/${item.id}`)}
-                  actions={
-                    <DoggoButton variant="red" size={ButtonSizes.Small} onClick={() => setRemoveEntryId(item.id)}>
-                      <FormattedMessage id="common.delete" />
-                    </DoggoButton>
-                  }
-                >
-                  <DoggoText noBottomMargin>{pipeNumber(item.raw)}</DoggoText>
-                  <DoggoText noBottomMargin>{pipeDate(item.date)}</DoggoText>
-                </DoggoList.Item>
-              ))}
-              {!response &&
-                Array(PLACEHOLDER_COMPONENTS)
-                  .fill(null)
-                  .map((_, index) => (
-                    <DoggoList.Item key={index}>
-                      <DoggoText>
-                        <DoggoPlaceholder />
-                      </DoggoText>
-                      <DoggoText>
-                        <DoggoPlaceholder />
-                      </DoggoText>
-                    </DoggoList.Item>
-                  ))}
+              {response ? (
+                response.map((item) => (
+                  <DoggoList.Item
+                    key={item.id}
+                    onClick={() => router.push(`/app/pet/${petId}/weight/${item.id}`)}
+                    actions={
+                      <DoggoButton variant="red" size={ButtonSizes.Small} onClick={() => setRemoveEntryId(item.id)}>
+                        <FormattedMessage id="common.delete" />
+                      </DoggoButton>
+                    }
+                  >
+                    <DoggoText noBottomMargin>{pipeNumber(item.raw)}</DoggoText>
+                    <DoggoText noBottomMargin>{pipeDate(item.date)}</DoggoText>
+                  </DoggoList.Item>
+                ))
+              ) : (
+                <ComponentListPlaceholder />
+              )}
             </DoggoList>
           </DoggoBox>
           {removeEntryId && (
             <RemoveEntryWeightById
               petId={petId}
-              weightId={removeEntryId}
+              entryId={removeEntryId}
               entry={removeEntryMessage}
               onClose={() => setRemoveEntryId(null)}
             />

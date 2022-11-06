@@ -12,6 +12,9 @@ export const mixin = keys.reduce((accumulator, label) => {
   `;
 
   return accumulator;
+
+  // @TODO: Change types
+  // eslint-disable-next-line @typescript-eslint/ban-types
 }, {} as Record<keyof typeof Breakpoints, Function>);
 
 export default mixin;

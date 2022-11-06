@@ -36,16 +36,6 @@
         }
       }
     ],
-    "@typescript-eslint/ban-types": [
-      "warn",
-      {
-        "types": {
-          "Function": {
-            "message": "Avoid using the `Function` type. Prefer a specific function type, like `() => void`."
-          }
-        }
-      }
-    ],
     "@typescript-eslint/consistent-type-assertions": "error",
     "@typescript-eslint/consistent-type-definitions": "error",
     "@typescript-eslint/dot-notation": "error",
@@ -178,15 +168,12 @@
     "no-eval": "error",
     "no-fallthrough": "error",
     "no-invalid-this": "off",
-    "no-magic-numbers": "warn",
     "no-multiple-empty-lines": "error",
     "no-new-wrappers": "error",
     "no-restricted-imports": [
       "error",
       "rxjs/Rx"
     ],
-    "no-shadow": "off",
-    "@typescript-eslint/no-shadow": "error",
     "no-throw-literal": "error",
     "no-trailing-spaces": "error",
     "no-undef-init": "error",
@@ -258,10 +245,6 @@
     "strict": [
       "error",
       "safe"
-    ],
-    "spaced-comment": [
-      "error",
-      "always"
     ],
     "prefer-arrow-callback": "error",
     "prettier/prettier": [

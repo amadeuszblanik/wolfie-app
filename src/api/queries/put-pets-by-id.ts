@@ -31,7 +31,10 @@ const useQueries = (id: string) => {
           message: intl.formatMessage({ id: "error.api_unknown_message" }),
         });
       },
-      onSettled: () => queryClient.invalidateQueries([QueryKeys.Pet]),
+      onSettled: () => {
+        void queryClient.invalidateQueries(QueryKeys.Pet.list());
+        void queryClient.invalidateQueries(QueryKeys.Pet.single(id));
+      },
     },
   );
 

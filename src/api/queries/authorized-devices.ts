@@ -25,7 +25,7 @@ const useAuthorizedDevices = () => {
     isStale,
     data,
     error: queryError,
-  } = useQuery([QueryKeys.Auth, QueryKeys.AuthAuthorizedDevices], () => apiClient.authorizedDevices());
+  } = useQuery(QueryKeys.Auth.authorizedDevices(), () => apiClient.authorizedDevices());
 
   useEffect(() => {
     setResponse(data?.success);
@@ -42,7 +42,7 @@ const useAuthorizedDevices = () => {
       error: intl.formatMessage({ id: "error.api_unknown_error" }),
       message: intl.formatMessage({ id: "error.api_unknown_message" }),
     });
-  }, [queryError]);
+  }, [queryError, intl]);
 
   useEffect(() => {
     setStatus(getQueryStatus(isLoading, isError, isSuccess, isStale, false, response, error));

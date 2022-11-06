@@ -26,7 +26,7 @@ const useQueries = () => {
     isStale,
     data,
     error: queryError,
-  } = useQuery([QueryKeys.Auth, QueryKeys.Config], () => apiClient.getConfig(), {
+  } = useQuery(QueryKeys.Auth.config(), () => apiClient.getConfig(), {
     refetchOnMount: "always",
     refetchOnWindowFocus: "always",
     refetchOnReconnect: "always",

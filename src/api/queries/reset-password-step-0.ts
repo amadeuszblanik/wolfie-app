@@ -25,13 +25,9 @@ const useResetPasswordStep0 = (userEmail: string) => {
     isStale,
     data,
     error: queryError,
-  } = useQuery(
-    [QueryKeys.Auth, QueryKeys.AuthResetPassword, userEmail],
-    () => apiClient.resetPasswordStep0(userEmail),
-    {
-      enabled: false,
-    },
-  );
+  } = useQuery(QueryKeys.Auth.resetPassword(), () => apiClient.resetPasswordStep0(userEmail), {
+    enabled: false,
+  });
 
   useEffect(() => {
     setResponse(data?.success);
@@ -48,7 +44,7 @@ const useResetPasswordStep0 = (userEmail: string) => {
       error: intl.formatMessage({ id: "error.api_unknown_error" }),
       message: intl.formatMessage({ id: "error.api_unknown_message" }),
     });
-  }, [queryError]);
+  }, [queryError, intl]);
 
   useEffect(() => {
     setStatus(getQueryStatus(isLoading, isError, isSuccess, isStale, false, response, error));

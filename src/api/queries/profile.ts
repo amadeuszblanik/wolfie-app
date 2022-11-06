@@ -25,7 +25,7 @@ const useProfile = () => {
     isStale,
     data,
     error: queryError,
-  } = useQuery([QueryKeys.Auth, QueryKeys.AuthProfile], () => apiClient.profile());
+  } = useQuery(QueryKeys.Auth.profile(), () => apiClient.profile());
 
   useEffect(() => {
     setResponse(data?.success);
@@ -42,7 +42,7 @@ const useProfile = () => {
       error: intl.formatMessage({ id: "error.api_unknown_error" }),
       message: intl.formatMessage({ id: "error.api_unknown_message" }),
     });
-  }, [queryError]);
+  }, [queryError, intl]);
 
   useEffect(() => {
     setStatus(getQueryStatus(isLoading, isError, isSuccess, isStale, false, response, error));

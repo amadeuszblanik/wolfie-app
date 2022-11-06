@@ -37,8 +37,7 @@ const useChangePassword = () => {
       });
     },
     onSettled: () => {
-      void queryClient.invalidateQueries([QueryKeys.Auth]);
-      void queryClient.invalidateQueries([QueryKeys.AuthProfile]);
+      void queryClient.invalidateQueries([QueryKeys.Auth.profile()]);
     },
   });
 

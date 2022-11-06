@@ -25,9 +25,13 @@ const useHealthLogPetSingle = (petId: string, healthLogId: string) => {
     isStale,
     data,
     error: queryError,
-  } = useQuery([QueryKeys.PetHealthLog, petId], () => apiClient.petsHealthLogSingle(petId, healthLogId), {
-    enabled: !!petId,
-  });
+  } = useQuery(
+    QueryKeys.Pet.healthLogSingle(petId, healthLogId),
+    () => apiClient.petsHealthLogSingle(petId, healthLogId),
+    {
+      enabled: !!petId,
+    },
+  );
 
   useEffect(() => {
     setResponse(data?.success);
@@ -44,7 +48,7 @@ const useHealthLogPetSingle = (petId: string, healthLogId: string) => {
       error: intl.formatMessage({ id: "error.api_unknown_error" }),
       message: intl.formatMessage({ id: "error.api_unknown_message" }),
     });
-  }, [queryError]);
+  }, [queryError, intl]);
 
   useEffect(() => {
     setStatus(getQueryStatus(isLoading, isError, isSuccess, isStale, false, response, error));

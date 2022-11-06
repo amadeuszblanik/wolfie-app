@@ -31,7 +31,11 @@ const useQueries = (id: string, weightId: string) => {
           message: intl.formatMessage({ id: "error.api_unknown_message" }),
         });
       },
-      onSettled: () => queryClient.invalidateQueries([QueryKeys.Pet]),
+      onSettled: () => {
+        void queryClient.invalidateQueries(QueryKeys.Pet.weightSingle(id, weightId));
+        void queryClient.invalidateQueries(QueryKeys.Pet.weight(id));
+        void queryClient.invalidateQueries(QueryKeys.Pet.single(id));
+      },
     },
   );
 

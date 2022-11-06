@@ -25,7 +25,7 @@ const useQueries = (id: string) => {
     isStale,
     data,
     error: queryError,
-  } = useQuery([QueryKeys.Pet, QueryKeys.PetWeight, id], () => apiClient.getPetWeightById(id), {
+  } = useQuery(QueryKeys.Pet.weight(id), () => apiClient.getPetWeightById(id), {
     enabled: !!id,
   });
   useEffect(() => {

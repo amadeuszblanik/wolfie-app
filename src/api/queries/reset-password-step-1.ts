@@ -36,7 +36,7 @@ const useResetPasswordStep1 = () => {
         message: intl.formatMessage({ id: "error.api_unknown_message" }),
       });
     },
-    onSettled: () => queryClient.invalidateQueries([QueryKeys.Auth]),
+    onSettled: () => queryClient.invalidateQueries(QueryKeys.Auth.resetPassword()),
   });
 
   useEffect(() => {

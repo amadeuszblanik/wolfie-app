@@ -25,7 +25,7 @@ const useMedicineShortList = () => {
     isStale,
     data,
     error: queryError,
-  } = useQuery([QueryKeys.Medicines], () => apiClient.medicineShortList());
+  } = useQuery(QueryKeys.Medicines.all(), () => apiClient.medicineShortList());
 
   useEffect(() => {
     setResponse(data?.success);
@@ -42,7 +42,7 @@ const useMedicineShortList = () => {
       error: intl.formatMessage({ id: "error.api_unknown_error" }),
       message: intl.formatMessage({ id: "error.api_unknown_message" }),
     });
-  }, [queryError]);
+  }, [queryError, intl]);
 
   useEffect(() => {
     setStatus(getQueryStatus(isLoading, isError, isSuccess, isStale, false, response, error));

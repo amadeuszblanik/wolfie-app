@@ -36,7 +36,10 @@ const useHealthLogAdd = (petId: string) => {
         message: intl.formatMessage({ id: "error.api_unknown_message" }),
       });
     },
-    onSettled: () => queryClient.invalidateQueries([QueryKeys.Pet]),
+    onSettled: () => {
+      void queryClient.invalidateQueries(QueryKeys.Pet.healthLog(petId));
+      void queryClient.invalidateQueries(QueryKeys.Pet.single(petId));
+    },
   });
 
   useEffect(() => {

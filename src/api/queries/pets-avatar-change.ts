@@ -36,7 +36,7 @@ const usePetsAvatarChange = () => {
         setData(undefined);
         setError(undefined);
       },
-      onSettled: () => queryClient.invalidateQueries([QueryKeys.Pet]),
+      onSettled: () => queryClient.invalidateQueries(QueryKeys.Pet.all()),
     },
   );
 

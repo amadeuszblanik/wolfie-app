@@ -37,8 +37,8 @@ const useUpdateProfile = () => {
       });
     },
     onSettled: () => {
-      void queryClient.invalidateQueries([QueryKeys.AuthProfile]);
-      void queryClient.invalidateQueries([QueryKeys.Config]);
+      void queryClient.invalidateQueries(QueryKeys.Auth.config());
+      void queryClient.invalidateQueries(QueryKeys.Auth.profile());
     },
   });
 

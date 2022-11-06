@@ -18,7 +18,7 @@ const useGdpr = () => {
     isError,
     isSuccess,
     isStale,
-  } = useQuery([QueryKeys.Gdpr], new ApiClient(intl.locale).gdpr);
+  } = useQuery(QueryKeys.Gdpr.all(), new ApiClient(intl.locale).gdpr);
 
   const [status, setStatus] = useState(ApiStatesTypes.Init);
   const [response, setResponse] = useState<GdprResponseModel>();
@@ -31,7 +31,7 @@ const useGdpr = () => {
 
   useEffect(() => {
     setStatus(getQueryStatus(isLoading, isError, isSuccess, isStale, false, response, error));
-  }, [isLoading, isError, isSuccess]);
+  }, [isLoading, isError, isSuccess, isStale, response, error]);
 
   return { get, status, response, error };
 };

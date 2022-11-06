@@ -3,9 +3,9 @@ import { WeightUnits } from "../types/weight-units.types";
 export interface UserResponseModel {
   id: string;
   email: string;
+  fullName: string;
   firstName: string;
   lastName: string;
-  password: string;
   isActive: boolean;
   isEmailVerified: boolean;
   weightUnit: WeightUnits;

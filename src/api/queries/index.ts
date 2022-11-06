@@ -3,6 +3,7 @@ export { default as useDeleteHealthLog } from "./delete-health-log";
 export { default as useGetBreed } from "./get-breed";
 export { default as useGetConfig } from "./get-config";
 export { default as useGetHealthLog } from "./get-health-log";
+export { default as useGetHealthLogSingle } from "./get-health-log-single";
 export { default as useGetPetsById } from "./get-pets-by-id";
 export { default as useGetPetsMy } from "./get-pets-my";
 export { default as useGetPetsWeightById } from "./get-pets-weight-by-id";

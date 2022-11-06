@@ -1,4 +1,5 @@
 export { default as backgroundMixin } from "./background";
+export { default as breakpointMixin } from "./breakpoint";
 export { default as buttonClearMixin } from "./buttonClear";
 export { default as colorTextMixin } from "./colorText";
 export { default as darkenColorMixin } from "./darkenColor";

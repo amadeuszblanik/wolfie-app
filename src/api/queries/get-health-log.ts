@@ -8,7 +8,9 @@ const useQueries = (petId: string) => {
   const intl = useIntl();
   const apiClient = new ApiClientPet(intl.locale);
 
-  return queriesBase.get<HealthLogResponseModel[]>(QueryKeys.Pet.healthLog(petId), () => apiClient.getHealtlog(petId));
+  return queriesBase.get<HealthLogResponseModel[]>(QueryKeys.Pet.healthLog(petId), () => apiClient.getHealtlog(petId), {
+    enabled: !!petId,
+  });
 };
 
 export default useQueries;

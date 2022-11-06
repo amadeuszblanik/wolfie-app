@@ -21,9 +21,6 @@
           "Object": {
             "message": "Avoid using the `Object` type. Did you mean `object`?"
           },
-          "Function": {
-            "message": "Avoid using the `Function` type. Prefer a specific function type, like `() => void`."
-          },
           "Boolean": {
             "message": "Avoid using the `Boolean` type. Did you mean `boolean`?"
           },
@@ -35,6 +32,16 @@
           },
           "Symbol": {
             "message": "Avoid using the `Symbol` type. Did you mean `symbol`?"
+          }
+        }
+      }
+    ],
+    "@typescript-eslint/ban-types": [
+      "warn",
+      {
+        "types": {
+          "Function": {
+            "message": "Avoid using the `Function` type. Prefer a specific function type, like `() => void`."
           }
         }
       }

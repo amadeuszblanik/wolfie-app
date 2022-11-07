@@ -9,6 +9,7 @@ export { default as useGetPetsMy } from "./get-pets-my";
 export { default as useGetPetsWeightById } from "./get-pets-weight-by-id";
 export { default as useGetPetsWeightSingleById } from "./get-pets-weight-single-by-id";
 export { default as usePatchPetWeightSingleById } from "./patch-pet-weight-single-by-id";
+export { default as usePostHealthLog } from "./post-health-log";
 export { default as usePostPetWeightById } from "./post-pet-weight-by-id";
 export { default as usePostPetsNew } from "./post-pets-add";
 export { default as usePutPetsById } from "./put-pets-by-id";

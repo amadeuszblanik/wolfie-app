@@ -73,7 +73,6 @@ const useGet = <ResponseType>(
 };
 
 const useMutate = <ResponseType, RequestPayload>(
-  queryKeys: string[],
   fetchFunction: (data: RequestPayload) => Promise<ApiResponse<ResponseType>>,
   invalidateQueryKeys: string[][] = [],
 ) => {

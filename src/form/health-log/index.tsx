@@ -20,7 +20,7 @@ import { ComponentSelectMedicines } from "../../component";
 import { ListItem } from "../../types/list-item.types";
 import { HealthLogKindTypes } from "../../types/healt-log-kind.types";
 import { DEFAULT_LONG_VARCHAR_LENGTH, DEFAULT_ON_SUCCESS_TIMEOUT } from "../../settings/globals";
-import useHealthLogAdd from "../../api/queries/health-log-add";
+import { usePostHealthLog } from "../../api/queries";
 
 interface Props {
   petId: string;
@@ -29,7 +29,7 @@ interface Props {
 
 const Form: React.FunctionComponent<Props> = ({ petId, onSuccess }) => {
   const intl = useIntl();
-  const { post, status, error } = useHealthLogAdd(petId);
+  const { request, status, error } = usePostHealthLog(petId);
 
   const kindItems: ListItem[] = Object.values(HealthLogKindTypes).map((value) => ({
     id: value,
@@ -73,7 +73,7 @@ const Form: React.FunctionComponent<Props> = ({ petId, onSuccess }) => {
       default:
         setFormEnable(true);
     }
-  }, [status]);
+  }, [status, onSuccess]);
 
   const handleSubmit = () => {
     if (!date) {
@@ -81,7 +81,7 @@ const Form: React.FunctionComponent<Props> = ({ petId, onSuccess }) => {
       return;
     }
 
-    post({
+    request({
       kind,
       date,
       medicines,

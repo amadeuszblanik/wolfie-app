@@ -9,7 +9,6 @@ const useQueries = (petId: string, healthLogId: string) => {
   const apiClient = new ApiClientPet(intl.locale);
 
   return queriesBase.delete<CommonMessageResponseModel, Parameters<typeof apiClient.deleteHealthLog>>(
-    QueryKeys.Pet.weight(petId),
     () => apiClient.deleteHealthLog(petId, healthLogId),
     [QueryKeys.Pet.healthLogSingle(petId, healthLogId), QueryKeys.Pet.healthLog(petId), QueryKeys.Pet.single(petId)],
   );

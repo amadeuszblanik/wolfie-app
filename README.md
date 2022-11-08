@@ -5,9 +5,9 @@ Wolfie.app is a Next.JS web application for dealing with pet management.
 _THIS APPLICATION IS IN DEVELOPMENT._
 
 ## Official website
-[Stable build](https://wolfie.app)
-[Development build](https://next.wolfie.app)
-[Wolfie.app Open API](https://api.wolfie.app)
+* [Stable build](https://wolfie.app)
+* [Development build](https://next.wolfie.app)
+* [Doggo Open API](https://api.wolfie.app)
 
 ## Installation
 Use the package manager [yarn](https://yarnpkg.com) to install all dependencies.
@@ -35,7 +35,6 @@ Please make sure to update tests as appropriate.
 * [x] Implement photo uploading and displaying
 * [ ] Refactor code to be more readable and maintainable
 * [ ] Create a alpha stage of the web application
-* [ ] Implement dog tinder
 * [ ] Implement dog park finder
 * [ ] Create a beta stage of the web application
 * [ ] Create a native iOS mobile application [repo](https://github.com/amadeuszblanik/wolfie-ios)

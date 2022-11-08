@@ -1,6 +1,6 @@
 import React from "react";
-import styled, { DefaultTheme } from "styled-components";
-import { darkenColorMixin, isDarkMixin, paddingMixin } from "../mixins";
+import styled, { ThemePalette } from "styled-components";
+import { backgroundMixin, darkenColorMixin, paddingMixin } from "../mixins";
 import { SizesEnum } from "../../settings/sizes";
 import Text from "../text";
 import { isText } from "../../utils";
@@ -8,16 +8,17 @@ import { isText } from "../../utils";
 export enum ButtonSizes {
   Small = "small",
   Normal = "normal",
+  FullWidth = "full-width",
 }
 
 interface StyledButtonProps {
-  variant?: keyof DefaultTheme["palette"];
+  variant?: ThemePalette;
   disabled?: boolean;
   size: ButtonSizes;
 }
 
 interface ButtonProps {
-  variant?: keyof DefaultTheme["palette"];
+  variant?: ThemePalette;
   size?: ButtonSizes;
   children: React.ReactNode;
   onClick?: () => void;
@@ -28,16 +29,20 @@ interface ButtonProps {
 const PADDING_SIZES: { [key in ButtonSizes]: { x: SizesEnum; y: SizesEnum } } = {
   [ButtonSizes.Small]: { x: SizesEnum.Medium, y: SizesEnum.Small },
   [ButtonSizes.Normal]: { x: SizesEnum.ExtraLarge, y: SizesEnum.Medium },
+  [ButtonSizes.FullWidth]: { x: SizesEnum.ExtraLarge, y: SizesEnum.Medium },
 };
 
 const StyledButton = styled.button<StyledButtonProps>`
+  ${({ size }) => size === ButtonSizes.FullWidth && "width: 100%"};
   ${({ size }) => paddingMixin(PADDING_SIZES[size])};
-  color: ${({ theme, variant }) =>
-    variant ? (isDarkMixin(theme.palette[variant]) ? theme.palette.light : theme.palette.dark) : `var(--color-text)`};
-  background: ${({ theme, variant, disabled }) =>
-    variant ? (!disabled ? theme.palette[variant] : theme.palette.gray) : `var(--color-background)`};
+  ${({ variant, disabled }) =>
+    disabled
+      ? backgroundMixin("gray")
+      : !variant
+      ? "background: var(--color-background)"
+      : backgroundMixin(!disabled ? variant : "gray")};
   border: none;
-  border-radius: ${({ theme }) => theme.borderRadius};
+  border-radius: var(--button-radius);
   cursor: pointer;
   ${({ disabled }) => disabled && "pointer-events: none"};
   transition: background 0.2s ease-in-out;
@@ -54,17 +59,25 @@ const StyledButton = styled.button<StyledButtonProps>`
   }
 `;
 
-const Button: React.FunctionComponent<ButtonProps> = ({ children, variant, size, onClick, disabled, type }) => (
-  <StyledButton
-    variant={variant}
-    onClick={!disabled ? onClick : () => console.warn("Button disabled")}
-    disabled={disabled}
-    size={size || ButtonSizes.Normal}
-    type={type}
-  >
-    {isText(children) ? <Text noBottomMargin>{children}</Text> : children}
-  </StyledButton>
-);
+const Button: React.FunctionComponent<ButtonProps> = ({ children, variant, size, onClick, disabled, type }) => {
+  const handleClick = () => {
+    if (!disabled && onClick) {
+      onClick();
+    }
+  };
+
+  return (
+    <StyledButton
+      variant={variant}
+      onClick={handleClick}
+      disabled={disabled}
+      size={size || ButtonSizes.Normal}
+      type={type}
+    >
+      {isText(children) ? <Text noBottomMargin>{children}</Text> : children}
+    </StyledButton>
+  );
+};
 
 Button.defaultProps = {
   type: "button",

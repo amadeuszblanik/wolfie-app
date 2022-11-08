@@ -1,7 +1,7 @@
 import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import Component from "./index";
 import { SizesEnum } from "../../settings/sizes";
+import Component from "./index";
 
 export default {
   title: "UI-Components/Loader",

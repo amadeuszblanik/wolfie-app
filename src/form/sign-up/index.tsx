@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from "react";
+import { FormattedMessage, useIntl } from "react-intl";
+import Link from "next/link";
 import { WeightUnits } from "../../api/types/weight-units.types";
 import {
   DoggoBox,
   DoggoButton,
   DoggoCheckbox,
   DoggoForm,
+  DoggoGrid,
   DoggoInput,
   DoggoPasswordValidator,
   DoggoSelect,
   DoggoText,
 } from "../../ui-components";
 import { InputTypes } from "../../ui-components/input";
-import { FormattedMessage, useIntl } from "react-intl";
 import { enumToList } from "../../utils";
-import { BoxWidth, FlexAlign } from "../../ui-components/box";
 import useSignUp from "../../api/queries/sign-up";
 import { ApiStatesTypes } from "../../types/api-states.types";
-import { SizesEnum } from "../../settings/sizes";
 import useFormValidator, { FormValidators } from "../../form-validator";
-import Link from "next/link";
+import { ButtonSizes } from "../../ui-components/button";
 
 const Form: React.FunctionComponent = () => {
   const intl = useIntl();
@@ -86,7 +86,7 @@ const Form: React.FunctionComponent = () => {
         onChange={setEmail}
         type={InputTypes.Email}
         disabled={!formEnable}
-        errors={formValidator.errors["email"]}
+        errors={formValidator.errors.email}
       />
       <DoggoInput
         label={intl.formatMessage({ id: "user.first_name" })}
@@ -94,7 +94,7 @@ const Form: React.FunctionComponent = () => {
         onChange={setFirstName}
         type={InputTypes.Text}
         disabled={!formEnable}
-        errors={formValidator.errors["firstName"]}
+        errors={formValidator.errors.firstName}
       />
       <DoggoInput
         label={intl.formatMessage({ id: "user.last_name" })}
@@ -102,7 +102,7 @@ const Form: React.FunctionComponent = () => {
         onChange={setLastName}
         type={InputTypes.Text}
         disabled={!formEnable}
-        errors={formValidator.errors["lastName"]}
+        errors={formValidator.errors.lastName}
       />
       <DoggoInput
         label={intl.formatMessage({ id: "user.password" })}
@@ -110,7 +110,7 @@ const Form: React.FunctionComponent = () => {
         onChange={setPassword}
         type={InputTypes.Password}
         disabled={!formEnable}
-        errors={formValidator.errors["password"]}
+        errors={formValidator.errors.password}
       />
       <DoggoPasswordValidator value={password} />
       <DoggoInput
@@ -119,7 +119,7 @@ const Form: React.FunctionComponent = () => {
         onChange={setPasswordConfirm}
         type={InputTypes.Password}
         disabled={!formEnable}
-        errors={formValidator.errors["passwordConfirm"]}
+        errors={formValidator.errors.passwordConfirm}
       />
       <DoggoSelect
         label={intl.formatMessage({ id: "user.weight_unit" })}
@@ -127,35 +127,28 @@ const Form: React.FunctionComponent = () => {
         onChange={(nextValue) => setWeightUnit(nextValue)}
         list={enumToList(WeightUnits, true)}
         disabled={!formEnable}
-        errors={formValidator.errors["weightUnit"]}
+        errors={formValidator.errors.weightUnit}
       />
       <DoggoCheckbox
         label={intl.formatMessage({ id: "user.gdpr" })}
         value={gdprConsent}
         onChange={setGdprConsent}
         disabled={!formEnable}
-        errors={formValidator.errors["gdprConsent"]}
+        errors={formValidator.errors.gdprConsent}
       />
-      <DoggoBox column>
-        <DoggoBox
-          width={BoxWidth.Full}
-          alignX={FlexAlign.Right}
-          alignY={FlexAlign.Center}
-          padding={{ bottom: SizesEnum.Large }}
-        >
-          <DoggoBox padding={{ right: SizesEnum.Medium }}>
-            <Link href="/app/auth/sign-in">
-              <a>
-                <DoggoButton>
-                  <FormattedMessage id="common.sign_in" />
-                </DoggoButton>
-              </a>
-            </Link>
-          </DoggoBox>
-          <DoggoButton variant="blue" type="submit" disabled={!submitEnable}>
+      <DoggoBox>
+        <DoggoGrid mobile={1} desktop={2}>
+          <Link href="/auth/sign-in">
+            <a>
+              <DoggoButton size={ButtonSizes.FullWidth}>
+                <FormattedMessage id="common.sign_in" />
+              </DoggoButton>
+            </a>
+          </Link>
+          <DoggoButton variant="blue" type="submit" disabled={!submitEnable} size={ButtonSizes.FullWidth}>
             <FormattedMessage id="common.sign_up" />
           </DoggoButton>
-        </DoggoBox>
+        </DoggoGrid>
         {response && (
           <DoggoBox>
             <DoggoText color="green">{response.message}</DoggoText>

@@ -1,10 +1,10 @@
 import React from "react";
-import Box, { BoxWidth, FlexAlign } from "../box";
 import styled from "styled-components";
+import { FormattedMessage } from "react-intl";
+import Box, { BoxWidth, FlexAlign } from "../box";
 import { sizeMixin } from "../mixins";
 import { SizesEnum } from "../../settings/sizes";
 import Text from "../text";
-import { FormattedMessage } from "react-intl";
 import Icon from "../icon";
 
 interface StyledStatusProps {

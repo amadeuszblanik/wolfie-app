@@ -1,11 +1,11 @@
 import { useMutation, useQueryClient } from "react-query";
-import ApiClient from "../client";
 import { useEffect, useState } from "react";
+import { useIntl } from "react-intl";
+import ApiClient from "../client";
 import { ApiStatesTypes } from "../../types/api-states.types";
 import { getQueryStatus } from "../../utils";
 import { CommonMessageResponseModel } from "../response-model/common-message.response-model";
 import { CommonErrorResponseModel } from "../response-model/common-error.response-model";
-import { useIntl } from "react-intl";
 import { ResetPasswordStep1Payload } from "../payload/reset-password-step-1.payload";
 
 const useResetPasswordStep1 = () => {

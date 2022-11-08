@@ -1,9 +1,9 @@
 import styled from "styled-components";
+import React from "react";
 import { DoggoBox, DoggoContainer, DoggoGrid, DoggoText } from "../../ui-components";
 import { BoxWidth, FlexAlign } from "../../ui-components/box";
 import { SizesEnum } from "../../settings/sizes";
 import { DoggoTextVariant } from "../../ui-components/text";
-import React from "react";
 import { GridAlign } from "../../ui-components/grid";
 import { sizeMixin } from "../../ui-components/mixins";
 

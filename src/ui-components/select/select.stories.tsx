@@ -8,7 +8,7 @@ export default {
   component: Component,
   argTypes: {
     value: { control: "text" },
-    onValueChange: { action: "onValueChange()" },
+    onChange: { action: "onValueChange()" },
     list: { control: "array" },
     label: { control: "array" },
     placeholder: { control: "array" },

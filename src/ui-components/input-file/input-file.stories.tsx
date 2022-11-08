@@ -4,7 +4,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import Component from "./index";
 
 export default {
-  title: "UI-Components/Input file",
+  title: "UI-Components/Input File",
   component: Component,
   argTypes: {
     label: { control: "text" },

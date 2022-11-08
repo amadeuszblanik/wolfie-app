@@ -1,10 +1,10 @@
-import type React from "react";
-import { SizesEnum } from "../../settings/sizes";
-import Box, { FlexAlign } from "../box";
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { toRgba } from "bme-utils";
+import Box, { FlexAlign } from "../box";
+import { SizesEnum } from "../../settings/sizes";
 import Loader from "../loader";
+import type React from "react";
 
 const CANVAS_INIT_DRAW_IMAGE_DX = 0;
 const CANVAS_INIT_DRAW_IMAGE_DY = 0;

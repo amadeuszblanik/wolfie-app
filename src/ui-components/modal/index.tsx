@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
+import { toRgba } from "bme-utils";
 import Container from "../container";
 import Box, { BoxWidth, FlexAlign } from "../box";
 import { SizesEnum } from "../../settings/sizes";
 import Icon from "../icon";
 import Button from "../button";
-import { toRgba } from "bme-utils";
+import { ConfigContext, ConfigContextType } from "../../context/config.context";
 
 interface Props {
   children: React.ReactNode;
@@ -31,24 +32,36 @@ const StyledModalWindow = styled(Box)`
   padding-bottom: 42px;
 `;
 
-const Component: React.FunctionComponent<Props> = ({ children, onClose }) => (
-  <StyledModalBackdrop>
-    <Container fullWidth>
-      <StyledModalWindow
-        width={BoxWidth.Full}
-        padding={{ x: SizesEnum.Medium, y: SizesEnum.Large }}
-        background="backgroundSecondary"
-        column
-      >
-        <Box width={BoxWidth.Full} alignX={FlexAlign.Right} padding={{ x: SizesEnum.Medium, y: SizesEnum.Medium }}>
-          <Button onClick={onClose}>
-            <Icon icon="close-circle" size={SizesEnum.ExtraLarge} />
-          </Button>
-        </Box>
-        {children}
-      </StyledModalWindow>
-    </Container>
-  </StyledModalBackdrop>
-);
+const Component: React.FunctionComponent<Props> = ({ children, onClose }) => {
+  const { setScrollEnabled } = useContext<ConfigContextType>(ConfigContext);
+
+  useEffect(() => {
+    setScrollEnabled(false);
+
+    return () => {
+      setScrollEnabled(true);
+    };
+  }, []);
+
+  return (
+    <StyledModalBackdrop>
+      <Container fullWidth>
+        <StyledModalWindow
+          width={BoxWidth.Full}
+          padding={{ x: SizesEnum.Medium, y: SizesEnum.Large }}
+          background="backgroundSecondary"
+          column
+        >
+          <Box width={BoxWidth.Full} alignX={FlexAlign.Right} padding={{ x: SizesEnum.Medium, y: SizesEnum.Medium }}>
+            <Button onClick={onClose}>
+              <Icon icon="close-circle" size={SizesEnum.ExtraLarge} />
+            </Button>
+          </Box>
+          {children}
+        </StyledModalWindow>
+      </Container>
+    </StyledModalBackdrop>
+  );
+};
 
 export default Component;

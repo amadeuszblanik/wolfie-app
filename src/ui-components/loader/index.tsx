@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import type React from "react";
-import { SizesEnum } from "../../settings/sizes";
-import Box, { BoxWidth, FlexAlign } from "../box";
-import { sizeMixin } from "../mixins";
 import { animated, useSpring } from "react-spring";
 import { toRgba } from "bme-utils";
+import { SizesEnum } from "../../settings/sizes";
+import Box, { FlexAlign } from "../box";
+import { sizeMixin } from "../mixins";
+import type React from "react";
 
 const LOADER_SIZES: { [key in SizesEnum]: number } = {
   [SizesEnum.ExtraSmall2]: 16,
@@ -19,14 +19,14 @@ const LOADER_SIZES: { [key in SizesEnum]: number } = {
 
 interface StyledBoxProps {
   size?: SizesEnum;
-  fullScreen: boolean;
+  fullScreen: boolean | "component";
 }
 
 const StyledBox = styled(Box)<StyledBoxProps>`
-  position: ${({ fullScreen }) => (fullScreen ? "fixed" : "relative")};
+  position: ${({ fullScreen }) => (fullScreen ? (fullScreen === "component" ? "absolute" : "fixed") : "relative")};
   top: 0;
   left: 0;
-  ${({ fullScreen }) => fullScreen && `width: 100%; height: 100%;`}
+  ${({ fullScreen }) => fullScreen && `z-index: 1020; width: 100%; height: 100%;`}
   ${({ size }) => size && `font-size: ${sizeMixin(size, LOADER_SIZES)}`};
   background: ${({ theme, fullScreen }) =>
     fullScreen ? theme.palette.gray6 : toRgba(theme.palette.gray6, theme.opacity.modal)};
@@ -36,7 +36,7 @@ const StyledBox = styled(Box)<StyledBoxProps>`
 interface Props {
   alt?: string;
   size?: SizesEnum;
-  fullScreen?: boolean;
+  fullScreen?: boolean | "component";
 }
 
 const Component = ({ size, fullScreen }: Props) => {
@@ -49,8 +49,15 @@ const Component = ({ size, fullScreen }: Props) => {
     from: { opacity: 0.3, transform: "scale(0.8)" },
   });
 
+  // @TODO Verify if this is the best way to do this - size
   return (
-    <StyledBox inline alignX={FlexAlign.Center} alignY={FlexAlign.Center} size={size!} fullScreen={fullScreen!}>
+    <StyledBox
+      inline
+      alignX={FlexAlign.Center}
+      alignY={FlexAlign.Center}
+      size={size || SizesEnum.Medium}
+      fullScreen={fullScreen || false}
+    >
       <animated.div style={styles}>🐶</animated.div>
     </StyledBox>
   );

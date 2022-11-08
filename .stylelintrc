@@ -11,21 +11,15 @@
     "stylelint-order",
     "stylelint-prettier"
   ],
+  "customSyntax": "postcss-scss",
   "rules": {
     "selector-type-no-unknown": [
       true,
       {
-        "ignoreTypes": [
-          "nx-expansion-panel",
-          "nx-expansion-panel-header",
-          "nx-icon",
-          "nx-message",
-          "nx-formfield",
-          "nx-progressbar",
-          "agm-map"
-        ]
+        "ignoreTypes": []
       }
     ],
+    "no-descending-specificity": null,
     "color-no-invalid-hex": true,
     "color-hex-case": [
       "lower",
@@ -34,7 +28,18 @@
       }
     ],
     "max-empty-lines": 1,
-    "unit-allowed-list": ["em", "rem", "%", "px", "vw", "vh", "s", "ms", "fr", "deg"],
+    "unit-allowed-list": [
+      "em",
+      "rem",
+      "%",
+      "px",
+      "vw",
+      "vh",
+      "s",
+      "ms",
+      "fr",
+      "deg"
+    ],
     "prettier/prettier": true
   }
 }

@@ -219,6 +219,7 @@ export default class ApiClient {
         if (!refreshToken) {
           localStorage.removeItem("accessToken");
           localStorage.removeItem("refreshToken");
+          window.dispatchEvent(new Event("authSignIn"));
 
           // @TODO: Refactor it later
           if (location && !location.pathname.startsWith("/auth")) {
@@ -233,11 +234,14 @@ export default class ApiClient {
         if (error) {
           localStorage.removeItem("accessToken");
           localStorage.removeItem("refreshToken");
+          window.dispatchEvent(new Event("authSignIn"));
         }
 
         if (success) {
           localStorage.setItem("accessToken", success.accessToken);
           localStorage.setItem("refreshToken", success.refreshToken);
+
+          window.dispatchEvent(new Event("authSignIn"));
 
           return fetch(url, {
             method,

@@ -9,6 +9,7 @@ const Component: React.FunctionComponent = () => {
   const handleClick = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
+    window.dispatchEvent(new Event("authSignIn"));
 
     router.push("/");
   };

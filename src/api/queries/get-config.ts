@@ -15,6 +15,7 @@ const useQueries = () => {
   const [status, setStatus] = useState(ApiStatesTypes.Init);
   const [response, setResponse] = useState<ConfigResponseModel>();
   const [error, setError] = useState<CommonErrorResponseModel>();
+  const [enabled, setEnabled] = useState<boolean>(false);
 
   const apiClient = new ApiClient(intl.locale);
 
@@ -32,7 +33,21 @@ const useQueries = () => {
     refetchOnReconnect: "always",
     refetchInterval: DEFAULT_CONFIG_REFETCH,
     refetchIntervalInBackground: true,
+    enabled,
   });
+
+  useEffect(() => {
+    setEnabled(localStorage.getItem("accessToken") !== null);
+
+    window.addEventListener("authSignIn", () => {
+      setEnabled(true);
+    });
+
+    return () =>
+      window.removeEventListener("authSignIn", () => {
+        setEnabled(true);
+      });
+  }, []);
 
   useEffect(() => {
     setResponse(data?.success);

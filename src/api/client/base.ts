@@ -66,11 +66,14 @@ export default class ApiClientBase {
         if (error) {
           localStorage.removeItem("accessToken");
           localStorage.removeItem("refreshToken");
+          window.dispatchEvent(new Event("authSignIn"));
         }
 
         if (success) {
           localStorage.setItem("accessToken", success.accessToken);
           localStorage.setItem("refreshToken", success.refreshToken);
+
+          window.dispatchEvent(new Event("authSignIn"));
 
           return fetch(url, {
             method,

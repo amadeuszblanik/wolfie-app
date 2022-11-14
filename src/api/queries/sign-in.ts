@@ -31,6 +31,8 @@ const useSignIn = () => {
 
       if (data.success) {
         localStorage.setItem("accessToken", data.success.accessToken);
+        window.dispatchEvent(new Event("authSignIn"));
+
         if (data.success.refreshToken) {
           localStorage.setItem("refreshToken", data.success.refreshToken);
         }

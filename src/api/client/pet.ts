@@ -8,13 +8,13 @@ import { CommonMessageResponseModel } from "../response-model/common-message.res
 
 export default class ApiClientPet extends ApiClientBase {
   // Health Log
-  public getHealtlog = async (petId: string): Promise<ApiResponse<HealthLogResponseModel[]>> =>
-    this.get<HealthLogResponseModel[]>(`/pets/${petId}/healthLog`).then((response) =>
+  public getHealthLog = async (petId: string): Promise<ApiResponse<HealthLogResponseModel[]>> =>
+    this.get<HealthLogResponseModel[]>(`/pets/${petId}/health-log`).then((response) =>
       responseDto(response, getHealthLogDto),
     );
 
   public getHealthLogById = async (petId: string, healthLogId: string): Promise<ApiResponse<HealthLogResponseModel>> =>
-    this.get<HealthLogResponseModel>(`/pets/${petId}/healthLog/${healthLogId}`).then((response) =>
+    this.get<HealthLogResponseModel>(`/pets/${petId}/health-log/${healthLogId}`).then((response) =>
       responseDto(response, getHealthLogSingleDto),
     );
 
@@ -22,7 +22,7 @@ export default class ApiClientPet extends ApiClientBase {
     petId: string,
     payload: HealthLogAddPayload,
   ): Promise<ApiResponse<HealthLogResponseModel>> =>
-    this.post<HealthLogResponseModel, HealthLogAddPayload>(`/pets/${petId}/healthLog`, payload).then((response) =>
+    this.post<HealthLogResponseModel, HealthLogAddPayload>(`/pets/${petId}/health-log`, payload).then((response) =>
       responseDto(response),
     );
 
@@ -30,5 +30,5 @@ export default class ApiClientPet extends ApiClientBase {
     petId: string,
     healthLogId: string,
   ): Promise<ApiResponse<CommonMessageResponseModel>> =>
-    this.delete(`/pets/${petId}/healthLog/${healthLogId}`).then((response) => responseDto(response));
+    this.delete(`/pets/${petId}/health-log/${healthLogId}`).then((response) => responseDto(response));
 }

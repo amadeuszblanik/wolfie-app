@@ -165,12 +165,12 @@ export default class ApiClient {
     );
 
   public petsHealthLog = async (id: string): Promise<ApiResponse<HealthLogResponseModel[]>> =>
-    this.get<HealthLogResponseModel[]>(`/pets/${id}/healthLog`).then((response) =>
+    this.get<HealthLogResponseModel[]>(`/pets/${id}/health-log`).then((response) =>
       responseDto(response, getHealthLogDto),
     );
 
   public petsHealthLogSingle = async (id: string, healthLogId: string): Promise<ApiResponse<HealthLogResponseModel>> =>
-    this.get<HealthLogResponseModel>(`/pets/${id}/healthLog/${healthLogId}`).then((response) =>
+    this.get<HealthLogResponseModel>(`/pets/${id}/health-log/${healthLogId}`).then((response) =>
       responseDto(response, getHealthLogSingleDto),
     );
 
@@ -178,7 +178,7 @@ export default class ApiClient {
     id: string,
     payload: HealthLogAddPayload,
   ): Promise<ApiResponse<HealthLogResponseModel>> =>
-    this.post<HealthLogResponseModel, HealthLogAddPayload>(`/pets/${id}/healthLog`, payload).then((response) =>
+    this.post<HealthLogResponseModel, HealthLogAddPayload>(`/pets/${id}/health-log`, payload).then((response) =>
       responseDto(response),
     );
 

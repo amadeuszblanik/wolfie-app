@@ -45,7 +45,7 @@ const Component: React.FunctionComponent<Props> = ({
   </Box>
 );
 
-Component.displayName = "DoggoUI/InputText";
+Component.displayName = "DoggoUI_InputText";
 
 Component.defaultProps = {
   maxLength: DEFAULT_VARCHAR_LENGTH,

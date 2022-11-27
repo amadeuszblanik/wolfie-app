@@ -35,6 +35,6 @@ const Component: React.FunctionComponent<Props> = ({
   />
 );
 
-Component.displayName = "DoggoUI/InputTime";
+Component.displayName = "DoggoUI_InputTime";
 
 export default Component;

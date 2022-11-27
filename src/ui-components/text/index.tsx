@@ -107,9 +107,9 @@ const Component: React.FunctionComponent<Props> = ({
   );
 };
 
-Component.defaultProps = {
-  variant: DoggoTextVariant.Body,
-  weight: DoggoTextWeight.Regular,
-};
+// Component.defaultProps = {
+//   variant: DoggoTextVariant.Body,
+//   weight: DoggoTextWeight.Regular,
+// };
 
 export default Component;

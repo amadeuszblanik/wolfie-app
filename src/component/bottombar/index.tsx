@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useIntl } from "react-intl";
+import { toRgba } from "bme-utils";
 import { DoggoBox, DoggoButton, DoggoContainer, DoggoIcon, DoggoText } from "../../ui-components";
 import { BoxWidth, FlexAlign } from "../../ui-components/box";
 import { SizesEnum } from "../../settings/sizes";
@@ -20,10 +21,16 @@ const StyledBottomBar = styled(DoggoBox)`
   bottom: 0;
   left: 0;
   z-index: 1090;
+
+  @supports (backdrop-filter: blur(20px)) {
+    background: ${({ theme }) => toRgba(theme.palette.backgroundSecondary, theme.opacity.navigation)};
+    backdrop-filter: blur(20px);
+    --color-background: transparent;
+  }
 `;
 
 const Item = ({ active, icon, name }: ItemProps) => (
-  <DoggoButton variant={active ? "background" : "backgroundSecondary"} size={ButtonSizes.Small}>
+  <DoggoButton size={ButtonSizes.Small}>
     <DoggoBox alignX={FlexAlign.Center} column>
       <DoggoBox padding={{ bottom: SizesEnum.Small }}>
         <DoggoIcon icon={icon} size={SizesEnum.Large2} color={active ? "blue" : undefined} />

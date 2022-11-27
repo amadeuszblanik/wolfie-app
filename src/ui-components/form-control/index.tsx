@@ -51,7 +51,7 @@ const Component: React.FunctionComponent<Props> = ({ label, hint, errors, childr
   </StyledFormControlWrapper>
 );
 
-Component.displayName = "DoggoUI/FormControl";
+Component.displayName = "DoggoUI_FormControl";
 
 Component.defaultProps = {};
 

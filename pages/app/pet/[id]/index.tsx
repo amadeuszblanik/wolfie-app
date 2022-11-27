@@ -21,7 +21,7 @@ const App: NextPage = () => {
   const router = useRouter();
   const intl = useIntl();
 
-  const { id } = router.query;
+  const id = router.query.id as string;
 
   return (
     <LayoutApp
@@ -29,7 +29,7 @@ const App: NextPage = () => {
       back
       right={<EditButton onClick={() => router.push(`/app/pet/${id}/edit`)} />}
     >
-      <DataDisplayPetDashboard petId={String(id)} />
+      <DataDisplayPetDashboard petId={id} />
     </LayoutApp>
   );
 };

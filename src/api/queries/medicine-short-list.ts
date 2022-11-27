@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useIntl } from "react-intl";
 import ApiClient from "../client";
@@ -6,6 +6,7 @@ import { ApiStatesTypes } from "../../types/api-states.types";
 import { getQueryStatus } from "../../utils";
 import { CommonErrorResponseModel } from "../response-model/common-error.response-model";
 import { ShortMedicineResponseModel } from "../response-model/short-medicine.response-model";
+import { QueryKeys } from "../keys";
 
 const useMedicineShortList = () => {
   const intl = useIntl();
@@ -21,10 +22,10 @@ const useMedicineShortList = () => {
     isLoading,
     isError,
     isSuccess,
-    isIdle,
+    isStale,
     data,
     error: queryError,
-  } = useQuery(["medicineShortList"], () => apiClient.medicineShortList());
+  } = useQuery(QueryKeys.Medicines.all(), () => apiClient.medicineShortList());
 
   useEffect(() => {
     setResponse(data?.success);
@@ -41,11 +42,11 @@ const useMedicineShortList = () => {
       error: intl.formatMessage({ id: "error.api_unknown_error" }),
       message: intl.formatMessage({ id: "error.api_unknown_message" }),
     });
-  }, [queryError]);
+  }, [queryError, intl]);
 
   useEffect(() => {
-    setStatus(getQueryStatus(isLoading, isError, isSuccess, isIdle, false, response, error));
-  }, [isLoading, isError, isSuccess, isIdle, response, error]);
+    setStatus(getQueryStatus(isLoading, isError, isSuccess, isStale, false, response, error));
+  }, [isLoading, isError, isSuccess, isStale, response, error]);
 
   return { get, status, response, error };
 };

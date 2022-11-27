@@ -1,3 +1,4 @@
+export { default as cssVariable } from "./css-variable.utils";
 export { default as dateDifference } from "./date-difference.utils";
 export { default as enumToList } from "./enum-to-list.utils";
 export { default as getIndexes } from "./get-indexes.utils";

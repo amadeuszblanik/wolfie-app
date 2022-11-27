@@ -24,7 +24,7 @@ const StyledModalBackdrop = styled.div`
   width: 100%;
   height: 100%;
   background-color: ${({ theme }) => toRgba(theme.palette.background, theme.modalBackgroundOpacity)};
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(2px);
 `;
 
 const StyledModalWindow = styled(Box)`
@@ -41,7 +41,7 @@ const Component: React.FunctionComponent<Props> = ({ children, onClose }) => {
     return () => {
       setScrollEnabled(true);
     };
-  }, []);
+  }, [setScrollEnabled]);
 
   return (
     <StyledModalBackdrop>

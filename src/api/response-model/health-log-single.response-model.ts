@@ -1,5 +1,5 @@
-import { UserResponseModel } from "./user.response-model";
 import { ShortMedicineResponseModel } from "./short-medicine.response-model";
+import { UserSimpleResponseModel } from "./user-simple.response-model";
 import { HealthLogKindTypes } from "../../types/healt-log-kind.types";
 
 export interface HealthLogResponseModel {
@@ -12,7 +12,7 @@ export interface HealthLogResponseModel {
   diagnosis: string | null;
   nextVisit: Date | null;
   description: string | null;
-  addedBy: UserResponseModel;
+  addedBy: UserSimpleResponseModel;
   createdAt: Date;
   updatedAt: Date;
 }

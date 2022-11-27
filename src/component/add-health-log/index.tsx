@@ -13,7 +13,7 @@ const Component: React.FunctionComponent<Props> = ({ onClose, onSuccess, petId }
   const intl = useIntl();
 
   return (
-    <DoggoSheet onClose={onClose} title={intl.formatMessage({ id: "page.pet_weight.header" })}>
+    <DoggoSheet onClose={onClose} title={intl.formatMessage({ id: "page.pet_health_log.header" })}>
       <FormHealthLog petId={petId} onSuccess={onSuccess} />
     </DoggoSheet>
   );

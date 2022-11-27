@@ -1,9 +1,9 @@
 import { ThemeProvider } from "styled-components";
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import React, { useCallback, useEffect, useState } from "react";
+import { Router, useRouter } from "next/router";
 import { IntlProvider } from "react-intl";
-import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
+import { Hydrate, QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Head from "next/head";
 import fr_FR from "../lang/fr-FR.json";
 import pl_PL from "../lang/pl-PL.json";
@@ -13,6 +13,8 @@ import theme from "../src/settings/theme";
 import { ComponentFirebase, ComponentFooter } from "../src/component";
 import { ConfigContext } from "../src/context/config.context";
 import { ConfigStore, FirebaseStore } from "../src/context";
+import { cssVariable } from "../src/utils";
+import { DoggoProgressBar } from "../src/ui-components";
 import type { AppProps } from "next/app";
 
 const MESSAGES = {
@@ -22,13 +24,43 @@ const MESSAGES = {
 };
 
 function MyApp({ Component, pageProps }: AppProps<{ dehydratedState: any }>) {
-  const [queryClient] = useState(() => new QueryClient());
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            cacheTime: 86400000, // 24 hours
+            staleTime: 2000,
+            retry: 0,
+            networkMode: "offlineFirst",
+          },
+        },
+      }),
+  );
+  const [loading, setLoading] = useState(false);
 
   const locale = useRouter().locale as keyof typeof MESSAGES;
 
   useEffect(() => {
     localStorage.setItem("locale", locale);
   }, [locale]);
+
+  const updateFullHeight = useCallback(() => {
+    cssVariable.set("full-height", `${window.innerHeight}px`);
+  }, []);
+
+  useEffect(() => {
+    updateFullHeight();
+    window.addEventListener("resize", updateFullHeight);
+
+    return () => window.removeEventListener("resize", updateFullHeight);
+  }, [updateFullHeight]);
+
+  useEffect(() => {
+    Router.events.on("routeChangeStart", () => setLoading(true));
+    Router.events.on("routeChangeComplete", () => setLoading(false));
+    Router.events.on("routeChangeError", () => setLoading(false));
+  }, []);
 
   return (
     <IntlProvider locale={locale} messages={MESSAGES[locale]}>
@@ -59,6 +91,7 @@ function MyApp({ Component, pageProps }: AppProps<{ dehydratedState: any }>) {
                       <meta name="HandheldFriendly" content="true" />
                     </Head>
                     <GlobalStyles />
+                    {loading && <DoggoProgressBar value={100} fixed />}
                     <Component {...pageProps} />
                     <ComponentFooter />
                     <ComponentFirebase />

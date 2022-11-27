@@ -27,6 +27,7 @@ export { default as DoggoNotification } from "./notification";
 export { default as DoggoPasswordValidator } from "./password-validator";
 export { default as DoggoPill } from "./pill";
 export { default as DoggoPlaceholder } from "./placeholder";
+export { default as DoggoProgressBar } from "./progress-bar";
 export { default as DoggoSelect } from "./select";
 export { default as DoggoSheet } from "./sheet";
 export { default as DoggoText } from "./text";

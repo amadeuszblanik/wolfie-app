@@ -29,11 +29,12 @@ const StyledModalBackdrop = styled.div`
   width: 100%;
   height: 100%;
   background-color: ${({ theme }) => toRgba(theme.palette.background, theme.modalBackgroundOpacity)};
+  backdrop-filter: blur(2px);
 `;
 
 const StyledModalWindow = styled(Box)`
   max-width: 100%;
-  height: 95vh;
+  height: calc(var(--full-height) * 0.95);
 `;
 
 const StyledModalWindowBody = styled(Box)`
@@ -66,7 +67,7 @@ const Component: React.FunctionComponent<Props> = ({ children, onClose, title, r
     return () => {
       setScrollEnabled(true);
     };
-  }, []);
+  }, [setScrollEnabled]);
 
   const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
     setTouchEnd(null);
@@ -97,7 +98,7 @@ const Component: React.FunctionComponent<Props> = ({ children, onClose, title, r
       <Container fullWidth>
         <StyledModalWindow
           width={BoxWidth.Full}
-          padding={{ x: SizesEnum.Medium, y: SizesEnum.Large }}
+          padding={{ y: SizesEnum.Large }}
           background="backgroundSecondary"
           column
         >

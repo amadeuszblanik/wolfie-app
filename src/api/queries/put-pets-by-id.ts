@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useIntl } from "react-intl";
 import ApiClient from "../client";
 import { ApiStatesTypes } from "../../types/api-states.types";
@@ -7,6 +7,7 @@ import { CommonErrorResponseModel } from "../response-model/common-error.respons
 import { PetsUpdatePayload } from "../payload/pets-update.payload";
 import { getQueryStatus } from "../../utils";
 import { PetsEditResponseModel } from "../response-model/pets-edit.response-model";
+import { QueryKeys } from "../keys";
 
 const useQueries = (id: string) => {
   const intl = useIntl();
@@ -31,7 +32,8 @@ const useQueries = (id: string) => {
         });
       },
       onSettled: () => {
-        void queryClient.invalidateQueries("resetPasswordStep1");
+        void queryClient.invalidateQueries(QueryKeys.Pet.list());
+        void queryClient.invalidateQueries(QueryKeys.Pet.single(id));
       },
     },
   );

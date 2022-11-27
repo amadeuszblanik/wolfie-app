@@ -5,12 +5,12 @@ import type { NextPage } from "next";
 
 const ForgotPassword: NextPage = () => {
   const router = useRouter();
-  const { token } = router.query;
+  const token = router.query.token as string;
 
   return (
     <LayoutAuth title="page.forgot_password.header" description="page.forgot_password.description">
       {!token && <FormForgotPasswordStep0 />}
-      {token && <FormForgotPasswordStep1 token={token as string} />}
+      {token && <FormForgotPasswordStep1 token={token} />}
     </LayoutAuth>
   );
 };

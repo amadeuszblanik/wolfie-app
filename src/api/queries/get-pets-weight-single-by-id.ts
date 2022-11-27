@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useIntl } from "react-intl";
 import ApiClient from "../client";
 import { ApiStatesTypes } from "../../types/api-states.types";
 import { CommonErrorResponseModel } from "../response-model/common-error.response-model";
 import { WeightValueResponseModel } from "../response-model/weight-value.response-model";
 import { getQueryStatus } from "../../utils";
-import { rsPetWeight } from "../../reactive-store";
+import { QueryKeys } from "../keys";
 
 const useQueries = (id: string, weightId: string) => {
   const intl = useIntl();
@@ -22,10 +22,12 @@ const useQueries = (id: string, weightId: string) => {
     isLoading,
     isError,
     isSuccess,
-    isIdle,
+    isStale,
     data,
     error: queryError,
-  } = useQuery(["[GET] pets/:id/weight/:weightId", id, weightId], () => apiClient.getPetWeightSingleById(id, weightId));
+  } = useQuery(QueryKeys.Pet.weightSingle(id, weightId), () => apiClient.getPetWeightSingleById(id, weightId), {
+    enabled: !!id && !!weightId,
+  });
 
   useEffect(() => {
     setResponse(data?.success);
@@ -45,8 +47,8 @@ const useQueries = (id: string, weightId: string) => {
   }, [queryError, intl]);
 
   useEffect(() => {
-    setStatus(getQueryStatus(isLoading, isError, isSuccess, isIdle, false, response, error));
-  }, [isLoading, isError, isSuccess, isIdle, response, error]);
+    setStatus(getQueryStatus(isLoading, isError, isSuccess, isStale, false, response, error));
+  }, [isLoading, isError, isSuccess, isStale, response, error]);
 
   const get = useCallback(() => {
     setResponse(undefined);
@@ -54,12 +56,6 @@ const useQueries = (id: string, weightId: string) => {
 
     void refetch();
   }, [setResponse, setError, refetch]);
-
-  useEffect(() => {
-    rsPetWeight.update.subscribe(() => {
-      get();
-    });
-  }, [get]);
 
   return { get, status, response, error };
 };

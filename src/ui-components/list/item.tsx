@@ -1,7 +1,8 @@
-import React from "react";
+import React, { Children } from "react";
 import styled from "styled-components";
 import Sizes, { SizesEnum } from "../../settings/sizes";
 import Icon from "../icon";
+import { sizeMixin } from "../mixins";
 
 export interface ItemProps {
   children: string | React.ReactNode;
@@ -21,6 +22,8 @@ interface StyledItemActionsProps {
 const TOUCH_STARTING_VALUE = 0;
 const TOUCH_INDEX = 0;
 const DRAG_REQUIRED = -10;
+const INDEX_CORRECTION = 1;
+const INDEX_FIRST_ELEMENT = 0;
 
 const StyledLi = styled.li`
   position: relative;
@@ -38,6 +41,7 @@ const StyledLi = styled.li`
 
 const StyledItem = styled.div<StyledItemProps>`
   display: flex;
+  align-items: center;
   justify-content: space-between;
   width: 100%;
   text-align: center;
@@ -103,6 +107,25 @@ const Item: React.FunctionComponent<ItemProps> = ({ children, actions, onClick }
     }
   };
 
+  const clonedChildren = React.Children.map(children, (child, index) => {
+    if (React.isValidElement(child)) {
+      const isFirst = index === INDEX_FIRST_ELEMENT;
+      const isLast = index === Children.count(children) - INDEX_CORRECTION;
+
+      return React.cloneElement(child, {
+        ...child.props,
+        style: {
+          ...child.props.style,
+          marginLeft: isFirst ? sizeMixin(SizesEnum.ExtraSmall2) : sizeMixin(SizesEnum.Small),
+          marginRight: isLast ? sizeMixin(SizesEnum.ExtraSmall2) : sizeMixin(SizesEnum.Small),
+          textAlign: isFirst ? "left" : isLast ? "right" : "center",
+        },
+      });
+    }
+
+    return child;
+  });
+
   return (
     <StyledLi
       onMouseEnter={() => setActionVisible(true)}
@@ -111,7 +134,7 @@ const Item: React.FunctionComponent<ItemProps> = ({ children, actions, onClick }
       onTouchEnd={handleTouchEnd}
     >
       <StyledItem onClick={onClick} clickable={!!onClick} actionsVisible={!!actions && actionVisible}>
-        {children}
+        {clonedChildren}
       </StyledItem>
       {onClick && (
         <StyledItemIcon>

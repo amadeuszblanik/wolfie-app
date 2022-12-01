@@ -10,8 +10,7 @@ export interface PetSingleResponseModel {
   image: string;
   currentWeight?: WeightValueResponseModel;
   birthDate: Date;
-  vaccinations: number;
-  medicines: number;
+  healthLog: number;
   breed?: Breed;
   createdAt: Date;
   updatedAt: Date;

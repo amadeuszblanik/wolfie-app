@@ -1,11 +1,12 @@
-import { useQuery, useQueryClient } from "react-query";
-import ApiClient from "../client";
+import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
+import { useIntl } from "react-intl";
+import ApiClient from "../client";
 import { ApiStatesTypes } from "../../types/api-states.types";
 import { getQueryStatus } from "../../utils";
 import { CommonMessageResponseModel } from "../response-model/common-message.response-model";
 import { CommonErrorResponseModel } from "../response-model/common-error.response-model";
-import { useIntl } from "react-intl";
+import { QueryKeys } from "../keys";
 
 const useResetPasswordStep0 = (userEmail: string) => {
   const intl = useIntl();
@@ -21,10 +22,10 @@ const useResetPasswordStep0 = (userEmail: string) => {
     isLoading,
     isError,
     isSuccess,
-    isIdle,
+    isStale,
     data,
     error: queryError,
-  } = useQuery(["resetPasswordStep0", userEmail], () => apiClient.resetPasswordStep0(userEmail), {
+  } = useQuery(QueryKeys.Auth.resetPassword(), () => apiClient.resetPasswordStep0(userEmail), {
     enabled: false,
   });
 
@@ -43,11 +44,11 @@ const useResetPasswordStep0 = (userEmail: string) => {
       error: intl.formatMessage({ id: "error.api_unknown_error" }),
       message: intl.formatMessage({ id: "error.api_unknown_message" }),
     });
-  }, [queryError]);
+  }, [queryError, intl]);
 
   useEffect(() => {
-    setStatus(getQueryStatus(isLoading, isError, isSuccess, isIdle, false, response, error));
-  }, [isLoading, isError, isSuccess, isIdle, response, error]);
+    setStatus(getQueryStatus(isLoading, isError, isSuccess, isStale, false, response, error));
+  }, [isLoading, isError, isSuccess, isStale, response, error]);
 
   return { get, status, response, error };
 };

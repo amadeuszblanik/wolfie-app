@@ -1,9 +1,9 @@
-/* eslint-disable no-magic-numbers */
+/* eslint-disable no-magic-numbers,no-console */
 import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import Component from "./index";
 import { FormattedMessage } from "react-intl";
 import { DoggoButton } from "../../ui-components";
+import Component from "./index";
 
 export default {
   title: "Components/Top bar",

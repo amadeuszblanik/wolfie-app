@@ -1,7 +1,8 @@
 import styled, { DefaultTheme } from "styled-components";
-import Sizes, { SizesEnum } from "../../settings/sizes";
 import React from "react";
+import Sizes, { SizesEnum } from "../../settings/sizes";
 
+// @TODO Rename this to something more generic
 export enum DoggoTextVariant {
   LargeTitle = "LARGE_TITLE",
   Title1 = "TITLE_1",
@@ -16,6 +17,7 @@ export enum DoggoTextVariant {
   Caption2 = "CAPTION_2",
 }
 
+// @TODO Rename this to something more generic
 export enum DoggoTextWeight {
   Thin = "100",
   UltraLight = "200",
@@ -28,12 +30,19 @@ export enum DoggoTextWeight {
   Black = "900",
 }
 
+export enum TextAlignment {
+  Left = "left",
+  Center = "center",
+  Right = "right",
+}
+
 export interface StyledTextProps {
   size: number;
   weight: string;
   color?: keyof DefaultTheme["palette"];
   noBottomMargin?: boolean;
   textTransform?: string;
+  align?: TextAlignment;
 }
 
 const StyledText = styled.p<StyledTextProps>`
@@ -41,7 +50,10 @@ const StyledText = styled.p<StyledTextProps>`
   color: ${({ theme, color }) => (color ? theme.palette[color] : "var(--color-text)")};
   font-weight: ${({ weight }) => weight};
   font-size: ${({ size }) => size}px;
+  text-align: ${({ align }) => align || "inherit"};
   text-transform: ${({ textTransform }) => textTransform};
+  --placeholder-height: ${({ size }) => size}px;
+  --placeholder-offset-y: 3px;
 `;
 
 const variantSize: {
@@ -68,6 +80,7 @@ export interface Props {
   noBottomMargin?: boolean;
   color?: keyof DefaultTheme["palette"];
   uppercase?: boolean;
+  align?: TextAlignment;
 }
 
 const Component: React.FunctionComponent<Props> = ({
@@ -84,7 +97,7 @@ const Component: React.FunctionComponent<Props> = ({
   return (
     <StyledText
       size={size}
-      weight={weight!}
+      weight={weight || DoggoTextWeight.Regular}
       color={color}
       textTransform={uppercase ? "uppercase" : undefined}
       {...props}
@@ -94,9 +107,9 @@ const Component: React.FunctionComponent<Props> = ({
   );
 };
 
-Component.defaultProps = {
-  variant: DoggoTextVariant.Body,
-  weight: DoggoTextWeight.Regular,
-};
+// Component.defaultProps = {
+//   variant: DoggoTextVariant.Body,
+//   weight: DoggoTextWeight.Regular,
+// };
 
 export default Component;

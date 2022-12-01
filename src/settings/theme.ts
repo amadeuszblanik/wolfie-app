@@ -1,10 +1,13 @@
 import { DefaultTheme } from "styled-components";
 
 const shared = {
-  modalBackgroundOpacity: 0.95,
+  modalBackgroundOpacity: 0.66,
   borderRadius: "8px",
   opacity: {
     modal: 0.5,
+    boxShadows: 0.66,
+    disabled: 0.33,
+    navigation: 0.88,
   },
   darken: {
     hover: 13,

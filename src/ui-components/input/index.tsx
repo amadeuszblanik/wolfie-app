@@ -6,12 +6,16 @@ import Box, { BoxWidth } from "../box";
 import { DoggoText } from "../index";
 import { DoggoTextVariant } from "../text";
 
+// @TODO DEPRECATE THIS COMPONENT
+
 export enum InputTypes {
   Color = "color",
   Date = "date",
   DatetimeLocal = "datetime-local",
   Email = "email",
   Month = "month",
+  // @TODO - Verify this is the best way to handle this
+  // eslint-disable-next-line id-blacklist
   Number = "number",
   Password = "password",
   Search = "search",
@@ -116,7 +120,7 @@ const Component: React.FunctionComponent<Props> = ({
       type={TYPE[type || InputTypes.Text]}
       inputMode={INPUT_MODE[type || InputTypes.Text]}
       value={value}
-      onChange={({ target: { value: nextValue, valueAsNumber } }) => onChange(nextValue)}
+      onChange={({ target: { value: nextValue } }) => onChange(nextValue)}
       max={max}
       min={min}
       plain={plain}
@@ -125,7 +129,7 @@ const Component: React.FunctionComponent<Props> = ({
     {!plain && (
       <Box padding={{ bottom: SizesEnum.Medium }}>
         <DoggoText color="red" variant={DoggoTextVariant.Caption1}>
-          {(errors || []).map((error, index) => error).join(", ")}
+          {(errors || []).map((error) => error).join(", ")}
         </DoggoText>
       </Box>
     )}

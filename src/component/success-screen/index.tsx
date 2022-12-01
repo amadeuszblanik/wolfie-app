@@ -1,9 +1,9 @@
 import React from "react";
-import { DoggoBox, DoggoButton, DoggoIcon, DoggoText } from "../../ui-components";
+import { FormattedMessage } from "react-intl";
+import { DoggoBox, DoggoIcon, DoggoText } from "../../ui-components";
 import { SizesEnum } from "../../settings/sizes";
 import { FlexAlign } from "../../ui-components/box";
 import { DoggoTextVariant } from "../../ui-components/text";
-import { FormattedMessage } from "react-intl";
 
 interface Props {
   title?: string;

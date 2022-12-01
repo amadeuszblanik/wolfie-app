@@ -1,10 +1,10 @@
 import React from "react";
-import { DoggoBox, DoggoButton, DoggoContainer } from "../../ui-components";
-import { SizesEnum } from "../../settings/sizes";
-import { ComponentBottombar, ComponentTopbar } from "../../component";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import { FormattedMessage } from "react-intl";
+import { DoggoBox, DoggoButton, DoggoContainer } from "../../ui-components";
+import { SizesEnum } from "../../settings/sizes";
+import { ComponentBottombar, ComponentTopbar } from "../../component";
 import { ButtonSizes } from "../../ui-components/button";
 
 interface Props {
@@ -28,16 +28,14 @@ const AppBackButton: React.FunctionComponent = () => {
   );
 };
 
-const App: React.FunctionComponent<Props> = ({ children, title, back, right }) => {
-  return (
-    <>
-      <StyledLayout padding={{ y: SizesEnum.Large }} column>
-        <ComponentTopbar title={title} left={back && <AppBackButton />} right={right} />
-        <DoggoContainer fullWidth>{children}</DoggoContainer>
-        <ComponentBottombar />
-      </StyledLayout>
-    </>
-  );
-};
+const App: React.FunctionComponent<Props> = ({ children, title, back, right }) => (
+  <>
+    <StyledLayout padding={{ y: SizesEnum.Large }} column>
+      <ComponentTopbar title={title} left={back && <AppBackButton />} right={right} />
+      <DoggoContainer fullWidth>{children}</DoggoContainer>
+      <ComponentBottombar />
+    </StyledLayout>
+  </>
+);
 
 export default App;

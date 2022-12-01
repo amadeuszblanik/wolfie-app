@@ -1,18 +1,20 @@
 import styled, { DefaultTheme } from "styled-components";
-import Sizes, { SizesEnum } from "../../settings/sizes";
 import React from "react";
 import AppsIcon from "./icons/apps-outline.svg";
 import BarbellIcon from "./icons/barbell-outline.svg";
 import BookIcon from "./icons/book-outline.svg";
 import CheckmarkIcon from "./icons/checkmark-outline.svg";
 import ChevronDownIcon from "./icons/chevron-down-outline.svg";
+import ChevronRightIcon from "./icons/chevron-forward-outline.svg";
 import CloseCircleIcon from "./icons/close-circle-outline.svg";
 import CloseIcon from "./icons/close-outline.svg";
 import CogIcon from "./icons/cog-outline.svg";
 import CreateIcon from "./icons/create-outline.svg";
+import HeartIcon from "./icons/heart-outline.svg";
 import MedicalIcon from "./icons/medical-outline.svg";
 import MedkitIcon from "./icons/medkit-outline.svg";
 import WarningIcon from "./icons/warning-outline.svg";
+import Sizes, { SizesEnum } from "../../settings/sizes";
 
 export const Icons = [
   "apps",
@@ -20,10 +22,12 @@ export const Icons = [
   "book",
   "checkmark",
   "chevron-down",
+  "chevron-right",
   "close-circle",
   "close",
   "cog",
   "create",
+  "heart",
   "medical",
   "medkit",
   "warning",
@@ -64,6 +68,8 @@ const Component: React.FunctionComponent<Props> = ({ icon, size, ...props }) => 
         return <CheckmarkIcon />;
       case "chevron-down":
         return <ChevronDownIcon />;
+      case "chevron-right":
+        return <ChevronRightIcon />;
       case "close-circle":
         return <CloseCircleIcon />;
       case "close":
@@ -72,6 +78,8 @@ const Component: React.FunctionComponent<Props> = ({ icon, size, ...props }) => 
         return <CogIcon />;
       case "create":
         return <CreateIcon />;
+      case "heart":
+        return <HeartIcon />;
       case "medical":
         return <MedicalIcon />;
       case "medkit":

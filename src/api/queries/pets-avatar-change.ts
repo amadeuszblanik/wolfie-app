@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useIntl } from "react-intl";
 import ApiClient from "../client";
 import { ApiStatesTypes } from "../../types/api-states.types";
-import { useIntl } from "react-intl";
 import { CommonErrorResponseModel } from "../response-model/common-error.response-model";
 import { PetsAvatarChangePayload } from "../payload/pets-avatar-change.payload";
+import { QueryKeys } from "../keys";
 
 const usePetsAvatarChange = () => {
   const queryClient = useQueryClient();
@@ -15,13 +16,10 @@ const usePetsAvatarChange = () => {
   const [status, setStatus] = useState<ApiStatesTypes>(ApiStatesTypes.Idle);
 
   const { isLoading, isError, isSuccess, mutate } = useMutation(
-    ({ id, body }: { id: string; body: PetsAvatarChangePayload }) => {
-      return new ApiClient(intl.locale).petsAvatarChange(id, body);
-    },
+    ({ id, body }: { id: string; body: PetsAvatarChangePayload }) =>
+      new ApiClient(intl.locale).petsAvatarChange(id, body),
     {
       onSuccess: (response) => {
-        queryClient.invalidateQueries(["petsAvatarChange"]);
-
         if ("success" in response) {
           setData(response.success);
         } else {
@@ -38,22 +36,26 @@ const usePetsAvatarChange = () => {
         setData(undefined);
         setError(undefined);
       },
+      onSettled: () => queryClient.invalidateQueries(QueryKeys.Pet.all()),
     },
   );
 
   useEffect(() => {
     if (isLoading) {
       setStatus(ApiStatesTypes.Loading);
+
       return;
     }
 
     if (isError) {
       setStatus(ApiStatesTypes.Error);
+
       return;
     }
 
     if (isSuccess) {
       setStatus(error ? ApiStatesTypes.Error : ApiStatesTypes.Success);
+
       return;
     }
 

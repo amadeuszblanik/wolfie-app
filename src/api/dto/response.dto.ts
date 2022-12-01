@@ -14,6 +14,7 @@ const responseDto = <T>(data: T | CommonErrorResponseModel, successDto?: (data: 
   ) {
     return { success: undefined, error: data as CommonErrorResponseModel };
   }
+
   return { success: successDto ? successDto(data as T) : (data as T), error: undefined };
 };
 

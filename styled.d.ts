@@ -7,6 +7,9 @@ declare module "styled-components" {
     borderRadius: string;
     opacity: {
       modal: number;
+      boxShadows: number;
+      disabled: number;
+      navigation: number;
     };
     darken: {
       hover: number;

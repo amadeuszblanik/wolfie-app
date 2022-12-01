@@ -5,12 +5,13 @@ const withPWA = require("next-pwa")({
   runtimeCaching,
 });
 const withSvgr = require('next-plugin-svgr');
+const {withSentryConfig} = require("@sentry/nextjs");
 
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   i18n: {
-    locales: ["en-GB", "pl-PL"],
+    locales: ["en-GB", "pl-PL", "fr-FR"],
     defaultLocale: "en-GB",
     domains: [
       {
@@ -21,4 +22,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withPWA(withSvgr(nextConfig));
+module.exports = withSentryConfig(withPWA(withSvgr(nextConfig)));

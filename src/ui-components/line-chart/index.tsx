@@ -1,12 +1,13 @@
 import styled from "styled-components";
-import type React from "react";
+import { clamp } from "bme-utils";
 import { useScreenSize } from "../../hooks";
 import Sizes, { SizesEnum } from "../../settings/sizes";
-import { getIndexes } from "../../utils";
+import { getIndexes, toPercentage } from "../../utils";
 import { pipeDate, pipeNumber } from "../../pipe";
-import { clamp } from "bme-utils";
+import { DoggoLoader } from "../index";
+import type React from "react";
 
-const CHART_RATIO = 1.799;
+const CHART_RATIO = 0.5625;
 
 interface LineChartItem {
   x: number | Date;
@@ -16,7 +17,18 @@ interface LineChartItem {
 interface Props {
   data: LineChartItem[];
   width?: number;
+  loading?: boolean;
 }
+
+interface ChartPlaceholderProps {
+  ratio: number;
+}
+
+const StyledChartPlaceholder = styled.div<ChartPlaceholderProps>`
+  position: relative;
+  width: 100%;
+  padding-bottom: ${({ ratio }) => toPercentage(ratio)}%;
+`;
 
 const StyledChartWrapper = styled.svg`
   width: 100%;
@@ -60,13 +72,29 @@ const LABELS_X_TO_SHOW_DESKTOP = 5;
 
 const DESKTOP_BREAKPOINT = 900;
 
-const Component = ({ data, width: componentWidth }: Props) => {
-  const dataIndexes = getIndexes(data);
+const MINIMUM_DATA_REQUIRED = 3;
+
+const Component = ({ data, width: componentWidth, loading }: Props) => {
   const { width: screenWidth } = useScreenSize();
+
+  const dataIndexes = getIndexes(data);
+  const width = componentWidth ?? screenWidth;
+  const height = width * CHART_RATIO;
+
+  if (loading) {
+    return (
+      <StyledChartPlaceholder ratio={CHART_RATIO}>
+        <DoggoLoader fullScreen="component" />
+      </StyledChartPlaceholder>
+    );
+  }
+
+  if (data.length < MINIMUM_DATA_REQUIRED) {
+    return <></>;
+  }
+
   const labelYWidth = 50;
   const labelXHeight = 8;
-
-  const width = componentWidth ?? screenWidth;
 
   const isDesktop = screenWidth >= DESKTOP_BREAKPOINT;
   const labelsYToShow = isDesktop ? LABELS_Y_TO_SHOW_DESKTOP : LABELS_Y_TO_SHOW_MOBILE;
@@ -85,7 +113,6 @@ const Component = ({ data, width: componentWidth }: Props) => {
   const maxYValue = Math.max(...dataChart.map((item) => item.y));
   const rangeY = maxYValue - minYValue;
 
-  const height = width / CHART_RATIO;
   const paddingX = Sizes[SizesEnum.ExtraLarge];
   const paddingY = Sizes[SizesEnum.ExtraLarge];
   const paddingLabelX = Sizes[SizesEnum.Large];
@@ -97,6 +124,7 @@ const Component = ({ data, width: componentWidth }: Props) => {
     .fill(null)
     .map((_, index) => {
       const value = minYValue + (rangeY / labelsYToShow) * index;
+
       return {
         value: clamp(value, minYValue, maxYValue),
         label: pipeNumber(value),
@@ -117,9 +145,7 @@ const Component = ({ data, width: componentWidth }: Props) => {
     .reverse();
   const labelsXIndexes = getIndexes(labelsX);
 
-  const calculatePointX = (index: number) => {
-    return (index / dataIndexes) * availableWidth + paddingX;
-  };
+  const calculatePointX = (index: number) => (index / dataIndexes) * availableWidth + paddingX;
 
   const calculatePointY = (index: number) => {
     const value = dataChart[index].y;
@@ -127,25 +153,15 @@ const Component = ({ data, width: componentWidth }: Props) => {
     return availableHeight - ((value - minYValue) / rangeY) * availableHeight + paddingY;
   };
 
-  const calculateLineX1 = (index: number) => {
-    return calculatePointX(index);
-  };
+  const calculateLineX1 = (index: number) => calculatePointX(index);
 
-  const calculateLineX2 = (index: number) => {
-    return calculatePointX(index + X_Y_2_INDEX_DIFFERENCE);
-  };
+  const calculateLineX2 = (index: number) => calculatePointX(index + X_Y_2_INDEX_DIFFERENCE);
 
-  const calculateLineY1 = (index: number) => {
-    return calculatePointY(index);
-  };
+  const calculateLineY1 = (index: number) => calculatePointY(index);
 
-  const calculateLineY2 = (index: number) => {
-    return calculatePointY(index + X_Y_2_INDEX_DIFFERENCE);
-  };
+  const calculateLineY2 = (index: number) => calculatePointY(index + X_Y_2_INDEX_DIFFERENCE);
 
-  const calculateLabelYX = () => {
-    return width - paddingY - labelYWidth + paddingLabelX;
-  };
+  const calculateLabelYX = () => width - paddingY - labelYWidth + paddingLabelX;
 
   const calculateLabelYY = (index: number) => {
     const value = labelsY[index].value;
@@ -153,21 +169,13 @@ const Component = ({ data, width: componentWidth }: Props) => {
     return availableHeight - ((value - minYValue) / rangeY) * availableHeight + paddingY;
   };
 
-  const calculateLabelLineYY = () => {
-    return availableWidth + paddingX;
-  };
+  const calculateLabelLineYY = () => availableWidth + paddingX;
 
-  const calculateLabelXX = (index: number) => {
-    return (index / labelsXIndexes) * availableWidth + paddingX;
-  };
+  const calculateLabelXX = (index: number) => (index / labelsXIndexes) * availableWidth + paddingX;
 
-  const calculateLabelXY = () => {
-    return height - paddingLabelY;
-  };
+  const calculateLabelXY = () => height - paddingLabelY;
 
-  const calculateLabelLineXY = () => {
-    return availableHeight + paddingY;
-  };
+  const calculateLabelLineXY = () => availableHeight + paddingY;
 
   return (
     <StyledChartWrapper viewBox={`0 0 ${width} ${height}`}>

@@ -1,8 +1,8 @@
 import React from "react";
-import { DoggoBox, DoggoButton, DoggoContainer, DoggoText } from "../../ui-components";
-import { SizesEnum } from "../../settings/sizes";
 import { FormattedMessage } from "react-intl";
 import { useRouter } from "next/router";
+import { DoggoBox, DoggoButton, DoggoContainer, DoggoText } from "../../ui-components";
+import { SizesEnum } from "../../settings/sizes";
 import { BoxWidth, FlexAlign } from "../../ui-components/box";
 import { DoggoTextVariant } from "../../ui-components/text";
 

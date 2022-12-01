@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import { useIntl } from "react-intl";
+import { isEmpty } from "bme-utils";
 import { paddingMixin } from "../mixins";
 import Sizes, { SizesEnum } from "../../settings/sizes";
 import Box from "../box";
-import { DoggoList, DoggoText } from "../index";
+import { DoggoListDeprecated, DoggoText } from "../index";
 import { DoggoTextVariant } from "../text";
-import { useIntl } from "react-intl";
-import { isEmpty } from "bme-utils";
 import { pipeFileSize } from "../../pipe";
 
 interface Props {
@@ -59,7 +59,7 @@ const Component: React.FunctionComponent<Props> = ({ label, errors, onChange, mu
         </DoggoText>
       </Box>
       {fileList && !isEmpty(Array.from(fileList)) && multiple && (
-        <DoggoList
+        <DoggoListDeprecated
           label={intl.formatMessage({ id: "common.selected_file_list" })}
           items={Array.from(fileList).map(({ name, size }) => [name, pipeFileSize(size)])}
         />

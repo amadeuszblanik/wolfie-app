@@ -1,9 +1,9 @@
 import styled, { ThemePalette } from "styled-components";
-import type React from "react";
-import Sizes, { SizesEnum } from "../../settings/sizes";
-import type { Padding } from "../types/padding";
-import { backgroundMixin, colorTextMixin, paddingMixin } from "../mixins";
 import { useEffect, useRef } from "react";
+import Sizes, { SizesEnum } from "../../settings/sizes";
+import { backgroundMixin, colorTextMixin, paddingMixin } from "../mixins";
+import type React from "react";
+import type { Padding } from "../types/padding";
 
 export enum FlexAlign {
   Left = "flex-start",
@@ -29,20 +29,8 @@ interface StyledViewProps {
   column?: boolean;
   justifyContent?: FlexAlign;
   alignItems?: FlexAlign;
+  wrap?: boolean;
 }
-
-const StyledView = styled.div<StyledViewProps>`
-  position: relative;
-  display: ${({ inline }) => (inline ? "inline-flex" : "flex")};
-  flex-direction: ${({ column }) => (column ? "column" : "row")};
-  ${({ justifyContent }) => (justifyContent ? `justify-content: ${justifyContent}` : "")};
-  ${({ alignItems }) => (alignItems ? `align-items: ${alignItems}` : "")};
-  ${({ width }) => width && `width: ${width}`};
-  ${({ padding }) => padding && `${paddingMixin(padding)}`};
-  ${({ background }) => background && colorTextMixin(background)};
-  ${({ background }) => background && backgroundMixin(background)};
-  border-radius: ${({ theme, borderRadius }) => (borderRadius ? ` ${borderRadius}px` : theme.borderRadius)};
-`;
 
 interface DoggoBoxProps {
   children?: React.ReactNode;
@@ -55,7 +43,22 @@ interface DoggoBoxProps {
   alignX?: FlexAlign;
   alignY?: FlexAlign;
   onSizeChange?: (size: { width: number; height: number }) => void;
+  wrap?: boolean;
 }
+
+const StyledView = styled.div<StyledViewProps>`
+  position: relative;
+  display: ${({ inline }) => (inline ? "inline-flex" : "flex")};
+  flex-direction: ${({ column }) => (column ? "column" : "row")};
+  ${({ justifyContent }) => (justifyContent ? `justify-content: ${justifyContent}` : "")};
+  ${({ alignItems }) => (alignItems ? `align-items: ${alignItems}` : "")};
+  ${({ wrap }) => wrap && "flex-wrap: wrap"};
+  ${({ width }) => width && `width: ${width}`};
+  ${({ padding }) => padding && `${paddingMixin(padding)}`};
+  ${({ background }) => background && colorTextMixin(background)};
+  ${({ background }) => background && backgroundMixin(background)};
+  border-radius: ${({ theme, borderRadius }) => (borderRadius ? ` ${borderRadius}px` : theme.borderRadius)};
+`;
 
 const Component = ({ children, border, column, alignX, alignY, onSizeChange, ...props }: DoggoBoxProps) => {
   const justifyContent = column ? alignY : alignX;
@@ -79,10 +82,11 @@ const Component = ({ children, border, column, alignX, alignY, onSizeChange, ...
     return () => window.removeEventListener("resize", handleResize);
   });
 
+  // @TODO Verify that this is the correct way to handle this — Border radius
   return (
     <StyledView
       ref={ref}
-      borderRadius={Sizes[border!]}
+      borderRadius={Sizes[border || SizesEnum.Small]}
       justifyContent={justifyContent}
       alignItems={alignItems}
       column={column}

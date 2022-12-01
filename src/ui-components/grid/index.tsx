@@ -1,6 +1,6 @@
-import { SizesEnum } from "../../settings/sizes";
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
+import { SizesEnum } from "../../settings/sizes";
 import { sizeMixin } from "../../ui-components/mixins";
 
 const DEFAULT_MOBILE_GRID = 2;
@@ -21,14 +21,14 @@ interface StyledGridProps {
   alignY?: GridAlign;
 }
 
-type Props = {
+interface Props {
   children: React.ReactNode;
   mobile?: number;
   desktop?: number;
   onSizeChange?: (size: { width: number; height: number }) => void;
   alignX?: GridAlign;
   alignY?: GridAlign;
-};
+}
 
 const StyledGrid = styled.div<StyledGridProps>`
   display: grid;

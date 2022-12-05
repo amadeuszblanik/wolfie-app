@@ -1,0 +1,26 @@
+{
+    "applinks": {
+        "details": [
+            {
+                "appIDs": [ "6WY65SAG73.me.blanik.Wolfie"],
+                "components": [
+                    {
+                        "#": "no_universal_links",
+                        "exclude": true,
+                        "comment": "Matches any URL with a fragment that equals no_universal_links and instructs the system not to open it as a universal link."
+                    },
+                    {
+                        "/": "/app/*",
+                        "comment": "Matches any URL with a path that starts with /app/."
+                    }
+                ]
+            }
+        ]
+    },
+    "webcredentials": {
+      "apps": [ "6WY65SAG73.me.blanik.Wolfie" ]
+    },
+    "appclips": {
+        "apps": ["6WY65SAG73.me.blanik.Wolfie"]
+    }
+}

@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Wolfie.app
 
-## Getting Started
+_THIS APPLICATION IS IN DEVELOPMENT._
 
-First, run the development server:
+Wolfie.app is a pet companion Next.JS web application.
 
+## Official website
+* [Stable build](https://wolfie.app)
+* [Development build](https://next.wolfie.app)
+* [Doggo Open API](https://api.wolfie.app)
+
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
+
+## About the project
+I become lucky dog dad of Standard Schnauzer in 2022. Shortly, started to look for application to deal with my standard dog things like taking care of her health, weight, feeding and heat.
+It took out that there's no such an application. So, I thought that I can create one. I am a software developer, so why not?
+I believe in open-source and I want to share my work with the world. I hope that this application will be useful for other dog owners.
+
+Also, it was wonderful opportunity to learn more about SwiftUI and great playground for testing some new technologies.
+
+I am open to any suggestions and ideas. If you have any, please contact me:
+- [LinkedIn](https://www.linkedin.com/in/amadeuszblanik/)
+- [Email](mailto:amadeusz@blanik.me)
+
+## Installation
+Use the package manager [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com) to install all dependencies.
+
+For npm:
 ```bash
-npm run dev
-# or
-yarn dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+For yarn:
+```bash
+yarn install
+```
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Usage
+* `npm run dev` or `yarn dev` - starts the application in development mode.
+* `npm run build` or `yarn build` - builds the application.
+* `npm run start` or `yarn start` - starts the application in production mode.
+* `npm run lint` or `yarn lint` - runs linter.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Please make sure to update tests as appropriate.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Stages for Wolfie.app development:
+* [✅] Create a Nest.JS application for the API - Due to security reasons, I decided to not publish the API repository.
+* [✅] Create a proof of concept web application based on Angular
+* [✅] Decide about final technology stack
+* [✅] Create a Next.JS application for the web application - On this stage it was more important to create quick and dirty prototype than to create a clean code.
+* [✅] Publish early version of mobile application to the App Store
+* [💻] Create a custom built-in UI library for the web application
+* [ ] Create a clean-code version of the web application 
 
-## Learn More
+**Legend:**
+* [✅] - Done
+- [💻] - In progress
+- [ ] - Not started
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Technical stack
+- Next.JS 13 — Decided not to use new App directory structure, because it is still in beta and I don't want to deal with it. Also don't have time to deal with new React Server Components.
+- React 18
+- Styled Components 5 - Due to lack of time some components might not be fully rendered on server side, but it is not a big deal for now. I will refactor it later in the new bne-ui library version.
+- TypeScript 4.9
+- bme-ui - Custom built-in UI library for the web application. It is still in development, but it is already used in this project. Not published yet on NPM, but it will be soon.
+- Redux / React Queries - Still not sure which one to use. I will decide later.
+- Jest / React Testing Library - For unit testing. Might be skipped for now due to lack of time.

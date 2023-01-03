@@ -5,7 +5,7 @@ import { Link } from "../../atoms";
 
 export interface TopBarItemProps {
   href: string;
-  children: string;
+  children: React.ReactNode;
 }
 
 export type TopBarItemType = React.FC<TopBarItemProps>;

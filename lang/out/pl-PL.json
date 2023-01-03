@@ -1,0 +1,9 @@
+{
+  "app.name": "Wolfie.app",
+  "layout.landing.menu.about": "O nas",
+  "layout.landing.menu.features": "Funkcjonalności",
+  "layout.landing.menu.pricing": "Cennik",
+  "layout.landing.menu.contact": "Kontakt",
+  "layout.landing.menu.app": "Aplikacja",
+  "common.hello": "Cześć"
+}

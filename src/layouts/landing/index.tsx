@@ -2,8 +2,9 @@ import React from "react";
 import Head from "next/head";
 import { BmeButton } from "bme-ui";
 import styled from "styled-components";
+import { FormattedMessage } from "react-intl";
 import { TopBar } from "../../components";
-import { Brand, Container } from "../../atoms";
+import { Brand, Container, Link } from "../../atoms";
 
 // @TODO: Displayed as a div for now, but should be a main. Looks like a bug in the styled-components that doesnt allow to use main as a styled component.
 const StyledMain = styled.div`
@@ -26,15 +27,25 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
     <TopBar
       left={<Brand withLink withName />}
       right={
-        <>
-          <BmeButton size="small">Open app</BmeButton>
-        </>
+        <Link href="/app">
+          <BmeButton size="small">
+            <FormattedMessage id="layout.landing.menu.app" />
+          </BmeButton>
+        </Link>
       }
     >
-      <TopBar.Item href="/#about">About</TopBar.Item>
-      <TopBar.Item href="/#features">Features</TopBar.Item>
-      <TopBar.Item href="/#pricing">Pricing</TopBar.Item>
-      <TopBar.Item href="/#contact">Contact</TopBar.Item>
+      <TopBar.Item href="/#about">
+        <FormattedMessage id="layout.landing.menu.about" />
+      </TopBar.Item>
+      <TopBar.Item href="/#features">
+        <FormattedMessage id="layout.landing.menu.features" />
+      </TopBar.Item>
+      <TopBar.Item href="/#pricing">
+        <FormattedMessage id="layout.landing.menu.pricing" />
+      </TopBar.Item>
+      <TopBar.Item href="/#contact">
+        <FormattedMessage id="layout.landing.menu.contact" />
+      </TopBar.Item>
     </TopBar>
     <StyledMain>
       <Container>{children}</Container>

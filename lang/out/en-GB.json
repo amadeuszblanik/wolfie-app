@@ -1,0 +1,9 @@
+{
+  "app.name": "Wolfie.app",
+  "layout.landing.menu.about": "About",
+  "layout.landing.menu.features": "Features",
+  "layout.landing.menu.pricing": "Pricing",
+  "layout.landing.menu.contact": "Contact",
+  "layout.landing.menu.app": "Open App",
+  "common.hello": "Hello"
+}

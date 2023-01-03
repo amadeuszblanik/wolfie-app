@@ -30,7 +30,7 @@ const Component = () => {
         width={isMobile ? "100%" : "50%"}
         direction="column"
         alignY="center"
-        padding={isMobile ? "no|no|md" : "md"}
+        padding={isMobile ? "sm|md" : "md"}
         background="backgroundSecondary"
         border="blue"
         rounded

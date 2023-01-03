@@ -1,1 +1,2 @@
-export { default as LayoutPage } from "./page";
+export { default as LayoutApp } from "./app";
+export { default as LayoutLanding } from "./landing";

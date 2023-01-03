@@ -1,9 +1,9 @@
-import { LayoutPage } from "../src/layouts";
+import { LayoutLanding } from "../src/layouts";
 
 export default function Home() {
   return (
-    <LayoutPage>
+    <LayoutLanding>
       <main>Hello, next.js!</main>
-    </LayoutPage>
+    </LayoutLanding>
   );
 }

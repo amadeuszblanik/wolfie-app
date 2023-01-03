@@ -14,6 +14,19 @@ const GlobalStyle = createGlobalStyle`
   *, *:before, *:after {
     box-sizing: border-box;
   }
+  
+  a {
+    color: ${({ theme }) => theme.colors.primary};
+    text-decoration: none;
+    
+    &:link, &:visited {
+      color: ${({ theme }) => theme.colors.primary};
+    }
+    
+    &:hover, &:active {
+      color: ${({ theme }) => theme.colors.primary};
+    }
+  }
 `;
 
 export default GlobalStyle;

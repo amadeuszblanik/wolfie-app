@@ -37,7 +37,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       </Head>
 
       <TopBar
-        left={<Brand withLink withName />}
+        left={<Brand withName />}
         right={
           <Link
             href={

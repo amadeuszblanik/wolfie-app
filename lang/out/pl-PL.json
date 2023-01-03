@@ -10,5 +10,7 @@
   "section.hello.description": "Zapamiętaj zdrowie, wagę, trening i okresy cieczy swojego pupila z Wolfie.app!",
   "section.hello.download.app_store": "Pobierz z App Store",
   "section.hello.web_app": "Również dostępna w przeglądarce!",
+  "section.about.title": "O nas",
+  "section.about.description": "W 2022 roku zostałem szczęśliwym psim tatą sznaucera standardowego. Wkrótce zacząłem szukać aplikacji do załatwiania moich standardowych psich spraw, takich jak dbanie o jej zdrowie, wagę, karmienie i ruję.\nWyszło, że nie ma takiej aplikacji. Pomyślałem więc, że mogę taki stworzyć. Jestem programistą, więc czemu nie?\nWierzę w open source i chcę dzielić się swoją pracą ze światem. Mam nadzieję, że ta aplikacja będzie przydatna dla innych właścicieli psów.\n\nByła to również wspaniała okazja, aby dowiedzieć się więcej o SwiftUI i świetny plac zabaw do testowania nowych technologii.\n\nJestem otwarty na wszelkie sugestie i pomysły. Jeśli masz jakieś, skontaktuj się ze mną.",
   "common.hello": "Cześć"
 }

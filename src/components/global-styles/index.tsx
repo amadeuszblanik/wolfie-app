@@ -3,6 +3,11 @@ import normalize from "styled-normalize";
 
 const GlobalStyle = createGlobalStyle`
   ${normalize}
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
   body {
     margin: 0;
     padding: 0;

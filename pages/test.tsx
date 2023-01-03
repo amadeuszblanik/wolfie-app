@@ -1,5 +1,7 @@
 import Head from "next/head";
-import { BmeBox, BmeIcon, BmeTest } from "bme-ui";
+import { BmeBox, BmeButton, BmeIcon, BmeTest } from "bme-ui";
+import { useDispatch, useSelector } from "react-redux";
+import { selectAuthState, setAuthState } from "../src/store/auth.slice";
 
 export const theme = {
   radius: 6,
@@ -36,6 +38,13 @@ export const theme = {
 };
 
 export default function Home() {
+  const authState = useSelector(selectAuthState);
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    dispatch(setAuthState(!authState));
+  };
+
   return (
     <>
       <Head>
@@ -50,6 +59,8 @@ export default function Home() {
           Test
         </BmeBox>
         <BmeTest variant="blue" />
+
+        <BmeButton onClick={handleClick}>{authState ? "Logout" : "Login"}</BmeButton>
       </main>
     </>
   );

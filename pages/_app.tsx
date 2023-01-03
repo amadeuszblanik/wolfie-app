@@ -5,9 +5,10 @@ import React from "react";
 import { IntlProvider } from "react-intl";
 import { locales, theme } from "../src/settings";
 import { GlobalStyles } from "../src/components";
+import { wrapper } from "../src/store";
 import type { AppProps } from "next/app";
 
-export default function App({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps) {
   const locale = useRouter().locale as keyof typeof locales;
 
   return (
@@ -22,3 +23,5 @@ export default function App({ Component, pageProps }: AppProps) {
     </IntlProvider>
   );
 }
+
+export default wrapper.withRedux(App);

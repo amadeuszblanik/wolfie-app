@@ -16,16 +16,21 @@ const GlobalStyle = createGlobalStyle`
   }
   
   a {
-    color: ${({ theme }) => theme.colors.primary};
+    color: ${({ theme }) => theme.colors.text};
     text-decoration: none;
     
     &:link, &:visited {
-      color: ${({ theme }) => theme.colors.primary};
+      color: ${({ theme }) => theme.colors.text};
     }
     
     &:hover, &:active {
-      color: ${({ theme }) => theme.colors.primary};
+      color: ${({ theme }) => theme.colors.text};
     }
+  }
+  
+  p {
+    margin: 0;
+    padding: 0;
   }
 `;
 

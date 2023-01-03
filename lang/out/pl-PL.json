@@ -6,5 +6,9 @@
   "layout.landing.menu.contact": "Kontakt",
   "layout.landing.menu.app": "Aplikacja",
   "layout.landing.menu.download": "Pobierz",
+  "section.hello.title": "Aplikacja do zarządzania swoim pupilem",
+  "section.hello.description": "Zapamiętaj zdrowie, wagę, trening i okresy cieczy swojego pupila z Wolfie.app!",
+  "section.hello.download.app_store": "Pobierz z App Store",
+  "section.hello.web_app": "Również dostępna w przeglądarce!",
   "common.hello": "Cześć"
 }

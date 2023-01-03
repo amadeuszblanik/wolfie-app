@@ -1,12 +1,12 @@
 import { FormattedMessage } from "react-intl";
 import { LayoutLanding } from "../src/layouts";
+import { SectionHello } from "../src/sections";
 
 export default function Home() {
   return (
     <LayoutLanding>
-      <main>
-        <FormattedMessage id="common.hello" />, <FormattedMessage id="app.name" />!
-      </main>
+      <SectionHello />
+      <FormattedMessage id="common.hello" />, <FormattedMessage id="app.name" />!
     </LayoutLanding>
   );
 }

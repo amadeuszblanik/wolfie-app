@@ -6,5 +6,9 @@
   "layout.landing.menu.contact": "Contact",
   "layout.landing.menu.app": "Open App",
   "layout.landing.menu.download": "Download App",
+  "section.hello.title": "Personal dog management app",
+  "section.hello.description": "Keep track of your dog's health, weight, training and heat with Wolfie.app!",
+  "section.hello.download.app_store": "Download on the App Store",
+  "section.hello.web_app": "Also available as a web app!",
   "common.hello": "Hello"
 }

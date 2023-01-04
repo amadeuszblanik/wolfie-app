@@ -43,3 +43,9 @@ next-env.d.ts
 /public/workbox-*.js.map
 
 /.sentryclirc
+
+# Sentry
+.sentryclirc
+
+# Sentry
+.sentryclirc

@@ -23,5 +23,8 @@
   "section.features.feature_share.description": "Udostępniaj dane swojego pupila z innymi użytkownikami.",
   "section.features.state_ready": "Gotowe",
   "section.features.state_in_progress": "W krótce",
-  "section.features.state_planned": "Planowane"
+  "section.features.state_planned": "Planowane",
+  "section.pricing.title": "Cennik",
+  "section.pricing.description": "Aplikacja jest całkowicie darmowa. Nie ma żadnych ukrytych kosztów ani ograniczeń.\nObecna wersja posiada jedynie limit do 3 zwierząt na każde konto.",
+  "section.pricing.donation": "Jeśli chcesz wesprzeć projekt, możesz zrobić to poprzez przekazanie darowizny."
 }

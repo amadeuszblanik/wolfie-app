@@ -23,5 +23,8 @@
   "section.features.feature_share.description": "You can share your pet's data with others.",
   "section.features.state_ready": "Ready",
   "section.features.state_in_progress": "Coming soon",
-  "section.features.state_planned": "Planned"
+  "section.features.state_planned": "Planned",
+  "section.pricing.title": "Pricing",
+  "section.pricing.description": "Wolfie.app is free to use. You can use it as long as you want.\nThere's is only limit to 3 pets per account.",
+  "section.pricing.donation": "If you like Wolfie.app, you can support me by donating."
 }

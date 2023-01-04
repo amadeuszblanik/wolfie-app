@@ -26,7 +26,7 @@ const Component = () => {
   const isMobile = useMobile();
 
   return (
-    <StyledSection id="pricing">
+    <StyledSection id="contact">
       <BmeBox direction="column" alignY="center" minHeight="90vh" padding="md|no">
         <BmeBox width="100%" alignX="center" padding="no|no|md" margin="no|no|auto">
           <BmeText variant="Title1" align="center">

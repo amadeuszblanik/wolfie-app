@@ -25,9 +25,6 @@ const Form: React.FunctionComponent = () => {
 
   useEffect(() => {
     switch (status) {
-      case ApiStatesTypes.Loading:
-        setFormEnable(false);
-        break;
       case ApiStatesTypes.Success:
         setFormEnable(false);
         break;

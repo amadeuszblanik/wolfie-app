@@ -6,12 +6,12 @@ import { AuthSignInResponse } from "../services/api/types/auth/sign-in/response.
 import { ApiErrorMessage } from "../services/api/types/error-message.type";
 import { ApiService } from "../services";
 
-const signUp = createAsyncThunk<
+const signIn = createAsyncThunk<
   AuthSignInResponse,
   AuthSignInPayload,
   { extra: { apiService: ApiService }; rejectValue: ApiErrorMessage }
 >(
-  "auth/signUp",
+  "auth/signIn",
   async (payload, thunkAPI) =>
     await thunkAPI.extra.apiService.authSignIn(payload.username, payload.password, payload.keepSignIn, payload.device),
 );
@@ -44,19 +44,19 @@ export const authSlice = createSlice({
       // @ts-ignore
       ...action.payload.subject,
     }));
-    builder.addCase(signUp.pending, (state) => {
+    builder.addCase(signIn.pending, (state) => {
       state.status = "pending";
       state.error = null;
       state.accessToken = null;
       state.refreshToken = null;
     });
-    builder.addCase(signUp.fulfilled, (state, action) => {
+    builder.addCase(signIn.fulfilled, (state, action) => {
       state.status = "success";
       state.error = null;
       state.accessToken = action.payload.accessToken;
       state.refreshToken = action.payload.refreshToken || null;
     });
-    builder.addCase(signUp.rejected, (state, action) => {
+    builder.addCase(signIn.rejected, (state, action) => {
       state.status = "error";
       state.error = action.error.message || null;
       state.accessToken = null;
@@ -72,5 +72,5 @@ export const selectAuthRefreshToken = (state: { auth: AuthStore }) => state.auth
 
 export const authActions = {
   ...authSlice.actions,
-  signUp,
+  signIn,
 };

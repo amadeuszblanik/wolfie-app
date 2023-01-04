@@ -45,5 +45,11 @@
   "page.app.title": "Pulpit",
   "page.pet_add.title": "Dodaj zwierzaka",
   "page.auth_sign_in.title": "Wpisz się",
-  "page.auth_sign_up.title": "Zapisz się"
+  "page.auth_sign_up.title": "Zapisz się",
+  "common.form.username.label": "Nazwa użytkownika",
+  "common.form.password.label": "Hasło",
+  "common.form.keep_sign_in.label": "Zapamiętaj mnie",
+  "common.form.submit.label": "Zatwierdź",
+  "common.form.reset_password.label": "Zapomniałeś hasła? Kliknij tutaj.",
+  "common.form.create_account.label": "Nie masz konta? Zarejestruj się tutaj."
 }

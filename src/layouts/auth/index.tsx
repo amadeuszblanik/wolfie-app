@@ -47,7 +47,14 @@ const Layout: React.FC<LayoutAppProps> = ({ title, children }) => {
           </BmeBox>
           <BmeText variant="Title2">{title}</BmeText>
         </BmeBox>
-        <BmeBox direction="column" width={isMobile ? "100%" : "50%"} minHeight="100vh" padding="md|no">
+        <BmeBox
+          direction="column"
+          alignX="center"
+          alignY="center"
+          width={isMobile ? "100%" : "50%"}
+          minHeight="100vh"
+          padding="md|no"
+        >
           <Container>{children}</Container>
         </BmeBox>
       </StyledMain>

@@ -45,5 +45,11 @@
   "page.app.title": "Dashboard",
   "page.pet_add.title": "Add Pet",
   "page.auth_sign_in.title": "Sign In",
-  "page.auth_sign_up.title": "Sign Up"
+  "page.auth_sign_up.title": "Sign Up",
+  "common.form.username.label": "Username",
+  "common.form.password.label": "Password",
+  "common.form.keep_sign_in.label": "Keep me signed in",
+  "common.form.submit.label": "Submit",
+  "common.form.reset_password.label": "Forgot password? Click here.",
+  "common.form.create_account.label": "Don't have an account? Click here."
 }

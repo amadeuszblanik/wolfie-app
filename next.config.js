@@ -51,4 +51,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withSentryConfig(withPWA(withSvgr(nextConfig)), sentryWebpackPluginOptions);
+module.exports = withPWA(withSvgr(nextConfig));

@@ -1,7 +1,7 @@
 import { LayoutLanding } from "../src/layouts";
 import { SectionAbout, SectionContact, SectionFeatures, SectionHello, SectionPricing } from "../src/sections";
 
-export default function Home() {
+export default function Page() {
   return (
     <LayoutLanding>
       <SectionHello />

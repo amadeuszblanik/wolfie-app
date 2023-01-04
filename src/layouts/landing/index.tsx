@@ -4,7 +4,7 @@ import { BmeButton } from "bme-ui";
 import styled from "styled-components";
 import { FormattedMessage } from "react-intl";
 import { detectDevice } from "bme-utils";
-import { TopBar } from "../../components";
+import { Footer, TopBar } from "../../components";
 import { Brand, Container, Link } from "../../atoms";
 import { useLocale } from "../../hooks";
 
@@ -66,6 +66,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       <StyledMain>
         <Container>{children}</Container>
       </StyledMain>
+      <Footer />
     </>
   );
 };

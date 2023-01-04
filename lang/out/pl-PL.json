@@ -1,5 +1,8 @@
 {
   "app.name": "Wolfie.app",
+  "common.error_message": "Wystąpił błąd podczas próby uruchomienia aplikacji. Spróbuj ponownie później.",
+  "common.language.en_gb": "Angielski (Zjednoczone Królestwo)",
+  "common.language.pl_pl": "Polski (Polska)",
   "layout.landing.menu.about": "O nas",
   "layout.landing.menu.features": "Funkcjonalności",
   "layout.landing.menu.pricing": "Cennik",
@@ -28,5 +31,9 @@
   "section.pricing.description": "Aplikacja jest całkowicie darmowa. Nie ma żadnych ukrytych kosztów ani ograniczeń.\nObecna wersja posiada jedynie limit do 3 zwierząt na każde konto.",
   "section.pricing.donation": "Jeśli chcesz wesprzeć projekt, możesz zrobić to poprzez przekazanie darowizny.",
   "section.contact.title": "Kontakt",
-  "section.contact.description": "Masz jakieś pytania lub sugestie? Skontaktuj się ze mną!"
+  "section.contact.description": "Masz jakieś pytania lub sugestie? Skontaktuj się ze mną!",
+  "component.footer.made_by": "Stworzone z ❤️ przez",
+  "component.footer.privacy_policy": "Polityka prywatności",
+  "component.footer.change_language": "Zmień język",
+  "component.footer.cookie_info": "Ta strona używa ciasteczek. Dzięki nim możemy zapewnić Ci najlepszą możliwą obsługę."
 }

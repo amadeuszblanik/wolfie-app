@@ -1,5 +1,8 @@
 {
   "app.name": "Wolfie.app",
+  "common.error_message": "An error occurred while trying to load the application. Please try again later.",
+  "common.language.en_gb": "English (United Kingdom)",
+  "common.language.pl_pl": "Polish (Poland)",
   "layout.landing.menu.about": "About",
   "layout.landing.menu.features": "Features",
   "layout.landing.menu.pricing": "Pricing",
@@ -28,5 +31,9 @@
   "section.pricing.description": "Wolfie.app is free to use. You can use it as long as you want.\nThere's is only limit to 3 pets per account.",
   "section.pricing.donation": "If you like Wolfie.app, you can support me by donating.",
   "section.contact.title": "Contact",
-  "section.contact.description": "If you have any questions, suggestions or ideas, feel free to contact me."
+  "section.contact.description": "If you have any questions, suggestions or ideas, feel free to contact me.",
+  "component.footer.made_by": "Made with ❤️ by",
+  "component.footer.privacy_policy": "Privacy Policy",
+  "component.footer.change_language": "Change language",
+  "component.footer.cookie_info": "This website uses cookies to ensure you get the best experience on our website."
 }

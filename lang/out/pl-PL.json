@@ -41,5 +41,7 @@
   "component.footer.made_by": "Stworzone z ❤️ przez",
   "component.footer.privacy_policy": "Polityka prywatności",
   "component.footer.change_language": "Zmień język",
-  "component.footer.cookie_info": "Ta strona używa ciasteczek. Dzięki nim możemy zapewnić Ci najlepszą możliwą obsługę."
+  "component.footer.cookie_info": "Ta strona używa ciasteczek. Dzięki nim możemy zapewnić Ci najlepszą możliwą obsługę.",
+  "page.app.title": "Pulpit",
+  "page.pet_add.title": "Dodaj zwierzaka"
 }

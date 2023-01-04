@@ -41,5 +41,7 @@
   "component.footer.made_by": "Made with ❤️ by",
   "component.footer.privacy_policy": "Privacy Policy",
   "component.footer.change_language": "Change language",
-  "component.footer.cookie_info": "This website uses cookies to ensure you get the best experience on our website."
+  "component.footer.cookie_info": "This website uses cookies to ensure you get the best experience on our website.",
+  "page.app.title": "Dashboard",
+  "page.pet_add.title": "Add Pet"
 }

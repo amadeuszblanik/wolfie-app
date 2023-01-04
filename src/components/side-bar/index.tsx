@@ -7,20 +7,21 @@ import Item, { SideBarItemType } from "./item";
 import { Brand } from "../../atoms";
 
 // @TODO: IN DEVELOPMENT
-// @TODO: Add translations
 // @TODO: Add button 100% width to bme-ui
 // @TODO: Fix progress bar width to bme-ui
-// @TODO: Add 3d animations to profile
-// @TODO: Add isOpen props to StyledSideBarProfile
 // @TODO: Add proper icons to bme-ui
-// @TODO: Add top bar with title
-// @TODO: Add custom width or paddings to container
+// @TODO: Add custom width or paddings to container — Probably no longer needed
 
 interface TopBarProps {
+  title: string;
   children: React.ReactNode;
 }
 
 interface StyledSideBarWrapperProps {
+  isOpen: boolean;
+}
+
+interface StyledSideBarProfileProps {
   isOpen: boolean;
 }
 
@@ -42,6 +43,25 @@ const StyledSideBarWrapper = styled.div<StyledSideBarWrapperProps>`
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}px) {
     height: 100vh;
   }
+`;
+
+const StyledSideBarTitleWrapper = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 80px;
+  background: ${({ theme }) => theme.colors.backgroundSecondary};
+`;
+
+const StyledSideBarTitlePlaceholder = styled.div`
+  display: block;
+  width: 100%;
+  height: 80px;
 `;
 
 const StyledSideBarTop = styled.button`
@@ -83,7 +103,7 @@ const StyledSideBarBottom = styled.button`
   appearance: none;
 `;
 
-const StyledSideBarProfile = styled.div`
+const StyledSideBarProfile = styled.div<StyledSideBarProfileProps>`
   position: fixed;
   bottom: 0;
   left: 80px;
@@ -95,23 +115,33 @@ const StyledSideBarProfile = styled.div`
   min-height: 300px;
   ${({ theme }) => bmeMixins.paddings("lg|md", theme)}
   background: ${({ theme }) => theme.colors.gray6};
+
+  transform: ${({ isOpen }) => (isOpen ? "rotateX(0deg)" : "rotateY(90deg)")};
+  transform-origin: 0 50%;
+
+  ${bmeMixins.animations(["transform"])};
 `;
 
-const Component: ComponentType = ({ children }) => {
+const Component: ComponentType = ({ title, children }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  // @TODO: const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+
+  const switchDrawerOpen = () => {
+    setIsDrawerOpen(!isDrawerOpen);
+    setIsProfileOpen(false);
+  };
 
   return (
     <>
       <StyledSideBarWrapper isOpen={isDrawerOpen}>
-        <StyledSideBarTop onClick={() => setIsDrawerOpen(!isDrawerOpen)}>
+        <StyledSideBarTop onClick={switchDrawerOpen}>
           <Brand withName={false} />
         </StyledSideBarTop>
         <StyledSideBarMenu>{children}</StyledSideBarMenu>
-        <StyledSideBarBottom>
+        <StyledSideBarBottom onClick={() => setIsProfileOpen(!isProfileOpen)}>
           <BmeAvatar rounded size="small" />
         </StyledSideBarBottom>
-        <StyledSideBarProfile>
+        <StyledSideBarProfile isOpen={isProfileOpen}>
           <BmeBox alignY="top">
             <BmeBox margin="no|xs|no|no">
               <BmeText variant="Title2">Joe Doe</BmeText>
@@ -149,6 +179,10 @@ const Component: ComponentType = ({ children }) => {
           </BmeBox>
         </StyledSideBarProfile>
       </StyledSideBarWrapper>
+      <StyledSideBarTitleWrapper>
+        <BmeText variant="Title1">{title}</BmeText>
+      </StyledSideBarTitleWrapper>
+      <StyledSideBarTitlePlaceholder />
     </>
   );
 };

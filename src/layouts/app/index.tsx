@@ -5,6 +5,11 @@ import { useIntl } from "react-intl";
 import { Container } from "../../atoms";
 import { Footer, SideBar } from "../../components";
 
+interface LayoutAppProps {
+  title: string;
+  children: React.ReactNode;
+}
+
 // @TODO: Displayed as a div for now, but should be a main. Looks like a bug in the styled-components that doesnt allow to use main as a styled component.
 const StyledMain = styled.div`
   margin-top: 16px;
@@ -14,7 +19,7 @@ const StyledMain = styled.div`
   }
 `;
 
-const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const Layout: React.FC<LayoutAppProps> = ({ title, children }) => {
   const intl = useIntl();
 
   return (
@@ -26,7 +31,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <SideBar>
+      <SideBar title={title}>
         <SideBar.Item icon="grid" label={intl.formatMessage({ id: "layout.app.menu.pets" })} href="/app" />
         <SideBar.Item icon="mail" label={intl.formatMessage({ id: "layout.app.menu.pet_add" })} href="/app/pet/add" />
       </SideBar>

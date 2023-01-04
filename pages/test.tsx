@@ -1,7 +1,14 @@
 import Head from "next/head";
-import { BmeBox, BmeButton, BmeIcon, BmeTest } from "bme-ui";
-import { useDispatch, useSelector } from "react-redux";
-import { selectAuthState, setAuthState } from "../src/store/auth.slice";
+import { BmeBox, BmeButton, BmeIcon, BmeTest, BmeText } from "bme-ui";
+
+import {
+  authActions,
+  selectAuthAccessToken,
+  selectAuthError,
+  selectAuthRefreshToken,
+  selectAuthStatus,
+} from "../src/store/auth.slice";
+import { useAppDispatch, useAppSelector } from "../src/hooks";
 
 export const theme = {
   radius: 6,
@@ -38,11 +45,21 @@ export const theme = {
 };
 
 export default function Home() {
-  const authState = useSelector(selectAuthState);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+  const storeAuthStatus = useAppSelector(selectAuthStatus);
+  const storeAuthError = useAppSelector(selectAuthError);
+  const storeAuthAccessToken = useAppSelector(selectAuthAccessToken);
+  const storeAuthRefreshToken = useAppSelector(selectAuthRefreshToken);
 
   const handleClick = () => {
-    dispatch(setAuthState(!authState));
+    dispatch(
+      authActions.signUp({
+        username: "amadeusz@blanik.me",
+        password: "Passw0rd!1",
+        keepSignIn: true,
+        device: "web",
+      }),
+    );
   };
 
   return (
@@ -60,7 +77,23 @@ export default function Home() {
         </BmeBox>
         <BmeTest variant="blue" />
 
-        <BmeButton onClick={handleClick}>{authState ? "Logout" : "Login"}</BmeButton>
+        <BmeText>
+          Auth Status: <span>{storeAuthStatus}</span>
+        </BmeText>
+
+        <BmeText>
+          Auth Error: <span>{storeAuthError}</span>
+        </BmeText>
+
+        <BmeText>
+          Auth Access Token: <span>{storeAuthAccessToken}</span>
+        </BmeText>
+
+        <BmeText>
+          Auth Refresh Token: <span>{storeAuthRefreshToken}</span>
+        </BmeText>
+
+        <BmeButton onClick={handleClick}>{"Login"}</BmeButton>
       </main>
     </>
   );

@@ -26,6 +26,8 @@
     "react-dom": "18.2.0",
     "react-intl": "^6.2.5",
     "react-redux": "^8.0.5",
+    "redux": "^4.2.0",
+    "redux-thunk": "^2.4.2",
     "sanitize-html": "^2.8.1",
     "styled-components": "^5.3.6",
     "styled-normalize": "^8.0.7"
@@ -34,6 +36,7 @@
     "styled-components": "^5"
   },
   "devDependencies": {
+    "@redux-devtools/core": "^3.13.1",
     "@types/sanitize-html": "^2.8.0",
     "@types/styled-components": "^5.1.26",
     "@typescript-eslint/eslint-plugin": "^5.48.0",

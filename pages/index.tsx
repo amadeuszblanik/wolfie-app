@@ -1,5 +1,5 @@
 import { LayoutLanding } from "../src/layouts";
-import { SectionAbout, SectionFeatures, SectionHello, SectionPricing } from "../src/sections";
+import { SectionAbout, SectionContact, SectionFeatures, SectionHello, SectionPricing } from "../src/sections";
 
 export default function Home() {
   return (
@@ -8,6 +8,7 @@ export default function Home() {
       <SectionAbout />
       <SectionFeatures />
       <SectionPricing />
+      <SectionContact />
     </LayoutLanding>
   );
 }

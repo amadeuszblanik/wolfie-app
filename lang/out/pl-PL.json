@@ -26,5 +26,7 @@
   "section.features.state_planned": "Planowane",
   "section.pricing.title": "Cennik",
   "section.pricing.description": "Aplikacja jest całkowicie darmowa. Nie ma żadnych ukrytych kosztów ani ograniczeń.\nObecna wersja posiada jedynie limit do 3 zwierząt na każde konto.",
-  "section.pricing.donation": "Jeśli chcesz wesprzeć projekt, możesz zrobić to poprzez przekazanie darowizny."
+  "section.pricing.donation": "Jeśli chcesz wesprzeć projekt, możesz zrobić to poprzez przekazanie darowizny.",
+  "section.contact.title": "Kontakt",
+  "section.contact.description": "Masz jakieś pytania lub sugestie? Skontaktuj się ze mną!"
 }

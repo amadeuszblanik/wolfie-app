@@ -53,7 +53,7 @@ const Component = () => {
           </Link>
         </BmeBox>
 
-        <Link href="/app">
+        <Link href="/app/app">
           <BmeText>
             <FormattedMessage id="section.hello.web_app" />
           </BmeText>

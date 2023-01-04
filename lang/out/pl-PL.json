@@ -12,5 +12,16 @@
   "section.hello.web_app": "Również dostępna w przeglądarce!",
   "section.about.title": "O nas",
   "section.about.description": "W 2022 roku zostałem szczęśliwym psim tatą sznaucera standardowego. Wkrótce zacząłem szukać aplikacji do załatwiania moich standardowych psich spraw, takich jak dbanie o jej zdrowie, wagę, karmienie i ruję.\nWyszło, że nie ma takiej aplikacji. Pomyślałem więc, że mogę taki stworzyć. Jestem programistą, więc czemu nie?\nWierzę w open source i chcę dzielić się swoją pracą ze światem. Mam nadzieję, że ta aplikacja będzie przydatna dla innych właścicieli psów.\n\nByła to również wspaniała okazja, aby dowiedzieć się więcej o SwiftUI i świetny plac zabaw do testowania nowych technologii.\n\nJestem otwarty na wszelkie sugestie i pomysły. Jeśli masz jakieś, skontaktuj się ze mną.",
-  "common.hello": "Cześć"
+  "section.features.title": "Funkcjonalności",
+  "section.features.feature_weight.title": "Waga",
+  "section.features.feature_weight.description": "Zapisuj i śledź wagę swojego pupila.",
+  "section.features.feature_health_log.title": "Dziennik zdrowia",
+  "section.features.feature_health_log.description": "Zapisuj i śledź zdrowie swojego pupila.",
+  "section.features.feature_heat.title": "Okres cieczy",
+  "section.features.feature_heat.description": "Zapisuj i śledź okres cieczy swojego pupila.",
+  "section.features.feature_share.title": "Udostępnianie",
+  "section.features.feature_share.description": "Udostępniaj dane swojego pupila z innymi użytkownikami.",
+  "section.features.state_ready": "Gotowe",
+  "section.features.state_in_progress": "W krótce",
+  "section.features.state_planned": "Planowane"
 }

@@ -12,5 +12,16 @@
   "section.hello.web_app": "Also available as a web app!",
   "section.about.title": "About Wolfie.app",
   "section.about.description": "I become lucky dog owner of Standard Schnauzer in 2022. Shortly, started to look for application to deal with my standard dog things like taking care of her health, weight, feeding and heat.\nIt took out that there's no such an application. So, I thought that I can create one. I am a software developer, so why not?\nI believe in open-source and I want to share my work with the world. I hope that this application will be useful for other dog owners.\n\nAlso, it was wonderful opportunity to learn more about SwiftUI and great playground for testing some new technologies.\n\nI am open to any suggestions and ideas. If you have any, feel free to contact me.",
-  "common.hello": "Hello"
+  "section.features.title": "Features",
+  "section.features.feature_weight.title": "Weight",
+  "section.features.feature_weight.description": "Keep track of your dog's weight. You can add new weight measurements and see the history of your dog's weight.",
+  "section.features.feature_health_log.title": "Health Log",
+  "section.features.feature_health_log.description": "Keep track of your dog's health. You can add new health logs and see the history of your dog's health.",
+  "section.features.feature_heat.title": "Heat tracker",
+  "section.features.feature_heat.description": "Keep track of your dog's heat. You can add new heat measurements and see the history of your dog's heat.",
+  "section.features.feature_share.title": "Share pet's",
+  "section.features.feature_share.description": "You can share your pet's data with others.",
+  "section.features.state_ready": "Ready",
+  "section.features.state_in_progress": "Coming soon",
+  "section.features.state_planned": "Planned"
 }

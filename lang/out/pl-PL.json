@@ -43,5 +43,7 @@
   "component.footer.change_language": "Zmień język",
   "component.footer.cookie_info": "Ta strona używa ciasteczek. Dzięki nim możemy zapewnić Ci najlepszą możliwą obsługę.",
   "page.app.title": "Pulpit",
-  "page.pet_add.title": "Dodaj zwierzaka"
+  "page.pet_add.title": "Dodaj zwierzaka",
+  "page.auth_sign_in.title": "Wpisz się",
+  "page.auth_sign_up.title": "Zapisz się"
 }

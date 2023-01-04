@@ -5,8 +5,9 @@ import { Container, Link } from "../../atoms";
 import { locales } from "../../settings";
 
 const StyledFooterWrapper = styled.footer`
+  width: 100%;
   ${({ theme }) => bmeMixins.paddings("lg|md|xl", theme)}
-  ${({ theme }) => bmeMixins.margins("md|no|no", theme)}
+  ${({ theme }) => bmeMixins.margins("auto|no|no", theme)}
   background: ${({ theme }) => theme.colors.background};
   border-top: 2px solid ${({ theme }) => theme.colors.gray5};
 `;

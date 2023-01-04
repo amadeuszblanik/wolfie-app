@@ -43,5 +43,7 @@
   "component.footer.change_language": "Change language",
   "component.footer.cookie_info": "This website uses cookies to ensure you get the best experience on our website.",
   "page.app.title": "Dashboard",
-  "page.pet_add.title": "Add Pet"
+  "page.pet_add.title": "Add Pet",
+  "page.auth_sign_in.title": "Sign In",
+  "page.auth_sign_up.title": "Sign Up"
 }

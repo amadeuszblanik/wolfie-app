@@ -5,6 +5,7 @@ import { ApiStatus } from "../services/api/types/status.type";
 import { AuthSignInResponse } from "../services/api/types/auth/sign-in/response.type";
 import { ApiErrorMessage } from "../services/api/types/error-message.type";
 import { ApiService } from "../services";
+import { cookie } from "../utils";
 
 const signIn = createAsyncThunk<
   AuthSignInResponse,
@@ -55,12 +56,23 @@ export const authSlice = createSlice({
       state.error = null;
       state.accessToken = action.payload.accessToken;
       state.refreshToken = action.payload.refreshToken || null;
+
+      cookie.set("accessToken", action.payload.accessToken, { path: "/", expires: new Date("2100") });
+
+      if (action.payload.refreshToken) {
+        cookie.set("refreshToken", action.payload.refreshToken, { path: "/", expires: new Date("2100") });
+      } else {
+        cookie.remove("refreshToken");
+      }
     });
     builder.addCase(signIn.rejected, (state, action) => {
       state.status = "error";
       state.error = action.error.message || null;
       state.accessToken = null;
       state.refreshToken = null;
+
+      cookie.remove("accessToken");
+      cookie.remove("refreshToken");
     });
   },
 });

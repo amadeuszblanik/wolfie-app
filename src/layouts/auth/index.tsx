@@ -14,7 +14,7 @@ const StyledMain = styled.main`
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-height: 100vh;
+  min-height: var(--bme-vh, 100vh);
 
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}px) {
     flex-direction: row;
@@ -52,7 +52,7 @@ const Layout: React.FC<LayoutAppProps> = ({ title, children }) => {
           alignX="center"
           alignY="center"
           width={isMobile ? "100%" : "50%"}
-          minHeight="100vh"
+          minHeight="var(--bme-vh, 100vh)"
           padding="md|no"
         >
           <Container>{children}</Container>

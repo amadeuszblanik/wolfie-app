@@ -32,7 +32,17 @@ export const authSlice = createSlice({
 
   initialState,
 
-  reducers: {},
+  reducers: {
+    signOff: (state) => {
+      state.status = "idle";
+      state.error = null;
+      state.accessToken = null;
+      state.refreshToken = null;
+
+      cookie.remove("accessToken");
+      cookie.remove("refreshToken");
+    },
+  },
 
   extraReducers: (builder) => {
     builder.addCase(HYDRATE, (state, action) => ({

@@ -10,8 +10,7 @@ interface LayoutAppProps {
   children: React.ReactNode;
 }
 
-// @TODO: Displayed as a div for now, but should be a main. Looks like a bug in the styled-components that doesnt allow to use main as a styled component.
-const StyledMain = styled.div`
+const StyledMain = styled.main`
   margin-top: 16px;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}px) {
@@ -32,8 +31,8 @@ const Layout: React.FC<LayoutAppProps> = ({ title, children }) => {
       </Head>
 
       <SideBar title={title}>
-        <SideBar.Item icon="grid" label={intl.formatMessage({ id: "layout.app.menu.pets" })} href="/app" />
-        <SideBar.Item icon="mail" label={intl.formatMessage({ id: "layout.app.menu.pet_add" })} href="/app/pet/add" />
+        <SideBar.Item icon="paw" label={intl.formatMessage({ id: "layout.app.menu.pets" })} href="/app" />
+        <SideBar.Item icon="paw" label={intl.formatMessage({ id: "layout.app.menu.pet_add" })} href="/app/pet/add" />
       </SideBar>
       <StyledMain>
         <Container>{children}</Container>

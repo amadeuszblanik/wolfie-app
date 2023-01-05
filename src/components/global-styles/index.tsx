@@ -37,6 +37,10 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
   }
+  
+  :root {
+    --bme-vh: 100vh; 
+  }
 `;
 
 export default GlobalStyle;

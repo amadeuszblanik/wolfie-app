@@ -3,14 +3,13 @@ import styled from "styled-components";
 import { BmeAvatar, BmeBox, BmeButton, BmeProgressBar, BmeText } from "bme-ui";
 import { bmeMixins } from "bme-ui";
 import { FormattedMessage } from "react-intl";
+import { useRouter } from "next/router";
 import Item, { SideBarItemType } from "./item";
-import { Brand } from "../../atoms";
+import { Brand, Link } from "../../atoms";
+import { useAppDispatch } from "../../hooks";
+import { authActions } from "../../store/auth.slice";
 
 // @TODO: IN DEVELOPMENT
-// @TODO: Add button 100% width to bme-ui
-// @TODO: Fix progress bar width to bme-ui
-// @TODO: Add proper icons to bme-ui
-// @TODO: Add custom width or paddings to container — Probably no longer needed
 
 interface TopBarProps {
   title: string;
@@ -33,7 +32,7 @@ const StyledSideBarWrapper = styled.div<StyledSideBarWrapperProps>`
   left: 0;
   z-index: 1005;
   width: 80px;
-  height: ${({ isOpen }) => (isOpen ? "100vh" : "80px")};
+  height: ${({ isOpen }) => (isOpen ? "var(--bme-vh, 100vh)" : "80px")};
   min-height: 80px;
   overflow: hidden;
   background: ${({ theme }) => theme.colors.backgroundSecondary};
@@ -41,7 +40,7 @@ const StyledSideBarWrapper = styled.div<StyledSideBarWrapperProps>`
   ${bmeMixins.animations(["height"])};
 
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}px) {
-    height: 100vh;
+    height: var(--bme-vh, 100vh);
   }
 `;
 
@@ -120,15 +119,26 @@ const StyledSideBarProfile = styled.div<StyledSideBarProfileProps>`
   transform-origin: 0 50%;
 
   ${bmeMixins.animations(["transform"])};
+
+  a {
+    width: 100%;
+  }
 `;
 
 const Component: ComponentType = ({ title, children }) => {
+  const router = useRouter();
+  const dispatch = useAppDispatch();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   const switchDrawerOpen = () => {
     setIsDrawerOpen(!isDrawerOpen);
     setIsProfileOpen(false);
+  };
+
+  const handleSignOff = () => {
+    dispatch(authActions.signOff());
+    void router.push("/auth/sign-in");
   };
 
   return (
@@ -163,17 +173,21 @@ const Component: ComponentType = ({ title, children }) => {
             <BmeProgressBar value={100} />
           </BmeBox>
           <BmeBox direction="column" alignY="bottom" margin="auto|no|no">
-            <BmeBox padding="no|no|xs">
-              <BmeButton size="small">
-                <FormattedMessage id="layout.app.profile.settings" />
-              </BmeButton>
+            <BmeBox padding="no|no|xs" width="100%">
+              <Link href="/app/settings">
+                <BmeButton size="small" width="100%">
+                  <FormattedMessage id="layout.app.profile.settings" />
+                </BmeButton>
+              </Link>
             </BmeBox>
-            <BmeBox padding="no|no|xs">
-              <BmeButton size="small">
-                <FormattedMessage id="layout.app.profile.profile" />
-              </BmeButton>
+            <BmeBox padding="no|no|xs" width="100%">
+              <Link href="/app/settings/profile">
+                <BmeButton size="small" width="100%">
+                  <FormattedMessage id="layout.app.profile.profile" />
+                </BmeButton>
+              </Link>
             </BmeBox>
-            <BmeButton size="small">
+            <BmeButton size="small" width="100%" onClick={handleSignOff}>
               <FormattedMessage id="layout.app.profile.sign_off" />
             </BmeButton>
           </BmeBox>

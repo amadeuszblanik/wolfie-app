@@ -1,16 +1,19 @@
 import { createWrapper } from "next-redux-wrapper";
 import { configureStore } from "@reduxjs/toolkit";
 import { authSlice, AuthStore } from "./auth.slice";
+import { signUpSlice, SignUpStore } from "./sign-up.slice";
 import { ApiService } from "../services";
 
 export interface State {
   auth: AuthStore;
+  signUp: SignUpStore;
 }
 
 const makeStore = () =>
   configureStore({
     reducer: {
       [authSlice.name]: authSlice.reducer,
+      [signUpSlice.name]: signUpSlice.reducer,
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({

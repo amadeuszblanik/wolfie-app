@@ -52,26 +52,28 @@ const Component = () => {
       modal={isErrorVisible ? <BmeText align="center">{storeAuthError}</BmeText> : undefined}
       onCloseModal={() => setIsErrorVisible(false)}
     >
-      <BmeBox direction="column" alignX="center" alignY="center" width="100%">
-        <BmeBox margin="no|no|sm">
+      <BmeBox direction="column" alignX="center" alignY="center" width="100%" maxWidth="420px" margin="no|auto">
+        <BmeBox width="100%" margin="no|no|sm">
           <BmeInput
             name="username"
             value={username}
             label={intl.formatMessage({ id: "common.form.username.label" })}
             onValue={setUsername}
             type="email"
+            width="100%"
           />
         </BmeBox>
-        <BmeBox margin="no|no|sm">
+        <BmeBox width="100%" margin="no|no|sm">
           <BmeInput
             name="password"
             value={password}
             label={intl.formatMessage({ id: "common.form.password.label" })}
             onValue={setPassword}
             type="password"
+            width="100%"
           />
         </BmeBox>
-        <BmeBox margin="no|no|sm">
+        <BmeBox width="100%" margin="no|no|sm">
           <BmeCheckbox
             name="sign-in"
             value={keepSignIn}

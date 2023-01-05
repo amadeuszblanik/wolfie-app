@@ -47,9 +47,21 @@
   "page.auth_sign_in.title": "Sign In",
   "page.auth_sign_up.title": "Sign Up",
   "common.form.username.label": "Username",
+  "common.form.email.label": "Email",
+  "common.form.first_name.label": "First Name",
+  "common.form.last_name.label": "Last Name",
   "common.form.password.label": "Password",
+  "common.form.password_confirm.label": "Confirm Password",
+  "common.form.weight_unit.label": "Weight Unit",
+  "common.form.weight_unit.value.kg": "Kilograms",
+  "common.form.weight_unit.value.g": "Grams",
+  "common.form.weight_unit.value.lb": "Pounds",
+  "common.form.weight_unit.value.oz": "Ounces",
   "common.form.keep_sign_in.label": "Keep me signed in",
+  "common.form.gdpr_consent.label": "I agree to the processing of my personal data",
   "common.form.submit.label": "Submit",
   "common.form.reset_password.label": "Forgot password? Click here.",
-  "common.form.create_account.label": "Don't have an account? Click here."
+  "common.form.create_account.label": "Don't have an account? Click here.",
+  "common.form.sign_in.label": "Already have an account? Click here.",
+  "common.form.read_gdpr.label": "Read privacy policy"
 }

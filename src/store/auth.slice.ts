@@ -11,11 +11,7 @@ const signIn = createAsyncThunk<
   AuthSignInResponse,
   AuthSignInPayload,
   { extra: { apiService: ApiService }; rejectValue: ApiErrorMessage }
->(
-  "auth/signIn",
-  async (payload, thunkAPI) =>
-    await thunkAPI.extra.apiService.authSignIn(payload.username, payload.password, payload.keepSignIn, payload.device),
-);
+>("auth/signIn", async (payload, thunkAPI) => await thunkAPI.extra.apiService.authSignIn(payload));
 
 export interface AuthStore {
   status: ApiStatus;

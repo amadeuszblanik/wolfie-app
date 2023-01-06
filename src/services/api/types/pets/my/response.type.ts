@@ -1,5 +1,5 @@
 import { PetKind } from "../../../../../types/pet-kind.type";
-import { PetsPetIdWeightGetResponse } from "../:petId/weight/get/response.type";
+import { PetsPetIdWeightSingleGetResponse } from "../:petId/weight/get/response.type";
 import { BreedSingleResponse } from "../../breed/response.type";
 
 export interface PetsMySingleResponse {
@@ -8,7 +8,7 @@ export interface PetsMySingleResponse {
   kind: PetKind;
   microchip: string;
   image: string;
-  currentWeight?: PetsPetIdWeightGetResponse;
+  currentWeight?: PetsPetIdWeightSingleGetResponse;
   birthDate: string;
   healthLog: number;
   vaccinations: number;

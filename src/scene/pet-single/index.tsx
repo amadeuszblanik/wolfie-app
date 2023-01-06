@@ -33,21 +33,23 @@ const Scene = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  const id = String(router.query.id);
+  const petId = String(router.query.petId);
 
   const storePetsMyStatus = useAppSelector(selectPetsMyStatus);
   const storePetsMyError = useAppSelector(selectPetsMyError);
-  const storePetsSingle = useAppSelector(selectPets(id));
+  const storePetsSingle = useAppSelector(selectPets(petId));
 
+  // @TODO: Check this code when I will be rested
   const handleUpdatePets = useCallback(() => {
     if (!storePetsSingle) {
       dispatch(petsActions.petsMy());
     }
   }, [dispatch, storePetsSingle]);
 
+  // @TODO: Check this code when I will be rested
   useEffect(() => {
     handleUpdatePets();
-  }, [handleUpdatePets]);
+  }, [dispatch]);
 
   if (storePetsMyStatus === "error") {
     return (
@@ -61,7 +63,7 @@ const Scene = () => {
   return (
     <StyledSceneWrapper>
       <StyledScenePromo>{storePetsSingle && <PetCard {...storePetsSingle} />}</StyledScenePromo>
-      <Link href={`/app/pet/${id}/weight`}>
+      <Link href={`/app/pet/${petId}/weight`}>
         <BigFancyBox
           icon="barbell"
           title="Weight"
@@ -69,7 +71,7 @@ const Scene = () => {
           variant="blue"
         />
       </Link>
-      <Link href={`/app/pet/${id}/health-log`}>
+      <Link href={`/app/pet/${petId}/health-log`}>
         <BigFancyBox icon="heart" title="Health log" value={String(storePetsSingle?.healthLog ?? "—")} variant="red" />
       </Link>
       {storePetsMyStatus === "pending" && <Loader />}

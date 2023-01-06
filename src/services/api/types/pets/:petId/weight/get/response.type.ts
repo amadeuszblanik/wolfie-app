@@ -1,4 +1,4 @@
-export interface PetsPetIdWeightGetResponse {
+export interface PetsPetIdWeightSingleGetResponse {
   id: string;
   raw: number;
   formatted: string;
@@ -7,3 +7,5 @@ export interface PetsPetIdWeightGetResponse {
   createdAt: string;
   updatedAt: string;
 }
+
+export type PetsPetIdWeightGetResponse = PetsPetIdWeightSingleGetResponse[];

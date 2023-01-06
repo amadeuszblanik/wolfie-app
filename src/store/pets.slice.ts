@@ -14,13 +14,13 @@ const petsMy = createAsyncThunk<
 export interface PetsStore {
   myStatus: ApiStatus;
   myError: string | null;
-  my: PetsMyResponse | null;
+  data: PetsMyResponse | null;
 }
 
 const initialState: PetsStore = {
   myStatus: "idle",
   myError: null,
-  my: null,
+  data: null,
 };
 
 export const petsSlice = createSlice({
@@ -40,25 +40,25 @@ export const petsSlice = createSlice({
     builder.addCase(petsMy.pending, (state) => {
       state.myStatus = "pending";
       state.myError = null;
-      state.my = null;
+      state.data = null;
     });
     builder.addCase(petsMy.fulfilled, (state, action) => {
       state.myStatus = "success";
       state.myError = null;
-      state.my = action.payload;
+      state.data = action.payload;
     });
     builder.addCase(petsMy.rejected, (state, action) => {
       state.myStatus = "error";
       state.myError = action.error.message || null;
-      state.my = null;
+      state.data = null;
     });
   },
 });
 
 export const selectPetsMyStatus = (state: { pets: PetsStore }) => state.pets.myStatus;
 export const selectPetsMyError = (state: { pets: PetsStore }) => state.pets.myError;
-export const selectPetsMy = (state: { pets: PetsStore }) => state.pets.my;
-export const selectPets = (id: string) => (state: { pets: PetsStore }) => state.pets.my?.find((pet) => pet.id === id);
+export const selectPetsMy = (state: { pets: PetsStore }) => state.pets.data;
+export const selectPets = (id: string) => (state: { pets: PetsStore }) => state.pets.data?.find((pet) => pet.id === id);
 
 export const petsActions = {
   ...petsSlice.actions,

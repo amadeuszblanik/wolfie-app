@@ -416,6 +416,7 @@
   "page.app.title": "Pulpit",
   "page.pet_add.title": "Dodaj zwierzaka",
   "page.pet_id.title": "Zwierzak",
+  "page.pet_id_weight.title": "Waga",
   "page.auth_sign_in.title": "Wpisz się",
   "page.auth_sign_up.title": "Zapisz się",
   "common.form.username.label": "Nazwa użytkownika",

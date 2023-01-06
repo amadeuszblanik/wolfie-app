@@ -22,4 +22,6 @@ export enum ApiPetsEndpoint {
   Pet = "/pets/:petId",
   PetAdd = "/pets/add",
   PetsAvatar = "/pets/:petId/avatar",
+  PetsWeight = "/pets/:petId/weight",
+  PetsWeightSingle = "/pets/:petId/weight/:weightId",
 }

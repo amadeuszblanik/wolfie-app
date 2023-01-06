@@ -50,9 +50,9 @@ const Component = () => {
                 ))}
             </BmeText>
           </BmeBox>
-          {/* <BmeText variant="Caption1"> */}
-          {/*   <FormattedMessage id="component.footer.cookie_info" /> */}
-          {/* </BmeText> */}
+          <BmeText variant="Caption1">
+            <FormattedMessage id="component.footer.cookie_info" />
+          </BmeText>
         </BmeBox>
       </Container>
     </StyledFooterWrapper>

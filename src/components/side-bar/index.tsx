@@ -11,8 +11,6 @@ import { authActions } from "../../store/auth.slice";
 import { profileActions, selectProfileData } from "../../store/profile.slice";
 import { configActions, selectConfigData } from "../../store/config.slice";
 
-// @TODO: IN DEVELOPMENT
-
 interface TopBarProps {
   title: string;
   children: React.ReactNode;
@@ -41,7 +39,8 @@ const StyledSideBarWrapper = styled.div<StyledSideBarWrapperProps>`
   border-bottom: 1px solid ${({ theme }) => theme.colors.gray6};
   ${bmeMixins.animations(["height"])};
 
-  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}px) {
+  // If larger than container and safe area it's not needed to close the sidebar
+  @media (min-width: 1300px) {
     height: var(--bme-vh, 100vh);
   }
 `;

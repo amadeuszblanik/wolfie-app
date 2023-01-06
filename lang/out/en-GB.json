@@ -415,6 +415,7 @@
   "component.error_message.try_again": "Try again",
   "page.app.title": "Dashboard",
   "page.pet_add.title": "Add Pet",
+  "page.pet_id.title": "Pet",
   "page.auth_sign_in.title": "Sign In",
   "page.auth_sign_up.title": "Sign Up",
   "common.form.username.label": "Username",

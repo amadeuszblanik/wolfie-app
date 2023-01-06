@@ -58,6 +58,7 @@ export const petsSlice = createSlice({
 export const selectPetsMyStatus = (state: { pets: PetsStore }) => state.pets.myStatus;
 export const selectPetsMyError = (state: { pets: PetsStore }) => state.pets.myError;
 export const selectPetsMy = (state: { pets: PetsStore }) => state.pets.my;
+export const selectPets = (id: string) => (state: { pets: PetsStore }) => state.pets.my?.find((pet) => pet.id === id);
 
 export const petsActions = {
   ...petsSlice.actions,

@@ -14,11 +14,17 @@ const Component: React.FC<PetCardProps> = ({ name, image, birthDate, microchip, 
       <BmeText variant="Title1">{name}</BmeText>
     </BmeBox>
 
-    <BmeText>Age: {pipeAge(birthDate)}</BmeText>
-    <BmeText>Birthdate: {pipeDate(birthDate)}</BmeText>
-    <BmeText>Microchip: {microchip}</BmeText>
     <BmeText>
-      Breed: <FormattedMessage id={`breed.${breed?.name ?? "mixed"}`} />
+      <FormattedMessage id="component.pet_card.age" />: {pipeAge(birthDate)}
+    </BmeText>
+    <BmeText>
+      <FormattedMessage id="component.pet_card.birth_date" />: {pipeDate(birthDate)}
+    </BmeText>
+    <BmeText>
+      <FormattedMessage id="component.pet_card.microchip" />: {microchip}
+    </BmeText>
+    <BmeText>
+      <FormattedMessage id="component.pet_card.breed" />: <FormattedMessage id={`breed.${breed?.name ?? "mixed"}`} />
     </BmeText>
   </BmeBox>
 );

@@ -1,3 +1,4 @@
+export { default as BigFancyBox } from "./big-fancy-box";
 export { default as ErrorMessage } from "./error-message";
 export { default as Footer } from "./footer";
 export { default as Form } from "./form";

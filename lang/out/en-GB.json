@@ -411,6 +411,8 @@
   "component.pet_card.birth_date": "Birth date",
   "component.pet_card.microchip": "Weight",
   "component.pet_card.breed": "Breed",
+  "component.error_message.title": "Something went wrong",
+  "component.error_message.try_again": "Try again",
   "page.app.title": "Dashboard",
   "page.pet_add.title": "Add Pet",
   "page.auth_sign_in.title": "Sign In",
@@ -435,5 +437,6 @@
   "common.form.read_gdpr.label": "Read privacy policy",
   "common.user_role.banned": "Banned",
   "common.user_role.user": "User",
-  "common.user_role.superuser": "Superuser"
+  "common.user_role.superuser": "Superuser",
+  "error.generic_fetch": "Something went wrong. Please try again later."
 }

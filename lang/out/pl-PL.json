@@ -411,6 +411,8 @@
   "component.pet_card.birth_date": "Data urodzenia",
   "component.pet_card.microchip": "Mikrochipu",
   "component.pet_card.breed": "Rasa",
+  "component.error_message.title": "Ups, coś poszło nie tak...",
+  "component.error_message.try_again": "Spróbuj ponownie",
   "page.app.title": "Pulpit",
   "page.pet_add.title": "Dodaj zwierzaka",
   "page.auth_sign_in.title": "Wpisz się",
@@ -435,5 +437,6 @@
   "common.form.read_gdpr.label": "Przeczytaj politykę prywatności.",
   "common.user_role.banned": "Zablokowany",
   "common.user_role.user": "Użytkownik",
-  "common.user_role.superuser": "Superużytkownik"
+  "common.user_role.superuser": "Superużytkownik",
+  "error.generic_fetch": "Wystąpił błąd podczas pobierania danych. Spróbuj ponownie później."
 }

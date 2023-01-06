@@ -11,6 +11,7 @@ interface LayoutAppProps {
 }
 
 const StyledMain = styled.main`
+  min-height: calc(var(--bme-vh) - 80px);
   margin-top: 16px;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}px) {

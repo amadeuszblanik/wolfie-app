@@ -16,3 +16,10 @@ export enum ApiAuthEndpoint {
 export enum ApiConfigEndpoint {
   Config = "/config",
 }
+
+export enum ApiPetsEndpoint {
+  PetsMy = "/pets/my",
+  Pet = "/pets/:petId",
+  PetAdd = "/pets/add",
+  PetsAvatar = "/pets/:petId/avatar",
+}

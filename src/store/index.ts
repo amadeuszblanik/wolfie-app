@@ -4,6 +4,7 @@ import { authSlice, AuthStore } from "./auth.slice";
 import { signUpSlice, SignUpStore } from "./sign-up.slice";
 import { profileSlice, ProfileStore } from "./profile.slice";
 import { configSlice } from "./config.slice";
+import { petsSlice } from "./pets.slice";
 import { ApiService } from "../services";
 
 export interface State {
@@ -17,6 +18,7 @@ const makeStore = () =>
     reducer: {
       [authSlice.name]: authSlice.reducer,
       [configSlice.name]: configSlice.reducer,
+      [petsSlice.name]: petsSlice.reducer,
       [profileSlice.name]: profileSlice.reducer,
       [signUpSlice.name]: signUpSlice.reducer,
     },

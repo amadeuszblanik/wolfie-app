@@ -1,11 +1,12 @@
 import ApiBase from "./base";
-import { ApiAuthEndpoint, ApiConfigEndpoint } from "./endpoint.type";
+import { ApiAuthEndpoint, ApiConfigEndpoint, ApiPetsEndpoint } from "./endpoint.type";
 import { AuthSignInResponse } from "./types/auth/sign-in/response.type";
 import { AuthSignInPayload } from "./types/auth/sign-in/payload.type";
 import { AuthSignUpPayload } from "./types/auth/sign-up/payload.type";
 import { AuthSignUpResponse } from "./types/auth/sign-up/response.type";
 import { AuthProfileResponse } from "./types/auth/profile/get/response.type";
 import { ConfigResponse } from "./types/config/response.type";
+import { PetsMyResponse } from "./types/pets/my/response.type";
 
 export default class ApiService extends ApiBase {
   // Auth
@@ -18,6 +19,9 @@ export default class ApiService extends ApiBase {
 
   authSignUp = async (payload: AuthSignUpPayload) =>
     await this.post<AuthSignUpResponse>(ApiAuthEndpoint.SignUp, payload);
+
+  // Pets
+  petsMy = async () => await this.get<PetsMyResponse>(ApiPetsEndpoint.PetsMy);
 
   //   Config
   config = async () => await this.get<ConfigResponse>(ApiConfigEndpoint.Config);

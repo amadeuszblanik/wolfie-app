@@ -63,5 +63,8 @@
   "common.form.reset_password.label": "Zapomniałeś hasła? Kliknij tutaj.",
   "common.form.create_account.label": "Nie masz konta? Kliknij tutaj.",
   "common.form.sign_in.label": "Masz już konto? Kliknij tutaj.",
-  "common.form.read_gdpr.label": "Przeczytaj politykę prywatności."
+  "common.form.read_gdpr.label": "Przeczytaj politykę prywatności.",
+  "common.user_role.banned": "Zablokowany",
+  "common.user_role.user": "Użytkownik",
+  "common.user_role.superuser": "Superużytkownik"
 }

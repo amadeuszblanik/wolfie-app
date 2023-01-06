@@ -12,3 +12,7 @@ export enum ApiAuthEndpoint {
   ResetPassword = "/auth/reset-password",
   ConfirmEmail = "/auth/confirm-email",
 }
+
+export enum ApiConfigEndpoint {
+  Config = "/config",
+}

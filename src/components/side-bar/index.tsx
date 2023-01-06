@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { BmeAvatar, BmeBox, BmeButton, BmeProgressBar, BmeText } from "bme-ui";
 import { bmeMixins } from "bme-ui";
@@ -6,8 +6,10 @@ import { FormattedMessage } from "react-intl";
 import { useRouter } from "next/router";
 import Item, { SideBarItemType } from "./item";
 import { Brand, Link } from "../../atoms";
-import { useAppDispatch } from "../../hooks";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 import { authActions } from "../../store/auth.slice";
+import { profileActions, selectProfileData } from "../../store/profile.slice";
+import { configActions, selectConfigData } from "../../store/config.slice";
 
 // @TODO: IN DEVELOPMENT
 
@@ -128,8 +130,16 @@ const StyledSideBarProfile = styled.div<StyledSideBarProfileProps>`
 const Component: ComponentType = ({ title, children }) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const storeProfileData = useAppSelector(selectProfileData);
+  const storeConfigData = useAppSelector(selectConfigData);
+
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+
+  useEffect(() => {
+    dispatch(profileActions.get());
+    dispatch(configActions.get());
+  }, [dispatch]);
 
   const switchDrawerOpen = () => {
     setIsDrawerOpen(!isDrawerOpen);
@@ -154,9 +164,11 @@ const Component: ComponentType = ({ title, children }) => {
         <StyledSideBarProfile isOpen={isProfileOpen}>
           <BmeBox alignY="top">
             <BmeBox margin="no|xs|no|no">
-              <BmeText variant="Title2">Joe Doe</BmeText>
+              <BmeText variant="Title2">{storeProfileData?.fullName}</BmeText>
             </BmeBox>
-            <BmeText>User+</BmeText>
+            <BmeText>
+              <FormattedMessage id={`common.user_role.${storeProfileData?.userRole.toLowerCase() ?? "user"}`} />
+            </BmeText>
           </BmeBox>
           <BmeBox direction="column" width="100%">
             <BmeBox margin="no|no|xs|no">
@@ -164,13 +176,19 @@ const Component: ComponentType = ({ title, children }) => {
                 <FormattedMessage
                   id="layout.app.profile.usage"
                   values={{
-                    petsCount: 3,
-                    petsLimit: 3,
+                    petsCount: storeConfigData?.userPets,
+                    petsLimit: storeConfigData?.userPetsAllowed,
                   }}
                 />
               </BmeText>
             </BmeBox>
-            <BmeProgressBar value={100} />
+            <BmeProgressBar
+              value={
+                storeConfigData?.userPets && storeConfigData?.userPetsAllowed
+                  ? storeConfigData.userPets / storeConfigData.userPetsAllowed
+                  : undefined
+              }
+            />
           </BmeBox>
           <BmeBox direction="column" alignY="bottom" margin="auto|no|no">
             <BmeBox padding="no|no|xs" width="100%">

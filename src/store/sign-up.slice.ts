@@ -10,7 +10,7 @@ const signUp = createAsyncThunk<
   AuthSignUpResponse,
   AuthSignUpPayload,
   { extra: { apiService: ApiService }; rejectValue: ApiErrorMessage }
->("auth/signUp", async (payload, thunkAPI) => await thunkAPI.extra.apiService.authSignUp(payload));
+>("signUp/signUp", async (payload, thunkAPI) => await thunkAPI.extra.apiService.authSignUp(payload));
 
 export interface SignUpStore {
   status: ApiStatus;

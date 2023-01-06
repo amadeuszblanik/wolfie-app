@@ -6,7 +6,7 @@ import { pipeAge, pipeDate } from "../../pipes";
 
 type PetCardProps = PetsMySingleResponse;
 const Component: React.FC<PetCardProps> = ({ name, image, birthDate, microchip, breed }) => (
-  <BmeBox direction="column" width="100%" padding="sm|md" rounded background="backgroundSecondary">
+  <BmeBox direction="column" width="100%" padding="md" rounded background="backgroundSecondary">
     <BmeBox alignY="bottom" width="100%" margin="no|no|sm">
       <BmeBox padding="no|sm|no|no">
         <BmeAvatar src={image} variant="primary" />

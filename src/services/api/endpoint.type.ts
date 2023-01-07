@@ -3,6 +3,7 @@ export enum ApiAuthEndpoint {
   SignIn = "/auth/sign-in",
   Apple = "/auth/apple",
   RefreshToken = "/auth/refresh-token",
+  RefreshTokenById = "/auth/refresh-token/:refreshTokenId",
   FcmToken = "/auth/fcm-token",
   TestNotification = "/auth/test-notification",
   Profile = "/auth/profile",

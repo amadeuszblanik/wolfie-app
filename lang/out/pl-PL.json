@@ -472,5 +472,6 @@
   "page.settings.link.sign_off": "Wypisz się",
   "page.profile.title": "Profil",
   "page.profile_update.title": "Zaktualizuj profil",
-  "page.profile_change_password.title": "Zmień hasło"
+  "page.profile_change_password.title": "Zmień hasło",
+  "page.security_authorized_devices.title": "Autoryzowane urządzenia"
 }

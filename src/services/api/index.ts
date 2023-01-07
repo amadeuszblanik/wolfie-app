@@ -13,6 +13,10 @@ import { AuthProfilePutResponse } from "./types/auth/profile/put/response.type";
 import { AuthProfilePutPayload } from "./types/auth/profile/put/payload.type";
 import { AuthChangePasswordPayload } from "./types/auth/change-password/payload.type";
 import { AuthChangePasswordResponse } from "./types/auth/change-password/response.type";
+import { AuthRefreshTokenGetResponse } from "./types/auth/refresh-token/get/response.type";
+import { AuthRefreshTokenPostPayload } from "./types/auth/refresh-token/post/payload.type";
+import { AuthRefreshTokenPostResponse } from "./types/auth/refresh-token/post/response.type";
+import { AuthRefreshTokenDeleteResponse } from "./types/auth/refresh-token/delete/response.type";
 import { apiUrl } from "../../utils";
 
 export default class ApiService extends ApiBase {
@@ -20,6 +24,14 @@ export default class ApiService extends ApiBase {
     get: async () => await this.get<AuthProfileGetResponse>(ApiAuthEndpoint.Profile),
     put: async (payload: AuthProfilePutPayload) =>
       await this.put<AuthProfilePutResponse>(ApiAuthEndpoint.Profile, payload),
+  };
+
+  authRefreshToken = {
+    get: async () => await this.get<AuthRefreshTokenGetResponse>(ApiAuthEndpoint.RefreshToken),
+    post: async (payload: AuthRefreshTokenPostPayload) =>
+      await this.put<AuthRefreshTokenPostResponse>(ApiAuthEndpoint.RefreshToken, payload),
+    delete: async (refreshTokenId: string) =>
+      await this.delete<AuthRefreshTokenDeleteResponse>(apiUrl(ApiAuthEndpoint.RefreshTokenById, { refreshTokenId })),
   };
 
   petsWeight = {

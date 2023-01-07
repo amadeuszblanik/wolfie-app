@@ -1,23 +1,14 @@
 import { createWrapper } from "next-redux-wrapper";
 import { configureStore } from "@reduxjs/toolkit";
-import { authSlice, AuthStore } from "./auth.slice";
-import { signUpSlice, SignUpStore } from "./sign-up.slice";
-import { profileSlice, ProfileStore } from "./profile.slice";
-import { configSlice, ConfigStore } from "./config.slice";
-import { petsSlice, PetsStore } from "./pets.slice";
-import { petsWeightsSlice, PetsWeightStore } from "./petsWeight.slice";
-import { petsHealthLogSlice, PetsHealthLogtore } from "./petsHealthLog.slice";
+import { authSlice } from "./auth.slice";
+import { signUpSlice } from "./sign-up.slice";
+import { profileSlice } from "./profile.slice";
+import { configSlice } from "./config.slice";
+import { petsSlice } from "./pets.slice";
+import { petsWeightsSlice } from "./petsWeight.slice";
+import { petsHealthLogSlice } from "./petsHealthLog.slice";
+import { refreshTokenSlice } from "./refresh-token.slice";
 import { ApiService } from "../services";
-
-export interface State {
-  auth: AuthStore;
-  config: ConfigStore;
-  pets: PetsStore;
-  petsHealthLog: PetsHealthLogtore;
-  petsWeight: PetsWeightStore;
-  profile: ProfileStore;
-  signUp: SignUpStore;
-}
 
 const makeStore = () =>
   configureStore({
@@ -28,6 +19,7 @@ const makeStore = () =>
       [petsHealthLogSlice.name]: petsHealthLogSlice.reducer,
       [petsWeightsSlice.name]: petsWeightsSlice.reducer,
       [profileSlice.name]: profileSlice.reducer,
+      [refreshTokenSlice.name]: refreshTokenSlice.reducer,
       [signUpSlice.name]: signUpSlice.reducer,
     },
     middleware: (getDefaultMiddleware) =>

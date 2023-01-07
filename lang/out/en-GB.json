@@ -473,5 +473,6 @@
   "page.settings.link.sign_off": "Sign off",
   "page.profile.title": "Profile",
   "page.profile_update.title": "Update profile",
-  "page.profile_change_password.title": "Change password"
+  "page.profile_change_password.title": "Change password",
+  "page.security_authorized_devices.title": "Authorized devices"
 }

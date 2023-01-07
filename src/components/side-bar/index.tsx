@@ -3,11 +3,9 @@ import styled from "styled-components";
 import { BmeAvatar, BmeBox, BmeButton, BmeProgressBar, BmeText } from "bme-ui";
 import { bmeMixins } from "bme-ui";
 import { FormattedMessage } from "react-intl";
-import { useRouter } from "next/router";
 import Item, { SideBarItemType } from "./item";
 import { Brand, Link } from "../../atoms";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { authActions } from "../../store/auth.slice";
 import { profileActions, selectProfileData } from "../../store/profile.slice";
 import { configActions, selectConfigData } from "../../store/config.slice";
 
@@ -127,7 +125,6 @@ const StyledSideBarProfile = styled.div<StyledSideBarProfileProps>`
 `;
 
 const Component: ComponentType = ({ title, children }) => {
-  const router = useRouter();
   const dispatch = useAppDispatch();
   const storeProfileData = useAppSelector(selectProfileData);
   const storeConfigData = useAppSelector(selectConfigData);
@@ -143,11 +140,6 @@ const Component: ComponentType = ({ title, children }) => {
   const switchDrawerOpen = () => {
     setIsDrawerOpen(!isDrawerOpen);
     setIsProfileOpen(false);
-  };
-
-  const handleSignOff = () => {
-    dispatch(authActions.signOff());
-    void router.push("/auth/sign-in");
   };
 
   return (
@@ -204,9 +196,11 @@ const Component: ComponentType = ({ title, children }) => {
                 </BmeButton>
               </Link>
             </BmeBox>
-            <BmeButton size="small" width="100%" onClick={handleSignOff}>
-              <FormattedMessage id="layout.app.profile.sign_off" />
-            </BmeButton>
+            <Link href="/auth/sign-off">
+              <BmeButton size="small" width="100%">
+                <FormattedMessage id="layout.app.profile.sign_off" />
+              </BmeButton>
+            </Link>
           </BmeBox>
         </StyledSideBarProfile>
       </StyledSideBarWrapper>

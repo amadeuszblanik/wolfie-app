@@ -455,5 +455,13 @@
   "scene.health_log_details.diagnosis": "Diagnosis",
   "scene.health_log_details.next_visit": "Next visit",
   "scene.health_log_details.description": "Description",
-  "scene.health_log_details.added_by": "Added by"
+  "scene.health_log_details.added_by": "Added by",
+  "page.settings.title": "Settings",
+  "page.settings.link.update_profile": "Update profile",
+  "page.settings.link.change_password": "Change password",
+  "page.settings.link.authorized_devices": "Authorized devices",
+  "page.settings.link.privacy_policy": "Privacy policy",
+  "page.settings.link.test_notification": "Test notification (iOS app only)",
+  "page.settings.link.delete_account": "Delete account",
+  "page.settings.link.sign_off": "Sign off"
 }

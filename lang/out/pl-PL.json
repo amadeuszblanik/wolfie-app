@@ -454,5 +454,13 @@
   "scene.health_log_details.diagnosis": "Diagnoza",
   "scene.health_log_details.next_visit": "Następna wizyta",
   "scene.health_log_details.description": "Szczegóły",
-  "scene.health_log_details.added_by": "Dodane przez"
+  "scene.health_log_details.added_by": "Dodane przez",
+  "page.settings.title": "Ustawienia",
+  "page.settings.link.update_profile": "Aktualizuj profil",
+  "page.settings.link.change_password": "Zmień hasło",
+  "page.settings.link.authorized_devices": "Autoryzowane urządzenia",
+  "page.settings.link.privacy_policy": "Polityka prywatności",
+  "page.settings.link.test_notification": "Test notyfikacji (Tylko aplikacja)",
+  "page.settings.link.delete_account": "Usuń konto",
+  "page.settings.link.sign_off": "Wypisz się"
 }

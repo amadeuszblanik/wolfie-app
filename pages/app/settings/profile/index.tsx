@@ -43,6 +43,11 @@ export default function Page(_: InferGetServerSidePropsType<typeof getServerSide
             <FormattedMessage id="page.settings.link.change_password" />
           </BmeText>
         </BmeList.Item>
+        <BmeList.Item onClick={() => void router.push("/app/settings/profile/delete")}>
+          <BmeText>
+            <FormattedMessage id="page.settings.link.delete_account" />
+          </BmeText>
+        </BmeList.Item>
       </BmeList>
     </LayoutApp>
   );

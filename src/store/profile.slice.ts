@@ -6,7 +6,7 @@ import { ApiService } from "../services";
 import { AuthProfileGetResponse } from "../services/api/types/auth/profile/get/response.type";
 import { AuthProfilePutResponse } from "../services/api/types/auth/profile/put/response.type";
 import { AuthProfilePutPayload } from "../services/api/types/auth/profile/put/payload.type";
-import { AuthChangePasswordResponse } from "../services/api/types/auth/reset-password/get/response.type";
+import { AuthChangePasswordResponse } from "../services/api/types/auth/change-password/response.type";
 import { AuthChangePasswordPayload } from "../services/api/types/auth/change-password/payload.type";
 import { AuthDeleteAccountResponse } from "../services/api/types/auth/delete-account/response.type";
 import { AuthDeleteAccountPayload } from "../services/api/types/auth/delete-account/payload.type";

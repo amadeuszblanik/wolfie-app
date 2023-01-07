@@ -440,5 +440,12 @@
   "common.user_role.banned": "Banned",
   "common.user_role.user": "User",
   "common.user_role.superuser": "Superuser",
+  "common.health_log.kind.vaccination_rabies": "Rabies vaccination",
+  "common.health_log.kind.vaccination": "Vaccination",
+  "common.health_log.kind.deworming": "Deworming",
+  "common.health_log.kind.external_parasite": "External parasite",
+  "common.health_log.kind.regulations_of_breeding": "Regulations of breeding",
+  "common.health_log.kind.use_of_gamaglobulin": "Use of gamaglobulin",
+  "common.health_log.kind.treatment": "Treatment",
   "error.generic_fetch": "Something went wrong. Please try again later."
 }

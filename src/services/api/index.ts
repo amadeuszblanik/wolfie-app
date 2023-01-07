@@ -8,6 +8,7 @@ import { AuthProfileResponse } from "./types/auth/profile/get/response.type";
 import { ConfigResponse } from "./types/config/response.type";
 import { PetsMyResponse } from "./types/pets/my/response.type";
 import { PetsPetIdWeightGetResponse } from "./types/pets/:petId/weight/get/response.type";
+import { PetsPetIdHealthLogGetResponse } from "./types/pets/:petId/health-log/get/response.type";
 import { apiUrl } from "../../utils";
 
 export default class ApiService extends ApiBase {
@@ -18,6 +19,11 @@ export default class ApiService extends ApiBase {
   petsWeight = {
     get: async (petId: string) =>
       await this.get<PetsPetIdWeightGetResponse>(apiUrl(ApiPetsEndpoint.PetsWeight, { petId })),
+  };
+
+  petsHealthLog = {
+    get: async (petId: string) =>
+      await this.get<PetsPetIdHealthLogGetResponse>(apiUrl(ApiPetsEndpoint.PetsHealthLog, { petId })),
   };
 
   authSignIn = async (payload: AuthSignInPayload) =>

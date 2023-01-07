@@ -6,12 +6,14 @@ import { profileSlice, ProfileStore } from "./profile.slice";
 import { configSlice, ConfigStore } from "./config.slice";
 import { petsSlice, PetsStore } from "./pets.slice";
 import { petsWeightsSlice, PetsWeightStore } from "./petsWeight.slice";
+import { petsHealthLogSlice, PetsHealthLogtore } from "./petsHealthLog.slice";
 import { ApiService } from "../services";
 
 export interface State {
   auth: AuthStore;
   config: ConfigStore;
   pets: PetsStore;
+  petsHealthLog: PetsHealthLogtore;
   petsWeight: PetsWeightStore;
   profile: ProfileStore;
   signUp: SignUpStore;
@@ -23,6 +25,7 @@ const makeStore = () =>
       [authSlice.name]: authSlice.reducer,
       [configSlice.name]: configSlice.reducer,
       [petsSlice.name]: petsSlice.reducer,
+      [petsHealthLogSlice.name]: petsHealthLogSlice.reducer,
       [petsWeightsSlice.name]: petsWeightsSlice.reducer,
       [profileSlice.name]: profileSlice.reducer,
       [signUpSlice.name]: signUpSlice.reducer,

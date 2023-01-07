@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector, useDeviceName } from "../../hooks";
 import { authActions, selectAuthError, selectAuthStatus } from "../../store/auth.slice";
 import { Form } from "../../components";
+import { Link } from "../../atoms";
 
 const Component = () => {
   const intl = useIntl();
@@ -86,12 +87,16 @@ const Component = () => {
             <FormattedMessage id="common.form.submit.label" />
           </BmeButton>
         </BmeBox>
-        <BmeButton size="small" variant="background">
-          <FormattedMessage id="common.form.create_account.label" />
-        </BmeButton>
-        <BmeButton size="small" variant="background">
-          <FormattedMessage id="common.form.reset_password.label" />
-        </BmeButton>
+        <Link href="/auth/sign-up">
+          <BmeButton size="small" variant="background">
+            <FormattedMessage id="common.form.create_account.label" />
+          </BmeButton>
+        </Link>
+        <Link href="/auth/forgot-password">
+          <BmeButton size="small" variant="background">
+            <FormattedMessage id="common.form.reset_password.label" />
+          </BmeButton>
+        </Link>
       </BmeBox>
     </Form>
   );

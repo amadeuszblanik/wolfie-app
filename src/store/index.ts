@@ -8,6 +8,7 @@ import { petsSlice } from "./pets.slice";
 import { petsWeightsSlice } from "./petsWeight.slice";
 import { petsHealthLogSlice } from "./petsHealthLog.slice";
 import { refreshTokenSlice } from "./refresh-token.slice";
+import { confirmEmailSlice } from "./confrim-email.slice";
 import { ApiService } from "../services";
 
 const makeStore = () =>
@@ -15,6 +16,7 @@ const makeStore = () =>
     reducer: {
       [authSlice.name]: authSlice.reducer,
       [configSlice.name]: configSlice.reducer,
+      [confirmEmailSlice.name]: confirmEmailSlice.reducer,
       [petsSlice.name]: petsSlice.reducer,
       [petsHealthLogSlice.name]: petsHealthLogSlice.reducer,
       [petsWeightsSlice.name]: petsWeightsSlice.reducer,

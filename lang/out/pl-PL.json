@@ -491,5 +491,9 @@
   "common.form.profile_deactivate.checkbox": "Rozumiem, że wszystkie moje dane będą przechowywane przez następne 30 dni i mogę podjąć decyzję później.",
   "common.form.profile_deactivate.button": "Dezaktywuj moje konto",
   "page.profile_delete.back_up.label": "Informacje o kopii zapasowej",
-  "page.profile_delete.back_up.item_1": "Twoje dane mogą być przechowywane w zaszyfrowanej kopii zapasowej. Przechowujemy nasze kopie zapasowe w bezpieczny sposób i dokładamy wszelkich starań, aby zapobiec konieczności ich użycia. Kopie zapasowe nie są przechowywane dłużej niż 7 dni od daty ich utworzenia."
+  "page.profile_delete.back_up.item_1": "Twoje dane mogą być przechowywane w zaszyfrowanej kopii zapasowej. Przechowujemy nasze kopie zapasowe w bezpieczny sposób i dokładamy wszelkich starań, aby zapobiec konieczności ich użycia. Kopie zapasowe nie są przechowywane dłużej niż 7 dni od daty ich utworzenia.",
+  "page.auth_email_verification.title": "Weryfikacja e-mail",
+  "page.auth_email_verification.missing_token_title": "Brakujący token",
+  "page.auth_email_verification.success": "Twój adres e-mail został zweryfikowany.",
+  "page.auth_email_verification.sign_in": "Wpisz się"
 }

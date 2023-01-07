@@ -21,6 +21,8 @@ import { AuthDeleteAccountPayload } from "./types/auth/delete-account/payload.ty
 import { AuthDeleteAccountResponse } from "./types/auth/delete-account/response.type";
 import { AuthDeactivateAccountPayload } from "./types/auth/deactivate-account/payload.type";
 import { AuthDeactivateAccountResponse } from "./types/auth/deactivate-account/response.type";
+import { AuthConfirmEmailResponse } from "./types/auth/confirm-email/response.type";
+import { AuthConfirmEmailPayload } from "./types/auth/confirm-email/payload.type";
 import { apiUrl } from "../../utils";
 
 export default class ApiService extends ApiBase {
@@ -53,6 +55,9 @@ export default class ApiService extends ApiBase {
 
   authSignUp = async (payload: AuthSignUpPayload) =>
     await this.post<AuthSignUpResponse>(ApiAuthEndpoint.SignUp, payload);
+
+  authConfirmEmail = async (payload: AuthConfirmEmailPayload) =>
+    await this.post<AuthConfirmEmailResponse>(ApiAuthEndpoint.ConfirmEmail, payload);
 
   authChangePassword = async (payload: AuthChangePasswordPayload) =>
     await this.put<AuthChangePasswordResponse>(ApiAuthEndpoint.ChangePassword, payload);

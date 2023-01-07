@@ -443,7 +443,7 @@
   "common.form.profile.success": "Profile updated successfully",
   "common.form.profile.error": "Failed to update profile",
   "common.form.profile_change_password.error": "Failed to change password",
-    "common.form.profile_change_password.success": "Password changed successfully",
+  "common.form.profile_change_password.success": "Password changed successfully",
   "common.user_role.banned": "Banned",
   "common.user_role.user": "User",
   "common.user_role.superuser": "Superuser",
@@ -492,5 +492,9 @@
   "common.form.profile_deactivate.checkbox": "I understand that all of my data will be stored for next 30 days and I can decide later.",
   "common.form.profile_deactivate.button": "Deactivate my account",
   "page.profile_delete.back_up.label": "Back-up information",
-  "page.profile_delete.back_up.item_1": "Your data might be stored in encrypted backup. We keep our backups safely and do our best to prevent need of use them. Back-ups are not stored longer than 7 days after their creation date."
+  "page.profile_delete.back_up.item_1": "Your data might be stored in encrypted backup. We keep our backups safely and do our best to prevent need of use them. Back-ups are not stored longer than 7 days after their creation date.",
+  "page.auth_email_verification.title": "Email verification",
+  "page.auth_email_verification.missing_token_title": "Missing token",
+  "page.auth_email_verification.success": "Email verified successfully",
+  "page.auth_email_verification.sign_in": "Sign in"
 }

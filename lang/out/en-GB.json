@@ -463,5 +463,6 @@
   "page.settings.link.privacy_policy": "Privacy policy",
   "page.settings.link.test_notification": "Test notification (iOS app only)",
   "page.settings.link.delete_account": "Delete account",
-  "page.settings.link.sign_off": "Sign off"
+  "page.settings.link.sign_off": "Sign off",
+  "page.profile.title": "Profile"
 }

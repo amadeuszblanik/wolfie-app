@@ -462,5 +462,6 @@
   "page.settings.link.privacy_policy": "Polityka prywatności",
   "page.settings.link.test_notification": "Test notyfikacji (Tylko aplikacja)",
   "page.settings.link.delete_account": "Usuń konto",
-  "page.settings.link.sign_off": "Wypisz się"
+  "page.settings.link.sign_off": "Wypisz się",
+  "page.profile.title": "Profil"
 }

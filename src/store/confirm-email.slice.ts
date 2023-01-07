@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
-import { configSlice } from "./config.slice";
 import { ApiStatus } from "../services/api/types/status.type";
 import { ApiErrorMessage } from "../services/api/types/error-message.type";
 import { ApiService } from "../services";
@@ -63,6 +62,6 @@ export const selectConfirmEmailPostError = ({ confirmEmail }: AppState) => confi
 export const selectConfirmEmailPostData = ({ confirmEmail }: AppState) => confirmEmail.data;
 
 export const confirmEmailActions = {
-  ...configSlice.actions,
+  ...confirmEmailSlice.actions,
   post,
 };

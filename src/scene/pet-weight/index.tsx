@@ -20,8 +20,6 @@ const ENTRIES_TO_DISPLAY_CHART = 3;
 // @TODO: Fix chart X labels - bme-ui
 // @TODO: Refactor line chart - bme-ui
 // @TODO: Refactor list - bme-ui
-// @TODO: Check this code when I will be rested
-// @TODO: Good night or good morning 😴
 
 const StyledSceneWrapper = styled.div`
   display: grid;
@@ -50,19 +48,27 @@ const Scene = () => {
   const storeProfileData = useAppSelector(selectProfileData);
 
   const isAnyPending = [storePetsMyStatus, storePetsWeightStatus].some((status) => status === "pending");
+  const isAnyError = [storePetsMyStatus, storePetsWeightStatus].some((status) => status === "error");
   const errorMessages = [storePetsMyError, storePetsWeightError].filter(Boolean) as string[];
 
-  // @TODO: Check this code when I will be rested
   const handleUpdatePets = useCallback(() => {
     if (!storePetsSingle) {
       dispatch(petsActions.petsMy());
     }
   }, [dispatch, storePetsSingle]);
 
-  // @TODO: Check this code when I will be rested
+  const handleUpdatePetsWeight = useCallback(() => {
+    dispatch(petsWeightActions.get({ petId }));
+  }, [dispatch, storePetsSingle, petId]);
+
+  const handleTryAgain = () => {
+    handleUpdatePets();
+    handleUpdatePetsWeight();
+  };
+
   useEffect(() => {
     if (petId) {
-      dispatch(petsWeightActions.get({ petId }));
+      handleUpdatePetsWeight();
     }
   }, [petId]);
 
@@ -70,11 +76,11 @@ const Scene = () => {
     handleUpdatePets();
   }, [dispatch]);
 
-  if (storePetsMyStatus === "error") {
+  if (isAnyError) {
     return (
       <ErrorMessage
         messages={errorMessages || [intl.formatMessage({ id: "error.generic_fetch" })]}
-        onTryAgain={handleUpdatePets}
+        onTryAgain={handleTryAgain}
       />
     );
   }

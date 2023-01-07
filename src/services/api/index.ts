@@ -4,16 +4,20 @@ import { AuthSignInResponse } from "./types/auth/sign-in/response.type";
 import { AuthSignInPayload } from "./types/auth/sign-in/payload.type";
 import { AuthSignUpPayload } from "./types/auth/sign-up/payload.type";
 import { AuthSignUpResponse } from "./types/auth/sign-up/response.type";
-import { AuthProfileResponse } from "./types/auth/profile/get/response.type";
+import { AuthProfileGetResponse } from "./types/auth/profile/get/response.type";
 import { ConfigResponse } from "./types/config/response.type";
 import { PetsMyResponse } from "./types/pets/my/response.type";
 import { PetsPetIdWeightGetResponse } from "./types/pets/:petId/weight/get/response.type";
 import { PetsPetIdHealthLogGetResponse } from "./types/pets/:petId/health-log/get/response.type";
+import { AuthProfilePutResponse } from "./types/auth/profile/put/response.type";
+import { AuthProfilePutPayload } from "./types/auth/profile/put/payload.type";
 import { apiUrl } from "../../utils";
 
 export default class ApiService extends ApiBase {
   authProfile = {
-    get: async () => await this.get<AuthProfileResponse>(ApiAuthEndpoint.Profile),
+    get: async () => await this.get<AuthProfileGetResponse>(ApiAuthEndpoint.Profile),
+    put: async (payload: AuthProfilePutPayload) =>
+      await this.put<AuthProfilePutResponse>(ApiAuthEndpoint.Profile, payload),
   };
 
   petsWeight = {

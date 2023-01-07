@@ -437,6 +437,8 @@
   "common.form.create_account.label": "Don't have an account? Click here.",
   "common.form.sign_in.label": "Already have an account? Click here.",
   "common.form.read_gdpr.label": "Read privacy policy",
+  "common.form.profile.success": "Profile updated successfully",
+  "common.form.profile.error": "Failed to update profile",
   "common.user_role.banned": "Banned",
   "common.user_role.user": "User",
   "common.user_role.superuser": "Superuser",
@@ -464,5 +466,6 @@
   "page.settings.link.test_notification": "Test notification (iOS app only)",
   "page.settings.link.delete_account": "Delete account",
   "page.settings.link.sign_off": "Sign off",
-  "page.profile.title": "Profile"
+  "page.profile.title": "Profile",
+  "page.profile_update.title": "Update profile"
 }

@@ -437,6 +437,8 @@
   "common.form.create_account.label": "Nie masz konta? Kliknij tutaj.",
   "common.form.sign_in.label": "Masz już konto? Kliknij tutaj.",
   "common.form.read_gdpr.label": "Przeczytaj politykę prywatności.",
+  "common.form.profile.success": "Profil został zaktualizowany.",
+  "common.form.profile.error": "Wystąpił błąd podczas aktualizacji profilu.",
   "common.user_role.banned": "Zablokowany",
   "common.user_role.user": "Użytkownik",
   "common.user_role.superuser": "Superużytkownik",
@@ -463,5 +465,6 @@
   "page.settings.link.test_notification": "Test notyfikacji (Tylko aplikacja)",
   "page.settings.link.delete_account": "Usuń konto",
   "page.settings.link.sign_off": "Wypisz się",
-  "page.profile.title": "Profil"
+  "page.profile.title": "Profil",
+  "page.profile_update.title": "Zaktualizuj profil"
 }

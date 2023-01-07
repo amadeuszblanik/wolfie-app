@@ -12,21 +12,9 @@ export default class ApiBase {
   protected readonly url: string = process.env.NEXT_PUBLIC_API_URL || "https://api.wolfie.app/v1";
 
   protected async get<T>(path: string, options?: ApiRequestGetOptions): Promise<T> {
-    const headers: HeadersInit = {
-      "Content-Type": "application/json",
-      ...(options?.headers || {}),
-    };
-
-    const accessToken =
-      options?.accessToken || IS_SERVER ? null : cookie.get("accessToken") || localStorage.getItem("accessToken");
-
-    if (accessToken) {
-      headers.Authorization = `Bearer ${accessToken}`;
-    }
-
     const response = await fetch(`${this.url}${path}`, {
       method: "GET",
-      headers,
+      headers: this.getHeaders(options?.headers),
     });
     const json = await response.json();
 
@@ -40,9 +28,7 @@ export default class ApiBase {
   protected async post<T>(path: string, body: any): Promise<T> {
     const response = await fetch(`${this.url}${path}`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: this.getHeaders(),
       body: JSON.stringify(body),
     });
     const json = await response.json();
@@ -57,9 +43,7 @@ export default class ApiBase {
   protected async put<T>(path: string, body: any): Promise<T> {
     const response = await fetch(`${this.url}${path}`, {
       method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: this.getHeaders(),
       body: JSON.stringify(body),
     });
     const json = await response.json();
@@ -74,9 +58,7 @@ export default class ApiBase {
   protected async patch<T>(path: string, body: any): Promise<T> {
     const response = await fetch(`${this.url}${path}`, {
       method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: this.getHeaders(),
       body: JSON.stringify(body),
     });
     const json = await response.json();
@@ -91,6 +73,7 @@ export default class ApiBase {
   protected async delete<T>(path: string): Promise<T> {
     const response = await fetch(`${this.url}${path}`, {
       method: "DELETE",
+      headers: this.getHeaders(),
     });
     const json = await response.json();
 
@@ -99,5 +82,20 @@ export default class ApiBase {
     }
 
     return json;
+  }
+
+  private getHeaders(init?: Record<string, string>): HeadersInit {
+    const headers: HeadersInit = {
+      "Content-Type": "application/json",
+      ...(init || {}),
+    };
+
+    const accessToken = IS_SERVER ? null : cookie.get("accessToken") || localStorage.getItem("accessToken");
+
+    if (accessToken) {
+      headers.Authorization = `Bearer ${accessToken}`;
+    }
+
+    return headers;
   }
 }

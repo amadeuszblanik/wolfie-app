@@ -1,7 +1,7 @@
 import { WeightUnits } from "../../../../../../types/weight-units.type";
 import { UserRoles } from "../../../../../../types/user-roles.type";
 
-export interface AuthProfileGetResponse {
+export interface AuthProfilePutResponse {
   id: string;
   email: string;
   fullName: string;

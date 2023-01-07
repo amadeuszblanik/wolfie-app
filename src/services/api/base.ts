@@ -1,6 +1,7 @@
 import { cookie } from "../../utils";
 
 const ERROR_STATUS_CODE_BREAKPOINT = 400;
+const ERROR_STATUS_REFRESH_TOKEN = 401;
 const IS_SERVER = typeof window === "undefined";
 
 interface ApiRequestGetOptions {
@@ -17,6 +18,13 @@ export default class ApiBase {
       headers: this.getHeaders(options?.headers),
     });
     const json = await response.json();
+
+    if (ERROR_STATUS_REFRESH_TOKEN === response.status) {
+      // @TODO: Refactor it later
+      if (!IS_SERVER) {
+        location.href = "/auth/refresh-session";
+      }
+    }
 
     if (response.status >= ERROR_STATUS_CODE_BREAKPOINT) {
       throw new Error(json.message);

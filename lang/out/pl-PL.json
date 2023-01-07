@@ -499,5 +499,9 @@
   "page.forgot_password.title": "Zapomniałem hasła",
   "page.forgot_password.missing_token_title": "Brakujący token",
   "page.auth_forgot_password.success": "Twoje hasło zostało zresetowane. Możesz wpisać się.",
-  "page.auth_forgot_password.sign_in": "Wpisz się"
+  "page.auth_forgot_password.sign_in": "Wpisz się",
+  "page.auth_refresh_session.title": "Odśwież sesję",
+  "page.auth_refresh_session.error": "Wystąpił błąd podczas odświeżania sesji. Zostałeś wylogowany.",
+  "page.auth_refresh_session.success": "Otwórz aplikację, aby kontynuować.",
+  "page.auth_refresh_session.error.button": "Wpisz się"
 }

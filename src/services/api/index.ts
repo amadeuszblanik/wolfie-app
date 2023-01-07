@@ -38,7 +38,7 @@ export default class ApiService extends ApiBase {
   authRefreshToken = {
     get: async () => await this.get<AuthRefreshTokenGetResponse>(ApiAuthEndpoint.RefreshToken),
     post: async (payload: AuthRefreshTokenPostPayload) =>
-      await this.put<AuthRefreshTokenPostResponse>(ApiAuthEndpoint.RefreshToken, payload),
+      await this.post<AuthRefreshTokenPostResponse>(ApiAuthEndpoint.RefreshToken, payload),
     delete: async (refreshTokenId: string) =>
       await this.delete<AuthRefreshTokenDeleteResponse>(apiUrl(ApiAuthEndpoint.RefreshTokenById, { refreshTokenId })),
   };

@@ -41,7 +41,7 @@ export default function Page() {
       return;
     }
 
-    cookie.set("accessToken", accessToken);
+    cookie.set("accessToken", accessToken, { path: "/", expires: new Date("2100") });
 
     const path = KNOWN_PATHS[name] || "/app";
 

@@ -500,5 +500,9 @@
   "page.forgot_password.title": "Forgot password",
   "page.forgot_password.missing_token_title": "Missing token",
   "page.auth_forgot_password.success": "Password reset successfully",
-  "page.auth_forgot_password.sign_in": "Sign in"
+  "page.auth_forgot_password.sign_in": "Sign in",
+  "page.auth_refresh_session.title": "Refresh session",
+  "page.auth_refresh_session.error": "Failed to refresh session. You have been signed out.",
+  "page.auth_refresh_session.success": "Open app",
+  "page.auth_refresh_session.error.button": "Sign in"
 }

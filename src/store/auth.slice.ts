@@ -6,6 +6,9 @@ import { AuthSignInResponse } from "../services/api/types/auth/sign-in/response.
 import { ApiErrorMessage } from "../services/api/types/error-message.type";
 import { ApiService } from "../services";
 import { cookie } from "../utils";
+import { AuthRefreshTokenPostResponse } from "../services/api/types/auth/refresh-token/post/response.type";
+import { AuthRefreshTokenPostPayload } from "../services/api/types/auth/refresh-token/post/payload.type";
+import { AppState } from "./index";
 
 const signIn = createAsyncThunk<
   AuthSignInResponse,
@@ -13,11 +16,19 @@ const signIn = createAsyncThunk<
   { extra: { apiService: ApiService }; rejectValue: ApiErrorMessage }
 >("auth/signIn", async (payload, thunkAPI) => await thunkAPI.extra.apiService.authSignIn(payload));
 
+const refreshSession = createAsyncThunk<
+  AuthRefreshTokenPostResponse,
+  AuthRefreshTokenPostPayload,
+  { extra: { apiService: ApiService }; rejectValue: ApiErrorMessage }
+>("auth/refreshSession", async (payload, thunkAPI) => await thunkAPI.extra.apiService.authRefreshToken.post(payload));
+
 export interface AuthStore {
   status: ApiStatus;
   error: string | null;
   accessToken: string | null;
   refreshToken: string | null;
+  refreshSessionStatus: ApiStatus;
+  refreshSessionError: string | null;
 }
 
 const initialState: AuthStore = {
@@ -25,6 +36,8 @@ const initialState: AuthStore = {
   error: null,
   accessToken: null,
   refreshToken: null,
+  refreshSessionStatus: "idle",
+  refreshSessionError: null,
 };
 
 export const authSlice = createSlice({
@@ -80,15 +93,48 @@ export const authSlice = createSlice({
       cookie.remove("accessToken");
       cookie.remove("refreshToken");
     });
+    builder.addCase(refreshSession.pending, (state) => {
+      state.refreshSessionStatus = "pending";
+      state.refreshSessionError = null;
+      state.accessToken = null;
+    });
+    builder.addCase(refreshSession.fulfilled, (state, action) => {
+      const refreshToken = action.payload.refreshToken || state.refreshToken || null;
+
+      state.refreshSessionStatus = "success";
+      state.refreshSessionError = null;
+      state.accessToken = action.payload.accessToken;
+      state.refreshToken = refreshToken;
+
+      cookie.set("accessToken", action.payload.accessToken, { path: "/", expires: new Date("2100") });
+
+      if (refreshToken) {
+        cookie.set("refreshToken", refreshToken, { path: "/", expires: new Date("2100") });
+      } else {
+        cookie.remove("refreshToken");
+      }
+    });
+    builder.addCase(refreshSession.rejected, (state, action) => {
+      state.refreshSessionStatus = "error";
+      state.refreshSessionError = action.error.message || null;
+      state.accessToken = null;
+      state.refreshToken = null;
+
+      cookie.remove("accessToken");
+      cookie.remove("refreshToken");
+    });
   },
 });
 
-export const selectAuthStatus = (state: { auth: AuthStore }) => state.auth.status;
-export const selectAuthError = (state: { auth: AuthStore }) => state.auth.error;
-export const selectAuthAccessToken = (state: { auth: AuthStore }) => state.auth.accessToken;
-export const selectAuthRefreshToken = (state: { auth: AuthStore }) => state.auth.refreshToken;
+export const selectAuthStatus = ({ auth }: AppState) => auth.status;
+export const selectAuthError = ({ auth }: AppState) => auth.error;
+export const selectAuthAccessToken = ({ auth }: AppState) => auth.accessToken;
+export const selectAuthRefreshToken = ({ auth }: AppState) => auth.refreshToken;
+export const selectAuthRefreshSessionStatus = ({ auth }: AppState) => auth.refreshSessionStatus;
+export const selectAuthRefreshSessionError = ({ auth }: AppState) => auth.refreshSessionError;
 
 export const authActions = {
   ...authSlice.actions,
   signIn,
+  refreshSession,
 };

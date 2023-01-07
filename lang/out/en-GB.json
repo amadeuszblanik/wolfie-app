@@ -425,6 +425,9 @@
   "common.form.last_name.label": "Last Name",
   "common.form.password.label": "Password",
   "common.form.password_confirm.label": "Confirm Password",
+  "common.form.current_password.label": "Current Password",
+  "common.form.new_password.label": "New Password",
+  "common.form.new_password_confirm.label": "Confirm New Password",
   "common.form.weight_unit.label": "Weight Unit",
   "common.form.weight_unit.value.kg": "Kilograms",
   "common.form.weight_unit.value.g": "Grams",
@@ -439,6 +442,8 @@
   "common.form.read_gdpr.label": "Read privacy policy",
   "common.form.profile.success": "Profile updated successfully",
   "common.form.profile.error": "Failed to update profile",
+  "common.form.profile_change_password.error": "Failed to change password",
+    "common.form.profile_change_password.success": "Password changed successfully",
   "common.user_role.banned": "Banned",
   "common.user_role.user": "User",
   "common.user_role.superuser": "Superuser",
@@ -467,5 +472,6 @@
   "page.settings.link.delete_account": "Delete account",
   "page.settings.link.sign_off": "Sign off",
   "page.profile.title": "Profile",
-  "page.profile_update.title": "Update profile"
+  "page.profile_update.title": "Update profile",
+  "page.profile_change_password.title": "Change password"
 }

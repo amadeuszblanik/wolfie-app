@@ -2,7 +2,7 @@ import { useIntl } from "react-intl";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { LayoutApp } from "../../../../src/layouts";
 import getAuth from "../../../../lib/get-auth";
-import { FormProfile } from "../../../../src/form";
+import { FormChangePassword } from "../../../../src/form";
 
 export const getServerSideProps: GetServerSideProps<{ isSignedId: boolean }> = async (context) => {
   const { isSignedIn } = getAuth(context);
@@ -27,8 +27,8 @@ export default function Page(_: InferGetServerSidePropsType<typeof getServerSide
   const intl = useIntl();
 
   return (
-    <LayoutApp title={intl.formatMessage({ id: "page.profile_update.title" })}>
-      <FormProfile />
+    <LayoutApp title={intl.formatMessage({ id: "page.profile_change_password.title" })}>
+      <FormChangePassword />
     </LayoutApp>
   );
 }

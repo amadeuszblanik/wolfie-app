@@ -6,6 +6,8 @@ import { ApiService } from "../services";
 import { AuthProfileGetResponse } from "../services/api/types/auth/profile/get/response.type";
 import { AuthProfilePutResponse } from "../services/api/types/auth/profile/put/response.type";
 import { AuthProfilePutPayload } from "../services/api/types/auth/profile/put/payload.type";
+import { AuthChangePasswordResponse } from "../services/api/types/auth/change-password/response.type";
+import { AuthChangePasswordPayload } from "../services/api/types/auth/change-password/payload.type";
 import { AppState } from "./index";
 
 const get = createAsyncThunk<
@@ -20,12 +22,21 @@ const put = createAsyncThunk<
   { extra: { apiService: ApiService }; rejectValue: ApiErrorMessage }
 >("profile/put", async (payload, thunkAPI) => await thunkAPI.extra.apiService.authProfile.put(payload));
 
+const changePassword = createAsyncThunk<
+  AuthChangePasswordResponse,
+  AuthChangePasswordPayload,
+  { extra: { apiService: ApiService }; rejectValue: ApiErrorMessage }
+>("profile/change-password", async (payload, thunkAPI) => await thunkAPI.extra.apiService.authChangePassword(payload));
+
 export interface ProfileStore {
   getStatus: ApiStatus;
   getError: string | null;
   data: AuthProfileGetResponse | null;
   putStatus: ApiStatus;
   putError: string | null;
+  changePasswordStatus: ApiStatus;
+  changePasswordError: string | null;
+  changePasswordData: AuthChangePasswordResponse | null;
 }
 
 const initialState: ProfileStore = {
@@ -34,6 +45,9 @@ const initialState: ProfileStore = {
   data: null,
   putStatus: "idle",
   putError: null,
+  changePasswordStatus: "idle",
+  changePasswordError: null,
+  changePasswordData: null,
 };
 
 export const profileSlice = createSlice({
@@ -45,6 +59,11 @@ export const profileSlice = createSlice({
     resetPut: (state) => {
       state.putStatus = "idle";
       state.putError = null;
+    },
+    resetChangePassword: (state) => {
+      state.changePasswordStatus = "idle";
+      state.changePasswordError = null;
+      state.changePasswordData = null;
     },
   },
 
@@ -73,7 +92,6 @@ export const profileSlice = createSlice({
     builder.addCase(put.pending, (state) => {
       state.putStatus = "pending";
       state.putError = null;
-      state.data = null;
     });
     builder.addCase(put.fulfilled, (state, action) => {
       state.putStatus = "success";
@@ -83,7 +101,21 @@ export const profileSlice = createSlice({
     builder.addCase(put.rejected, (state, action) => {
       state.putStatus = "error";
       state.putError = action.error.message || null;
-      state.data = null;
+    });
+    builder.addCase(changePassword.pending, (state) => {
+      state.changePasswordStatus = "pending";
+      state.changePasswordError = null;
+      state.changePasswordData = null;
+    });
+    builder.addCase(changePassword.fulfilled, (state, action) => {
+      state.changePasswordStatus = "success";
+      state.changePasswordError = null;
+      state.changePasswordData = action.payload;
+    });
+    builder.addCase(changePassword.rejected, (state, action) => {
+      state.changePasswordStatus = "error";
+      state.changePasswordError = action.error.message || null;
+      state.changePasswordData = null;
     });
   },
 });
@@ -93,9 +125,13 @@ export const selectProfileGetError = ({ profile }: AppState) => profile.getError
 export const selectProfilePutStatus = ({ profile }: AppState) => profile.putStatus;
 export const selectProfilePutError = ({ profile }: AppState) => profile.putError;
 export const selectProfileData = ({ profile }: AppState) => profile.data;
+export const selectProfileChangePasswordStatus = ({ profile }: AppState) => profile.changePasswordStatus;
+export const selectProfileChangePasswordError = ({ profile }: AppState) => profile.changePasswordError;
+export const selectProfileChangePasswordData = ({ profile }: AppState) => profile.changePasswordData;
 
 export const profileActions = {
   ...profileSlice.actions,
   get,
   put,
+  changePassword,
 };

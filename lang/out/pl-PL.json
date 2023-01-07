@@ -425,6 +425,9 @@
   "common.form.last_name.label": "Nazwisko",
   "common.form.password.label": "Hasło",
   "common.form.password_confirm.label": "Potwierdź hasło",
+  "common.form.current_password.label": "Aktualne hasło",
+  "common.form.new_password.label": "Nowe hasło",
+  "common.form.new_password_confirm.label": "Potwierdź nowe hasło",
   "common.form.weight_unit.label": "Jednostka wagi",
   "common.form.weight_unit.value.kg": "Kilogramy",
   "common.form.weight_unit.value.g": "Gramy",
@@ -439,6 +442,8 @@
   "common.form.read_gdpr.label": "Przeczytaj politykę prywatności.",
   "common.form.profile.success": "Profil został zaktualizowany.",
   "common.form.profile.error": "Wystąpił błąd podczas aktualizacji profilu.",
+  "common.form.profile_change_password.error": "Wystąpił błąd podczas zmiany hasła.",
+  "common.form.profile_change_password.success": "Hasło zostało zmienione.",
   "common.user_role.banned": "Zablokowany",
   "common.user_role.user": "Użytkownik",
   "common.user_role.superuser": "Superużytkownik",
@@ -466,5 +471,6 @@
   "page.settings.link.delete_account": "Usuń konto",
   "page.settings.link.sign_off": "Wypisz się",
   "page.profile.title": "Profil",
-  "page.profile_update.title": "Zaktualizuj profil"
+  "page.profile_update.title": "Zaktualizuj profil",
+  "page.profile_change_password.title": "Zmień hasło"
 }

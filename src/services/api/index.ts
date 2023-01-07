@@ -11,6 +11,8 @@ import { PetsPetIdWeightGetResponse } from "./types/pets/:petId/weight/get/respo
 import { PetsPetIdHealthLogGetResponse } from "./types/pets/:petId/health-log/get/response.type";
 import { AuthProfilePutResponse } from "./types/auth/profile/put/response.type";
 import { AuthProfilePutPayload } from "./types/auth/profile/put/payload.type";
+import { AuthChangePasswordPayload } from "./types/auth/change-password/payload.type";
+import { AuthChangePasswordResponse } from "./types/auth/change-password/response.type";
 import { apiUrl } from "../../utils";
 
 export default class ApiService extends ApiBase {
@@ -35,6 +37,9 @@ export default class ApiService extends ApiBase {
 
   authSignUp = async (payload: AuthSignUpPayload) =>
     await this.post<AuthSignUpResponse>(ApiAuthEndpoint.SignUp, payload);
+
+  authChangePassword = async (payload: AuthChangePasswordPayload) =>
+    await this.put<AuthChangePasswordResponse>(ApiAuthEndpoint.ChangePassword, payload);
 
   petsMy = async () => await this.get<PetsMyResponse>(ApiPetsEndpoint.PetsMy);
 

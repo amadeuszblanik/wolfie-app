@@ -17,6 +17,10 @@ import { AuthRefreshTokenGetResponse } from "./types/auth/refresh-token/get/resp
 import { AuthRefreshTokenPostPayload } from "./types/auth/refresh-token/post/payload.type";
 import { AuthRefreshTokenPostResponse } from "./types/auth/refresh-token/post/response.type";
 import { AuthRefreshTokenDeleteResponse } from "./types/auth/refresh-token/delete/response.type";
+import { AuthDeleteAccountPayload } from "./types/auth/delete-account/payload.type";
+import { AuthDeleteAccountResponse } from "./types/auth/delete-account/response.type";
+import { AuthDeactivateAccountPayload } from "./types/auth/deactivate-account/payload.type";
+import { AuthDeactivateAccountResponse } from "./types/auth/deactivate-account/response.type";
 import { apiUrl } from "../../utils";
 
 export default class ApiService extends ApiBase {
@@ -52,6 +56,12 @@ export default class ApiService extends ApiBase {
 
   authChangePassword = async (payload: AuthChangePasswordPayload) =>
     await this.put<AuthChangePasswordResponse>(ApiAuthEndpoint.ChangePassword, payload);
+
+  authDeleteAccount = async (payload: AuthDeleteAccountPayload) =>
+    await this.delete<AuthDeleteAccountResponse>(ApiAuthEndpoint.DeleteAccount, payload);
+
+  authDeactivateAccount = async (payload: AuthDeactivateAccountPayload) =>
+    await this.delete<AuthDeactivateAccountResponse>(ApiAuthEndpoint.DeactivateAccount, payload);
 
   petsMy = async () => await this.get<PetsMyResponse>(ApiPetsEndpoint.PetsMy);
 

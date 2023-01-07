@@ -70,10 +70,11 @@ export default class ApiBase {
     return json;
   }
 
-  protected async delete<T>(path: string): Promise<T> {
+  protected async delete<T>(path: string, body?: any): Promise<T> {
     const response = await fetch(`${this.url}${path}`, {
       method: "DELETE",
       headers: this.getHeaders(),
+      body: body ? JSON.stringify(body) : undefined,
     });
     const json = await response.json();
 

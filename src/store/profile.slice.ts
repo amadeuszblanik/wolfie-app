@@ -8,6 +8,10 @@ import { AuthProfilePutResponse } from "../services/api/types/auth/profile/put/r
 import { AuthProfilePutPayload } from "../services/api/types/auth/profile/put/payload.type";
 import { AuthChangePasswordResponse } from "../services/api/types/auth/change-password/response.type";
 import { AuthChangePasswordPayload } from "../services/api/types/auth/change-password/payload.type";
+import { AuthDeleteAccountResponse } from "../services/api/types/auth/delete-account/response.type";
+import { AuthDeleteAccountPayload } from "../services/api/types/auth/delete-account/payload.type";
+import { AuthDeactivateAccountResponse } from "../services/api/types/auth/deactivate-account/response.type";
+import { AuthDeactivateAccountPayload } from "../services/api/types/auth/deactivate-account/payload.type";
 import { AppState } from "./index";
 
 const get = createAsyncThunk<
@@ -28,6 +32,21 @@ const changePassword = createAsyncThunk<
   { extra: { apiService: ApiService }; rejectValue: ApiErrorMessage }
 >("profile/change-password", async (payload, thunkAPI) => await thunkAPI.extra.apiService.authChangePassword(payload));
 
+const deleteAccount = createAsyncThunk<
+  AuthDeleteAccountResponse,
+  AuthDeleteAccountPayload,
+  { extra: { apiService: ApiService }; rejectValue: ApiErrorMessage }
+>("profile/delete-account", async (payload, thunkAPI) => await thunkAPI.extra.apiService.authDeleteAccount(payload));
+
+const deactivateAccount = createAsyncThunk<
+  AuthDeactivateAccountResponse,
+  AuthDeactivateAccountPayload,
+  { extra: { apiService: ApiService }; rejectValue: ApiErrorMessage }
+>(
+  "profile/deactivate-account",
+  async (payload, thunkAPI) => await thunkAPI.extra.apiService.authDeactivateAccount(payload),
+);
+
 export interface ProfileStore {
   getStatus: ApiStatus;
   getError: string | null;
@@ -37,6 +56,12 @@ export interface ProfileStore {
   changePasswordStatus: ApiStatus;
   changePasswordError: string | null;
   changePasswordData: AuthChangePasswordResponse | null;
+  deleteAccountStatus: ApiStatus;
+  deleteAccountError: string | null;
+  deleteAccountData: AuthDeleteAccountResponse | null;
+  deactivateAccountStatus: ApiStatus;
+  deactivateAccountError: string | null;
+  deactivateAccountData: AuthDeactivateAccountResponse | null;
 }
 
 const initialState: ProfileStore = {
@@ -48,6 +73,12 @@ const initialState: ProfileStore = {
   changePasswordStatus: "idle",
   changePasswordError: null,
   changePasswordData: null,
+  deleteAccountStatus: "idle",
+  deleteAccountError: null,
+  deleteAccountData: null,
+  deactivateAccountStatus: "idle",
+  deactivateAccountError: null,
+  deactivateAccountData: null,
 };
 
 export const profileSlice = createSlice({
@@ -117,6 +148,36 @@ export const profileSlice = createSlice({
       state.changePasswordError = action.error.message || null;
       state.changePasswordData = null;
     });
+    builder.addCase(deleteAccount.pending, (state) => {
+      state.deleteAccountStatus = "pending";
+      state.deleteAccountError = null;
+      state.deleteAccountData = null;
+    });
+    builder.addCase(deleteAccount.fulfilled, (state, action) => {
+      state.deleteAccountStatus = "success";
+      state.deleteAccountError = null;
+      state.deleteAccountData = action.payload;
+    });
+    builder.addCase(deleteAccount.rejected, (state, action) => {
+      state.deleteAccountStatus = "error";
+      state.deleteAccountError = action.error.message || null;
+      state.deleteAccountData = null;
+    });
+    builder.addCase(deactivateAccount.pending, (state) => {
+      state.deactivateAccountStatus = "pending";
+      state.deactivateAccountError = null;
+      state.deactivateAccountData = null;
+    });
+    builder.addCase(deactivateAccount.fulfilled, (state, action) => {
+      state.deactivateAccountStatus = "success";
+      state.deactivateAccountError = null;
+      state.deactivateAccountData = action.payload;
+    });
+    builder.addCase(deactivateAccount.rejected, (state, action) => {
+      state.deactivateAccountStatus = "error";
+      state.deactivateAccountError = action.error.message || null;
+      state.deactivateAccountData = null;
+    });
   },
 });
 
@@ -128,10 +189,18 @@ export const selectProfileData = ({ profile }: AppState) => profile.data;
 export const selectProfileChangePasswordStatus = ({ profile }: AppState) => profile.changePasswordStatus;
 export const selectProfileChangePasswordError = ({ profile }: AppState) => profile.changePasswordError;
 export const selectProfileChangePasswordData = ({ profile }: AppState) => profile.changePasswordData;
+export const selectProfileDeleteAccountStatus = ({ profile }: AppState) => profile.deleteAccountStatus;
+export const selectProfileDeleteAccountError = ({ profile }: AppState) => profile.deleteAccountError;
+export const selectProfileDeleteAccountData = ({ profile }: AppState) => profile.deleteAccountData;
+export const selectProfileDeactivateAccountStatus = ({ profile }: AppState) => profile.deactivateAccountStatus;
+export const selectProfileDeactivateAccountError = ({ profile }: AppState) => profile.deactivateAccountError;
+export const selectProfileDeactivateAccountData = ({ profile }: AppState) => profile.deactivateAccountData;
 
 export const profileActions = {
   ...profileSlice.actions,
   get,
   put,
   changePassword,
+  deleteAccount,
+  deactivateAccount,
 };

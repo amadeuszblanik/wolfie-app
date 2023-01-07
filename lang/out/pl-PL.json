@@ -447,5 +447,12 @@
   "common.health_log.kind.regulations_of_breeding": "Regulacje hodowli",
   "common.health_log.kind.use_of_gamaglobulin": "Użycie gamaglobuliny",
   "common.health_log.kind.treatment": "Leczenie",
-  "error.generic_fetch": "Wystąpił błąd podczas pobierania danych. Spróbuj ponownie później."
+  "error.generic_fetch": "Wystąpił błąd podczas pobierania danych. Spróbuj ponownie później.",
+  "scene.health_log_details.date": "Data",
+  "scene.health_log_details.medicines": "Leki",
+  "scene.health_log_details.veterinary": "Weterynarz",
+  "scene.health_log_details.diagnosis": "Diagnoza",
+  "scene.health_log_details.next_visit": "Następna wizyta",
+  "scene.health_log_details.description": "Szczegóły",
+  "scene.health_log_details.added_by": "Dodane przez"
 }

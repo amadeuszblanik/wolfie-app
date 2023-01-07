@@ -1,8 +1,8 @@
 import { useIntl } from "react-intl";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import { LayoutApp } from "../../../../src/layouts";
-import { ScenePetHealthLog } from "../../../../src/scene";
-import getAuth from "../../../../lib/get-auth";
+import { LayoutApp } from "../../../../../src/layouts";
+import { ScenePetHealthLogDetails } from "../../../../../src/scene";
+import getAuth from "../../../../../lib/get-auth";
 
 export const getServerSideProps: GetServerSideProps<{ isSignedId: boolean }> = async (context) => {
   const { isSignedIn } = getAuth(context);
@@ -27,7 +27,7 @@ export default function Page(_: InferGetServerSidePropsType<typeof getServerSide
 
   return (
     <LayoutApp title={intl.formatMessage({ id: "page.pet_id_weight.title" })}>
-      <ScenePetHealthLog />
+      <ScenePetHealthLogDetails />
     </LayoutApp>
   );
 }

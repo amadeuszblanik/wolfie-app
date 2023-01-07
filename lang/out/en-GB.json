@@ -447,5 +447,13 @@
   "common.health_log.kind.regulations_of_breeding": "Regulations of breeding",
   "common.health_log.kind.use_of_gamaglobulin": "Use of gamaglobulin",
   "common.health_log.kind.treatment": "Treatment",
-  "error.generic_fetch": "Something went wrong. Please try again later."
+  "error.generic_fetch": "Something went wrong. Please try again later.",
+  "scene.health_log_details.kind": "Kind",
+  "scene.health_log_details.date": "Date",
+  "scene.health_log_details.medicines": "Medicines",
+  "scene.health_log_details.veterinary": "Vet",
+  "scene.health_log_details.diagnosis": "Diagnosis",
+  "scene.health_log_details.next_visit": "Next visit",
+  "scene.health_log_details.description": "Description",
+  "scene.health_log_details.added_by": "Added by"
 }

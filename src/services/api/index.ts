@@ -23,6 +23,9 @@ import { AuthDeactivateAccountPayload } from "./types/auth/deactivate-account/pa
 import { AuthDeactivateAccountResponse } from "./types/auth/deactivate-account/response.type";
 import { AuthConfirmEmailResponse } from "./types/auth/confirm-email/response.type";
 import { AuthConfirmEmailPayload } from "./types/auth/confirm-email/payload.type";
+import { AuthResetPasswordPutPayload } from "./types/auth/reset-password/put/payload.type";
+import { AuthResetPasswordPutResponse } from "./types/auth/reset-password/put/response.type";
+import { AuthResetPasswordGetPayload } from "./types/auth/reset-password/get/response.type";
 import { apiUrl } from "../../utils";
 
 export default class ApiService extends ApiBase {
@@ -38,6 +41,17 @@ export default class ApiService extends ApiBase {
       await this.put<AuthRefreshTokenPostResponse>(ApiAuthEndpoint.RefreshToken, payload),
     delete: async (refreshTokenId: string) =>
       await this.delete<AuthRefreshTokenDeleteResponse>(apiUrl(ApiAuthEndpoint.RefreshTokenById, { refreshTokenId })),
+  };
+
+  authResetPassword = {
+    get: async (userEmail: string) =>
+      await this.get<AuthResetPasswordGetPayload>(
+        apiUrl(ApiAuthEndpoint.ResetPassword, undefined, {
+          "user-email": userEmail,
+        }),
+      ),
+    put: async (payload: AuthResetPasswordPutPayload) =>
+      await this.put<AuthResetPasswordPutResponse>(ApiAuthEndpoint.ResetPassword, payload),
   };
 
   petsWeight = {

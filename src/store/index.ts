@@ -8,7 +8,8 @@ import { petsSlice } from "./pets.slice";
 import { petsWeightsSlice } from "./petsWeight.slice";
 import { petsHealthLogSlice } from "./petsHealthLog.slice";
 import { refreshTokenSlice } from "./refresh-token.slice";
-import { confirmEmailSlice } from "./confrim-email.slice";
+import { confirmEmailSlice } from "./confirm-email.slice";
+import { resetPasswordSlice } from "./reset-password.slice";
 import { ApiService } from "../services";
 
 const makeStore = () =>
@@ -22,6 +23,7 @@ const makeStore = () =>
       [petsWeightsSlice.name]: petsWeightsSlice.reducer,
       [profileSlice.name]: profileSlice.reducer,
       [refreshTokenSlice.name]: refreshTokenSlice.reducer,
+      [resetPasswordSlice.name]: resetPasswordSlice.reducer,
       [signUpSlice.name]: signUpSlice.reducer,
     },
     middleware: (getDefaultMiddleware) =>

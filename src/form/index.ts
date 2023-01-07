@@ -1,4 +1,6 @@
 export { default as FormChangePassword } from "./change-password";
+export { default as FormResetPassword } from "./reset-password";
+export { default as FormResetPasswordConfirm } from "./reset-password-confirm";
 export { default as FormProfile } from "./profile";
 export { default as FormProfileDeactivate } from "./profile-deactivate";
 export { default as FormProfileDelete } from "./profile-delete";

@@ -10,7 +10,7 @@ import {
   selectConfirmEmailPostData,
   selectConfirmEmailPostError,
   selectConfirmEmailPostStatus,
-} from "../../../src/store/confrim-email.slice";
+} from "../../../src/store/confirm-email.slice";
 import { Link } from "../../../src/atoms";
 
 export default function Page() {

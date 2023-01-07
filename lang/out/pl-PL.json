@@ -495,5 +495,9 @@
   "page.auth_email_verification.title": "Weryfikacja e-mail",
   "page.auth_email_verification.missing_token_title": "Brakujący token",
   "page.auth_email_verification.success": "Twój adres e-mail został zweryfikowany.",
-  "page.auth_email_verification.sign_in": "Wpisz się"
+  "page.auth_email_verification.sign_in": "Wpisz się",
+  "page.forgot_password.title": "Zapomniałem hasła",
+  "page.forgot_password.missing_token_title": "Brakujący token",
+  "page.auth_forgot_password.success": "Twoje hasło zostało zresetowane. Możesz wpisać się.",
+  "page.auth_forgot_password.sign_in": "Wpisz się"
 }

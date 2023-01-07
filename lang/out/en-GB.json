@@ -496,5 +496,9 @@
   "page.auth_email_verification.title": "Email verification",
   "page.auth_email_verification.missing_token_title": "Missing token",
   "page.auth_email_verification.success": "Email verified successfully",
-  "page.auth_email_verification.sign_in": "Sign in"
+  "page.auth_email_verification.sign_in": "Sign in",
+  "page.forgot_password.title": "Forgot password",
+  "page.forgot_password.missing_token_title": "Missing token",
+  "page.auth_forgot_password.success": "Password reset successfully",
+  "page.auth_forgot_password.sign_in": "Sign in"
 }

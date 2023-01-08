@@ -440,6 +440,8 @@
   "common.form.keep_sign_in.label": "Zapamiętaj mnie",
   "common.form.gdpr_consent.label": "Wyrażam zgodę na przetwarzanie moich danych osobowych w celu korzystania z tej usługi.",
   "common.form.submit.label": "Zatwierdź",
+  "common.form.add.label": "Dodaj",
+  "common.form.update.label": "Zaktualizuj",
   "common.form.reset_password.label": "Zapomniałeś hasła? Kliknij tutaj.",
   "common.form.create_account.label": "Nie masz konta? Kliknij tutaj.",
   "common.form.sign_in.label": "Masz już konto? Kliknij tutaj.",
@@ -507,5 +509,10 @@
   "page.auth_refresh_session.title": "Odśwież sesję",
   "page.auth_refresh_session.error": "Wystąpił błąd podczas odświeżania sesji. Zostałeś wylogowany.",
   "page.auth_refresh_session.success": "Otwórz aplikację, aby kontynuować.",
-  "page.auth_refresh_session.error.button": "Wpisz się"
+  "page.auth_refresh_session.error.button": "Wpisz się",
+  "page.pet_edit.title": "Edytuj zwierzę",
+  "common.form.pet_add.error": "Wystąpił błąd podczas dodawania zwierzęcia.",
+  "common.form.pet_add.success": "Zwierzę zostało dodane.",
+  "common.form.pet_update.error": "Wystąpił błąd podczas aktualizowania zwierzęcia.",
+  "common.form.pet_update.success": "Zwierzę zostało zaktualizowane."
 }

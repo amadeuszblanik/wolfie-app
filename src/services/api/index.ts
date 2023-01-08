@@ -29,6 +29,8 @@ import { AuthResetPasswordGetPayload } from "./types/auth/reset-password/get/res
 import { PetsAddPayload } from "./types/pets/add/payload.type";
 import { PetsAddResponse } from "./types/pets/add/response.type";
 import { BreedResponse } from "./types/breed/response.type";
+import { PetsPetIdPutPayload } from "./types/pets/:petId/put/payload.type";
+import { PetsPetIdPutResponse } from "./types/pets/:petId/put/response.type";
 import { apiUrl } from "../../utils";
 
 export default class ApiService extends ApiBase {
@@ -58,7 +60,12 @@ export default class ApiService extends ApiBase {
   };
 
   petsAdd = {
-    post: async (payload: PetsAddPayload) => await this.post<PetsAddResponse>(apiUrl(ApiPetsEndpoint.PetAdd), payload),
+    post: async (payload: PetsAddPayload) => await this.post<PetsAddResponse>(ApiPetsEndpoint.PetAdd, payload),
+  };
+
+  pets = {
+    put: async (petId: string, payload: PetsPetIdPutPayload) =>
+      await this.put<PetsPetIdPutResponse>(apiUrl(ApiPetsEndpoint.PetsById, { petId }), payload),
   };
 
   petsWeight = {

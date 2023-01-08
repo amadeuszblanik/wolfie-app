@@ -19,6 +19,7 @@ export enum ApiConfigEndpoint {
 }
 
 export enum ApiPetsEndpoint {
+  PetsById = "/pets/:petId",
   PetsMy = "/pets/my",
   Pet = "/pets/:petId",
   PetAdd = "/pets/add",

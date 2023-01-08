@@ -440,6 +440,8 @@
   "common.form.keep_sign_in.label": "Keep me signed in",
   "common.form.gdpr_consent.label": "I agree to the processing of my personal data",
   "common.form.submit.label": "Submit",
+  "common.form.add.label": "Add",
+  "common.form.update.label": "Update",
   "common.form.reset_password.label": "Forgot password? Click here.",
   "common.form.create_account.label": "Don't have an account? Click here.",
   "common.form.sign_in.label": "Already have an account? Click here.",
@@ -508,5 +510,10 @@
   "page.auth_refresh_session.title": "Refresh session",
   "page.auth_refresh_session.error": "Failed to refresh session. You have been signed out.",
   "page.auth_refresh_session.success": "Open app",
-  "page.auth_refresh_session.error.button": "Sign in"
+  "page.auth_refresh_session.error.button": "Sign in",
+  "page.pet_edit.title": "Edit pet",
+  "common.form.pet_add.error": "Failed to add pet",
+  "common.form.pet_add.success": "Pet added successfully",
+  "common.form.pet_update.error": "Failed to update pet",
+  "common.form.pet_update.success": "Pet updated successfully"
 }

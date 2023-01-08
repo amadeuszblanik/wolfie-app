@@ -6,6 +6,7 @@ import { ApiService } from "../services";
 import { PetsMyResponse } from "../services/api/types/pets/my/response.type";
 import { PetsAddResponse } from "../services/api/types/pets/add/response.type";
 import { PetsAddPayload } from "../services/api/types/pets/add/payload.type";
+import { PetsPetIdPutResponse } from "../services/api/types/pets/:petId/put/response.type";
 import { AppState } from "./index";
 
 const petsMy = createAsyncThunk<
@@ -20,12 +21,23 @@ const add = createAsyncThunk<
   { extra: { apiService: ApiService }; rejectValue: ApiErrorMessage }
 >("pets/add", async (payload, thunkAPI) => await thunkAPI.extra.apiService.petsAdd.post(payload));
 
+const edit = createAsyncThunk<
+  PetsPetIdPutResponse,
+  {
+    petId: string;
+    payload: PetsAddPayload;
+  },
+  { extra: { apiService: ApiService }; rejectValue: ApiErrorMessage }
+>("pets/edit", async ({ petId, payload }, thunkAPI) => await thunkAPI.extra.apiService.pets.put(petId, payload));
+
 export interface PetsStore {
   myStatus: ApiStatus;
   myError: string | null;
   data: PetsMyResponse | null;
   addStatus: ApiStatus;
   addError: string | null;
+  editStatus: ApiStatus;
+  editError: string | null;
 }
 
 const initialState: PetsStore = {
@@ -34,6 +46,8 @@ const initialState: PetsStore = {
   data: null,
   addStatus: "idle",
   addError: null,
+  editStatus: "idle",
+  editError: null,
 };
 
 export const petsSlice = createSlice({
@@ -45,6 +59,10 @@ export const petsSlice = createSlice({
     resetAdd: (state) => {
       state.addStatus = "idle";
       state.addError = null;
+    },
+    resetEdit: (state) => {
+      state.editStatus = "idle";
+      state.editError = null;
     },
   },
 
@@ -71,9 +89,8 @@ export const petsSlice = createSlice({
       state.data = null;
     });
     builder.addCase(add.pending, (state) => {
-      state.myStatus = "pending";
-      state.myError = null;
-      state.data = null;
+      state.addStatus = "pending";
+      state.addError = null;
     });
     builder.addCase(add.fulfilled, (state, action) => {
       state.addStatus = "success";
@@ -83,6 +100,19 @@ export const petsSlice = createSlice({
     builder.addCase(add.rejected, (state, action) => {
       state.addStatus = "error";
       state.addError = action.error.message || null;
+    });
+    builder.addCase(edit.pending, (state) => {
+      state.editStatus = "pending";
+      state.editError = null;
+    });
+    builder.addCase(edit.fulfilled, (state) => {
+      state.editStatus = "success";
+      state.editError = null;
+      state.data = null;
+    });
+    builder.addCase(edit.rejected, (state, action) => {
+      state.editStatus = "error";
+      state.editError = action.error.message || null;
     });
   },
 });
@@ -96,9 +126,12 @@ export const selectPets =
     pets.data?.find((pet) => pet.id === id);
 export const selectPetsAddStatus = ({ pets }: AppState) => pets.addStatus;
 export const selectPetsAddError = ({ pets }: AppState) => pets.addError;
+export const selectPetsEditStatus = ({ pets }: AppState) => pets.editStatus;
+export const selectPetsEditError = ({ pets }: AppState) => pets.editError;
 
 export const petsActions = {
   ...petsSlice.actions,
   petsMy,
   add,
+  edit,
 };

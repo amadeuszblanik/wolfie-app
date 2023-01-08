@@ -1,10 +1,13 @@
 import React from "react";
-import { BmeAvatar, BmeBox, BmeText } from "bme-ui";
+import { BmeAvatar, BmeBox, BmeButton, BmeIcon, BmeText } from "bme-ui";
 import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
 import { PetsMySingleResponse } from "../../services/api/types/pets/my/response.type";
 import { pipeAge, pipeDate } from "../../pipes";
 import { Link } from "../../atoms";
+
+// @TODO I know that anchor should not be in an anchor, but It's fine for now. Refactor it later.
+// @TODO Fix create icon - bme-ui
 
 interface PetCardProps extends PetsMySingleResponse {
   withLink?: boolean;
@@ -22,6 +25,13 @@ const Component: React.FC<PetCardProps> = ({ id, name, image, birthDate, microch
           <BmeAvatar src={image} variant="primary" />
         </BmeBox>
         <BmeText variant="Title1">{name}</BmeText>
+        <BmeBox alignY="top" height="100%" margin="no|no|auto|auto">
+          <Link href={`/app/pet/${id}/edit`}>
+            <BmeButton variant="gray5" size="small">
+              <BmeIcon name="create" />
+            </BmeButton>
+          </Link>
+        </BmeBox>
       </BmeBox>
 
       <BmeText>

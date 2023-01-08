@@ -7,16 +7,19 @@ import { ScenePetsMy } from "../../src/scene";
 
 export const getServerSideProps: GetServerSideProps<{ isSignedId: boolean }> = async (context) => {
   const session = await getSession(context.req, context.res);
-  const { accessToken, refreshToken, isSignedIn } = getAuth(context);
-
-  // eslint-disable-next-line no-console
-  console.debug("session", session);
-  // eslint-disable-next-line no-console
-  console.debug("accessToken", accessToken);
-  // eslint-disable-next-line no-console
-  console.debug("refreshToken", refreshToken);
+  const { refreshToken, isSignedIn } = getAuth(context);
+  session.lastPage = context.resolvedUrl;
 
   if (!isSignedIn) {
+    if (refreshToken) {
+      return {
+        redirect: {
+          destination: "/auth/refresh-session",
+          permanent: false,
+        },
+      };
+    }
+
     return {
       redirect: {
         destination: "/auth/sign-in",

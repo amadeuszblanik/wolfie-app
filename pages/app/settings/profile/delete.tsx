@@ -4,11 +4,23 @@ import { BmeBox, BmeList, BmeText } from "bme-ui";
 import { LayoutApp } from "../../../../src/layouts";
 import getAuth from "../../../../lib/get-auth";
 import { FormProfileDeactivate, FormProfileDelete } from "../../../../src/form";
+import { getSession } from "../../../../lib/get-session";
 
 export const getServerSideProps: GetServerSideProps<{ isSignedId: boolean }> = async (context) => {
-  const { isSignedIn } = getAuth(context);
+  const session = await getSession(context.req, context.res);
+  const { refreshToken, isSignedIn } = getAuth(context);
+  session.lastPage = context.resolvedUrl;
 
   if (!isSignedIn) {
+    if (refreshToken) {
+      return {
+        redirect: {
+          destination: "/auth/refresh-session",
+          permanent: false,
+        },
+      };
+    }
+
     return {
       redirect: {
         destination: "/auth/sign-in",

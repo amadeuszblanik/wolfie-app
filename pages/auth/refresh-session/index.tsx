@@ -2,6 +2,7 @@ import { FormattedMessage, useIntl } from "react-intl";
 import { BmeBox, BmeButton, BmeProgressBar } from "bme-ui";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { LayoutAuth } from "../../../src/layouts";
 import { useAppDispatch, useAppSelector } from "../../../src/hooks";
 import {
@@ -13,10 +14,21 @@ import {
 import { cookie } from "../../../src/utils";
 import { ErrorMessage } from "../../../src/components";
 import { Link } from "../../../src/atoms";
+import { getSession } from "../../../lib/get-session";
 
 const DEFAULT_REFRESH_SESSION_TIMEOUT = 5000;
 
-export default function Page() {
+export const getServerSideProps: GetServerSideProps<{ lastPage: string }> = async (context) => {
+  const session = await getSession(context.req, context.res);
+
+  return {
+    props: {
+      lastPage: session.lastPage || "/app",
+    },
+  };
+};
+
+export default function Page({ lastPage }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const router = useRouter();
   const intl = useIntl();
   const dispatch = useAppDispatch();
@@ -43,7 +55,7 @@ export default function Page() {
 
   useEffect(() => {
     if (storeAuthRefreshSessionStatus === "success") {
-      void router.push("/app");
+      void router.push(lastPage);
     }
 
     if (storeAuthRefreshSessionStatus === "error") {

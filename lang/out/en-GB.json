@@ -392,7 +392,7 @@
   "section.features.feature_health_log.title": "Health Log",
   "section.features.feature_health_log.description": "Keep track of your dog's health. You can add new health logs and see the history of your dog's health.",
   "section.features.feature_heat.title": "Heat tracker",
-  "section.features.feature_heat.description": "Keep track of your dog's heat. You can add new heat measurements and see the history of your dog's heat.",
+  "section.features.feature_heat.description": "Keep track of your dog's heat. You can predict the next heat and see the history of your dog's heat.",
   "section.features.feature_share.title": "Share pet's",
   "section.features.feature_share.description": "You can share your pet's data with others.",
   "section.features.state_ready": "Ready",

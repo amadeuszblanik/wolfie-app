@@ -1,5 +1,5 @@
 import ApiBase from "./base";
-import { ApiAuthEndpoint, ApiConfigEndpoint, ApiPetsEndpoint } from "./endpoint.type";
+import { ApiAuthEndpoint, ApiBreedEndpoint, ApiConfigEndpoint, ApiPetsEndpoint } from "./endpoint.type";
 import { AuthSignInResponse } from "./types/auth/sign-in/response.type";
 import { AuthSignInPayload } from "./types/auth/sign-in/payload.type";
 import { AuthSignUpPayload } from "./types/auth/sign-up/payload.type";
@@ -26,6 +26,9 @@ import { AuthConfirmEmailPayload } from "./types/auth/confirm-email/payload.type
 import { AuthResetPasswordPutPayload } from "./types/auth/reset-password/put/payload.type";
 import { AuthResetPasswordPutResponse } from "./types/auth/reset-password/put/response.type";
 import { AuthResetPasswordGetPayload } from "./types/auth/reset-password/get/response.type";
+import { PetsAddPayload } from "./types/pets/add/payload.type";
+import { PetsAddResponse } from "./types/pets/add/response.type";
+import { BreedResponse } from "./types/breed/response.type";
 import { apiUrl } from "../../utils";
 
 export default class ApiService extends ApiBase {
@@ -52,6 +55,10 @@ export default class ApiService extends ApiBase {
       ),
     put: async (payload: AuthResetPasswordPutPayload) =>
       await this.put<AuthResetPasswordPutResponse>(ApiAuthEndpoint.ResetPassword, payload),
+  };
+
+  petsAdd = {
+    post: async (payload: PetsAddPayload) => await this.post<PetsAddResponse>(apiUrl(ApiPetsEndpoint.PetAdd), payload),
   };
 
   petsWeight = {
@@ -81,6 +88,8 @@ export default class ApiService extends ApiBase {
 
   authDeactivateAccount = async (payload: AuthDeactivateAccountPayload) =>
     await this.delete<AuthDeactivateAccountResponse>(ApiAuthEndpoint.DeactivateAccount, payload);
+
+  breed = async () => await this.get<BreedResponse>(ApiBreedEndpoint.Breed);
 
   petsMy = async () => await this.get<PetsMyResponse>(ApiPetsEndpoint.PetsMy);
 

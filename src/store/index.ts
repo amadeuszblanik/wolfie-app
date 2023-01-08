@@ -10,12 +10,14 @@ import { petsHealthLogSlice } from "./petsHealthLog.slice";
 import { refreshTokenSlice } from "./refresh-token.slice";
 import { confirmEmailSlice } from "./confirm-email.slice";
 import { resetPasswordSlice } from "./reset-password.slice";
+import { breedsSlice } from "./breeds.slice";
 import { ApiService } from "../services";
 
 const makeStore = () =>
   configureStore({
     reducer: {
       [authSlice.name]: authSlice.reducer,
+      [breedsSlice.name]: breedsSlice.reducer,
       [configSlice.name]: configSlice.reducer,
       [confirmEmailSlice.name]: confirmEmailSlice.reducer,
       [petsSlice.name]: petsSlice.reducer,

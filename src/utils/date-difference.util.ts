@@ -1,6 +1,6 @@
 const TIME_IN_DAY = 86400000;
 const DAYS_IN_WEEK = 7;
-const DAYS_IN_MONTH = 30;
+const DAYS_IN_MONTH = 30.437;
 const MONTHS_IN_YEAR = 12;
 
 const util = (dateA: Date, dateB: Date): { years: number; months: number; weeks: number; days: number } => {
@@ -16,7 +16,7 @@ const util = (dateA: Date, dateB: Date): { years: number; months: number; weeks:
   const weeks = Math.floor(daysDiff / DAYS_IN_WEEK);
   daysDiff = daysDiff - weeks * DAYS_IN_WEEK;
 
-  const days = daysDiff;
+  const days = Math.floor(daysDiff);
 
   return { years, months, weeks, days };
 };

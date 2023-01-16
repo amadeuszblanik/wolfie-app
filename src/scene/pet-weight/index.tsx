@@ -113,7 +113,7 @@ const Scene = () => {
                 key={item.id}
                 actions={
                   <Link href={`/app/pet/${petId}/weight/${item.id}`}>
-                    <BmeButton variant="blue">
+                    <BmeButton variant="blue" size="small">
                       <FormattedMessage id="page.pet_weight.edit_entry" />
                     </BmeButton>
                   </Link>

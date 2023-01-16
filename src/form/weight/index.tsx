@@ -9,7 +9,7 @@ import { toInputDate, toInputTime } from "../../utils";
 import { selectProfileData } from "../../store/profile.slice";
 import {
   petsWeightActions,
-  selectPetsWeightDataByWeightId,
+  selectPetsWeightDataById,
   selectPetsWeightPatchError,
   selectPetsWeightPatchStatus,
   selectPetsWeightPostError,
@@ -35,7 +35,7 @@ const Component = () => {
   const storePetsWeightPostError = useAppSelector(selectPetsWeightPostError);
   const storePetsWeightPatchStatus = useAppSelector(selectPetsWeightPatchStatus);
   const storePetsWeightPatchError = useAppSelector(selectPetsWeightPatchError);
-  const storePetsWeightDataByWeightId = useAppSelector(selectPetsWeightDataByWeightId(petId || "", weightId || ""));
+  const storePetsWeightDataById = useAppSelector(selectPetsWeightDataById(weightId || ""));
   const storeProfileData = useAppSelector(selectProfileData);
 
   const status = isUpdate ? storePetsWeightPatchStatus : storePetsWeightPostStatus;
@@ -58,10 +58,10 @@ const Component = () => {
   }, []);
 
   useEffect(() => {
-    if (storePetsWeightDataByWeightId === undefined && petId) {
+    if (storePetsWeightDataById === undefined && petId) {
       dispatch(petsWeightActions.get({ petId }));
     }
-  }, [storePetsWeightDataByWeightId, petId, dispatch]);
+  }, [storePetsWeightDataById, petId, dispatch]);
 
   useLayoutEffect(() => {
     if (error) {
@@ -76,12 +76,12 @@ const Component = () => {
   }, [error, status]);
 
   useEffect(() => {
-    if (storePetsWeightDataByWeightId) {
-      setWeight(String(storePetsWeightDataByWeightId.raw || ""));
-      setDate(toInputDate(new Date(storePetsWeightDataByWeightId.date)));
-      setTime(toInputTime(new Date(storePetsWeightDataByWeightId.date)));
+    if (storePetsWeightDataById) {
+      setWeight(String(storePetsWeightDataById.raw || ""));
+      setDate(toInputDate(new Date(storePetsWeightDataById.date)));
+      setTime(toInputTime(new Date(storePetsWeightDataById.date)));
     }
-  }, [storePetsWeightDataByWeightId]);
+  }, [storePetsWeightDataById]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

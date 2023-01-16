@@ -150,11 +150,6 @@ export const selectPetsWeightDataById =
   ({ petsWeights }: AppState) =>
     petsWeights.getData?.find((pet) => pet.id === id);
 
-export const selectPetsWeightDataByWeightId =
-  (id: string, weightId: string) =>
-  ({ petsWeights }: AppState) =>
-    petsWeights.getData?.filter((pet) => pet.id === id).find((weight) => weight.id === weightId);
-
 export const petsWeightActions = {
   ...petsWeightsSlice.actions,
   get,

@@ -1,8 +1,8 @@
-import { BmeBox, BmeButton, BmeDropdown, BmeInput, BmeText } from "bme-ui";
+import { BmeBox, BmeButton, BmeInput, BmeSelect, BmeText } from "bme-ui";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useEffect, useLayoutEffect, useState } from "react";
-import { DropdownItem } from "bme-ui/dist/cjs/types/atoms/dropdown/types";
 import { DefaultTheme } from "styled-components";
+import { SelectItem } from "bme-ui/dist/cjs/types/atoms/select/types";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { Form } from "../../components";
 import { WeightUnits } from "../../types/weight-units.type";
@@ -22,7 +22,7 @@ const Component = () => {
 
   const isError = storeProfilePutStatus === "error";
 
-  const weightUnitsList: DropdownItem[] = Object.values(WeightUnits).map((weightUnit) => ({
+  const weightUnitsList: SelectItem[] = Object.values(WeightUnits).map((weightUnit) => ({
     key: weightUnit,
     label: intl.formatMessage({ id: `common.form.weight_unit.value.${weightUnit.toLowerCase()}` }),
   }));
@@ -31,7 +31,7 @@ const Component = () => {
   const [modelBorderColor, setModelBorderColor] = useState<keyof DefaultTheme["colors"]>("red");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [weightUnit, setWeightUnit] = useState<DropdownItem | null>(
+  const [weightUnit, setWeightUnit] = useState<SelectItem | null>(
     weightUnitsList.find((item) => item.key === WeightUnits.Kilogram) || null,
   );
 
@@ -64,7 +64,7 @@ const Component = () => {
     setFirstName(storeProfileData.firstName);
     setLastName(storeProfileData.lastName);
     setWeightUnit(weightUnitsList.find((item) => item.key === storeProfileData.weightUnit) || null);
-  }, [storeProfileData]);
+  }, [storeProfileData, weightUnitsList]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -114,7 +114,7 @@ const Component = () => {
           />
         </BmeBox>
         <BmeBox width="100%" margin="no|no|sm">
-          <BmeDropdown
+          <BmeSelect
             name="weightUnit"
             label={intl.formatMessage({ id: "common.form.weight_unit.label" })}
             list={weightUnitsList}

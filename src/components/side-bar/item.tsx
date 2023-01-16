@@ -1,12 +1,13 @@
 import React from "react";
 import { BmeIcon, bmeMixins, BmeText } from "bme-ui";
 import styled from "styled-components";
+import { IconName } from "bme-ui/dist/cjs/types/atoms/icon/types";
 import { Link } from "../../atoms";
 
 // @TODO: Handle longer labels
 
 export interface SideBarItemProps {
-  icon: string;
+  icon: IconName;
   label: string;
   href: string;
 }

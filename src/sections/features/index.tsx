@@ -2,6 +2,7 @@ import { BmeBox, BmeDefaultTheme, BmeIcon, BmeTag, BmeText } from "bme-ui";
 import { FormattedMessage, useIntl } from "react-intl";
 import styled from "styled-components";
 import React from "react";
+import { IconName } from "bme-ui/dist/cjs/types/atoms/icon/types";
 import { useMobile } from "../../hooks";
 
 // @TODO: Add proper icon to bme-ui
@@ -10,7 +11,7 @@ import { useMobile } from "../../hooks";
 // @TODO: Add justify for AlignX and AlignY to BmeBox
 
 interface FeatureSingleProps {
-  icon: string;
+  icon: IconName;
   title: string;
   description: string;
   state: "ready" | "in-progress" | "planned";

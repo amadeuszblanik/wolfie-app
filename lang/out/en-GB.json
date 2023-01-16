@@ -424,6 +424,9 @@
   "common.form.first_name.label": "First Name",
   "common.form.last_name.label": "Last Name",
   "common.form.name.label": "Name",
+  "common.form.date.label": "Date",
+  "common.form.time.label": "Time",
+  "common.form.weight.label": "Weight",
   "common.form.birth_date.label": "Birth Date",
   "common.form.breed.label": "Breed",
   "common.form.microchip.label": "Microchip",
@@ -515,5 +518,12 @@
   "common.form.pet_add.error": "Failed to add pet",
   "common.form.pet_add.success": "Pet added successfully",
   "common.form.pet_update.error": "Failed to update pet",
-  "common.form.pet_update.success": "Pet updated successfully"
+  "common.form.pet_update.success": "Pet updated successfully",
+  "common.form.weight_add.error": "Failed to add weight",
+  "common.form.weight_add.success": "Weight added successfully",
+  "common.form.weight_update.error": "Failed to update weight",
+  "common.form.weight_update.success": "Weight updated successfully",
+  "page.pet_weight.no_entries": "Add your first weight entry",
+  "page.pet_weight.add_entry": "Add weight entry",
+  "page.pet_weight.edit_entry": "Edit"
 }

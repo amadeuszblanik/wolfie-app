@@ -1,9 +1,9 @@
 import { useIntl } from "react-intl";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import { LayoutApp } from "../../../../src/layouts";
-import { ScenePetWeight } from "../../../../src/scene";
-import getAuth from "../../../../lib/get-auth";
-import { getSession } from "../../../../lib/get-session";
+import { LayoutApp } from "../../../../../src/layouts";
+import { ScenePetWeight } from "../../../../../src/scene";
+import getAuth from "../../../../../lib/get-auth";
+import { getSession } from "../../../../../lib/get-session";
 
 export const getServerSideProps: GetServerSideProps<{ isSignedId: boolean }> = async (context) => {
   const session = await getSession(context.req, context.res);

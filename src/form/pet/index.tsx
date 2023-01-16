@@ -1,7 +1,7 @@
-import { BmeBox, BmeButton, BmeDropdown, BmeInput, BmeInputDate, BmeText } from "bme-ui";
+import { BmeBox, BmeButton, BmeInput, BmeInputDate, BmeSelect, BmeText } from "bme-ui";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useEffect, useLayoutEffect, useState } from "react";
-import { DropdownItem } from "bme-ui/dist/cjs/types/atoms/dropdown/types";
+import { SelectItem } from "bme-ui/dist/cjs/types/atoms/select/types";
 import { DefaultTheme } from "styled-components";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../../hooks";
@@ -44,7 +44,7 @@ const Component = () => {
 
   const isError = status === "error";
 
-  const breedsList: DropdownItem[] = (storeBreedsData || []).map((breed) => ({
+  const breedsList: SelectItem[] = (storeBreedsData || []).map((breed) => ({
     key: String(breed.id),
     label: intl.formatMessage({ id: `breed.${breed.name}` }),
   }));
@@ -53,7 +53,7 @@ const Component = () => {
   const [modelBorderColor, setModelBorderColor] = useState<keyof DefaultTheme["colors"]>("red");
   const [name, setName] = useState("");
   const kind = PetKind.Dog;
-  const [breed, setBreed] = useState<DropdownItem | null>(null);
+  const [breed, setBreed] = useState<SelectItem | null>(null);
   const [microchip, setMicrochip] = useState("");
   const [birthDate, setBirthDate] = useState<string>(toInputDate());
 
@@ -148,7 +148,7 @@ const Component = () => {
             />
           </BmeBox>
           <BmeBox width="100%" margin="no|no|sm">
-            <BmeDropdown
+            <BmeSelect
               name="breed"
               label={intl.formatMessage({ id: "common.form.breed.label" })}
               list={breedsList}

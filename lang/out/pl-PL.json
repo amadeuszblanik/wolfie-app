@@ -424,6 +424,9 @@
   "common.form.first_name.label": "Imię",
   "common.form.last_name.label": "Nazwisko",
   "common.form.name.label": "Imię",
+  "common.form.date.label": "Data",
+  "common.form.time.label": "Czas",
+  "common.form.weight.label": "Waga",
   "common.form.birth_date.label": "Data urodzenia",
   "common.form.breed.label": "Rasa",
   "common.form.microchip.label": "Mikrochip",
@@ -514,5 +517,12 @@
   "common.form.pet_add.error": "Wystąpił błąd podczas dodawania zwierzęcia.",
   "common.form.pet_add.success": "Zwierzę zostało dodane.",
   "common.form.pet_update.error": "Wystąpił błąd podczas aktualizowania zwierzęcia.",
-  "common.form.pet_update.success": "Zwierzę zostało zaktualizowane."
+  "common.form.pet_update.success": "Zwierzę zostało zaktualizowane.",
+  "common.form.weight_add.error": "Wystąpił błąd podczas dodawania wagi.",
+  "common.form.weight_add.success": "Waga została dodana.",
+  "common.form.weight_update.error": "Wystąpił błąd podczas aktualizowania wagi.",
+  "common.form.weight_update.success": "Waga została zaktualizowana.",
+  "page.pet_weight.no_entries": "Dodaj pierwszy wpis wagi",
+  "page.pet_weight.add_entry": "Dodaj wpis wagi",
+  "page.pet_weight.edit_entry": "Edytuj"
 }

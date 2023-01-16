@@ -31,6 +31,10 @@ import { PetsAddResponse } from "./types/pets/add/response.type";
 import { BreedResponse } from "./types/breed/response.type";
 import { PetsPetIdPutPayload } from "./types/pets/:petId/put/payload.type";
 import { PetsPetIdPutResponse } from "./types/pets/:petId/put/response.type";
+import { PetsPetIdWeightPostPayload } from "./types/pets/:petId/weight/post/payload.type";
+import { PetsPetIdWeightPostResponse } from "./types/pets/:petId/weight/post/response.type";
+import { PetsPetIdWeightPatchResponse } from "./types/pets/:petId/weight/patch/response.type";
+import { PetsPetIdWeightPatchPayload } from "./types/pets/:petId/weight/patch/payload.type";
 import { apiUrl } from "../../utils";
 
 export default class ApiService extends ApiBase {
@@ -71,6 +75,13 @@ export default class ApiService extends ApiBase {
   petsWeight = {
     get: async (petId: string) =>
       await this.get<PetsPetIdWeightGetResponse>(apiUrl(ApiPetsEndpoint.PetsWeight, { petId })),
+    post: async (petId: string, payload: PetsPetIdWeightPostPayload) =>
+      await this.post<PetsPetIdWeightPostResponse>(apiUrl(ApiPetsEndpoint.PetsWeight, { petId }), payload),
+    patch: async (petId: string, weightId: string, payload: PetsPetIdWeightPatchPayload) =>
+      await this.patch<PetsPetIdWeightPatchResponse>(
+        apiUrl(ApiPetsEndpoint.PetsWeightSingle, { petId, weightId }),
+        payload,
+      ),
   };
 
   petsHealthLog = {

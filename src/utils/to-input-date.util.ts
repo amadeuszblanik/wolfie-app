@@ -1,7 +1,6 @@
-const ADD_LEADING_ZERO_BREAKPOINT = 10;
-const MONTH_DIFFERENCE = 1;
+import { default as addLeadingZero } from "./add-leading-zero.util";
 
-const addLeadingZero = (value: number): string => (value < ADD_LEADING_ZERO_BREAKPOINT ? `0${value}` : `${value}`);
+const MONTH_DIFFERENCE = 1;
 
 const util = (date: Date = new Date()): string => {
   const day = date.getDate();

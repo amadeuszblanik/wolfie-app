@@ -1,6 +1,6 @@
 import { BmeBox, BmeButton, BmeInput, BmeText } from "bme-ui";
 import { FormattedMessage, useIntl } from "react-intl";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { DefaultTheme } from "styled-components";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { Form } from "../../components";
@@ -31,7 +31,7 @@ const Component = () => {
     setIsModalOpen(false);
   }, []);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (storeProfileChangePasswordError) {
       setIsModalOpen(true);
       setModelBorderColor("red");

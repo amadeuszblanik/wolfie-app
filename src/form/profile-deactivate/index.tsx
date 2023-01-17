@@ -1,6 +1,6 @@
 import { BmeButton, BmeCheckbox, BmeInput, BmeList, BmeText } from "bme-ui";
 import { FormattedMessage, useIntl } from "react-intl";
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { DefaultTheme } from "styled-components";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../../hooks";
@@ -30,7 +30,7 @@ const Component = () => {
   const [approve, setApprove] = useState(false);
   const [password, setPassword] = useState("");
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (isError) {
       setIsModalOpen(true);
       setModelBorderColor("red");

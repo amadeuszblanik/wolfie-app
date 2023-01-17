@@ -1,6 +1,6 @@
 import { BmeBox, BmeButton, BmeInput, BmeSelect, BmeText } from "bme-ui";
 import { FormattedMessage, useIntl } from "react-intl";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { DefaultTheme } from "styled-components";
 import { SelectItem } from "bme-ui/dist/cjs/types/atoms/select/types";
 import { useAppDispatch, useAppSelector } from "../../hooks";
@@ -50,7 +50,7 @@ const Component = () => {
     }
   }, [storeProfilePutError, storeProfilePutStatus]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!storeProfileData) {
       setFirstName("");
       setLastName("");

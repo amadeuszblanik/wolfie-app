@@ -1,6 +1,6 @@
 import { BmeBox, BmeButton, BmeInput, BmeInputDate, BmeText } from "bme-ui";
 import { FormattedMessage, useIntl } from "react-intl";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { DefaultTheme } from "styled-components";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../../hooks";
@@ -63,7 +63,7 @@ const Component = () => {
     }
   }, [storePetsWeightDataById, petId, dispatch]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (error) {
       setIsModalOpen(true);
       setModelBorderColor("red");

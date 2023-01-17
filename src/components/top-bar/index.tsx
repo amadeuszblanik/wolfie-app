@@ -1,4 +1,4 @@
-import React, { createRef, useLayoutEffect, useState } from "react";
+import React, { createRef, useEffect, useState } from "react";
 import styled from "styled-components";
 import { BmeBox, BmeButton, BmeIcon } from "bme-ui";
 import { bmeMixins } from "bme-ui";
@@ -70,7 +70,7 @@ const Component: ComponentType = ({ left, right, children }) => {
     setTopBarHeight(entry.map((e) => e.contentRect.height).reduce((a, b) => a + b, REDUCE_START_TOP_BAR_HEIGHT));
   });
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     setTopBarHeight(topBarRef.current?.clientHeight || DEFAULT_TOP_BAR_HEIGHT);
   }, [topBarRef]);
 

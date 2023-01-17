@@ -1,6 +1,6 @@
 import { BmeBox, BmeButton, BmeCheckbox, BmeInput, BmeText } from "bme-ui";
 import { FormattedMessage, useIntl } from "react-intl";
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector, useDeviceName } from "../../hooks";
 import { authActions, selectAuthError, selectAuthStatus } from "../../store/auth.slice";
@@ -20,7 +20,7 @@ const Component = () => {
   const [password, setPassword] = useState("");
   const [keepSignIn, setKeepSignIn] = useState(true);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (storeAuthError) {
       setIsErrorVisible(true);
     }

@@ -1,6 +1,6 @@
 import { BmeBox, BmeButton, BmeCheckbox, BmeInput, BmeSelect, BmeText } from "bme-ui";
 import { FormattedMessage, useIntl } from "react-intl";
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { DefaultTheme } from "styled-components";
 import { SelectItem } from "bme-ui/dist/cjs/types/atoms/select/types";
 import { useAppDispatch, useAppSelector } from "../../hooks";
@@ -33,7 +33,7 @@ const Component = () => {
   );
   const [gdprConsent, setGdprConsent] = useState(false);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (storeSignUpError) {
       setIsModalOpen(true);
       setModelBorderColor("red");

@@ -28,9 +28,13 @@ export enum ApiPetsEndpoint {
   PetsWeightSingle = "/pets/:petId/weight/:weightId",
 
   PetsHealthLog = "/pets/:petId/health-log",
-  PetsHealthLogSingle = "/pets/:petId/health-log/:weightId",
+  PetsHealthLogSingle = "/pets/:petId/health-log/:healthLogId",
 }
 
 export enum ApiBreedEndpoint {
   Breed = "/breed",
+}
+
+export enum ApiMedicineEndpoint {
+  Medicine = "/medicine",
 }

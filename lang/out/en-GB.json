@@ -525,5 +525,21 @@
   "common.form.weight_update.success": "Weight updated successfully",
   "page.pet_weight.no_entries": "Add your first weight entry",
   "page.pet_weight.add_entry": "Add weight entry",
-  "page.pet_weight.edit_entry": "Edit"
+  "page.pet_weight.edit_entry": "Edit",
+  "page.pet_health_log.no_entries": "Add your first health log entry",
+  "page.pet_health_log.add_entry": "Add health log entry",
+  "page.pet_health_log.edit_entry": "Edit",
+  "page.pet_id_health_log.title": "Health log",
+  "common.form.health_log_kind.label": "Kind",
+  "common.form.medicines.label": "Medicines",
+  "common.form.additional_medicines.label": "Additional medicines",
+  "common.form.additional_medicines.hint": "Separate medicines with comma",
+  "common.form.diagnosis.label": "Diagnosis",
+  "common.form.next_visit.label": "Next visit",
+  "common.form.vet.label": "Vet",
+  "common.form.description.label": "Description",
+  "common.form.health_log_add.error": "Failed to add health log entry",
+  "common.form.health_log_add.success": "Health log entry added successfully",
+  "common.form.health_log_update.error": "Failed to update health log entry",
+  "common.form.health_log_update.success": "Health log entry updated successfully"
 }

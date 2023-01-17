@@ -11,6 +11,7 @@ import { refreshTokenSlice } from "./refresh-token.slice";
 import { confirmEmailSlice } from "./confirm-email.slice";
 import { resetPasswordSlice } from "./reset-password.slice";
 import { breedsSlice } from "./breeds.slice";
+import { medicinesSlice } from "./medicines.slice";
 import { ApiService } from "../services";
 
 const makeStore = () =>
@@ -20,6 +21,7 @@ const makeStore = () =>
       [breedsSlice.name]: breedsSlice.reducer,
       [configSlice.name]: configSlice.reducer,
       [confirmEmailSlice.name]: confirmEmailSlice.reducer,
+      [medicinesSlice.name]: medicinesSlice.reducer,
       [petsSlice.name]: petsSlice.reducer,
       [petsHealthLogSlice.name]: petsHealthLogSlice.reducer,
       [petsWeightsSlice.name]: petsWeightsSlice.reducer,

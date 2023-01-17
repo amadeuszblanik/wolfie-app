@@ -146,9 +146,9 @@ export const selectPetsWeightPatchError = ({ petsWeights }: AppState) => petsWei
 export const selectPetsWeightPatchData = ({ petsWeights }: AppState) => petsWeights.patchData;
 // @TODO: Rename it later
 export const selectPetsWeightDataById =
-  (id: string) =>
+  (weightId: string) =>
   ({ petsWeights }: AppState) =>
-    petsWeights.getData?.find((pet) => pet.id === id);
+    petsWeights.getData?.find((weight) => weight.id === weightId);
 
 export const petsWeightActions = {
   ...petsWeightsSlice.actions,

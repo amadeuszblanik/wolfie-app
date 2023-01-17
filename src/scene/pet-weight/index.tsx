@@ -3,6 +3,7 @@ import { FormattedMessage, useIntl } from "react-intl";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import { BmeButton, BmeLineChart, BmeList, BmeText } from "bme-ui";
+import { isEmpty } from "bme-utils";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { petsActions, selectPets, selectPetsMyError, selectPetsMyStatus } from "../../store/pets.slice";
 import { ErrorMessage, Loader, PetCard } from "../../components";
@@ -17,7 +18,6 @@ import { selectProfileData } from "../../store/profile.slice";
 import { Link } from "../../atoms";
 
 const ENTRIES_TO_DISPLAY_CHART = 3;
-const ENTRIES_TO_DISPLAY_LIST = 1;
 
 // @TODO: Fix chart X labels - bme-ui
 // @TODO: Refactor line chart - bme-ui
@@ -100,7 +100,7 @@ const Scene = () => {
           }))}
         />
       )}
-      {storePetsWeightData && storePetsWeightData.length >= ENTRIES_TO_DISPLAY_LIST ? (
+      {!isEmpty(storePetsWeightData) ? (
         <>
           <Link href={`/app/pet/${petId}/weight/add`}>
             <BmeButton width="100%">

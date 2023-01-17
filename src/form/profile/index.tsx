@@ -12,6 +12,7 @@ import {
   selectProfilePutError,
   selectProfilePutStatus,
 } from "../../store/profile.slice";
+import { enumToList } from "../../utils";
 
 const Component = () => {
   const intl = useIntl();
@@ -22,10 +23,7 @@ const Component = () => {
 
   const isError = storeProfilePutStatus === "error";
 
-  const weightUnitsList: SelectItem[] = Object.values(WeightUnits).map((weightUnit) => ({
-    key: weightUnit,
-    label: intl.formatMessage({ id: `common.form.weight_unit.value.${weightUnit.toLowerCase()}` }),
-  }));
+  const weightUnitsList: SelectItem[] = enumToList(WeightUnits, "common.form.weight_unit.value", intl);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modelBorderColor, setModelBorderColor] = useState<keyof DefaultTheme["colors"]>("red");

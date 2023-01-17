@@ -2,7 +2,8 @@ import { useCallback, useEffect } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useRouter } from "next/router";
 import styled from "styled-components";
-import { BmeList, BmeText } from "bme-ui";
+import { BmeButton, BmeList, BmeText } from "bme-ui";
+import { isEmpty } from "bme-utils";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { petsActions, selectPets, selectPetsMyError, selectPetsMyStatus } from "../../store/pets.slice";
 import { ErrorMessage, Loader, PetCard } from "../../components";
@@ -13,6 +14,7 @@ import {
   selectPetsHealthLogStatus,
 } from "../../store/petsHealthLog.slice";
 import { pipeDate } from "../../pipes";
+import { Link } from "../../atoms";
 
 const StyledSceneWrapper = styled.div`
   display: grid;
@@ -80,16 +82,42 @@ const Scene = () => {
   return (
     <StyledSceneWrapper>
       {storePetsSingle && <PetCard {...storePetsSingle} />}
-      <BmeList>
-        {storePetsHealthLogData?.map((item) => (
-          <BmeList.Item key={item.id} onClick={() => void router.push(`/app/pet/${petId}/health-log/${item.id}`)}>
-            <BmeText>
-              <FormattedMessage id={`common.health_log.kind.${item.kind.toLowerCase()}`} />
-            </BmeText>
-            <BmeText>{pipeDate(item.date)}</BmeText>
-          </BmeList.Item>
-        ))}
-      </BmeList>
+      {!isEmpty(storePetsHealthLogData) ? (
+        <>
+          <Link href={`/app/pet/${petId}/health-log/add`}>
+            <BmeButton width="100%">
+              <FormattedMessage id="page.pet_health_log.add_entry" />
+            </BmeButton>
+          </Link>
+          <BmeList>
+            {storePetsHealthLogData?.map((item) => (
+              <BmeList.Item
+                key={item.id}
+                onClick={() => void router.push(`/app/pet/${petId}/health-log/${item.id}`)}
+                actions={
+                  <Link href={`/app/pet/${petId}/health-log/${item.id}/edit`}>
+                    <BmeButton variant="blue" size="small">
+                      <FormattedMessage id="page.pet_weight.edit_entry" />
+                    </BmeButton>
+                  </Link>
+                }
+              >
+                <BmeText>
+                  <FormattedMessage id={`common.health_log.kind.${item.kind.toLowerCase()}`} />
+                </BmeText>
+                <BmeText>{pipeDate(item.date)}</BmeText>
+              </BmeList.Item>
+            ))}
+          </BmeList>
+        </>
+      ) : (
+        <Link href={`/app/pet/${petId}/health-log/add`}>
+          <BmeButton width="100%">
+            <FormattedMessage id="page.pet_health_log.no_entries" />
+          </BmeButton>
+        </Link>
+      )}
+
       {isAnyPending && <Loader />}
     </StyledSceneWrapper>
   );

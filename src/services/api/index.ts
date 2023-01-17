@@ -1,5 +1,11 @@
 import ApiBase from "./base";
-import { ApiAuthEndpoint, ApiBreedEndpoint, ApiConfigEndpoint, ApiPetsEndpoint } from "./endpoint.type";
+import {
+  ApiAuthEndpoint,
+  ApiBreedEndpoint,
+  ApiConfigEndpoint,
+  ApiMedicineEndpoint,
+  ApiPetsEndpoint,
+} from "./endpoint.type";
 import { AuthSignInResponse } from "./types/auth/sign-in/response.type";
 import { AuthSignInPayload } from "./types/auth/sign-in/payload.type";
 import { AuthSignUpPayload } from "./types/auth/sign-up/payload.type";
@@ -35,6 +41,11 @@ import { PetsPetIdWeightPostPayload } from "./types/pets/:petId/weight/post/payl
 import { PetsPetIdWeightPostResponse } from "./types/pets/:petId/weight/post/response.type";
 import { PetsPetIdWeightPatchResponse } from "./types/pets/:petId/weight/patch/response.type";
 import { PetsPetIdWeightPatchPayload } from "./types/pets/:petId/weight/patch/payload.type";
+import { PetsPetIdHealthLogPostResponse } from "./types/pets/:petId/health-log/post/response.type";
+import { PetsPetIdHealthLogPatchResponse } from "./types/pets/:petId/health-log/patch/response.type";
+import { PetsPetIdHealthLogPostPayload } from "./types/pets/:petId/health-log/post/payload.type";
+import { PetsPetIdHealthLogPatchPayload } from "./types/pets/:petId/health-log/patch/payload.type";
+import { MedicineShortResponse } from "./types/medicine/response.type";
 import { apiUrl } from "../../utils";
 
 export default class ApiService extends ApiBase {
@@ -87,6 +98,13 @@ export default class ApiService extends ApiBase {
   petsHealthLog = {
     get: async (petId: string) =>
       await this.get<PetsPetIdHealthLogGetResponse>(apiUrl(ApiPetsEndpoint.PetsHealthLog, { petId })),
+    post: async (petId: string, payload: PetsPetIdHealthLogPostPayload) =>
+      await this.post<PetsPetIdHealthLogPostResponse>(apiUrl(ApiPetsEndpoint.PetsHealthLog, { petId }), payload),
+    patch: async (petId: string, healthLogId: string, payload: PetsPetIdHealthLogPatchPayload) =>
+      await this.patch<PetsPetIdHealthLogPatchResponse>(
+        apiUrl(ApiPetsEndpoint.PetsHealthLogSingle, { petId, healthLogId }),
+        payload,
+      ),
   };
 
   authSignIn = async (payload: AuthSignInPayload) =>
@@ -107,9 +125,11 @@ export default class ApiService extends ApiBase {
   authDeactivateAccount = async (payload: AuthDeactivateAccountPayload) =>
     await this.delete<AuthDeactivateAccountResponse>(ApiAuthEndpoint.DeactivateAccount, payload);
 
-  breed = async () => await this.get<BreedResponse>(ApiBreedEndpoint.Breed);
-
   petsMy = async () => await this.get<PetsMyResponse>(ApiPetsEndpoint.PetsMy);
 
   config = async () => await this.get<ConfigResponse>(ApiConfigEndpoint.Config);
+
+  breed = async () => await this.get<BreedResponse>(ApiBreedEndpoint.Breed);
+
+  medicine = async () => await this.get<MedicineShortResponse>(ApiMedicineEndpoint.Medicine);
 }

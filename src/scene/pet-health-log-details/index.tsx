@@ -2,7 +2,7 @@ import { useCallback, useEffect } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useRouter } from "next/router";
 import styled from "styled-components";
-import { BmeList, BmeText } from "bme-ui";
+import { BmeButton, BmeList, BmeText } from "bme-ui";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { petsActions, selectPets, selectPetsMyError, selectPetsMyStatus } from "../../store/pets.slice";
 import { ErrorMessage, Loader, PetCard } from "../../components";
@@ -13,6 +13,7 @@ import {
   selectPetsHealthLogStatus,
 } from "../../store/petsHealthLog.slice";
 import { pipeDate } from "../../pipes";
+import { Link } from "../../atoms";
 
 // @TODO Add 404 view
 
@@ -88,6 +89,11 @@ const Scene = () => {
   return (
     <StyledSceneWrapper>
       {storePetsSingle && <PetCard {...storePetsSingle} />}
+      <Link href={`/app/pet/${petId}/health-log/${healthLogId}/edit`}>
+        <BmeButton variant="blue" width="100%">
+          <FormattedMessage id="page.pet_health_log.edit_entry" />
+        </BmeButton>
+      </Link>
       <BmeList>
         <BmeList.Item>
           <BmeText>

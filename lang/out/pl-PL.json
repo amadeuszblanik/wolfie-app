@@ -524,5 +524,21 @@
   "common.form.weight_update.success": "Waga została zaktualizowana.",
   "page.pet_weight.no_entries": "Dodaj pierwszy wpis wagi",
   "page.pet_weight.add_entry": "Dodaj wpis wagi",
-  "page.pet_weight.edit_entry": "Edytuj"
+  "page.pet_weight.edit_entry": "Edytuj",
+  "page.pet_health_log.no_entries": "Dodaj pierwszy wpis dziennika zdrowia",
+  "page.pet_health_log.add_entry": "Dodaj wpis dziennika zdrowia",
+  "page.pet_health_log.edit_entry": "Edytuj",
+  "page.pet_id_health_log.title": "Dziennik zdrowia",
+  "common.form.health_log_kind.label": "Rodzaj",
+  "common.form.medicines.label": "Leki",
+  "common.form.additional_medicines.label": "Dodatkowe leki",
+  "common.form.additional_medicines.hint": "Oddzielaj leki przecinkami",
+  "common.form.diagnosis.label": "Diagnoza",
+  "common.form.next_visit.label": "Następna wizyta",
+  "common.form.vet.label": "Weterynarz",
+  "common.form.description.label": "Opis",
+  "common.form.health_log_add.error": "Wystąpił błąd podczas dodawania wpisu dziennika zdrowia.",
+  "common.form.health_log_add.success": "Wpis dziennika zdrowia został dodany.",
+  "common.form.health_log_update.error": "Wystąpił błąd podczas aktualizowania wpisu dziennika zdrowia.",
+  "common.form.health_log_update.success": "Wpis dziennika zdrowia został zaktualizowany."
 }

@@ -3,11 +3,14 @@ import styled from "styled-components";
 import { BmeAvatar, BmeBox, BmeButton, BmeProgressBar, BmeText } from "bme-ui";
 import { bmeMixins } from "bme-ui";
 import { FormattedMessage } from "react-intl";
+import { useRouter } from "next/router";
 import Item, { SideBarItemType } from "./item";
 import { Brand, Link } from "../../atoms";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { profileActions, selectProfileData } from "../../store/profile.slice";
 import { configActions, selectConfigData } from "../../store/config.slice";
+
+// @TODO: Redesign back button
 
 interface TopBarProps {
   title: string;
@@ -54,6 +57,33 @@ const StyledSideBarTitleWrapper = styled.div`
   width: 100%;
   height: 80px;
   background: ${({ theme }) => theme.colors.backgroundSecondary};
+`;
+
+const StyledSideBarTitleBackButton = styled.button`
+  position: absolute;
+  top: 0;
+  left: calc(100% - 80px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  color: ${({ theme }) => theme.colors.text};
+  background: ${({ theme }) => theme.colors.backgroundSecondary};
+  border: none;
+  border-right: 1px solid ${({ theme }) => theme.colors.backgroundSecondary};
+  border-left: 1px solid ${({ theme }) => theme.colors.primary};
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  ${bmeMixins.animations(["left", "border-right", "border-left"])};
+
+  @media (min-width: 1300px) {
+    left: 80px;
+    border-right: 1px solid ${({ theme }) => theme.colors.primary};
+    border-left: 1px solid ${({ theme }) => theme.colors.backgroundSecondary};
+  }
 `;
 
 const StyledSideBarTitlePlaceholder = styled.div`
@@ -125,12 +155,15 @@ const StyledSideBarProfile = styled.div<StyledSideBarProfileProps>`
 `;
 
 const Component: ComponentType = ({ title, children }) => {
+  const router = useRouter();
   const dispatch = useAppDispatch();
   const storeProfileData = useAppSelector(selectProfileData);
   const storeConfigData = useAppSelector(selectConfigData);
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+
+  const isBackButtonVisible = router.pathname !== "/app";
 
   useEffect(() => {
     dispatch(profileActions.get());
@@ -205,6 +238,11 @@ const Component: ComponentType = ({ title, children }) => {
         </StyledSideBarProfile>
       </StyledSideBarWrapper>
       <StyledSideBarTitleWrapper>
+        {isBackButtonVisible && (
+          <StyledSideBarTitleBackButton onClick={() => router.back()}>
+            <FormattedMessage id="layout.app.back" />
+          </StyledSideBarTitleBackButton>
+        )}
         <BmeText variant="Title1">{title}</BmeText>
       </StyledSideBarTitleWrapper>
       <StyledSideBarTitlePlaceholder />

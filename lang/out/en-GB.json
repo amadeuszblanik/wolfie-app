@@ -541,5 +541,6 @@
   "common.form.health_log_add.error": "Failed to add health log entry",
   "common.form.health_log_add.success": "Health log entry added successfully",
   "common.form.health_log_update.error": "Failed to update health log entry",
-  "common.form.health_log_update.success": "Health log entry updated successfully"
+  "common.form.health_log_update.success": "Health log entry updated successfully",
+  "layout.app.back": "Back"
 }

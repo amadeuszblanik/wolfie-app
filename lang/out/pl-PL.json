@@ -540,5 +540,6 @@
   "common.form.health_log_add.error": "Wystąpił błąd podczas dodawania wpisu dziennika zdrowia.",
   "common.form.health_log_add.success": "Wpis dziennika zdrowia został dodany.",
   "common.form.health_log_update.error": "Wystąpił błąd podczas aktualizowania wpisu dziennika zdrowia.",
-  "common.form.health_log_update.success": "Wpis dziennika zdrowia został zaktualizowany."
+  "common.form.health_log_update.success": "Wpis dziennika zdrowia został zaktualizowany.",
+  "layout.app.back": "Wróć"
 }

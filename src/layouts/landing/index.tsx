@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
-import { BmeButton } from "bme-ui";
+import { BmeBox, BmeButton } from "bme-ui";
 import styled from "styled-components";
 import { FormattedMessage } from "react-intl";
 import { detectDevice } from "bme-utils";
@@ -39,15 +39,22 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       <TopBar
         left={<Brand withName />}
         right={
-          <Link
-            href={
-              isAvailableDownload ? `https://apps.apple.com/${country.toLowerCase()}/app/wolfie/id6444870861` : "/app"
-            }
-          >
-            <BmeButton size="small">
-              <FormattedMessage id={isAvailableDownload ? "layout.landing.menu.download" : "layout.landing.menu.app"} />
-            </BmeButton>
-          </Link>
+          <>
+            {isAvailableDownload && (
+              <BmeBox padding="no|md|no|no">
+                <Link href={`https://apps.apple.com/${country.toLowerCase()}/app/wolfie/id6444870861`}>
+                  <BmeButton size="small">
+                    <FormattedMessage id="layout.landing.menu.download" />
+                  </BmeButton>
+                </Link>
+              </BmeBox>
+            )}
+            <Link href="/app">
+              <BmeButton size="small">
+                <FormattedMessage id="layout.landing.menu.app" />
+              </BmeButton>
+            </Link>
+          </>
         }
       >
         <TopBar.Item href="/#about">

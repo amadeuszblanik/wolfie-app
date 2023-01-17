@@ -40,7 +40,7 @@ const Component = () => {
     setIsModalOpen(false);
   }, []);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (storeProfilePutError) {
       setIsModalOpen(true);
       setModelBorderColor("red");
@@ -64,7 +64,7 @@ const Component = () => {
     setFirstName(storeProfileData.firstName);
     setLastName(storeProfileData.lastName);
     setWeightUnit(weightUnitsList.find((item) => item.key === storeProfileData.weightUnit) || null);
-  }, [storeProfileData, weightUnitsList]);
+  }, [storeProfileData]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

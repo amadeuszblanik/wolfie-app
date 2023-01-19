@@ -1,15 +1,14 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import { ApiStatus } from "../services/api/types/status.type";
-import { ApiErrorMessage } from "../services/api/types/error-message.type";
+import { ApiMessage } from "../services/api/types/api-message.type";
 import { ApiService } from "../services";
 import { ConfigResponse } from "../services/api/types/config/response.type";
 
-const get = createAsyncThunk<
-  ConfigResponse,
-  undefined,
-  { extra: { apiService: ApiService }; rejectValue: ApiErrorMessage }
->("config/get", async (_, thunkAPI) => await thunkAPI.extra.apiService.config());
+const get = createAsyncThunk<ConfigResponse, undefined, { extra: { apiService: ApiService }; rejectValue: ApiMessage }>(
+  "config/get",
+  async (_, thunkAPI) => await thunkAPI.extra.apiService.config(),
+);
 
 export interface ConfigStore {
   status: ApiStatus;

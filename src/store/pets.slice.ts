@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import { ApiStatus } from "../services/api/types/status.type";
-import { ApiErrorMessage } from "../services/api/types/error-message.type";
+import { ApiMessage } from "../services/api/types/api-message.type";
 import { ApiService } from "../services";
 import { PetsMyResponse } from "../services/api/types/pets/my/response.type";
 import { PetsAddResponse } from "../services/api/types/pets/add/response.type";
@@ -12,13 +12,13 @@ import { AppState } from "./index";
 const petsMy = createAsyncThunk<
   PetsMyResponse,
   undefined,
-  { extra: { apiService: ApiService }; rejectValue: ApiErrorMessage }
+  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
 >("pets/get", async (_, thunkAPI) => await thunkAPI.extra.apiService.petsMy());
 
 const add = createAsyncThunk<
   PetsAddResponse,
   PetsAddPayload,
-  { extra: { apiService: ApiService }; rejectValue: ApiErrorMessage }
+  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
 >("pets/add", async (payload, thunkAPI) => await thunkAPI.extra.apiService.petsAdd.post(payload));
 
 const edit = createAsyncThunk<
@@ -27,7 +27,7 @@ const edit = createAsyncThunk<
     petId: string;
     payload: PetsAddPayload;
   },
-  { extra: { apiService: ApiService }; rejectValue: ApiErrorMessage }
+  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
 >("pets/edit", async ({ petId, payload }, thunkAPI) => await thunkAPI.extra.apiService.pets.put(petId, payload));
 
 export interface PetsStore {

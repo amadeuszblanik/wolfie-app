@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import { ApiStatus } from "../services/api/types/status.type";
-import { ApiErrorMessage } from "../services/api/types/error-message.type";
+import { ApiMessage } from "../services/api/types/api-message.type";
 import { ApiService } from "../services";
 import { AuthSignUpResponse } from "../services/api/types/auth/sign-up/response.type";
 import { AuthSignUpPayload } from "../services/api/types/auth/sign-up/payload.type";
@@ -9,7 +9,7 @@ import { AuthSignUpPayload } from "../services/api/types/auth/sign-up/payload.ty
 const signUp = createAsyncThunk<
   AuthSignUpResponse,
   AuthSignUpPayload,
-  { extra: { apiService: ApiService }; rejectValue: ApiErrorMessage }
+  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
 >("signUp/signUp", async (payload, thunkAPI) => await thunkAPI.extra.apiService.authSignUp(payload));
 
 export interface SignUpStore {

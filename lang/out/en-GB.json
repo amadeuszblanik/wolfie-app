@@ -542,5 +542,13 @@
   "common.form.health_log_add.success": "Health log entry added successfully",
   "common.form.health_log_update.error": "Failed to update health log entry",
   "common.form.health_log_update.success": "Health log entry updated successfully",
-  "layout.app.back": "Back"
+  "layout.app.back": "Back",
+  "page.pet_weight.delete_entry": "Delete",
+  "common.component.remove_entry_modal.title": "Remove entry",
+  "common.component.remove_entry_modal.description": "Are you sure you want to remove this entry?",
+  "common.component.remove_entry_modal.cancel": "Cancel",
+  "common.component.remove_entry_modal.confirm": "Confirm",
+  "common.component.remove_entry_modal.success.title": "Entry removed",
+  "common.component.remove_entry_modal.success.description": "Entry has been removed successfully",
+  "common.component.remove_entry_modal.success.close": "Close"
 }

@@ -46,6 +46,7 @@ import { PetsPetIdHealthLogPatchResponse } from "./types/pets/:petId/health-log/
 import { PetsPetIdHealthLogPostPayload } from "./types/pets/:petId/health-log/post/payload.type";
 import { PetsPetIdHealthLogPatchPayload } from "./types/pets/:petId/health-log/patch/payload.type";
 import { MedicineShortResponse } from "./types/medicine/response.type";
+import { ApiMessage } from "./types/api-message.type";
 import { apiUrl } from "../../utils";
 
 export default class ApiService extends ApiBase {
@@ -93,6 +94,8 @@ export default class ApiService extends ApiBase {
         apiUrl(ApiPetsEndpoint.PetsWeightSingle, { petId, weightId }),
         payload,
       ),
+    delete: async (petId: string, weightId: string) =>
+      await this.delete<ApiMessage>(apiUrl(ApiPetsEndpoint.PetsWeightSingle, { petId, weightId })),
   };
 
   petsHealthLog = {
@@ -105,6 +108,8 @@ export default class ApiService extends ApiBase {
         apiUrl(ApiPetsEndpoint.PetsHealthLogSingle, { petId, healthLogId }),
         payload,
       ),
+    delete: async (petId: string, healthLogId: string) =>
+      await this.delete<ApiMessage>(apiUrl(ApiPetsEndpoint.PetsHealthLogSingle, { petId, healthLogId })),
   };
 
   authSignIn = async (payload: AuthSignInPayload) =>

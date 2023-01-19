@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import { ApiStatus } from "../services/api/types/status.type";
-import { ApiErrorMessage } from "../services/api/types/error-message.type";
+import { ApiMessage } from "../services/api/types/api-message.type";
 import { ApiService } from "../services";
 import { AuthProfileGetResponse } from "../services/api/types/auth/profile/get/response.type";
 import { AuthProfilePutResponse } from "../services/api/types/auth/profile/put/response.type";
@@ -17,31 +17,31 @@ import { AppState } from "./index";
 const get = createAsyncThunk<
   AuthProfileGetResponse,
   undefined,
-  { extra: { apiService: ApiService }; rejectValue: ApiErrorMessage }
+  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
 >("profile/get", async (_, thunkAPI) => await thunkAPI.extra.apiService.authProfile.get());
 
 const put = createAsyncThunk<
   AuthProfilePutResponse,
   AuthProfilePutPayload,
-  { extra: { apiService: ApiService }; rejectValue: ApiErrorMessage }
+  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
 >("profile/put", async (payload, thunkAPI) => await thunkAPI.extra.apiService.authProfile.put(payload));
 
 const changePassword = createAsyncThunk<
   AuthChangePasswordResponse,
   AuthChangePasswordPayload,
-  { extra: { apiService: ApiService }; rejectValue: ApiErrorMessage }
+  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
 >("profile/change-password", async (payload, thunkAPI) => await thunkAPI.extra.apiService.authChangePassword(payload));
 
 const deleteAccount = createAsyncThunk<
   AuthDeleteAccountResponse,
   AuthDeleteAccountPayload,
-  { extra: { apiService: ApiService }; rejectValue: ApiErrorMessage }
+  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
 >("profile/delete-account", async (payload, thunkAPI) => await thunkAPI.extra.apiService.authDeleteAccount(payload));
 
 const deactivateAccount = createAsyncThunk<
   AuthDeactivateAccountResponse,
   AuthDeactivateAccountPayload,
-  { extra: { apiService: ApiService }; rejectValue: ApiErrorMessage }
+  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
 >(
   "profile/deactivate-account",
   async (payload, thunkAPI) => await thunkAPI.extra.apiService.authDeactivateAccount(payload),

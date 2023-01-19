@@ -1,4 +1,4 @@
-export interface ApiErrorMessage {
+export interface ApiMessage {
   message: string;
   success: boolean;
 }

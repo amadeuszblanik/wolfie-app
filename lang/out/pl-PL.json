@@ -541,5 +541,13 @@
   "common.form.health_log_add.success": "Wpis dziennika zdrowia został dodany.",
   "common.form.health_log_update.error": "Wystąpił błąd podczas aktualizowania wpisu dziennika zdrowia.",
   "common.form.health_log_update.success": "Wpis dziennika zdrowia został zaktualizowany.",
-  "layout.app.back": "Wróć"
+  "layout.app.back": "Wróć",
+  "page.pet_weight.delete_entry": "Usuń",
+  "common.component.remove_entry_modal.title": "Usuń wpis",
+  "common.component.remove_entry_modal.description": "Czy na pewno chcesz usunąć ten wpis?",
+  "common.component.remove_entry_modal.cancel": "Anuluj",
+  "common.component.remove_entry_modal.confirm": "Usuń",
+  "common.component.remove_entry_modal.success.title": "Wpis został usunięty",
+  "common.component.remove_entry_modal.success.description": "Wpis został poprawnie usunięty.",
+  "common.component.remove_entry_modal.success.close": "Zamknij"
 }

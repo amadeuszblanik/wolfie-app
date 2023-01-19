@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useRouter } from "next/router";
 import styled from "styled-components";
@@ -6,10 +6,13 @@ import { BmeButton, BmeLineChart, BmeList, BmeText } from "bme-ui";
 import { isEmpty } from "bme-utils";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { petsActions, selectPets, selectPetsMyError, selectPetsMyStatus } from "../../store/pets.slice";
-import { ErrorMessage, Loader, PetCard } from "../../components";
+import { ErrorMessage, Loader, PetCard, RemoveEntryModal } from "../../components";
 import {
   petsWeightActions,
   selectPetsWeightData,
+  selectPetsWeightDeleteData,
+  selectPetsWeightDeleteError,
+  selectPetsWeightDeleteStatus,
   selectPetsWeightError,
   selectPetsWeightStatus,
 } from "../../store/petsWeight.slice";
@@ -50,24 +53,43 @@ const Scene = () => {
   const storePetsWeightError = useAppSelector(selectPetsWeightError);
   const storePetsWeightData = useAppSelector(selectPetsWeightData);
   const storeProfileData = useAppSelector(selectProfileData);
+  const storePetsWeightDeleteStatus = useAppSelector(selectPetsWeightDeleteStatus);
+  const storePetsWeightDeleteError = useAppSelector(selectPetsWeightDeleteError);
+  const storePetsWeightDeleteData = useAppSelector(selectPetsWeightDeleteData);
 
   const isAnyPending = [storePetsMyStatus, storePetsWeightStatus].some((status) => status === "pending");
   const isAnyError = [storePetsMyStatus, storePetsWeightStatus].some((status) => status === "error");
   const errorMessages = [storePetsMyError, storePetsWeightError].filter(Boolean) as string[];
 
+  const [entryToRemove, setEntryToRemove] = useState<string | null>(null);
+
   const handleUpdatePets = useCallback(() => {
     if (!storePetsSingle) {
       dispatch(petsActions.petsMy());
     }
-  }, [dispatch, storePetsSingle]);
+  }, [storePetsSingle]);
 
   const handleUpdatePetsWeight = useCallback(() => {
     dispatch(petsWeightActions.get({ petId }));
-  }, [dispatch, petId]);
+  }, [petId]);
 
   const handleTryAgain = () => {
     handleUpdatePets();
     handleUpdatePetsWeight();
+  };
+
+  const handleOpenRemoveEntryModal = (entryId: string | null) => {
+    setEntryToRemove(entryId);
+    dispatch(petsWeightActions.resetDelete());
+  };
+
+  const handleRemoveEntry = () => {
+    if (!entryToRemove) {
+      return;
+    }
+
+    dispatch(petsWeightActions.remove({ petId, weightId: entryToRemove }));
+    dispatch(petsWeightActions.get({ petId }));
   };
 
   useEffect(() => {
@@ -78,7 +100,7 @@ const Scene = () => {
 
   useEffect(() => {
     handleUpdatePets();
-  }, [dispatch, handleUpdatePets]);
+  }, [handleUpdatePets]);
 
   if (isAnyError) {
     return (
@@ -112,11 +134,16 @@ const Scene = () => {
               <BmeList.Item
                 key={item.id}
                 actions={
-                  <Link href={`/app/pet/${petId}/weight/${item.id}`}>
-                    <BmeButton variant="blue" size="small">
-                      <FormattedMessage id="page.pet_weight.edit_entry" />
+                  <>
+                    <Link href={`/app/pet/${petId}/weight/${item.id}`}>
+                      <BmeButton variant="blue" size="small">
+                        <FormattedMessage id="page.pet_weight.edit_entry" />
+                      </BmeButton>
+                    </Link>
+                    <BmeButton variant="red" size="small" onClick={() => handleOpenRemoveEntryModal(item.id)}>
+                      <FormattedMessage id="page.pet_weight.delete_entry" />
                     </BmeButton>
-                  </Link>
+                  </>
                 }
               >
                 <BmeText>{item.formatted}</BmeText>
@@ -131,6 +158,15 @@ const Scene = () => {
             <FormattedMessage id="page.pet_weight.no_entries" />
           </BmeButton>
         </Link>
+      )}
+      {entryToRemove && (
+        <RemoveEntryModal
+          apiStatus={storePetsWeightDeleteStatus}
+          error={storePetsWeightDeleteError}
+          success={storePetsWeightDeleteData}
+          onCancel={() => handleOpenRemoveEntryModal(null)}
+          onRemove={handleRemoveEntry}
+        />
       )}
       {isAnyPending && <Loader />}
     </StyledSceneWrapper>

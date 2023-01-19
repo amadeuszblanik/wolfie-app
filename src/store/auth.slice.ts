@@ -3,7 +3,7 @@ import { HYDRATE } from "next-redux-wrapper";
 import { AuthSignInPayload } from "../services/api/types/auth/sign-in/payload.type";
 import { ApiStatus } from "../services/api/types/status.type";
 import { AuthSignInResponse } from "../services/api/types/auth/sign-in/response.type";
-import { ApiErrorMessage } from "../services/api/types/error-message.type";
+import { ApiMessage } from "../services/api/types/api-message.type";
 import { ApiService } from "../services";
 import { cookie } from "../utils";
 import { AuthRefreshTokenPostResponse } from "../services/api/types/auth/refresh-token/post/response.type";
@@ -13,13 +13,13 @@ import { AppState } from "./index";
 const signIn = createAsyncThunk<
   AuthSignInResponse,
   AuthSignInPayload,
-  { extra: { apiService: ApiService }; rejectValue: ApiErrorMessage }
+  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
 >("auth/signIn", async (payload, thunkAPI) => await thunkAPI.extra.apiService.authSignIn(payload));
 
 const refreshSession = createAsyncThunk<
   AuthRefreshTokenPostResponse,
   AuthRefreshTokenPostPayload,
-  { extra: { apiService: ApiService }; rejectValue: ApiErrorMessage }
+  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
 >("auth/refreshSession", async (payload, thunkAPI) => await thunkAPI.extra.apiService.authRefreshToken.post(payload));
 
 export interface AuthStore {

@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import { SelectItem } from "bme-ui/dist/cjs/types/atoms/select/types";
 import { ApiStatus } from "../services/api/types/status.type";
-import { ApiErrorMessage } from "../services/api/types/error-message.type";
+import { ApiMessage } from "../services/api/types/api-message.type";
 import { ApiService } from "../services";
 import { MedicineShortResponse } from "../services/api/types/medicine/response.type";
 import { AppState } from "./index";
@@ -10,7 +10,7 @@ import { AppState } from "./index";
 const get = createAsyncThunk<
   MedicineShortResponse,
   undefined,
-  { extra: { apiService: ApiService }; rejectValue: ApiErrorMessage }
+  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
 >("medicines/get", async (_, thunkAPI) => await thunkAPI.extra.apiService.medicine());
 
 export interface MedicinesStore {

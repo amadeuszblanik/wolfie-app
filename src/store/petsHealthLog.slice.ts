@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import { ApiStatus } from "../services/api/types/status.type";
-import { ApiErrorMessage } from "../services/api/types/error-message.type";
+import { ApiMessage } from "../services/api/types/api-message.type";
 import { ApiService } from "../services";
 import { PetsPetIdHealthLogGetResponse } from "../services/api/types/pets/:petId/health-log/get/response.type";
 import { PetsPetIdHealthLogPostPayload } from "../services/api/types/pets/:petId/health-log/post/payload.type";
@@ -13,13 +13,13 @@ import { AppState } from "./index";
 const get = createAsyncThunk<
   PetsPetIdHealthLogGetResponse,
   { petId: string },
-  { extra: { apiService: ApiService }; rejectValue: ApiErrorMessage }
+  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
 >("petsHealthLog/get", async ({ petId }, thunkAPI) => await thunkAPI.extra.apiService.petsHealthLog.get(petId));
 
 const post = createAsyncThunk<
   PetsPetIdHealthLogPostResponse,
   { petId: string; payload: PetsPetIdHealthLogPostPayload },
-  { extra: { apiService: ApiService }; rejectValue: ApiErrorMessage }
+  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
 >(
   "petsHealthLog/post",
   async ({ petId, payload }, thunkAPI) => await thunkAPI.extra.apiService.petsHealthLog.post(petId, payload),
@@ -28,7 +28,7 @@ const post = createAsyncThunk<
 const patch = createAsyncThunk<
   PetsPetIdHealthLogPatchResponse,
   { petId: string; healthLogId: string; payload: PetsPetIdHealthLogPatchPayload },
-  { extra: { apiService: ApiService }; rejectValue: ApiErrorMessage }
+  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
 >(
   "petsHealthLog/patch",
   async ({ petId, healthLogId, payload }, thunkAPI) =>

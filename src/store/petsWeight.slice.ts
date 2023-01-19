@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import { ApiStatus } from "../services/api/types/status.type";
-import { ApiErrorMessage } from "../services/api/types/error-message.type";
+import { ApiMessage } from "../services/api/types/api-message.type";
 import { ApiService } from "../services";
 import { PetsPetIdWeightGetResponse } from "../services/api/types/pets/:petId/weight/get/response.type";
 import { PetsPetIdWeightPostResponse } from "../services/api/types/pets/:petId/weight/post/response.type";
@@ -13,13 +13,13 @@ import { AppState } from "./index";
 const get = createAsyncThunk<
   PetsPetIdWeightGetResponse,
   { petId: string },
-  { extra: { apiService: ApiService }; rejectValue: ApiErrorMessage }
+  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
 >("petsWeight/get", async ({ petId }, thunkAPI) => await thunkAPI.extra.apiService.petsWeight.get(petId));
 
 const post = createAsyncThunk<
   PetsPetIdWeightPostResponse,
   { petId: string; payload: PetsPetIdWeightPostPayload },
-  { extra: { apiService: ApiService }; rejectValue: ApiErrorMessage }
+  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
 >(
   "petsWeight/post",
   async ({ petId, payload }, thunkAPI) => await thunkAPI.extra.apiService.petsWeight.post(petId, payload),
@@ -28,11 +28,20 @@ const post = createAsyncThunk<
 const patch = createAsyncThunk<
   PetsPetIdWeightPatchResponse,
   { petId: string; weightId: string; payload: PetsPetIdWeightPatchPayload },
-  { extra: { apiService: ApiService }; rejectValue: ApiErrorMessage }
+  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
 >(
   "petsWeight/patch",
   async ({ petId, weightId, payload }, thunkAPI) =>
     await thunkAPI.extra.apiService.petsWeight.patch(petId, weightId, payload),
+);
+
+const remove = createAsyncThunk<
+  ApiMessage,
+  { petId: string; weightId: string },
+  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
+>(
+  "petsWeight/delete",
+  async ({ petId, weightId }, thunkAPI) => await thunkAPI.extra.apiService.petsWeight.delete(petId, weightId),
 );
 
 export interface PetsWeightStore {
@@ -45,6 +54,9 @@ export interface PetsWeightStore {
   patchStatus: ApiStatus;
   patchError: string | null;
   patchData: PetsPetIdWeightPatchResponse | null;
+  deleteStatus: ApiStatus;
+  deleteError: string | null;
+  deleteData: string | null;
 }
 
 const initialState: PetsWeightStore = {
@@ -57,6 +69,9 @@ const initialState: PetsWeightStore = {
   patchStatus: "idle",
   patchError: null,
   patchData: null,
+  deleteStatus: "idle",
+  deleteError: null,
+  deleteData: null,
 };
 
 export const petsWeightsSlice = createSlice({
@@ -74,6 +89,11 @@ export const petsWeightsSlice = createSlice({
       state.patchStatus = "idle";
       state.patchError = null;
       state.patchData = null;
+    },
+    resetDelete: (state) => {
+      state.deleteStatus = "idle";
+      state.deleteError = null;
+      state.deleteData = null;
     },
   },
 
@@ -129,6 +149,21 @@ export const petsWeightsSlice = createSlice({
       state.patchError = action.error.message || null;
       state.patchData = null;
     });
+    builder.addCase(remove.pending, (state) => {
+      state.deleteStatus = "pending";
+      state.deleteError = null;
+      state.deleteData = null;
+    });
+    builder.addCase(remove.fulfilled, (state, action) => {
+      state.deleteStatus = "success";
+      state.deleteError = null;
+      state.deleteData = action.payload.message || null;
+    });
+    builder.addCase(remove.rejected, (state, action) => {
+      state.deleteStatus = "error";
+      state.deleteError = action.error.message || null;
+      state.deleteData = null;
+    });
   },
 });
 
@@ -144,6 +179,9 @@ export const selectPetsWeightPostData = ({ petsWeights }: AppState) => petsWeigh
 export const selectPetsWeightPatchStatus = ({ petsWeights }: AppState) => petsWeights.patchStatus;
 export const selectPetsWeightPatchError = ({ petsWeights }: AppState) => petsWeights.patchError;
 export const selectPetsWeightPatchData = ({ petsWeights }: AppState) => petsWeights.patchData;
+export const selectPetsWeightDeleteStatus = ({ petsWeights }: AppState) => petsWeights.deleteStatus;
+export const selectPetsWeightDeleteError = ({ petsWeights }: AppState) => petsWeights.deleteError;
+export const selectPetsWeightDeleteData = ({ petsWeights }: AppState) => petsWeights.deleteData;
 // @TODO: Rename it later
 export const selectPetsWeightDataById =
   (weightId: string) =>
@@ -155,4 +193,5 @@ export const petsWeightActions = {
   get,
   post,
   patch,
+  remove,
 };

@@ -35,6 +35,15 @@ const patch = createAsyncThunk<
     await thunkAPI.extra.apiService.petsHealthLog.patch(petId, healthLogId, payload),
 );
 
+const remove = createAsyncThunk<
+  ApiMessage,
+  { petId: string; healthLogId: string },
+  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
+>(
+  "petsHealthLog/delete",
+  async ({ petId, healthLogId }, thunkAPI) => await thunkAPI.extra.apiService.petsHealthLog.delete(petId, healthLogId),
+);
+
 export interface PetsHealthLogtore {
   getStatus: ApiStatus;
   getError: string | null;
@@ -45,6 +54,9 @@ export interface PetsHealthLogtore {
   patchStatus: ApiStatus;
   patchError: string | null;
   patchData: PetsPetIdHealthLogPatchResponse | null;
+  deleteStatus: ApiStatus;
+  deleteError: string | null;
+  deleteData: string | null;
 }
 
 const initialState: PetsHealthLogtore = {
@@ -57,6 +69,9 @@ const initialState: PetsHealthLogtore = {
   patchStatus: "idle",
   patchError: null,
   patchData: null,
+  deleteStatus: "idle",
+  deleteError: null,
+  deleteData: null,
 };
 
 export const petsHealthLogSlice = createSlice({
@@ -74,6 +89,11 @@ export const petsHealthLogSlice = createSlice({
       state.patchStatus = "idle";
       state.patchError = null;
       state.patchData = null;
+    },
+    resetDelete: (state) => {
+      state.deleteStatus = "idle";
+      state.deleteError = null;
+      state.deleteData = null;
     },
   },
 
@@ -129,6 +149,21 @@ export const petsHealthLogSlice = createSlice({
       state.patchError = action.error.message || null;
       state.patchData = null;
     });
+    builder.addCase(remove.pending, (state) => {
+      state.deleteStatus = "pending";
+      state.deleteError = null;
+      state.deleteData = null;
+    });
+    builder.addCase(remove.fulfilled, (state, action) => {
+      state.deleteStatus = "success";
+      state.deleteError = null;
+      state.deleteData = action.payload.message || null;
+    });
+    builder.addCase(remove.rejected, (state, action) => {
+      state.deleteStatus = "error";
+      state.deleteError = action.error.message || null;
+      state.deleteData = null;
+    });
   },
 });
 
@@ -144,6 +179,9 @@ export const selectPetsHealthLogPostData = ({ petsHealthLog }: AppState) => pets
 export const selectPetsHealthLogPatchStatus = ({ petsHealthLog }: AppState) => petsHealthLog.patchStatus;
 export const selectPetsHealthLogPatchError = ({ petsHealthLog }: AppState) => petsHealthLog.patchError;
 export const selectPetsHealthLogPatchData = ({ petsHealthLog }: AppState) => petsHealthLog.patchData;
+export const selectPetsHealthLogDeleteStatus = ({ petsHealthLog }: AppState) => petsHealthLog.deleteStatus;
+export const selectPetsHealthLogDeleteError = ({ petsHealthLog }: AppState) => petsHealthLog.deleteError;
+export const selectPetsHealthLogDeleteData = ({ petsHealthLog }: AppState) => petsHealthLog.deleteData;
 // @TODO: Rename it later
 export const selectPetsHealthLogDataById =
   (healthLogId: string) =>
@@ -155,4 +193,5 @@ export const petsHealthLogActions = {
   get,
   post,
   patch,
+  remove,
 };

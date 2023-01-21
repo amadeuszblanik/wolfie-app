@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useRouter } from "next/router";
 import styled from "styled-components";
@@ -6,10 +6,13 @@ import { BmeButton, BmeList, BmeText } from "bme-ui";
 import { isEmpty } from "bme-utils";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { petsActions, selectPets, selectPetsMyError, selectPetsMyStatus } from "../../store/pets.slice";
-import { ErrorMessage, Loader, PetCard } from "../../components";
+import { ErrorMessage, Loader, PetCard, RemoveEntryModal } from "../../components";
 import {
   petsHealthLogActions,
   selectPetsHealthLogData,
+  selectPetsHealthLogDeleteData,
+  selectPetsHealthLogDeleteError,
+  selectPetsHealthLogDeleteStatus,
   selectPetsHealthLogError,
   selectPetsHealthLogStatus,
 } from "../../store/petsHealthLog.slice";
@@ -40,10 +43,15 @@ const Scene = () => {
   const storePetsHealthLogStatus = useAppSelector(selectPetsHealthLogStatus);
   const storePetsHealthLogError = useAppSelector(selectPetsHealthLogError);
   const storePetsHealthLogData = useAppSelector(selectPetsHealthLogData);
+  const storePetsHealthLogDeleteStatus = useAppSelector(selectPetsHealthLogDeleteStatus);
+  const storePetsHealthLogDeleteError = useAppSelector(selectPetsHealthLogDeleteError);
+  const storePetsHealthLogDeleteData = useAppSelector(selectPetsHealthLogDeleteData);
 
   const isAnyPending = [storePetsMyStatus, storePetsHealthLogStatus].some((status) => status === "pending");
   const isAnyError = [storePetsMyStatus, storePetsHealthLogStatus].some((status) => status === "error");
   const errorMessages = [storePetsMyError, storePetsHealthLogError].filter(Boolean) as string[];
+
+  const [entryToRemove, setEntryToRemove] = useState<string | null>(null);
 
   const handleUpdatePets = useCallback(() => {
     if (!storePetsSingle) {
@@ -58,6 +66,20 @@ const Scene = () => {
   const handleTryAgain = () => {
     handleUpdatePets();
     handleUpdatePetsHealthLog();
+  };
+
+  const handleOpenRemoveEntryModal = (entryId: string | null) => {
+    setEntryToRemove(entryId);
+    dispatch(petsHealthLogActions.resetDelete());
+  };
+
+  const handleRemoveEntry = () => {
+    if (!entryToRemove) {
+      return;
+    }
+
+    dispatch(petsHealthLogActions.remove({ petId, healthLogId: entryToRemove }));
+    dispatch(petsHealthLogActions.get({ petId }));
   };
 
   useEffect(() => {
@@ -95,11 +117,16 @@ const Scene = () => {
                 key={item.id}
                 onClick={() => void router.push(`/app/pet/${petId}/health-log/${item.id}`)}
                 actions={
-                  <Link href={`/app/pet/${petId}/health-log/${item.id}/edit`}>
-                    <BmeButton variant="blue" size="small">
-                      <FormattedMessage id="page.pet_weight.edit_entry" />
+                  <>
+                    <Link href={`/app/pet/${petId}/health-log/${item.id}/edit`}>
+                      <BmeButton variant="blue" size="small">
+                        <FormattedMessage id="page.pet_weight.edit_entry" />
+                      </BmeButton>
+                    </Link>
+                    <BmeButton variant="red" size="small" onClick={() => handleOpenRemoveEntryModal(item.id)}>
+                      <FormattedMessage id="page.pet_weight.delete_entry" />
                     </BmeButton>
-                  </Link>
+                  </>
                 }
               >
                 <BmeText>
@@ -117,7 +144,15 @@ const Scene = () => {
           </BmeButton>
         </Link>
       )}
-
+      {entryToRemove && (
+        <RemoveEntryModal
+          apiStatus={storePetsHealthLogDeleteStatus}
+          error={storePetsHealthLogDeleteError}
+          success={storePetsHealthLogDeleteData}
+          onCancel={() => handleOpenRemoveEntryModal(null)}
+          onRemove={handleRemoveEntry}
+        />
+      )}
       {isAnyPending && <Loader />}
     </StyledSceneWrapper>
   );

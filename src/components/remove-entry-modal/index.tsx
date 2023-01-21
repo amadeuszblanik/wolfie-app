@@ -11,7 +11,7 @@ interface RemoveEntryModalProps {
   success: string | null;
   onRemove: () => void;
   onCancel: () => void;
-  onSuccess: () => void;
+  onSuccess?: () => void;
 }
 
 const Component: React.FC<RemoveEntryModalProps> = ({ apiStatus, error, success, onRemove, onCancel, onSuccess }) => {
@@ -66,6 +66,9 @@ const Component: React.FC<RemoveEntryModalProps> = ({ apiStatus, error, success,
           size="small"
           onClick={() => {
             onCancel();
+            if (!onSuccess) {
+              return;
+            }
             onSuccess();
           }}
         >

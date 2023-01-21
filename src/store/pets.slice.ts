@@ -30,6 +30,12 @@ const edit = createAsyncThunk<
   { extra: { apiService: ApiService }; rejectValue: ApiMessage }
 >("pets/edit", async ({ petId, payload }, thunkAPI) => await thunkAPI.extra.apiService.pets.put(petId, payload));
 
+const remove = createAsyncThunk<
+  ApiMessage,
+  { petId: string },
+  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
+>("pets/delete", async ({ petId }, thunkAPI) => await thunkAPI.extra.apiService.pets.delete(petId));
+
 export interface PetsStore {
   myStatus: ApiStatus;
   myError: string | null;
@@ -38,6 +44,9 @@ export interface PetsStore {
   addError: string | null;
   editStatus: ApiStatus;
   editError: string | null;
+  deleteStatus: ApiStatus;
+  deleteError: string | null;
+  deleteData: string | null;
 }
 
 const initialState: PetsStore = {
@@ -48,6 +57,9 @@ const initialState: PetsStore = {
   addError: null,
   editStatus: "idle",
   editError: null,
+  deleteStatus: "idle",
+  deleteError: null,
+  deleteData: null,
 };
 
 export const petsSlice = createSlice({
@@ -63,6 +75,11 @@ export const petsSlice = createSlice({
     resetEdit: (state) => {
       state.editStatus = "idle";
       state.editError = null;
+    },
+    resetDelete: (state) => {
+      state.deleteStatus = "idle";
+      state.deleteError = null;
+      state.deleteData = null;
     },
   },
 
@@ -114,6 +131,21 @@ export const petsSlice = createSlice({
       state.editStatus = "error";
       state.editError = action.error.message || null;
     });
+    builder.addCase(remove.pending, (state) => {
+      state.deleteStatus = "pending";
+      state.deleteError = null;
+      state.deleteData = null;
+    });
+    builder.addCase(remove.fulfilled, (state, action) => {
+      state.deleteStatus = "success";
+      state.deleteError = null;
+      state.deleteData = action.payload.message || null;
+    });
+    builder.addCase(remove.rejected, (state, action) => {
+      state.deleteStatus = "error";
+      state.deleteError = action.error.message || null;
+      state.deleteData = null;
+    });
   },
 });
 
@@ -128,10 +160,14 @@ export const selectPetsAddStatus = ({ pets }: AppState) => pets.addStatus;
 export const selectPetsAddError = ({ pets }: AppState) => pets.addError;
 export const selectPetsEditStatus = ({ pets }: AppState) => pets.editStatus;
 export const selectPetsEditError = ({ pets }: AppState) => pets.editError;
+export const selectPetsDeleteStatus = ({ pets }: AppState) => pets.deleteStatus;
+export const selectPetsDeleteError = ({ pets }: AppState) => pets.deleteError;
+export const selectPetsDeleteData = ({ pets }: AppState) => pets.deleteData;
 
 export const petsActions = {
   ...petsSlice.actions,
   petsMy,
   add,
   edit,
+  remove,
 };

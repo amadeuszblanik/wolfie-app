@@ -5,12 +5,15 @@ import { SelectItem } from "bme-ui/dist/cjs/types/atoms/select/types";
 import { DefaultTheme } from "styled-components";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { Form, Loader } from "../../components";
+import { Form, Loader, RemoveEntryModal } from "../../components";
 import {
   petsActions,
   selectPets,
   selectPetsAddError,
   selectPetsAddStatus,
+  selectPetsDeleteData,
+  selectPetsDeleteError,
+  selectPetsDeleteStatus,
   selectPetsEditError,
   selectPetsEditStatus,
   selectPetsMyStatus,
@@ -34,6 +37,9 @@ const Component = () => {
   const storePetsAddError = useAppSelector(selectPetsAddError);
   const storePetsEditStatus = useAppSelector(selectPetsEditStatus);
   const storePetsEditError = useAppSelector(selectPetsEditError);
+  const storePetsDeleteStatus = useAppSelector(selectPetsDeleteStatus);
+  const storePetsDeleteError = useAppSelector(selectPetsDeleteError);
+  const storePetsDeleteData = useAppSelector(selectPetsDeleteData);
   const storePets = useAppSelector(selectPets(petId || ""));
   const storeBreedsData = useAppSelector(selectBreedsData);
 
@@ -56,6 +62,8 @@ const Component = () => {
   const [breed, setBreed] = useState<SelectItem | null>(null);
   const [microchip, setMicrochip] = useState("");
   const [birthDate, setBirthDate] = useState<string>(toInputDate());
+
+  const [entryToRemove, setEntryToRemove] = useState<string | null>(null);
 
   useEffect(() => {
     dispatch(petsActions.resetAdd());
@@ -119,73 +127,107 @@ const Component = () => {
     dispatch(petsActions.add(payload));
   };
 
+  const handleOpenRemoveEntryModal = (entryId: string | null) => {
+    setEntryToRemove(entryId);
+    dispatch(petsActions.resetDelete());
+  };
+
+  const handleRemoveEntry = () => {
+    if (!entryToRemove) {
+      return;
+    }
+
+    dispatch(petsActions.remove({ petId: entryToRemove }));
+  };
+
   return (
-    <Form
-      onSubmit={handleSubmit}
-      apiStatus={status}
-      modalBorder={modelBorderColor}
-      modal={
-        isModalOpen ? (
-          <BmeText align="center">
-            {isError
-              ? error ||
-                intl.formatMessage({ id: petId ? "common.form.pet_update.error" : "common.form.pet_add.error" })
-              : intl.formatMessage({ id: petId ? "common.form.pet_update.success" : "common.form.pet_add.success" })}
-          </BmeText>
-        ) : undefined
-      }
-      onCloseModal={isError ? () => setIsModalOpen(false) : undefined}
-    >
-      <>
-        <BmeBox direction="column" alignX="center" alignY="center" width="100%" maxWidth="420px" margin="no|auto">
-          <BmeBox width="100%" margin="no|no|sm">
-            <BmeInput
-              name="name"
-              value={name}
-              label={intl.formatMessage({ id: "common.form.name.label" })}
-              onValue={setName}
-              width="100%"
-            />
+    <>
+      <Form
+        onSubmit={handleSubmit}
+        apiStatus={status}
+        modalBorder={modelBorderColor}
+        modal={
+          isModalOpen ? (
+            <BmeText align="center">
+              {isError
+                ? error ||
+                  intl.formatMessage({ id: petId ? "common.form.pet_update.error" : "common.form.pet_add.error" })
+                : intl.formatMessage({ id: petId ? "common.form.pet_update.success" : "common.form.pet_add.success" })}
+            </BmeText>
+          ) : undefined
+        }
+        onCloseModal={isError ? () => setIsModalOpen(false) : undefined}
+      >
+        <>
+          <BmeBox direction="column" alignX="center" alignY="center" width="100%" maxWidth="420px" margin="no|auto">
+            <BmeBox width="100%" margin="no|no|sm">
+              <BmeInput
+                name="name"
+                value={name}
+                label={intl.formatMessage({ id: "common.form.name.label" })}
+                onValue={setName}
+                width="100%"
+              />
+            </BmeBox>
+            <BmeBox width="100%" margin="no|no|sm">
+              <BmeSelect
+                name="breed"
+                label={intl.formatMessage({ id: "common.form.breed.label" })}
+                list={breedsList}
+                value={breed}
+                onValue={setBreed}
+                width="100%"
+                emptyLabel={intl.formatMessage({ id: "breed.mixed" })}
+              />
+            </BmeBox>
+            <BmeBox width="100%" margin="no|no|sm">
+              <BmeInput
+                name="microchip"
+                value={microchip}
+                label={intl.formatMessage({ id: "common.form.microchip.label" })}
+                onValue={setMicrochip}
+                width="100%"
+              />
+            </BmeBox>
+            <BmeBox width="100%" margin="no|no|sm">
+              <BmeInputDate
+                name="microchip"
+                value={birthDate}
+                label={intl.formatMessage({ id: "common.form.birth_date.label" })}
+                onValue={setBirthDate}
+                width="100%"
+                type="date"
+              />
+            </BmeBox>
+            <BmeBox margin="no|no|lg">
+              <BmeBox margin="no|xs">
+                <BmeButton type="submit">
+                  <FormattedMessage id={petId ? "common.form.update.label" : "common.form.add.label"} />
+                </BmeButton>
+              </BmeBox>
+              {petId && (
+                <BmeBox margin="no|xs">
+                  <BmeButton type="button" variant="red" onClick={() => handleOpenRemoveEntryModal(petId)}>
+                    <FormattedMessage id="common.form.delete.label" />
+                  </BmeButton>
+                </BmeBox>
+              )}
+            </BmeBox>
           </BmeBox>
-          <BmeBox width="100%" margin="no|no|sm">
-            <BmeSelect
-              name="breed"
-              label={intl.formatMessage({ id: "common.form.breed.label" })}
-              list={breedsList}
-              value={breed}
-              onValue={setBreed}
-              width="100%"
-              emptyLabel={intl.formatMessage({ id: "breed.mixed" })}
-            />
-          </BmeBox>
-          <BmeBox width="100%" margin="no|no|sm">
-            <BmeInput
-              name="microchip"
-              value={microchip}
-              label={intl.formatMessage({ id: "common.form.microchip.label" })}
-              onValue={setMicrochip}
-              width="100%"
-            />
-          </BmeBox>
-          <BmeBox width="100%" margin="no|no|sm">
-            <BmeInputDate
-              name="microchip"
-              value={birthDate}
-              label={intl.formatMessage({ id: "common.form.birth_date.label" })}
-              onValue={setBirthDate}
-              width="100%"
-              type="date"
-            />
-          </BmeBox>
-          <BmeBox margin="no|no|lg">
-            <BmeButton type="submit">
-              <FormattedMessage id={petId ? "common.form.update.label" : "common.form.add.label"} />
-            </BmeButton>
-          </BmeBox>
-        </BmeBox>
-        {isLoadingPets && <Loader />}
-      </>
-    </Form>
+          {isLoadingPets && <Loader />}
+        </>
+      </Form>
+      {entryToRemove && (
+        <RemoveEntryModal
+          apiStatus={storePetsDeleteStatus}
+          error={storePetsDeleteError}
+          success={storePetsDeleteData}
+          onCancel={() => handleOpenRemoveEntryModal(null)}
+          onRemove={handleRemoveEntry}
+          onSuccess={() => router.push("/app")}
+        />
+      )}
+    </>
   );
 };
 

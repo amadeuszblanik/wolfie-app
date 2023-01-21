@@ -82,6 +82,7 @@ export default class ApiService extends ApiBase {
   pets = {
     put: async (petId: string, payload: PetsPetIdPutPayload) =>
       await this.put<PetsPetIdPutResponse>(apiUrl(ApiPetsEndpoint.PetsById, { petId }), payload),
+    delete: async (petId: string) => await this.delete<ApiMessage>(apiUrl(ApiPetsEndpoint.PetsById, { petId })),
   };
 
   petsWeight = {

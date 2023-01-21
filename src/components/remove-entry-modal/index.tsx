@@ -11,9 +11,10 @@ interface RemoveEntryModalProps {
   success: string | null;
   onRemove: () => void;
   onCancel: () => void;
+  onSuccess: () => void;
 }
 
-const Component: React.FC<RemoveEntryModalProps> = ({ apiStatus, error, success, onRemove, onCancel }) => {
+const Component: React.FC<RemoveEntryModalProps> = ({ apiStatus, error, success, onRemove, onCancel, onSuccess }) => {
   const isLoading = apiStatus === "pending";
   const isSuccess = apiStatus === "success";
   const isError = apiStatus === "error";
@@ -61,7 +62,13 @@ const Component: React.FC<RemoveEntryModalProps> = ({ apiStatus, error, success,
         </BmeText>
       </BmeBox>
       <BmeBox>
-        <BmeButton size="small" onClick={onCancel}>
+        <BmeButton
+          size="small"
+          onClick={() => {
+            onCancel();
+            onSuccess();
+          }}
+        >
           <FormattedMessage id="common.component.remove_entry_modal.success.close" />
         </BmeButton>
       </BmeBox>

@@ -445,6 +445,7 @@
   "common.form.submit.label": "Zatwierdź",
   "common.form.add.label": "Dodaj",
   "common.form.update.label": "Zaktualizuj",
+  "common.form.delete.label": "Usuń",
   "common.form.reset_password.label": "Zapomniałeś hasła? Kliknij tutaj.",
   "common.form.create_account.label": "Nie masz konta? Kliknij tutaj.",
   "common.form.sign_in.label": "Masz już konto? Kliknij tutaj.",

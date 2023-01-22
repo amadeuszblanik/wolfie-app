@@ -17,7 +17,6 @@ const StyledFormWrapper = styled.form`
   flex-direction: column;
   width: 100%;
   ${bmeMixins.paddings("md|md")}
-  overflow: hidden;
   border-radius: ${({ theme }) => theme.radius}px;
 `;
 

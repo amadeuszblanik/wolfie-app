@@ -97,7 +97,6 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 Please make sure to update tests as appropriate.
 
 ## Stages for Wolfie.app development:
-
 * [✅] Create a Nest.JS application for the API - Due to security reasons, I decided to not publish the API repository.
 * [✅] Create a proof of concept web application based on Angular
 * [✅] Decide about final technology stack
@@ -106,13 +105,18 @@ Please make sure to update tests as appropriate.
 * [✅] Publish early version of mobile application to the App Store
 * [💻] Create a custom built-in UI library for the web application
 * [💻] Create a clean-code version of the web application
-* [ ] Add more features
 
 **Legend:**
 
 * [✅] - Done
 - [💻] - In progress
 - [ ] - Not started
+
+### Summary
+* Web application: Beta
+* BME-UI: Beta
+* Mobile application: Stable
+* API: Stable
 
 ## Technical stack
 - Next.JS 13 — Decided not to use new App directory structure, because it is still in beta and I don't want to deal with

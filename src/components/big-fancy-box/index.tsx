@@ -1,7 +1,7 @@
 import React from "react";
 import { BmeBox, BmeIcon, BmeText } from "bme-ui";
 import { DefaultTheme } from "styled-components";
-import { IconName } from "bme-ui/dist/cjs/types/atoms/icon/types";
+import { IconName } from "bme-ui/dist/atoms/icon/types";
 import { useMobile } from "../../hooks";
 
 interface ErrorMessagesProps {

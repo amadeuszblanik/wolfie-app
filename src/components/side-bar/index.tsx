@@ -141,7 +141,7 @@ const StyledSideBarProfile = styled.div<StyledSideBarProfileProps>`
   width: 320px;
   max-width: calc(100vw - 80px);
   min-height: 300px;
-  ${({ theme }) => bmeMixins.paddings("lg|md", theme)}
+  ${bmeMixins.paddings("lg|md")}
   background: ${({ theme }) => theme.colors.gray6};
 
   transform: ${({ isOpen }) => (isOpen ? "rotateX(0deg)" : "rotateY(90deg)")};

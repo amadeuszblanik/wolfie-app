@@ -1,7 +1,7 @@
 import React from "react";
 import { BmeIcon, bmeMixins, BmeText } from "bme-ui";
 import styled from "styled-components";
-import { IconName } from "bme-ui/dist/cjs/types/atoms/icon/types";
+import { IconName } from "bme-ui/dist/atoms/icon/types";
 import { Link } from "../../atoms";
 
 // @TODO: Handle longer labels
@@ -21,7 +21,7 @@ const StyledSideBarItem = styled.button`
   justify-content: space-between;
   width: 80px;
   height: 80px;
-  ${({ theme }) => bmeMixins.paddings("sm", theme)}
+  ${bmeMixins.paddings("sm")}
   color: ${({ theme }) => theme.colors.text};
   background: ${({ theme }) => theme.colors.background};
   border: none;

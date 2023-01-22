@@ -1,9 +1,9 @@
 import { BmeBox, BmeButton, BmeInput, BmeInputDate, BmeSelect, BmeText } from "bme-ui";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useEffect, useState } from "react";
-import { SelectItem } from "bme-ui/dist/cjs/types/atoms/select/types";
 import { DefaultTheme } from "styled-components";
 import { useRouter } from "next/router";
+import { SelectItem } from "bme-ui/dist/atoms/select/types";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { Form, Loader, RemoveEntryModal } from "../../components";
 import {
@@ -178,6 +178,7 @@ const Component = () => {
                 onValue={setBreed}
                 width="100%"
                 emptyLabel={intl.formatMessage({ id: "breed.mixed" })}
+                searchable
               />
             </BmeBox>
             <BmeBox width="100%" margin="no|no|sm">

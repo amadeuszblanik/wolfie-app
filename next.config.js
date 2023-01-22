@@ -8,6 +8,9 @@ const nextConfig = {
     locales: ["en-GB", "pl-PL"],
     defaultLocale: "en-GB",
   },
+  compiler: {
+    styledComponents: true,
+  }
 }
 
 module.exports = nextConfig

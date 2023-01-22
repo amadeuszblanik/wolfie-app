@@ -2,7 +2,7 @@ import { BmeBox, BmeButton, BmeInput, BmeSelect, BmeText } from "bme-ui";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useEffect, useState } from "react";
 import { DefaultTheme } from "styled-components";
-import { SelectItem } from "bme-ui/dist/cjs/types/atoms/select/types";
+import { SelectItem } from "bme-ui/dist/atoms/select/types";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { Form } from "../../components";
 import { WeightUnits } from "../../types/weight-units.type";

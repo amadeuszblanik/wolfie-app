@@ -3,7 +3,7 @@ import { FormattedMessage, useIntl } from "react-intl";
 import { useEffect, useState } from "react";
 import { DefaultTheme } from "styled-components";
 import { useRouter } from "next/router";
-import { SelectItem } from "bme-ui/dist/cjs/types/atoms/select/types";
+import { SelectItem } from "bme-ui/dist/atoms/select/types";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { Form, Loader } from "../../components";
 import { enumToList, toInputDate, toInputDatetimeLocal } from "../../utils";

@@ -1,9 +1,9 @@
-import React, { useLayoutEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 const useHook = <T extends HTMLElement>(element: React.RefObject<T> | null, onResize: ResizeObserverCallback) => {
   const observer = useRef<ResizeObserver | null>(null);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!element?.current) {
       return;
     }

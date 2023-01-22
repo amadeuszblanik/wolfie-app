@@ -6,8 +6,8 @@ import { locales } from "../../settings";
 
 const StyledFooterWrapper = styled.footer`
   width: 100%;
-  ${({ theme }) => bmeMixins.paddings("lg|md|xl", theme)}
-  ${({ theme }) => bmeMixins.margins("auto|no|no", theme)}
+  ${bmeMixins.paddings("lg|md|xl")}
+  ${bmeMixins.margins("auto|no|no")}
   background: ${({ theme }) => theme.colors.background};
   border-top: 2px solid ${({ theme }) => theme.colors.gray5};
 `;

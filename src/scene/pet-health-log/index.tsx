@@ -115,19 +115,19 @@ const Scene = () => {
             {storePetsHealthLogData?.map((item) => (
               <BmeList.Item
                 key={item.id}
-                onClick={() => void router.push(`/app/pet/${petId}/health-log/${item.id}`)}
-                actions={
-                  <>
-                    <Link href={`/app/pet/${petId}/health-log/${item.id}/edit`}>
-                      <BmeButton variant="blue" size="small">
-                        <FormattedMessage id="page.pet_weight.edit_entry" />
-                      </BmeButton>
-                    </Link>
-                    <BmeButton variant="red" size="small" onClick={() => handleOpenRemoveEntryModal(item.id)}>
-                      <FormattedMessage id="page.pet_weight.delete_entry" />
-                    </BmeButton>
-                  </>
-                }
+                onClick={() => router.push(`/app/pet/${petId}/health-log/${item.id}`)}
+                actions={[
+                  {
+                    variant: "blue",
+                    onClick: () => router.push(`/app/pet/${petId}/health-log/${item.id}/edit`),
+                    children: intl.formatMessage({ id: "page.pet_weight.edit_entry" }),
+                  },
+                  {
+                    variant: "red",
+                    onClick: () => handleOpenRemoveEntryModal(item.id),
+                    children: intl.formatMessage({ id: "page.pet_weight.delete_entry" }),
+                  },
+                ]}
               >
                 <BmeText>
                   <FormattedMessage id={`common.health_log.kind.${item.kind.toLowerCase()}`} />

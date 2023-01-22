@@ -2,7 +2,7 @@ import { BmeBox, BmeDefaultTheme, BmeIcon, BmeTag, BmeText } from "bme-ui";
 import { FormattedMessage, useIntl } from "react-intl";
 import styled from "styled-components";
 import React from "react";
-import { IconName } from "bme-ui/dist/cjs/types/atoms/icon/types";
+import { IconName } from "bme-ui/dist/atoms/icon/types";
 import { useMobile } from "../../hooks";
 
 // @TODO: Add proper icon to bme-ui

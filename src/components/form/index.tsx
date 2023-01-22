@@ -16,7 +16,7 @@ const StyledFormWrapper = styled.form`
   display: flex;
   flex-direction: column;
   width: 100%;
-  ${({ theme }) => bmeMixins.paddings("md|md", theme)}
+  ${bmeMixins.paddings("md|md")}
   overflow: hidden;
   border-radius: ${({ theme }) => theme.radius}px;
 `;
@@ -36,7 +36,7 @@ const StyledFormModal = styled.div`
 `;
 
 const StyledFormModalCloseButton = styled.button`
-  ${({ theme }) => bmeMixins.paddings("no|no|sm", theme)}
+  ${bmeMixins.paddings("no|no|sm")}
   color: ${({ theme }) => theme.colors.text};
   background: transparent;
   border: none;

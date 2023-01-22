@@ -1,10 +1,10 @@
 import { ThemeProvider } from "styled-components";
-import { BmeGlobalStyle, BmeThemeProvider } from "bme-ui";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { IntlProvider } from "react-intl";
 import { Provider } from "react-redux";
-import { locales, theme } from "../src/settings";
+import dark from "bme-ui/dist/themes/dark";
+import { locales } from "../src/settings";
 import { GlobalStyles } from "../src/components";
 import { wrapper } from "../src/store";
 import type { AppProps } from "next/app";
@@ -26,17 +26,14 @@ function App({ Component, ...rest }: AppProps) {
   }, []);
 
   return (
-    <Provider store={store}>
-      <IntlProvider locale={locale} messages={locales[locale]}>
-        <BmeThemeProvider theme={theme}>
-          <ThemeProvider theme={theme}>
-            <GlobalStyles />
-            <BmeGlobalStyle />
-            <Component {...props.pageProps} />
-          </ThemeProvider>
-        </BmeThemeProvider>
-      </IntlProvider>
-    </Provider>
+    <ThemeProvider theme={{ ...dark }}>
+      <Provider store={store}>
+        <IntlProvider locale={locale} messages={locales[locale]}>
+          <GlobalStyles />
+          <Component {...props.pageProps} />
+        </IntlProvider>
+      </Provider>
+    </ThemeProvider>
   );
 }
 

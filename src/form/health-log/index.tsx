@@ -201,6 +201,7 @@ const Component = () => {
               onValue={setMedicines}
               width="100%"
               multiple
+              searchable
             />
           </BmeBox>
           <BmeBox width="100%" margin="no|no|sm">

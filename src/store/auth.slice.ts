@@ -52,8 +52,8 @@ export const authSlice = createSlice({
       state.accessToken = null;
       state.refreshToken = null;
 
-      cookie.remove("accessToken");
-      cookie.remove("refreshToken");
+      cookie.remove("accessToken", "/");
+      cookie.remove("refreshToken", "/");
     },
   },
 
@@ -81,7 +81,7 @@ export const authSlice = createSlice({
       if (action.payload.refreshToken) {
         cookie.set("refreshToken", action.payload.refreshToken, { path: "/", expires: new Date("2100") });
       } else {
-        cookie.remove("refreshToken");
+        cookie.remove("refreshToken", "/");
       }
     });
     builder.addCase(signIn.rejected, (state, action) => {
@@ -90,8 +90,8 @@ export const authSlice = createSlice({
       state.accessToken = null;
       state.refreshToken = null;
 
-      cookie.remove("accessToken");
-      cookie.remove("refreshToken");
+      cookie.remove("accessToken", "/");
+      cookie.remove("refreshToken", "/");
     });
     builder.addCase(refreshSession.pending, (state) => {
       state.refreshSessionStatus = "pending";
@@ -111,7 +111,7 @@ export const authSlice = createSlice({
       if (refreshToken) {
         cookie.set("refreshToken", refreshToken, { path: "/", expires: new Date("2100") });
       } else {
-        cookie.remove("refreshToken");
+        cookie.remove("refreshToken", "/");
       }
     });
     builder.addCase(refreshSession.rejected, (state, action) => {
@@ -120,8 +120,8 @@ export const authSlice = createSlice({
       state.accessToken = null;
       state.refreshToken = null;
 
-      cookie.remove("accessToken");
-      cookie.remove("refreshToken");
+      cookie.remove("accessToken", "/");
+      cookie.remove("refreshToken", "/");
     });
   },
 });

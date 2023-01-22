@@ -18,7 +18,8 @@ const get = (name: string, source = document.cookie): string | null => {
 
 const set = (name: string, value: string, options: CookieOptions = {}): void => {
   const { path, domain, expires, maxAge, secure, httpOnly, sameSite } = options;
-  document.cookie = [
+
+  const cookieValue = [
     `${name}=${value}`,
     path ? `path=${path}` : "",
     domain ? `domain=${domain}` : "",
@@ -30,10 +31,12 @@ const set = (name: string, value: string, options: CookieOptions = {}): void => 
   ]
     .filter(Boolean)
     .join("; ");
+
+  document.cookie = cookieValue;
 };
 
-const remove = (name: string): void => {
-  set(name, "", { maxAge: 0 });
+const remove = (name: string, path?: string): void => {
+  set(name, "", { maxAge: 0, path });
 };
 
 const util = {

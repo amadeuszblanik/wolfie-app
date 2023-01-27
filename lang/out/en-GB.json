@@ -418,6 +418,7 @@
   "page.pet_id.title": "Pet",
   "page.pet_id_weight.title": "Weight",
   "page.auth_sign_in.title": "Sign In",
+  "page.auth_sign_in_apple.title": "Sign In with Apple",
   "page.auth_sign_up.title": "Sign Up",
   "common.form.username.label": "Username",
   "common.form.email.label": "Email",
@@ -551,5 +552,7 @@
   "common.component.remove_entry_modal.confirm": "Confirm",
   "common.component.remove_entry_modal.success.title": "Entry removed",
   "common.component.remove_entry_modal.success.description": "Entry has been removed successfully",
-  "common.component.remove_entry_modal.success.close": "Close"
+  "common.component.remove_entry_modal.success.close": "Close",
+  "common.component.sign_in_with_apple.error": "Failed to sign in with Apple. Please try again.",
+  "common.component.sign_in_with_apple.or": "or"
 }

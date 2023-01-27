@@ -5,6 +5,10 @@ import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector, useDeviceName } from "../../hooks";
 import { authActions, selectAuthAppleError, selectAuthAppleStatus } from "../../store/auth.slice";
+import { Loader } from "../index";
+
+const LOADING_APPLE_INTERVAL = 1000;
+const LOADING_APPLE_TIMEOUT = 10000;
 
 interface SignInWithAppleProps {
   short?: boolean;
@@ -32,6 +36,50 @@ const Component: React.FC<SignInWithAppleProps> = ({ short }) => {
   const [isError, setIsError] = useState(false);
 
   const device = useDeviceName();
+
+  useEffect(() => {
+    let interval: NodeJS.Timer | null = null;
+    let timeout: NodeJS.Timeout | null = null;
+
+    const handleInterval = () => {
+      if ("AppleID" in window) {
+        setIsLoaded(true);
+
+        if (interval) {
+          clearInterval(interval);
+        }
+
+        if (timeout) {
+          clearTimeout(timeout);
+        }
+      }
+    };
+
+    const handleTimeout = () => {
+      setIsError(true);
+
+      if (interval) {
+        clearInterval(interval);
+      }
+
+      if (timeout) {
+        clearTimeout(timeout);
+      }
+    };
+
+    timeout = setTimeout(handleTimeout, LOADING_APPLE_TIMEOUT);
+    interval = setInterval(handleInterval, LOADING_APPLE_INTERVAL);
+
+    return () => {
+      if (interval) {
+        clearInterval(interval);
+      }
+
+      if (timeout) {
+        clearTimeout(timeout);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     setIsError(storeAuthAppleStatus === "error");
@@ -93,6 +141,7 @@ const Component: React.FC<SignInWithAppleProps> = ({ short }) => {
 
   return (
     <>
+      {!isLoaded && <Loader />}
       <StyledSignInWithAppleWrapper>
         <div id="appleid-signin" data-color="black" data-border="true" data-type="sign in"></div>
         {!short && (

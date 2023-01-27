@@ -7,6 +7,8 @@ import { useAppDispatch, useAppSelector, useDeviceName } from "../../hooks";
 import { authActions, selectAuthAppleError, selectAuthAppleStatus } from "../../store/auth.slice";
 import { Loader } from "../index";
 
+// @TODO API: Handle client id and redirect uri for web and mobile
+
 const LOADING_APPLE_INTERVAL = 1000;
 const LOADING_APPLE_TIMEOUT = 10000;
 

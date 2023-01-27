@@ -7,4 +7,5 @@ export { default as Loader } from "./loader";
 export { default as PetCard } from "./pet-card";
 export { default as RemoveEntryModal } from "./remove-entry-modal";
 export { default as SideBar } from "./side-bar";
+export { default as SignInWithApple } from "./sign-in-with-apple";
 export { default as TopBar } from "./top-bar";

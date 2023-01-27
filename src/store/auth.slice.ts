@@ -8,6 +8,8 @@ import { ApiService } from "../services";
 import { cookie } from "../utils";
 import { AuthRefreshTokenPostResponse } from "../services/api/types/auth/refresh-token/post/response.type";
 import { AuthRefreshTokenPostPayload } from "../services/api/types/auth/refresh-token/post/payload.type";
+import { AuthApplePayload } from "../services/api/types/auth/apple/payload.type";
+import { AuthAppleResponse } from "../services/api/types/auth/apple/response.type";
 import { AppState } from "./index";
 
 const signIn = createAsyncThunk<
@@ -15,6 +17,12 @@ const signIn = createAsyncThunk<
   AuthSignInPayload,
   { extra: { apiService: ApiService }; rejectValue: ApiMessage }
 >("auth/signIn", async (payload, thunkAPI) => await thunkAPI.extra.apiService.authSignIn(payload));
+
+const signInApple = createAsyncThunk<
+  AuthAppleResponse,
+  AuthApplePayload,
+  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
+>("auth/signInApple", async (payload, thunkAPI) => await thunkAPI.extra.apiService.authApple(payload));
 
 const refreshSession = createAsyncThunk<
   AuthRefreshTokenPostResponse,
@@ -24,7 +32,9 @@ const refreshSession = createAsyncThunk<
 
 export interface AuthStore {
   status: ApiStatus;
+  appleStatus: ApiStatus;
   error: string | null;
+  appleError: string | null;
   accessToken: string | null;
   refreshToken: string | null;
   refreshSessionStatus: ApiStatus;
@@ -33,7 +43,9 @@ export interface AuthStore {
 
 const initialState: AuthStore = {
   status: "idle",
+  appleStatus: "idle",
   error: null,
+  appleError: null,
   accessToken: null,
   refreshToken: null,
   refreshSessionStatus: "idle",
@@ -93,6 +105,35 @@ export const authSlice = createSlice({
       cookie.remove("accessToken", "/");
       cookie.remove("refreshToken", "/");
     });
+    builder.addCase(signInApple.pending, (state) => {
+      state.appleStatus = "pending";
+      state.appleError = null;
+      state.accessToken = null;
+      state.refreshToken = null;
+    });
+    builder.addCase(signInApple.fulfilled, (state, action) => {
+      state.appleStatus = "success";
+      state.appleError = null;
+      state.accessToken = action.payload.accessToken;
+      state.refreshToken = action.payload.refreshToken || null;
+
+      cookie.set("accessToken", action.payload.accessToken, { path: "/", expires: new Date("2100") });
+
+      if (action.payload.refreshToken) {
+        cookie.set("refreshToken", action.payload.refreshToken, { path: "/", expires: new Date("2100") });
+      } else {
+        cookie.remove("refreshToken", "/");
+      }
+    });
+    builder.addCase(signInApple.rejected, (state, action) => {
+      state.appleStatus = "error";
+      state.appleError = action.error.message || null;
+      state.accessToken = null;
+      state.refreshToken = null;
+
+      cookie.remove("accessToken", "/");
+      cookie.remove("refreshToken", "/");
+    });
     builder.addCase(refreshSession.pending, (state) => {
       state.refreshSessionStatus = "pending";
       state.refreshSessionError = null;
@@ -127,7 +168,9 @@ export const authSlice = createSlice({
 });
 
 export const selectAuthStatus = ({ auth }: AppState) => auth.status;
+export const selectAuthAppleStatus = ({ auth }: AppState) => auth.appleStatus;
 export const selectAuthError = ({ auth }: AppState) => auth.error;
+export const selectAuthAppleError = ({ auth }: AppState) => auth.appleError;
 export const selectAuthAccessToken = ({ auth }: AppState) => auth.accessToken;
 export const selectAuthRefreshToken = ({ auth }: AppState) => auth.refreshToken;
 export const selectAuthRefreshSessionStatus = ({ auth }: AppState) => auth.refreshSessionStatus;
@@ -136,5 +179,6 @@ export const selectAuthRefreshSessionError = ({ auth }: AppState) => auth.refres
 export const authActions = {
   ...authSlice.actions,
   signIn,
+  signInApple,
   refreshSession,
 };

@@ -47,6 +47,8 @@ import { PetsPetIdHealthLogPostPayload } from "./types/pets/:petId/health-log/po
 import { PetsPetIdHealthLogPatchPayload } from "./types/pets/:petId/health-log/patch/payload.type";
 import { MedicineShortResponse } from "./types/medicine/response.type";
 import { ApiMessage } from "./types/api-message.type";
+import { AuthApplePayload } from "./types/auth/apple/payload.type";
+import { AuthAppleResponse } from "./types/auth/apple/response.type";
 import { apiUrl } from "../../utils";
 
 export default class ApiService extends ApiBase {
@@ -115,6 +117,8 @@ export default class ApiService extends ApiBase {
 
   authSignIn = async (payload: AuthSignInPayload) =>
     await this.post<AuthSignInResponse>(ApiAuthEndpoint.SignIn, payload);
+
+  authApple = async (payload: AuthApplePayload) => await this.post<AuthAppleResponse>(ApiAuthEndpoint.Apple, payload);
 
   authSignUp = async (payload: AuthSignUpPayload) =>
     await this.post<AuthSignUpResponse>(ApiAuthEndpoint.SignUp, payload);

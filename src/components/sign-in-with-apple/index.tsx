@@ -43,16 +43,14 @@ const Component: React.FC<SignInWithAppleProps> = ({ short }) => {
     }
 
     AppleID.auth.init({
-      clientId: "me.blanik.Wolfie.Api",
+      clientId: process.env.NEXT_PUBLIC_APPLE_CLIENT_ID,
       scope: "name email",
-      redirectURI: "https://test.wolfie.app/auth/apple",
+      redirectURI: process.env.NEXT_PUBLIC_APPLE_REDIRECT_URI,
       usePopup: true,
     });
 
-    document.addEventListener("AppleIDSignInOnSuccess", (event) => {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      const detail = event.detail as AppleSignInDetail;
+    const handleAppleSignInSuccess = (event: Event) => {
+      const detail = (event as Event & { detail: AppleSignInDetail }).detail;
 
       const idToken = detail.authorization.id_token;
       const code = detail.authorization.code;
@@ -73,15 +71,24 @@ const Component: React.FC<SignInWithAppleProps> = ({ short }) => {
           email,
         }),
       );
-    });
+    };
 
-    // Listen for authorization failures.
-    document.addEventListener("AppleIDSignInOnFailure", (event) => {
+    const handleAppleSignInFailure = (event: Event) => {
       // @TODO: Temporary solution
       console.error(event);
 
       setIsError(true);
-    });
+    };
+
+    document.addEventListener("AppleIDSignInOnSuccess", handleAppleSignInSuccess);
+
+    // Listen for authorization failures.
+    document.addEventListener("AppleIDSignInOnFailure", handleAppleSignInFailure);
+
+    return () => {
+      document.removeEventListener("AppleIDSignInOnSuccess", handleAppleSignInSuccess);
+      document.removeEventListener("AppleIDSignInOnFailure", handleAppleSignInFailure);
+    };
   }, [isLoaded]);
 
   return (

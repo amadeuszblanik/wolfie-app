@@ -9,8 +9,6 @@ import { authActions, selectAuthAppleError, selectAuthAppleStatus } from "../../
 import { Loader } from "../index";
 import { SignInWithAppleRedirect } from "../../types/sign-in-with-apple-redirect.type";
 
-// @TODO API: Handle client id and redirect uri for web and mobile
-
 const LOADING_APPLE_INTERVAL = 1000;
 const LOADING_APPLE_TIMEOUT = 10000;
 

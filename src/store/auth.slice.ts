@@ -58,6 +58,10 @@ export const authSlice = createSlice({
   initialState,
 
   reducers: {
+    resetSignIn: (state) => {
+      state.status = "idle";
+      state.error = null;
+    },
     signOff: (state) => {
       state.status = "idle";
       state.error = null;

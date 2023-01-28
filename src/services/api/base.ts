@@ -48,6 +48,51 @@ export default class ApiBase {
     return json;
   }
 
+  protected async postMultipart<T>(path: string, body: any): Promise<T> {
+    const formData = new FormData();
+
+    Object.entries(body).forEach(([key, value]) => {
+      if (value instanceof File) {
+        formData.append(key, value, value.name);
+      }
+
+      if (value instanceof Array) {
+        value.forEach((file) => {
+          formData.append(key, file, file.name);
+        });
+      }
+
+      if (typeof value === "string") {
+        formData.append(key, value);
+      }
+
+      if (typeof value === "number") {
+        formData.append(key, value.toString());
+      }
+
+      if (typeof value === "boolean") {
+        formData.append(key, value.toString());
+      }
+
+      if (value === null) {
+        formData.append(key, "");
+      }
+    });
+
+    const response = await fetch(`${this.url}${path}`, {
+      method: "POST",
+      headers: this.getHeaders({}, null),
+      body: formData,
+    });
+    const json = await response.json();
+
+    if (response.status >= ERROR_STATUS_CODE_BREAKPOINT) {
+      throw new Error(json.message);
+    }
+
+    return json;
+  }
+
   protected async put<T>(path: string, body: any): Promise<T> {
     const response = await fetch(`${this.url}${path}`, {
       method: "PUT",
@@ -93,11 +138,14 @@ export default class ApiBase {
     return json;
   }
 
-  private getHeaders(init?: Record<string, string>): HeadersInit {
+  private getHeaders(init?: Record<string, string>, contentType: string | null = "application/json"): HeadersInit {
     const headers: HeadersInit = {
-      "Content-Type": "application/json",
       ...(init || {}),
     };
+
+    if (contentType) {
+      headers["Content-Type"] = contentType;
+    }
 
     const accessToken = IS_SERVER ? null : cookie.get("accessToken") || localStorage.getItem("accessToken");
 

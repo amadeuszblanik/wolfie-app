@@ -7,7 +7,7 @@ const formBuilderValidator = (validator: FormValidators[], value: string): strin
   const errors: string[] = [];
 
   validator.forEach((type) => {
-    if (type === "required" && !isEmpty(value)) {
+    if (type === "required" && isEmpty(value)) {
       errors.push("This field is required");
     }
 

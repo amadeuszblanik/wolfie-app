@@ -3,6 +3,7 @@ import { BmeBox } from "bme-ui";
 import Text from "./text";
 import { FormControlProps } from "./types";
 import Checkbox from "./checkbox";
+import Select from "./select";
 
 const Component: React.FC<FormControlProps> = (props) => {
   switch (props.type) {
@@ -16,6 +17,8 @@ const Component: React.FC<FormControlProps> = (props) => {
       return <Text {...props} />;
     case "checkbox":
       return <Checkbox {...props} />;
+    case "select":
+      return <Select {...props} />;
   }
 
   return <BmeBox>Unknown</BmeBox>;

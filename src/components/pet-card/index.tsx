@@ -51,7 +51,7 @@ const Component: React.FC<PetCardProps> = ({ id, name, image, birthDate, microch
           refCurrent.value = "";
         }
     }
-  }, [storePetsAvatarStatus]);
+  }, [storePetsAvatarStatus, dispatch]);
 
   const handleUpdateAvatar = () => {
     ref.current?.click();
@@ -64,9 +64,7 @@ const Component: React.FC<PetCardProps> = ({ id, name, image, birthDate, microch
       return;
     }
 
-    if (file) {
-      dispatch(petsActions.avatar({ petId: id, payload: { file } }));
-    }
+    dispatch(petsActions.avatar({ petId: id, payload: { file } }));
   };
 
   const Card = () => (

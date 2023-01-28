@@ -151,7 +151,7 @@ const Component: React.FC<SignInWithAppleProps> = ({ short }) => {
       document.removeEventListener("AppleIDSignInOnSuccess", handleAppleSignInSuccess);
       document.removeEventListener("AppleIDSignInOnFailure", handleAppleSignInFailure);
     };
-  }, [isLoaded]);
+  }, [isLoaded, router, dispatch, device]);
 
   return (
     <>

@@ -49,6 +49,8 @@ import { MedicineShortResponse } from "./types/medicine/response.type";
 import { ApiMessage } from "./types/api-message.type";
 import { AuthApplePayload } from "./types/auth/apple/payload.type";
 import { AuthAppleResponse } from "./types/auth/apple/response.type";
+import { PetsPetIdAvatarPostPayload } from "./types/pets/:petId/avatar/payload.type";
+import { PetsPetIdAvatarPostResponse } from "./types/pets/:petId/avatar/response.type";
 import { apiUrl } from "../../utils";
 
 export default class ApiService extends ApiBase {
@@ -85,6 +87,8 @@ export default class ApiService extends ApiBase {
     put: async (petId: string, payload: PetsPetIdPutPayload) =>
       await this.put<PetsPetIdPutResponse>(apiUrl(ApiPetsEndpoint.PetsById, { petId }), payload),
     delete: async (petId: string) => await this.delete<ApiMessage>(apiUrl(ApiPetsEndpoint.PetsById, { petId })),
+    avatarPost: async (petId: string, payload: PetsPetIdAvatarPostPayload) =>
+      await this.postMultipart<PetsPetIdAvatarPostResponse>(apiUrl(ApiPetsEndpoint.PetsAvatar, { petId }), payload),
   };
 
   petsWeight = {

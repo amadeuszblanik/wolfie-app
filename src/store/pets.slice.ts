@@ -8,6 +8,7 @@ import { PetsAddResponse } from "../services/api/types/pets/add/response.type";
 import { PetsAddPayload } from "../services/api/types/pets/add/payload.type";
 import { PetsPetIdPutResponse } from "../services/api/types/pets/:petId/put/response.type";
 import { PetsPetIdAvatarPostPayload } from "../services/api/types/pets/:petId/avatar/payload.type";
+import { PetsPetIdAvatarPostResponse } from "../services/api/types/pets/:petId/avatar/response.type";
 import { AppState } from "./index";
 
 const petsMy = createAsyncThunk<
@@ -38,7 +39,7 @@ const remove = createAsyncThunk<
 >("pets/delete", async ({ petId }, thunkAPI) => await thunkAPI.extra.apiService.pets.delete(petId));
 
 const avatar = createAsyncThunk<
-  PetsPetIdAvatarPostPayload,
+  PetsPetIdAvatarPostResponse,
   { petId: string; payload: PetsPetIdAvatarPostPayload },
   { extra: { apiService: ApiService }; rejectValue: ApiMessage }
 >(
@@ -59,7 +60,7 @@ export interface PetsStore {
   deleteData: string | null;
   avatarStatus: ApiStatus;
   avatarError: string | null;
-  avatarData: PetsPetIdAvatarPostPayload | null;
+  avatarData: string | null;
 }
 
 const initialState: PetsStore = {
@@ -175,7 +176,7 @@ export const petsSlice = createSlice({
     builder.addCase(avatar.fulfilled, (state, action) => {
       state.avatarStatus = "success";
       state.avatarError = null;
-      state.avatarData = action.payload;
+      state.avatarData = action.payload.message || null;
     });
     builder.addCase(avatar.rejected, (state, action) => {
       state.avatarStatus = "error";

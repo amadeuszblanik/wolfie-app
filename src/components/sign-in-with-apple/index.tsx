@@ -3,9 +3,11 @@ import Script from "next/script";
 import { BmeModal, BmeText } from "bme-ui";
 import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
+import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector, useDeviceName } from "../../hooks";
 import { authActions, selectAuthAppleError, selectAuthAppleStatus } from "../../store/auth.slice";
 import { Loader } from "../index";
+import { SignInWithAppleRedirect } from "../../types/sign-in-with-apple-redirect.type";
 
 // @TODO API: Handle client id and redirect uri for web and mobile
 
@@ -30,12 +32,17 @@ const StyledSignInWithAppleWrapper = styled.div`
 `;
 
 const Component: React.FC<SignInWithAppleProps> = ({ short }) => {
+  const router = useRouter();
+
   const dispatch = useAppDispatch();
   const storeAuthAppleStatus = useAppSelector(selectAuthAppleStatus);
   const storeAuthAppleError = useAppSelector(selectAuthAppleError);
 
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isPending, setIsPending] = useState(false);
   const [isError, setIsError] = useState(false);
+
+  const isLoader = !isLoaded || isPending;
 
   const device = useDeviceName();
 
@@ -111,6 +118,8 @@ const Component: React.FC<SignInWithAppleProps> = ({ short }) => {
       // eslint-disable-next-line no-console
       console.debug(event);
 
+      setIsPending(false);
+
       dispatch(
         authActions.signInApple({
           idToken,
@@ -119,8 +128,12 @@ const Component: React.FC<SignInWithAppleProps> = ({ short }) => {
           firstName: name?.firstName,
           lastName: name?.lastName,
           email,
+          service: true,
+          redirect: (process.env.NEXT_PUBLIC_APPLE_REDIRECT_API as SignInWithAppleRedirect) || "WEB",
         }),
       );
+
+      void router.push("/app");
     };
 
     const handleAppleSignInFailure = (event: Event) => {
@@ -128,6 +141,7 @@ const Component: React.FC<SignInWithAppleProps> = ({ short }) => {
       console.error(event);
 
       setIsError(true);
+      setIsPending(false);
     };
 
     document.addEventListener("AppleIDSignInOnSuccess", handleAppleSignInSuccess);
@@ -143,9 +157,15 @@ const Component: React.FC<SignInWithAppleProps> = ({ short }) => {
 
   return (
     <>
-      {!isLoaded && <Loader />}
+      {isLoader && <Loader />}
       <StyledSignInWithAppleWrapper>
-        <div id="appleid-signin" data-color="black" data-border="true" data-type="sign in"></div>
+        <div
+          id="appleid-signin"
+          data-color="black"
+          data-border="true"
+          data-type="sign in"
+          onClick={() => setIsPending(true)}
+        ></div>
         {!short && (
           <BmeText variant="LargeTitle">
             <FormattedMessage id="common.component.sign_in_with_apple.or" />

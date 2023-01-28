@@ -1,3 +1,5 @@
+import { SignInWithAppleRedirect } from "../../../../../types/sign-in-with-apple-redirect.type";
+
 export interface AuthApplePayload {
   state?: string;
   idToken: string;
@@ -6,4 +8,6 @@ export interface AuthApplePayload {
   lastName?: string;
   email?: string;
   device?: string;
+  service: true;
+  redirect: SignInWithAppleRedirect;
 }

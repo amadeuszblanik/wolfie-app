@@ -7,6 +7,7 @@ import { PetsMyResponse } from "../services/api/types/pets/my/response.type";
 import { PetsAddResponse } from "../services/api/types/pets/add/response.type";
 import { PetsAddPayload } from "../services/api/types/pets/add/payload.type";
 import { PetsPetIdPutResponse } from "../services/api/types/pets/:petId/put/response.type";
+import { PetsPetIdAvatarPostPayload } from "../services/api/types/pets/:petId/avatar/payload.type";
 import { AppState } from "./index";
 
 const petsMy = createAsyncThunk<
@@ -36,6 +37,15 @@ const remove = createAsyncThunk<
   { extra: { apiService: ApiService }; rejectValue: ApiMessage }
 >("pets/delete", async ({ petId }, thunkAPI) => await thunkAPI.extra.apiService.pets.delete(petId));
 
+const avatar = createAsyncThunk<
+  PetsPetIdAvatarPostPayload,
+  { petId: string; payload: PetsPetIdAvatarPostPayload },
+  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
+>(
+  "pets/avatar",
+  async ({ petId, payload }, thunkAPI) => await thunkAPI.extra.apiService.pets.avatarPost(petId, payload),
+);
+
 export interface PetsStore {
   myStatus: ApiStatus;
   myError: string | null;
@@ -47,6 +57,9 @@ export interface PetsStore {
   deleteStatus: ApiStatus;
   deleteError: string | null;
   deleteData: string | null;
+  avatarStatus: ApiStatus;
+  avatarError: string | null;
+  avatarData: PetsPetIdAvatarPostPayload | null;
 }
 
 const initialState: PetsStore = {
@@ -60,6 +73,9 @@ const initialState: PetsStore = {
   deleteStatus: "idle",
   deleteError: null,
   deleteData: null,
+  avatarStatus: "idle",
+  avatarError: null,
+  avatarData: null,
 };
 
 export const petsSlice = createSlice({
@@ -80,6 +96,11 @@ export const petsSlice = createSlice({
       state.deleteStatus = "idle";
       state.deleteError = null;
       state.deleteData = null;
+    },
+    resetAvatar: (state) => {
+      state.avatarStatus = "idle";
+      state.avatarError = null;
+      state.avatarData = null;
     },
   },
 
@@ -146,6 +167,21 @@ export const petsSlice = createSlice({
       state.deleteError = action.error.message || null;
       state.deleteData = null;
     });
+    builder.addCase(avatar.pending, (state) => {
+      state.avatarStatus = "pending";
+      state.avatarError = null;
+      state.avatarData = null;
+    });
+    builder.addCase(avatar.fulfilled, (state, action) => {
+      state.avatarStatus = "success";
+      state.avatarError = null;
+      state.avatarData = action.payload;
+    });
+    builder.addCase(avatar.rejected, (state, action) => {
+      state.avatarStatus = "error";
+      state.avatarError = action.error.message || null;
+      state.avatarData = null;
+    });
   },
 });
 
@@ -163,6 +199,9 @@ export const selectPetsEditError = ({ pets }: AppState) => pets.editError;
 export const selectPetsDeleteStatus = ({ pets }: AppState) => pets.deleteStatus;
 export const selectPetsDeleteError = ({ pets }: AppState) => pets.deleteError;
 export const selectPetsDeleteData = ({ pets }: AppState) => pets.deleteData;
+export const selectPetsAvatarStatus = ({ pets }: AppState) => pets.avatarStatus;
+export const selectPetsAvatarError = ({ pets }: AppState) => pets.avatarError;
+export const selectPetsAvatarData = ({ pets }: AppState) => pets.avatarData;
 
 export const petsActions = {
   ...petsSlice.actions,
@@ -170,4 +209,5 @@ export const petsActions = {
   add,
   edit,
   remove,
+  avatar,
 };

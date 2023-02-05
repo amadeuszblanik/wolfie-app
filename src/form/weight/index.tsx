@@ -1,4 +1,4 @@
-import { BmeBox, BmeButton, BmeInput, BmeInputDate, BmeText } from "bme-ui";
+import { BmeBox, BmeButton, BmeInputDate, BmeInputDeprecated, BmeText } from "bme-ui";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useEffect, useState } from "react";
 import { DefaultTheme } from "styled-components";
@@ -159,7 +159,7 @@ const Component = () => {
             />
           </BmeBox>
           <BmeBox alignX="space-between" alignY="bottom" width="100%" margin="no|no|sm">
-            <BmeInput
+            <BmeInputDeprecated
               name="weight"
               value={weight}
               label={intl.formatMessage({ id: "common.form.weight.label" })}

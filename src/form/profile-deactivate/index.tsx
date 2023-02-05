@@ -1,4 +1,4 @@
-import { BmeButton, BmeCheckbox, BmeInput, BmeList, BmeText } from "bme-ui";
+import { BmeButton, BmeCheckbox, BmeInputDeprecated, BmeList, BmeText } from "bme-ui";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useEffect, useState } from "react";
 import { DefaultTheme } from "styled-components";
@@ -88,7 +88,7 @@ const Component = () => {
           />
         </BmeList.Item>
         <BmeList.Item>
-          <BmeInput
+          <BmeInputDeprecated
             name="password"
             value={password}
             label={intl.formatMessage({ id: "common.form.password.label" })}

@@ -1,4 +1,4 @@
-import { BmeBox, BmeButton, BmeInput, BmeInputDate, BmeSelect, BmeText, BmeTextArea } from "bme-ui";
+import { BmeBox, BmeButton, BmeInputDate, BmeInputDeprecated, BmeSelect, BmeText, BmeTextArea } from "bme-ui";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useEffect, useState } from "react";
 import { DefaultTheme } from "styled-components";
@@ -205,7 +205,7 @@ const Component = () => {
             />
           </BmeBox>
           <BmeBox width="100%" margin="no|no|sm">
-            <BmeInput
+            <BmeInputDeprecated
               name="additional-medicines"
               value={additionalMedicines}
               label={intl.formatMessage({ id: "common.form.additional_medicines.label" })}
@@ -234,7 +234,7 @@ const Component = () => {
             />
           </BmeBox>
           <BmeBox width="100%" margin="no|no|sm">
-            <BmeInput
+            <BmeInputDeprecated
               name="veterinary"
               value={veterinary}
               label={intl.formatMessage({ id: "common.form.vet.label" })}

@@ -1,4 +1,4 @@
-import { BmeBox, BmeButton, BmeCheckbox, BmeInput, BmeSelect, BmeText } from "bme-ui";
+import { BmeBox, BmeButton, BmeCheckbox, BmeInputDeprecated, BmeSelect, BmeText } from "bme-ui";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useEffect, useState } from "react";
 import { DefaultTheme } from "styled-components";
@@ -71,7 +71,7 @@ const Component = () => {
     >
       <BmeBox direction="column" alignX="center" alignY="center" width="100%" maxWidth="420px" margin="no|auto">
         <BmeBox width="100%" margin="no|no|sm">
-          <BmeInput
+          <BmeInputDeprecated
             name="email"
             value={email}
             label={intl.formatMessage({ id: "common.form.email.label" })}
@@ -81,7 +81,7 @@ const Component = () => {
           />
         </BmeBox>
         <BmeBox width="100%" margin="no|no|sm">
-          <BmeInput
+          <BmeInputDeprecated
             name="firstName"
             value={firstName}
             label={intl.formatMessage({ id: "common.form.first_name.label" })}
@@ -90,7 +90,7 @@ const Component = () => {
           />
         </BmeBox>
         <BmeBox width="100%" margin="no|no|sm">
-          <BmeInput
+          <BmeInputDeprecated
             name="lastName"
             value={lastName}
             label={intl.formatMessage({ id: "common.form.last_name.label" })}
@@ -99,7 +99,7 @@ const Component = () => {
           />
         </BmeBox>
         <BmeBox width="100%" margin="no|no|sm">
-          <BmeInput
+          <BmeInputDeprecated
             name="password"
             value={password}
             label={intl.formatMessage({ id: "common.form.password.label" })}
@@ -109,7 +109,7 @@ const Component = () => {
           />
         </BmeBox>
         <BmeBox width="100%" margin="no|no|sm">
-          <BmeInput
+          <BmeInputDeprecated
             name="passwordConfirm"
             value={passwordConfirm}
             label={intl.formatMessage({ id: "common.form.password_confirm.label" })}

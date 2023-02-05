@@ -455,6 +455,7 @@
   "common.form.profile.error": "Wystąpił błąd podczas aktualizacji profilu.",
   "common.form.profile_change_password.error": "Wystąpił błąd podczas zmiany hasła.",
   "common.form.profile_change_password.success": "Hasło zostało zmienione.",
+  "common.form.errors.required": "To pole jest wymagane.",
   "common.user_role.banned": "Zablokowany",
   "common.user_role.user": "Użytkownik",
   "common.user_role.superuser": "Superużytkownik",

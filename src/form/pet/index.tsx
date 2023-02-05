@@ -1,4 +1,4 @@
-import { BmeBox, BmeButton, BmeInput, BmeInputDate, BmeSelect, BmeText } from "bme-ui";
+import { BmeBox, BmeButton, BmeInputDate, BmeInputDeprecated, BmeSelect, BmeText } from "bme-ui";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useEffect, useState } from "react";
 import { DefaultTheme } from "styled-components";
@@ -161,7 +161,7 @@ const Component = () => {
         <>
           <BmeBox direction="column" alignX="center" alignY="center" width="100%" maxWidth="420px" margin="no|auto">
             <BmeBox width="100%" margin="no|no|sm">
-              <BmeInput
+              <BmeInputDeprecated
                 name="name"
                 value={name}
                 label={intl.formatMessage({ id: "common.form.name.label" })}
@@ -182,7 +182,7 @@ const Component = () => {
               />
             </BmeBox>
             <BmeBox width="100%" margin="no|no|sm">
-              <BmeInput
+              <BmeInputDeprecated
                 name="microchip"
                 value={microchip}
                 label={intl.formatMessage({ id: "common.form.microchip.label" })}

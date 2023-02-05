@@ -1,4 +1,4 @@
-import { BmeBox, BmeButton, BmeInput, BmeText } from "bme-ui";
+import { BmeBox, BmeButton, BmeInputDeprecated, BmeText } from "bme-ui";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useEffect, useState } from "react";
 import { DefaultTheme } from "styled-components";
@@ -58,7 +58,7 @@ const Component = () => {
     >
       <BmeBox direction="column" alignX="center" alignY="center" width="100%" maxWidth="420px" margin="no|auto">
         <BmeBox width="100%" margin="no|no|sm">
-          <BmeInput
+          <BmeInputDeprecated
             name="user-email"
             value={userEmail}
             label={intl.formatMessage({ id: "common.form.email.label" })}

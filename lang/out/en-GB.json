@@ -455,6 +455,7 @@
   "common.form.profile.error": "Failed to update profile",
   "common.form.profile_change_password.error": "Failed to change password",
   "common.form.profile_change_password.success": "Password changed successfully",
+  "common.form.errors.required": "This field is required",
   "common.user_role.banned": "Banned",
   "common.user_role.user": "User",
   "common.user_role.superuser": "Superuser",

@@ -5,7 +5,7 @@ import { DefaultTheme } from "styled-components";
 import { useRouter } from "next/router";
 import { SelectItem } from "bme-ui/dist/atoms/select/types";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { Form, Loader, RemoveEntryModal } from "../../components";
+import { FormDeprecated, Loader, RemoveEntryModal } from "../../components";
 import {
   petsActions,
   selectPets,
@@ -142,7 +142,7 @@ const Component = () => {
 
   return (
     <>
-      <Form
+      <FormDeprecated
         onSubmit={handleSubmit}
         apiStatus={status}
         modalBorder={modelBorderColor}
@@ -217,7 +217,7 @@ const Component = () => {
           </BmeBox>
           {isLoadingPets && <Loader />}
         </>
-      </Form>
+      </FormDeprecated>
       {entryToRemove && (
         <RemoveEntryModal
           apiStatus={storePetsDeleteStatus}

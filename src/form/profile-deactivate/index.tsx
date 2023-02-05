@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { DefaultTheme } from "styled-components";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { Form } from "../../components";
+import { FormDeprecated } from "../../components";
 import {
   profileActions,
   selectProfileDeactivateAccountData,
@@ -57,7 +57,7 @@ const Component = () => {
   };
 
   return (
-    <Form
+    <FormDeprecated
       onSubmit={handleSubmit}
       apiStatus={storeProfileDeactivateAccountStatus}
       modalBorder={modelBorderColor}
@@ -103,7 +103,7 @@ const Component = () => {
           </BmeButton>
         </BmeList.Item>
       </BmeList>
-    </Form>
+    </FormDeprecated>
   );
 };
 

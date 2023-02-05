@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { DefaultTheme } from "styled-components";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { Form } from "../../components";
+import { FormDeprecated } from "../../components";
 import {
   resetPasswordActions,
   selectResetPasswordPutData,
@@ -52,7 +52,7 @@ const Component = () => {
   };
 
   return (
-    <Form
+    <FormDeprecated
       onSubmit={handleSubmit}
       apiStatus={storeResetPasswordPutStatus}
       modalBorder={modelBorderColor}
@@ -88,7 +88,7 @@ const Component = () => {
           <FormattedMessage id="common.form.submit.label" />
         </BmeButton>
       </BmeBox>
-    </Form>
+    </FormDeprecated>
   );
 };
 

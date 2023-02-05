@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector, useDeviceName } from "../../hooks";
 import { authActions, selectAuthError, selectAuthStatus } from "../../store/auth.slice";
-import { Form } from "../../components";
+import { FormDeprecated } from "../../components";
 import { Link } from "../../atoms";
 
 const Component = () => {
@@ -46,7 +46,7 @@ const Component = () => {
   };
 
   return (
-    <Form
+    <FormDeprecated
       onSubmit={handleSubmit}
       apiStatus={storeAuthStatus}
       modalBorder="red"
@@ -98,7 +98,7 @@ const Component = () => {
           </BmeButton>
         </Link>
       </BmeBox>
-    </Form>
+    </FormDeprecated>
   );
 };
 

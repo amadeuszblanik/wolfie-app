@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { DefaultTheme } from "styled-components";
 import { SelectItem } from "bme-ui/dist/atoms/select/types";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { Form } from "../../components";
+import { FormDeprecated } from "../../components";
 import { Link } from "../../atoms";
 import { WeightUnits } from "../../types/weight-units.type";
 import { selectSignUpError, selectSignUpMessage, selectSignUpStatus, signUpActions } from "../../store/sign-up.slice";
@@ -62,7 +62,7 @@ const Component = () => {
   };
 
   return (
-    <Form
+    <FormDeprecated
       onSubmit={handleSubmit}
       apiStatus={storeSignUpStatus}
       modalBorder={modelBorderColor}
@@ -152,7 +152,7 @@ const Component = () => {
           </BmeButton>
         </Link>
       </BmeBox>
-    </Form>
+    </FormDeprecated>
   );
 };
 

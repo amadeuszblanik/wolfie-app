@@ -5,7 +5,7 @@ import { DefaultTheme } from "styled-components";
 import { useRouter } from "next/router";
 import { SelectItem } from "bme-ui/dist/atoms/select/types";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { Form, Loader } from "../../components";
+import { FormDeprecated, Loader } from "../../components";
 import { enumToList, toInputDate, toInputDatetimeLocal } from "../../utils";
 import { HealthLogKind } from "../../types/health-log-kind.types";
 import { medicinesActions, selectMedicinesDataAsList } from "../../store/medicines.slice";
@@ -150,7 +150,7 @@ const Component = () => {
   };
 
   return (
-    <Form
+    <FormDeprecated
       onSubmit={handleSubmit}
       apiStatus={status}
       modalBorder={modelBorderColor}
@@ -259,7 +259,7 @@ const Component = () => {
         </BmeBox>
         {isLoadingHealthLogs && <Loader />}
       </>
-    </Form>
+    </FormDeprecated>
   );
 };
 

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { DefaultTheme } from "styled-components";
 import { SelectItem } from "bme-ui/dist/atoms/select/types";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { Form } from "../../components";
+import { FormDeprecated } from "../../components";
 import { WeightUnits } from "../../types/weight-units.type";
 import {
   profileActions,
@@ -77,7 +77,7 @@ const Component = () => {
   };
 
   return (
-    <Form
+    <FormDeprecated
       onSubmit={handleSubmit}
       apiStatus={storeProfilePutStatus}
       modalBorder={modelBorderColor}
@@ -127,7 +127,7 @@ const Component = () => {
           </BmeButton>
         </BmeBox>
       </BmeBox>
-    </Form>
+    </FormDeprecated>
   );
 };
 

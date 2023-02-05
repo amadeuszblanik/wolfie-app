@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { DefaultTheme } from "styled-components";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { Form, Loader } from "../../components";
+import { FormDeprecated, Loader } from "../../components";
 import { toInputDate, toInputTime } from "../../utils";
 import { selectProfileData } from "../../store/profile.slice";
 import {
@@ -118,7 +118,7 @@ const Component = () => {
   };
 
   return (
-    <Form
+    <FormDeprecated
       onSubmit={handleSubmit}
       apiStatus={status}
       modalBorder={modelBorderColor}
@@ -178,7 +178,7 @@ const Component = () => {
         </BmeBox>
         {isLoadingWeights && <Loader />}
       </>
-    </Form>
+    </FormDeprecated>
   );
 };
 

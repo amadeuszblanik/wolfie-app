@@ -3,7 +3,7 @@ import { FormattedMessage, useIntl } from "react-intl";
 import { useEffect, useState } from "react";
 import { DefaultTheme } from "styled-components";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { Form } from "../../components";
+import { FormDeprecated } from "../../components";
 import {
   profileActions,
   selectProfileChangePasswordData,
@@ -56,7 +56,7 @@ const Component = () => {
   };
 
   return (
-    <Form
+    <FormDeprecated
       onSubmit={handleSubmit}
       apiStatus={storeProfileChangePasswordStatus}
       modalBorder={modelBorderColor}
@@ -110,7 +110,7 @@ const Component = () => {
           </BmeButton>
         </BmeBox>
       </BmeBox>
-    </Form>
+    </FormDeprecated>
   );
 };
 

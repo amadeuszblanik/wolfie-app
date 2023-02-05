@@ -12,6 +12,7 @@ const Component = () => {
   const {
     control,
     handleSubmit,
+    register,
     formState: { errors },
   } = useForm<FormSignInData>({
     resolver: yupResolver(formSignInSchema),
@@ -53,6 +54,7 @@ const Component = () => {
           </BmeFormController>
         )}
       />
+      <input type="checkbox" {...register("keepSignIn")} />
     </Form>
   );
 };

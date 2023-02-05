@@ -30,7 +30,7 @@ const useLogic = () => {
       authActions.signIn({
         username: formData.username,
         password: formData.password,
-        keepSignIn: true,
+        keepSignIn: formData.keepSignIn,
         device: deviceName,
       }),
     );

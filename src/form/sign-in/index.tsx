@@ -1,6 +1,6 @@
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { BmeFormController, BmeInput } from "bme-ui";
+import { BmeCheckbox, BmeFormController, BmeInput } from "bme-ui";
 import { useIntl } from "react-intl";
 import { FormSignInData, formSignInSchema } from "./type";
 import useLogic from "./logic";
@@ -12,7 +12,6 @@ const Component = () => {
   const {
     control,
     handleSubmit,
-    register,
     formState: { errors },
   } = useForm<FormSignInData>({
     resolver: yupResolver(formSignInSchema),
@@ -32,7 +31,7 @@ const Component = () => {
         render={({ field }) => (
           <BmeFormController
             width="100%"
-            label="Username"
+            label={intl.formatMessage({ id: "common.form.username.label" })}
             name={field.name}
             error={errors.username && intl.formatMessage({ id: errors.username.message })}
           >
@@ -46,7 +45,7 @@ const Component = () => {
         render={({ field }) => (
           <BmeFormController
             width="100%"
-            label="Password"
+            label={intl.formatMessage({ id: "common.form.password.label" })}
             name={field.name}
             error={errors.password && intl.formatMessage({ id: errors.password.message })}
           >
@@ -54,7 +53,21 @@ const Component = () => {
           </BmeFormController>
         )}
       />
-      <input type="checkbox" {...register("keepSignIn")} />
+      <Controller
+        name="keepSignIn"
+        control={control}
+        render={({ field }) => (
+          <BmeFormController
+            width="100%"
+            label={intl.formatMessage({ id: "common.form.keep_sign_in.label" })}
+            labelPosition="left"
+            name={field.name}
+            error={errors.keepSignIn && intl.formatMessage({ id: errors.keepSignIn.message })}
+          >
+            <BmeCheckbox {...field} type="checkbox" />
+          </BmeFormController>
+        )}
+      />
     </Form>
   );
 };

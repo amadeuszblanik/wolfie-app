@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-export const formSignInSchema = yup
+export const formSchema = yup
   .object({
     username: yup.string().required("common.form.errors.required"),
     password: yup.string().required("common.form.errors.required"),
@@ -8,4 +8,4 @@ export const formSignInSchema = yup
   })
   .required();
 
-export type FormSignInData = yup.InferType<typeof formSignInSchema>;
+export type FormData = yup.InferType<typeof formSchema>;

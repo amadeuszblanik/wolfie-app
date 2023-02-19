@@ -29,7 +29,13 @@ export const signUpSlice = createSlice({
 
   initialState,
 
-  reducers: {},
+  reducers: {
+    resetForm: (state) => {
+      state.status = "idle";
+      state.error = null;
+      state.message = null;
+    },
+  },
 
   extraReducers: (builder) => {
     builder.addCase(HYDRATE, (state, action) => ({

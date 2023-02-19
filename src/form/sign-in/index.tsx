@@ -2,7 +2,7 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { BmeCheckbox, BmeFormController, BmeInput } from "bme-ui";
 import { useIntl } from "react-intl";
-import { FormSignInData, formSignInSchema } from "./type";
+import { FormData, formSchema } from "./type";
 import useLogic from "./logic";
 import { Form } from "../../components";
 
@@ -13,8 +13,8 @@ const Component = () => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormSignInData>({
-    resolver: yupResolver(formSignInSchema),
+  } = useForm<FormData>({
+    resolver: yupResolver(formSchema),
   });
 
   const { apiStatus, apiError, submit, resetForm } = useLogic();

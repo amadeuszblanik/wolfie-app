@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { FormSignInData } from "./type";
+import { FormData } from "./type";
 import { authActions, selectAuthError, selectAuthStatus } from "../../store/auth.slice";
 import { useAppDispatch, useAppSelector, useDeviceName } from "../../hooks";
 
@@ -25,7 +25,7 @@ const useLogic = () => {
     }
   }, [storeAuthStatus, storeAuthError, router]);
 
-  const submit = (formData: FormSignInData) => {
+  const submit = (formData: FormData) => {
     dispatch(
       authActions.signIn({
         username: formData.username,

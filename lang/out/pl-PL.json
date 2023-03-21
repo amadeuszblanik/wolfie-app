@@ -460,6 +460,7 @@
   "common.form.errors.password": "Hasło musi mieć co najmniej 8 znaków, zawierać małe, duże litery, cyfry i znaki specjalne.",
   "common.form.errors.password_confirm": "Hasła nie są takie same.",
   "common.form.errors.gdpr_consent": "Musisz wyrazić zgodę na przetwarzanie danych osobowych.",
+  "common.form.user_email.label": "Email",
   "common.user_role.banned": "Zablokowany",
   "common.user_role.user": "Użytkownik",
   "common.user_role.superuser": "Superużytkownik",

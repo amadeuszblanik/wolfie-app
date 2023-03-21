@@ -17,7 +17,7 @@ const useLogic = () => {
         password: formData.password,
         passwordConfirm: formData.passwordConfirm,
         weightUnit: formData.weightUnit,
-        gdprConsent: formData.gdprConsent,
+        gdprConsent: formData.gdprConsent ?? false,
       }),
     );
   };

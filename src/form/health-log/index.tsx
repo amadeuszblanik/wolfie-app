@@ -1,9 +1,9 @@
-import { BmeBox, BmeButton, BmeInputDate, BmeInputDeprecated, BmeSelect, BmeText, BmeTextArea } from "bme-ui";
+import { BmeBox, BmeButton, BmeInputDate, BmeInputDeprecated, BmeSelectDeprecated, BmeText, BmeTextArea } from "bme-ui";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useEffect, useState } from "react";
 import { DefaultTheme } from "styled-components";
 import { useRouter } from "next/router";
-import { SelectItem } from "bme-ui/dist/atoms/select/types";
+import { SelectItem } from "bme-ui/dist/atoms/select-deperacated/types";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { FormDeprecated, Loader } from "../../components";
 import { enumToList, toInputDate, toInputDatetimeLocal } from "../../utils";
@@ -173,7 +173,7 @@ const Component = () => {
       <>
         <BmeBox direction="column" alignX="center" alignY="center" width="100%" maxWidth="420px" margin="no|auto">
           <BmeBox width="100%" margin="no|no|sm">
-            <BmeSelect
+            <BmeSelectDeprecated
               name="kind"
               label={intl.formatMessage({ id: "common.form.health_log_kind.label" })}
               list={healthLogKindList}
@@ -193,7 +193,7 @@ const Component = () => {
             />
           </BmeBox>
           <BmeBox width="100%" margin="no|no|sm">
-            <BmeSelect
+            <BmeSelectDeprecated
               name="medicines"
               label={intl.formatMessage({ id: "common.form.medicines.label" })}
               list={storeMedicinesDataAsList}

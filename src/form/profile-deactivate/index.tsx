@@ -1,4 +1,4 @@
-import { BmeButton, BmeCheckbox, BmeInputDeprecated, BmeList, BmeText } from "bme-ui";
+import { BmeButton, BmeCheckboxDeprecated, BmeInputDeprecated, BmeList, BmeText } from "bme-ui";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useEffect, useState } from "react";
 import { DefaultTheme } from "styled-components";
@@ -80,7 +80,7 @@ const Component = () => {
           </BmeText>
         </BmeList.Item>
         <BmeList.Item>
-          <BmeCheckbox
+          <BmeCheckboxDeprecated
             name="delete-approve"
             label={intl.formatMessage({ id: "common.form.profile_deactivate.checkbox" })}
             value={approve}

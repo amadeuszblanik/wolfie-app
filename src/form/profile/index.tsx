@@ -1,8 +1,8 @@
-import { BmeBox, BmeButton, BmeInputDeprecated, BmeSelect, BmeText } from "bme-ui";
+import { BmeBox, BmeButton, BmeInputDeprecated, BmeSelectDeprecated, BmeText } from "bme-ui";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useEffect, useState } from "react";
 import { DefaultTheme } from "styled-components";
-import { SelectItem } from "bme-ui/dist/atoms/select/types";
+import { SelectItem } from "bme-ui/dist/atoms/select-deperacated/types";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { FormDeprecated } from "../../components";
 import { WeightUnits } from "../../types/weight-units.type";
@@ -112,7 +112,7 @@ const Component = () => {
           />
         </BmeBox>
         <BmeBox width="100%" margin="no|no|sm">
-          <BmeSelect
+          <BmeSelectDeprecated
             name="weightUnit"
             label={intl.formatMessage({ id: "common.form.weight_unit.label" })}
             list={weightUnitsList}

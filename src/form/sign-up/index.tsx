@@ -1,12 +1,13 @@
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { BmeCheckbox, BmeFormController, BmeInput } from "bme-ui";
-import { useIntl } from "react-intl";
+import { BmeCheckbox, BmeFormController, BmeInput, BmeSelect } from "bme-ui";
+import { FormattedMessage, useIntl } from "react-intl";
 import { FormData, formSchema } from "./type";
 import useLogic from "./logic";
 import { Form } from "../../components";
 import { changeCase } from "../../utils";
 import { ChangeCaseUtil } from "../../utils/change-case.util";
+import { WeightUnits } from "../../types/weight-units.type";
 
 const Component = () => {
   const intl = useIntl();
@@ -14,6 +15,7 @@ const Component = () => {
   const {
     control,
     handleSubmit,
+    register,
     formState: { errors },
   } = useForm<FormData>({
     resolver: yupResolver(formSchema),
@@ -39,7 +41,7 @@ const Component = () => {
             name={field.name}
             error={errors[field.name] && intl.formatMessage({ id: errors[field.name]?.message })}
           >
-            <BmeInput {...field} />
+            <BmeInput {...field} type="email" />
           </BmeFormController>
         )}
       />
@@ -119,7 +121,16 @@ const Component = () => {
             name={field.name}
             error={errors[field.name] && intl.formatMessage({ id: String(errors[field.name]?.message) })}
           >
-            <BmeInput {...field} />
+            <BmeSelect {...register("weightUnit")}>
+              <BmeSelect.Option disabled selected value="">
+                ——
+              </BmeSelect.Option>
+              {Object.values(WeightUnits).map((weightUnit) => (
+                <BmeSelect.Option key={weightUnit} value={weightUnit}>
+                  <FormattedMessage id={`common.form.weight_unit.value.${weightUnit.toLowerCase()}`} />
+                </BmeSelect.Option>
+              ))}
+            </BmeSelect>
           </BmeFormController>
         )}
       />

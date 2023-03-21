@@ -1,9 +1,9 @@
-import { BmeBox, BmeButton, BmeInputDate, BmeInputDeprecated, BmeSelect, BmeText } from "bme-ui";
+import { BmeBox, BmeButton, BmeInputDate, BmeInputDeprecated, BmeSelectDeprecated, BmeText } from "bme-ui";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useEffect, useState } from "react";
 import { DefaultTheme } from "styled-components";
 import { useRouter } from "next/router";
-import { SelectItem } from "bme-ui/dist/atoms/select/types";
+import { SelectItem } from "bme-ui/dist/atoms/select-deperacated/types";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { FormDeprecated, Loader, RemoveEntryModal } from "../../components";
 import {
@@ -170,7 +170,7 @@ const Component = () => {
               />
             </BmeBox>
             <BmeBox width="100%" margin="no|no|sm">
-              <BmeSelect
+              <BmeSelectDeprecated
                 name="breed"
                 label={intl.formatMessage({ id: "common.form.breed.label" })}
                 list={breedsList}

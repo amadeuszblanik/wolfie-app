@@ -27,7 +27,7 @@ Wolfie.app is a pet companion Next.JS web application.
 * [Doggo Open API](https://api.wolfie.app)
 
 ## License
-[MIT](https://choosealicense.com/licenses/mit/)
+[GPL v3](https://github.com/amadeuszblanik/wolfie-app/blob/main/licence)
 
 ## Authors
 * [**Amadeusz Blanik**](https://blanik.me) - Frontend, Mobile and Backend

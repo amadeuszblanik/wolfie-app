@@ -539,10 +539,10 @@
   "page.pet_health_log.add_entry": "Dodaj wpis dziennika zdrowia",
   "page.pet_health_log.edit_entry": "Edytuj",
   "page.pet_id_health_log.title": "Dziennik zdrowia",
-  "common.form.health_log_kind.label": "Rodzaj",
+  "common.form.log_kind.label": "Rodzaj",
   "common.form.medicines.label": "Leki",
-  "common.form.additional_medicines.label": "Dodatkowe leki",
-  "common.form.additional_medicines.hint": "Oddzielaj leki przecinkami",
+  "common.form.medicines.hint": "Oddzielaj kolejne leki przecinkami lub wybieraj z listy",
+  "common.form.medicines.selected_medicines.label": "Wybrane leki",
   "common.form.diagnosis.label": "Diagnoza",
   "common.form.next_visit.label": "Następna wizyta",
   "common.form.vet.label": "Weterynarz",
@@ -562,5 +562,6 @@
   "common.component.remove_entry_modal.success.close": "Zamknij",
   "common.component.sign_in_with_apple.error": "Wystąpił błąd podczas logowania za pomocą Apple. Spróbuj ponownie.",
   "common.component.sign_in_with_apple.or": "lub",
-  "form.pet_delete.verify": "Wpisz nazwę zwierzęcia, aby potwierdzić usunięcie"
+  "form.pet_delete.verify": "Wpisz nazwę zwierzęcia, aby potwierdzić usunięcie",
+  "common.delete": "Usuń"
 }

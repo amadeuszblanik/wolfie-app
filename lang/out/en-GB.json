@@ -540,13 +540,13 @@
   "page.pet_health_log.add_entry": "Add health log entry",
   "page.pet_health_log.edit_entry": "Edit",
   "page.pet_id_health_log.title": "Health log",
-  "common.form.health_log_kind.label": "Kind",
+  "common.form.kind.label": "Kind",
   "common.form.medicines.label": "Medicines",
-  "common.form.additional_medicines.label": "Additional medicines",
-  "common.form.additional_medicines.hint": "Separate medicines with comma",
+  "common.form.medicines.hint": "Separate medicines with comma or select from the list",
+  "common.form.medicines.selected_medicines.label": "Selected medicines",
   "common.form.diagnosis.label": "Diagnosis",
   "common.form.next_visit.label": "Next visit",
-  "common.form.vet.label": "Vet",
+  "common.form.veterinary.label": "Vet",
   "common.form.description.label": "Description",
   "common.form.health_log_add.error": "Failed to add health log entry",
   "common.form.health_log_add.success": "Health log entry added successfully",
@@ -563,5 +563,6 @@
   "common.component.remove_entry_modal.success.close": "Close",
   "common.component.sign_in_with_apple.error": "Failed to sign in with Apple. Please try again.",
   "common.component.sign_in_with_apple.or": "or",
-  "form.pet_delete.verify": "Type your pet name to confirm"
+  "form.pet_delete.verify": "Type your pet name to confirm",
+  "common.delete": "Delete"
 }

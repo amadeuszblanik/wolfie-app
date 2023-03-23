@@ -5,6 +5,7 @@ export { default as Form } from "./form";
 export { default as FormDeprecated } from "./form-depracated";
 export { default as GlobalStyles } from "./global-styles";
 export { default as Loader } from "./loader";
+export { default as MedicinesSelector } from "./medicines-selector";
 export { default as PetCard } from "./pet-card";
 export { default as RemoveEntryModal } from "./remove-entry-modal";
 export { default as SideBar } from "./side-bar";

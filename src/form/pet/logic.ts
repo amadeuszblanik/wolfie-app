@@ -27,7 +27,7 @@ const useLogic = () => {
   const storeStatus = isEdit ? storePetsEditStatus : storePetsAddStatus;
   const storeError = isEdit ? storePetsEditError : storePetsAddError;
   const storeMessage = intl.formatMessage({
-    id: petId ? "common.form.pet_update.success" : "common.form.pet_add.success",
+    id: isEdit ? "common.form.pet_update.success" : "common.form.pet_add.success",
   });
 
   const submit = (formData: FormData) => {

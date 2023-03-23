@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { BmeBox, BmeButton, bmeMixins } from "bme-ui";
+import { BmeBox, BmeButton, bmeMixins, BmeModal } from "bme-ui";
 import { FormattedMessage } from "react-intl";
-import Modal from "bme-ui/dist/components/modal";
 import { ApiStatus } from "../../services/api/types/status.type";
 import { Loader } from "../index";
 
@@ -16,7 +15,7 @@ interface FormProps extends React.HTMLAttributes<HTMLFormElement> {
 
 type FormType = React.FC<FormProps>;
 
-const StyledFormWrapper = styled.form`
+export const StyledFormWrapper = styled.form`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -29,12 +28,13 @@ const StyledFormWrapper = styled.form`
 
 const Component: FormType = ({ apiStatus, error, success, onCloseModal, children, ...props }) => {
   const isLoading = apiStatus === "pending";
+  const isModalVisible = (!!error || !!success) && (apiStatus === "success" || apiStatus === "error");
 
   return (
     <StyledFormWrapper {...props}>
       <BmeBox direction="column" width="100%" margin="no|no|sm">
         {isLoading && <Loader />}
-        {(error || success) && <Modal onClose={onCloseModal}>{error || success}</Modal>}
+        {isModalVisible && <BmeModal onClose={onCloseModal}>{error || success}</BmeModal>}
         {children}
       </BmeBox>
       <BmeButton type="submit">

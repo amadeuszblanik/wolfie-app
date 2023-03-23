@@ -447,6 +447,8 @@
   "common.form.add.label": "Add",
   "common.form.update.label": "Update",
   "common.form.delete.label": "Delete",
+  "common.form.cancel.label": "Cancel",
+  "common.form.confirm.label": "Confirm",
   "common.form.reset_password.label": "Forgot password? Click here.",
   "common.form.create_account.label": "Don't have an account? Click here.",
   "common.form.sign_in.label": "Already have an account? Click here.",
@@ -560,5 +562,6 @@
   "common.component.remove_entry_modal.success.description": "Entry has been removed successfully",
   "common.component.remove_entry_modal.success.close": "Close",
   "common.component.sign_in_with_apple.error": "Failed to sign in with Apple. Please try again.",
-  "common.component.sign_in_with_apple.or": "or"
+  "common.component.sign_in_with_apple.or": "or",
+  "form.pet_delete.verify": "Type your pet name to confirm"
 }

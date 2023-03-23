@@ -447,6 +447,8 @@
   "common.form.add.label": "Dodaj",
   "common.form.update.label": "Zaktualizuj",
   "common.form.delete.label": "Usuń",
+  "common.form.cancel.label": "Anuluj",
+  "common.form.confirm.label": "Potwierdź",
   "common.form.reset_password.label": "Zapomniałeś hasła? Kliknij tutaj.",
   "common.form.create_account.label": "Nie masz konta? Kliknij tutaj.",
   "common.form.sign_in.label": "Masz już konto? Kliknij tutaj.",
@@ -559,5 +561,6 @@
   "common.component.remove_entry_modal.success.description": "Wpis został poprawnie usunięty.",
   "common.component.remove_entry_modal.success.close": "Zamknij",
   "common.component.sign_in_with_apple.error": "Wystąpił błąd podczas logowania za pomocą Apple. Spróbuj ponownie.",
-  "common.component.sign_in_with_apple.or": "lub"
+  "common.component.sign_in_with_apple.or": "lub",
+  "form.pet_delete.verify": "Wpisz nazwę zwierzęcia, aby potwierdzić usunięcie"
 }

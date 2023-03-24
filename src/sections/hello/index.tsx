@@ -21,7 +21,6 @@ const StyledMockedWrapper = styled.figure`
 
 const Component = () => {
   const intl = useIntl();
-
   const isMobile = useMobile();
 
   return (
@@ -43,7 +42,7 @@ const Component = () => {
         </BmeText>
 
         <BmeBox padding="md|no">
-          <Link href="/about">
+          <Link href="download">
             <Image
               src={`/download/app-store/${intl.locale}.svg`}
               alt={intl.formatMessage({ id: "section.hello.download.app_store" })}

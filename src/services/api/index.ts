@@ -146,4 +146,9 @@ export default class ApiService extends ApiBase {
   breed = async () => await this.get<BreedResponse>(ApiBreedEndpoint.Breed);
 
   medicine = async () => await this.get<MedicineShortResponse>(ApiMedicineEndpoint.Medicine);
+
+  // eslint-disable-next-line @typescript-eslint/member-ordering
+  constructor() {
+    super();
+  }
 }

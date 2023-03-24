@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
+import { lastElement } from "bme-utils";
 import { ApiStatus } from "../services/api/types/status.type";
 import { ApiMessage } from "../services/api/types/api-message.type";
 import { ApiService } from "../services";
@@ -182,11 +183,19 @@ export const selectPetsWeightPatchData = ({ petsWeights }: AppState) => petsWeig
 export const selectPetsWeightDeleteStatus = ({ petsWeights }: AppState) => petsWeights.deleteStatus;
 export const selectPetsWeightDeleteError = ({ petsWeights }: AppState) => petsWeights.deleteError;
 export const selectPetsWeightDeleteData = ({ petsWeights }: AppState) => petsWeights.deleteData;
-// @TODO: Rename it later
+
 export const selectPetsWeightDataById =
   (weightId: string) =>
   ({ petsWeights }: AppState) =>
     petsWeights.getData?.find((weight) => weight.id === weightId);
+export const selectPetsWeightDataLast = ({ petsWeights }: AppState) => {
+  const data = petsWeights.getData;
+  if (!data) {
+    return null;
+  }
+
+  return lastElement(data);
+};
 
 export const petsWeightActions = {
   ...petsWeightsSlice.actions,

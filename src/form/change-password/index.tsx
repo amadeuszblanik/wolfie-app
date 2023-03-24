@@ -1,115 +1,80 @@
-import { BmeBox, BmeButton, BmeInput, BmeText } from "bme-ui";
-import { FormattedMessage, useIntl } from "react-intl";
-import { useEffect, useState } from "react";
-import { DefaultTheme } from "styled-components";
-import { useAppDispatch, useAppSelector } from "../../hooks";
+import { Controller, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { BmeFormController, BmeInput } from "bme-ui";
+import { useIntl } from "react-intl";
+import { FormData, formSchema } from "./type";
+import useLogic from "./logic";
 import { Form } from "../../components";
-import {
-  profileActions,
-  selectProfileChangePasswordData,
-  selectProfileChangePasswordError,
-  selectProfileChangePasswordStatus,
-} from "../../store/profile.slice";
+import { changeCase } from "../../utils";
+import { ChangeCaseUtil } from "../../utils/change-case.util";
 
 const Component = () => {
   const intl = useIntl();
-  const dispatch = useAppDispatch();
-  const storeProfileChangePasswordStatus = useAppSelector(selectProfileChangePasswordStatus);
-  const storeProfileChangePasswordError = useAppSelector(selectProfileChangePasswordError);
-  const storeProfileChangePasswordData = useAppSelector(selectProfileChangePasswordData);
 
-  const isError = storeProfileChangePasswordStatus === "error";
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: yupResolver(formSchema),
+  });
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modelBorderColor, setModelBorderColor] = useState<keyof DefaultTheme["colors"]>("red");
-  const [currentPassword, setCurrentPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [newPasswordConfirm, setNewPasswordConfirm] = useState("");
+  const { apiStatus, apiError, apiMessage, submit, resetForm } = useLogic();
 
-  useEffect(() => {
-    dispatch(profileActions.resetChangePassword());
-    setIsModalOpen(false);
-  }, []);
-
-  useEffect(() => {
-    if (storeProfileChangePasswordError) {
-      setIsModalOpen(true);
-      setModelBorderColor("red");
-    }
-
-    if (storeProfileChangePasswordStatus === "success") {
-      setIsModalOpen(true);
-      setModelBorderColor("green");
-    }
-  }, [storeProfileChangePasswordError, storeProfileChangePasswordStatus]);
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    dispatch(
-      profileActions.changePassword({
-        currentPassword,
-        newPassword,
-        newPasswordConfirm,
-      }),
-    );
-  };
+  const onSubmit = handleSubmit((data) => {
+    submit(data);
+  });
 
   return (
-    <Form
-      onSubmit={handleSubmit}
-      apiStatus={storeProfileChangePasswordStatus}
-      modalBorder={modelBorderColor}
-      modal={
-        isModalOpen ? (
-          <BmeText align="center">
-            {isError
-              ? storeProfileChangePasswordError ||
-                intl.formatMessage({ id: "common.form.profile_change_password.error" })
-              : storeProfileChangePasswordData?.message ||
-                intl.formatMessage({ id: "common.form.profile_change_password.success" })}
-          </BmeText>
-        ) : undefined
-      }
-      onCloseModal={isError ? () => setIsModalOpen(false) : undefined}
-    >
-      <BmeBox direction="column" alignX="center" alignY="center" width="100%" maxWidth="420px" margin="no|auto">
-        <BmeBox width="100%" margin="no|no|sm">
-          <BmeInput
-            name="current-password"
-            value={currentPassword}
-            label={intl.formatMessage({ id: "common.form.current_password.label" })}
-            onValue={setCurrentPassword}
-            type="password"
+    <Form onSubmit={onSubmit} apiStatus={apiStatus} error={apiError} success={apiMessage} onCloseModal={resetForm}>
+      <Controller
+        name="currentPassword"
+        control={control}
+        render={({ field }) => (
+          <BmeFormController
             width="100%"
-          />
-        </BmeBox>
-        <BmeBox width="100%" margin="no|no|sm">
-          <BmeInput
-            name="new-password"
-            value={newPassword}
-            label={intl.formatMessage({ id: "common.form.new_password.label" })}
-            onValue={setNewPassword}
-            type="password"
+            label={intl.formatMessage({
+              id: `common.form.${changeCase(field.name, ChangeCaseUtil.CamelCase, ChangeCaseUtil.SnakeCase)}.label`,
+            })}
+            name={field.name}
+            error={errors[field.name] && intl.formatMessage({ id: errors[field.name]?.message })}
+          >
+            <BmeInput {...field} type="password" />
+          </BmeFormController>
+        )}
+      />
+      <Controller
+        name="newPassword"
+        control={control}
+        render={({ field }) => (
+          <BmeFormController
             width="100%"
-          />
-        </BmeBox>
-        <BmeBox width="100%" margin="no|no|sm">
-          <BmeInput
-            name="new-password-confirm"
-            value={newPasswordConfirm}
-            label={intl.formatMessage({ id: "common.form.new_password_confirm.label" })}
-            onValue={setNewPasswordConfirm}
-            type="password"
+            label={intl.formatMessage({
+              id: `common.form.${changeCase(field.name, ChangeCaseUtil.CamelCase, ChangeCaseUtil.SnakeCase)}.label`,
+            })}
+            name={field.name}
+            error={errors[field.name] && intl.formatMessage({ id: errors[field.name]?.message })}
+          >
+            <BmeInput {...field} type="password" />
+          </BmeFormController>
+        )}
+      />
+      <Controller
+        name="newPasswordConfirm"
+        control={control}
+        render={({ field }) => (
+          <BmeFormController
             width="100%"
-          />
-        </BmeBox>
-        <BmeBox margin="no|no|lg">
-          <BmeButton type="submit">
-            <FormattedMessage id="common.form.submit.label" />
-          </BmeButton>
-        </BmeBox>
-      </BmeBox>
+            label={intl.formatMessage({
+              id: `common.form.${changeCase(field.name, ChangeCaseUtil.CamelCase, ChangeCaseUtil.SnakeCase)}.label`,
+            })}
+            name={field.name}
+            error={errors[field.name] && intl.formatMessage({ id: errors[field.name]?.message })}
+          >
+            <BmeInput {...field} type="password" />
+          </BmeFormController>
+        )}
+      />
     </Form>
   );
 };

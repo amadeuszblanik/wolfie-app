@@ -1,10 +1,10 @@
-import { BmeButton, BmeCheckbox, BmeInput, BmeList, BmeText } from "bme-ui";
+import { BmeButton, BmeCheckboxDeprecated, BmeInputDeprecated, BmeList, BmeText } from "bme-ui";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useEffect, useState } from "react";
 import { DefaultTheme } from "styled-components";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { Form } from "../../components";
+import { FormDeprecated } from "../../components";
 import {
   profileActions,
   selectProfileDeleteAccountData,
@@ -57,7 +57,7 @@ const Component = () => {
   };
 
   return (
-    <Form
+    <FormDeprecated
       onSubmit={handleSubmit}
       apiStatus={storeProfileDeleteAccountStatus}
       modalBorder={modelBorderColor}
@@ -80,7 +80,7 @@ const Component = () => {
           </BmeText>
         </BmeList.Item>
         <BmeList.Item>
-          <BmeCheckbox
+          <BmeCheckboxDeprecated
             name="delete-approve"
             label={intl.formatMessage({ id: "common.form.profile_delete.checkbox" })}
             value={approve}
@@ -88,7 +88,7 @@ const Component = () => {
           />
         </BmeList.Item>
         <BmeList.Item>
-          <BmeInput
+          <BmeInputDeprecated
             name="password"
             value={password}
             label={intl.formatMessage({ id: "common.form.password.label" })}
@@ -103,7 +103,7 @@ const Component = () => {
           </BmeButton>
         </BmeList.Item>
       </BmeList>
-    </Form>
+    </FormDeprecated>
   );
 };
 

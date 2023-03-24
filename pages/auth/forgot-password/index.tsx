@@ -1,4 +1,4 @@
-import { useIntl } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 import { useRouter } from "next/router";
 import { BmeBox, BmeButton, BmeText } from "bme-ui";
 import { LayoutAuth } from "../../../src/layouts";
@@ -22,6 +22,18 @@ export default function Page() {
     return (
       <LayoutAuth title={intl.formatMessage({ id: "page.forgot_password.title" })}>
         <FormResetPassword />
+        <BmeBox direction="column" alignX="center" margin="md|no|no">
+          <Link href="/auth/sign-in">
+            <BmeButton variant="background">
+              <FormattedMessage id="common.form.sign_in.label" />
+            </BmeButton>
+          </Link>
+          <Link href="/auth/sign-up">
+            <BmeButton variant="background">
+              <FormattedMessage id="common.form.create_account.label" />
+            </BmeButton>
+          </Link>
+        </BmeBox>
       </LayoutAuth>
     );
   }

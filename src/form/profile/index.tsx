@@ -1,133 +1,106 @@
-import { BmeBox, BmeButton, BmeInputDeprecated, BmeSelectDeprecated, BmeText } from "bme-ui";
-import { FormattedMessage, useIntl } from "react-intl";
-import { useEffect, useState } from "react";
-import { DefaultTheme } from "styled-components";
-import { SelectItem } from "bme-ui/dist/atoms/select-deperacated/types";
-import { useAppDispatch, useAppSelector } from "../../hooks";
-import { FormDeprecated } from "../../components";
+import { Controller, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { BmeFormController, BmeInput, BmeSelect } from "bme-ui";
+import { useIntl } from "react-intl";
+import { useEffect } from "react";
+import { FormData, formSchema } from "./type";
+import useLogic from "./logic";
+import { Form } from "../../components";
+import { changeCase } from "../../utils";
+import { ChangeCaseUtil } from "../../utils/change-case.util";
 import { WeightUnits } from "../../types/weight-units.type";
-import {
-  profileActions,
-  selectProfileData,
-  selectProfilePutError,
-  selectProfilePutStatus,
-} from "../../store/profile.slice";
-import { enumToList } from "../../utils";
+import { useAppSelector } from "../../hooks";
+import { selectProfileData } from "../../store/profile.slice";
 
 const Component = () => {
   const intl = useIntl();
-  const dispatch = useAppDispatch();
-  const storeProfilePutStatus = useAppSelector(selectProfilePutStatus);
-  const storeProfilePutError = useAppSelector(selectProfilePutError);
+
   const storeProfileData = useAppSelector(selectProfileData);
 
-  const isError = storeProfilePutStatus === "error";
+  const {
+    setValue,
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: yupResolver(formSchema),
+  });
 
-  const weightUnitsList: SelectItem[] = enumToList(WeightUnits, "common.form.weight_unit.value", intl);
+  const { apiStatus, apiError, apiMessage, submit, resetForm } = useLogic();
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modelBorderColor, setModelBorderColor] = useState<keyof DefaultTheme["colors"]>("red");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [weightUnit, setWeightUnit] = useState<SelectItem | null>(
-    weightUnitsList.find((item) => item.key === WeightUnits.Kilogram) || null,
-  );
-
-  useEffect(() => {
-    dispatch(profileActions.resetPut());
-    setIsModalOpen(false);
-  }, []);
+  const onSubmit = handleSubmit((data) => {
+    submit(data);
+  });
 
   useEffect(() => {
-    if (storeProfilePutError) {
-      setIsModalOpen(true);
-      setModelBorderColor("red");
+    if (storeProfileData) {
+      setValue("firstName", storeProfileData.firstName);
+      setValue("lastName", storeProfileData.lastName);
+      setValue("weightUnit", storeProfileData.weightUnit);
     }
-
-    if (storeProfilePutStatus === "success") {
-      setIsModalOpen(true);
-      setModelBorderColor("green");
-    }
-  }, [storeProfilePutError, storeProfilePutStatus]);
-
-  useEffect(() => {
-    if (!storeProfileData) {
-      setFirstName("");
-      setLastName("");
-      setWeightUnit(weightUnitsList.find((item) => item.key === WeightUnits.Kilogram) || null);
-
-      return;
-    }
-
-    setFirstName(storeProfileData.firstName);
-    setLastName(storeProfileData.lastName);
-    setWeightUnit(weightUnitsList.find((item) => item.key === storeProfileData.weightUnit) || null);
   }, [storeProfileData]);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    dispatch(
-      profileActions.put({
-        firstName,
-        lastName,
-        weightUnit: weightUnit?.key || WeightUnits.Kilogram,
-      }),
-    );
-  };
-
   return (
-    <FormDeprecated
-      onSubmit={handleSubmit}
-      apiStatus={storeProfilePutStatus}
-      modalBorder={modelBorderColor}
-      modal={
-        isModalOpen ? (
-          <BmeText align="center">
-            {isError
-              ? storeProfilePutError || intl.formatMessage({ id: "common.form.profile.error" })
-              : intl.formatMessage({ id: "common.form.profile.success" })}
-          </BmeText>
-        ) : undefined
-      }
-      onCloseModal={isError ? () => setIsModalOpen(false) : undefined}
-    >
-      <BmeBox direction="column" alignX="center" alignY="center" width="100%" maxWidth="420px" margin="no|auto">
-        <BmeBox width="100%" margin="no|no|sm">
-          <BmeInputDeprecated
-            name="firstName"
-            value={firstName}
-            label={intl.formatMessage({ id: "common.form.first_name.label" })}
-            onValue={setFirstName}
+    <Form onSubmit={onSubmit} apiStatus={apiStatus} error={apiError} success={apiMessage} onCloseModal={resetForm}>
+      <Controller
+        name="firstName"
+        control={control}
+        render={({ field }) => (
+          <BmeFormController
             width="100%"
-          />
-        </BmeBox>
-        <BmeBox width="100%" margin="no|no|sm">
-          <BmeInputDeprecated
-            name="lastName"
-            value={lastName}
-            label={intl.formatMessage({ id: "common.form.last_name.label" })}
-            onValue={setLastName}
+            label={intl.formatMessage({
+              id: `common.form.${changeCase(field.name, ChangeCaseUtil.CamelCase, ChangeCaseUtil.SnakeCase)}.label`,
+            })}
+            name={field.name}
+            error={errors[field.name] && intl.formatMessage({ id: errors[field.name]?.message })}
+          >
+            <BmeInput {...field} />
+          </BmeFormController>
+        )}
+      />
+      <Controller
+        name="lastName"
+        control={control}
+        render={({ field }) => (
+          <BmeFormController
             width="100%"
-          />
-        </BmeBox>
-        <BmeBox width="100%" margin="no|no|sm">
-          <BmeSelectDeprecated
-            name="weightUnit"
-            label={intl.formatMessage({ id: "common.form.weight_unit.label" })}
-            list={weightUnitsList}
-            value={weightUnit}
-            onValue={setWeightUnit}
+            label={intl.formatMessage({
+              id: `common.form.${changeCase(field.name, ChangeCaseUtil.CamelCase, ChangeCaseUtil.SnakeCase)}.label`,
+            })}
+            name={field.name}
+            error={errors[field.name] && intl.formatMessage({ id: errors[field.name]?.message })}
+          >
+            <BmeInput {...field} />
+          </BmeFormController>
+        )}
+      />
+      <Controller
+        name="weightUnit"
+        control={control}
+        render={({ field }) => (
+          <BmeFormController
             width="100%"
-          />
-        </BmeBox>
-        <BmeBox margin="no|no|lg">
-          <BmeButton type="submit">
-            <FormattedMessage id="common.form.submit.label" />
-          </BmeButton>
-        </BmeBox>
-      </BmeBox>
-    </FormDeprecated>
+            label={intl.formatMessage({
+              id: `common.form.${changeCase(field.name, ChangeCaseUtil.CamelCase, ChangeCaseUtil.SnakeCase)}.label`,
+            })}
+            name={field.name}
+            error={errors[field.name] && intl.formatMessage({ id: String(errors[field.name]?.message) })}
+          >
+            <BmeSelect {...field}>
+              <BmeSelect.Option disabled selected={!field.value || field.value === "-"} value="-" label="——" />
+              {Object.values(WeightUnits).map((weightUnit) => (
+                <BmeSelect.Option
+                  key={weightUnit}
+                  value={weightUnit}
+                  label={intl.formatMessage({ id: `common.form.weight_unit.value.${weightUnit.toLowerCase()}` })}
+                  selected={field.value === weightUnit}
+                />
+              ))}
+            </BmeSelect>
+          </BmeFormController>
+        )}
+      />
+    </Form>
   );
 };
 

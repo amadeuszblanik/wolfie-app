@@ -29,7 +29,7 @@ const useLogic = () => {
   const storeStatus = isEdit ? storePetsWeightPatchStatus : storePetsWeightPostStatus;
   const storeError = isEdit ? storePetsWeightPatchError : storePetsWeightPostError;
   const storeMessage = intl.formatMessage({
-    id: isEdit ? "common.form.weight_update.success" : "common.form.weight_update.success",
+    id: isEdit ? "common.form.weight_update.success" : "common.form.weight_add.success",
   });
 
   const submit = (formData: FormData) => {

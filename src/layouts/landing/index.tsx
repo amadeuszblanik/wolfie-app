@@ -6,7 +6,6 @@ import { FormattedMessage } from "react-intl";
 import { detectDevice } from "bme-utils";
 import { Footer, TopBar } from "../../components";
 import { Brand, Container, Link } from "../../atoms";
-import { useLocale } from "../../hooks";
 
 // @TODO: Displayed as a div for now, but should be a main. Looks like a bug in the styled-components that doesnt allow to use main as a styled component.
 const StyledMain = styled.div`
@@ -18,7 +17,6 @@ const StyledMain = styled.div`
 `;
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const { country } = useLocale();
   const [isAvailableDownload, setIsAvailableDownload] = useState(false);
 
   useEffect(() => {
@@ -42,7 +40,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           <>
             {isAvailableDownload && (
               <BmeBox padding="no|md|no|no">
-                <Link href={`https://apps.apple.com/${country.toLowerCase()}/app/wolfie/id6444870861`}>
+                <Link href="download">
                   <BmeButton size="small">
                     <FormattedMessage id="layout.landing.menu.download" />
                   </BmeButton>

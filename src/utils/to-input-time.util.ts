@@ -1,10 +1,16 @@
 import { default as addLeadingZero } from "./add-leading-zero.util";
 
-const util = (date: Date = new Date()): string => {
-  const hours = date.getHours();
-  const minutes = date.getMinutes();
+const util = (date: Date | string = new Date()): string => {
+  try {
+    const dateObject = new Date(date);
 
-  return `${addLeadingZero(hours)}:${addLeadingZero(minutes)}`;
+    const hours = dateObject.getHours();
+    const minutes = dateObject.getMinutes();
+
+    return `${addLeadingZero(hours)}:${addLeadingZero(minutes)}`;
+  } catch (error) {
+    return date.toString();
+  }
 };
 
 export default util;

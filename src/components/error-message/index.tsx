@@ -3,11 +3,12 @@ import { BmeBox, BmeButton, BmeIcon, BmeText } from "bme-ui";
 import { FormattedMessage } from "react-intl";
 
 interface ErrorMessagesProps {
+  title?: string;
   messages: string[];
   onTryAgain?: () => void;
 }
 
-const Component: React.FC<ErrorMessagesProps> = ({ messages, onTryAgain }) => (
+const Component: React.FC<ErrorMessagesProps> = ({ title, messages, onTryAgain }) => (
   <BmeBox
     direction="column"
     alignX="center"
@@ -20,9 +21,7 @@ const Component: React.FC<ErrorMessagesProps> = ({ messages, onTryAgain }) => (
     <BmeBox margin="no|no|md">
       <BmeIcon name="close-circle" size={120} />
     </BmeBox>
-    <BmeText variant="LargeTitle">
-      <FormattedMessage id="component.error_message.title" />
-    </BmeText>
+    <BmeText variant="LargeTitle">{title ?? <FormattedMessage id="component.error_message.title" />}</BmeText>
     {messages.map((message) => (
       <BmeText key={message} variant="Title2">
         {message}

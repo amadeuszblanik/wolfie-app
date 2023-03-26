@@ -1,15 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import { BmeBox, BmeButton, bmeMixins, BmeModal } from "bme-ui";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 import { ApiStatus } from "../../services/api/types/status.type";
-import { Loader } from "../index";
+import { ErrorMessage, Loader } from "../index";
 
 interface FormProps extends React.HTMLAttributes<HTMLFormElement> {
   apiStatus?: ApiStatus;
   error?: string | null;
   success?: string | null;
   onCloseModal?: () => void;
+  loadFailed?: boolean;
+  loadFailedMessage?: string | null;
+  onTryAgain?: () => void;
   children: JSX.Element | JSX.Element[];
 }
 
@@ -26,9 +29,30 @@ export const StyledFormWrapper = styled.form`
   border-radius: ${({ theme }) => theme.radius}px;
 `;
 
-const Component: FormType = ({ apiStatus, error, success, onCloseModal, children, ...props }) => {
+const Component: FormType = ({
+  apiStatus,
+  error,
+  success,
+  onCloseModal,
+  loadFailed,
+  loadFailedMessage,
+  onTryAgain,
+  children,
+  ...props
+}) => {
+  const intl = useIntl();
   const isLoading = apiStatus === "pending";
   const isModalVisible = (!!error || !!success) && (apiStatus === "success" || apiStatus === "error");
+
+  if (loadFailed) {
+    return (
+      <ErrorMessage
+        title={intl.formatMessage({ id: "form.load_error.title" })}
+        messages={[loadFailedMessage || intl.formatMessage({ id: "form.load_error.message" })]}
+        onTryAgain={onTryAgain}
+      />
+    );
+  }
 
   return (
     <StyledFormWrapper {...props}>

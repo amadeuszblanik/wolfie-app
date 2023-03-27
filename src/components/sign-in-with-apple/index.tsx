@@ -7,7 +7,6 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector, useDeviceName } from "../../hooks";
 import { authActions, selectAuthAppleError, selectAuthAppleStatus } from "../../store/auth.slice";
 import { Loader } from "../index";
-import { SignInWithAppleRedirect } from "../../types/sign-in-with-apple-redirect.type";
 
 const LOADING_APPLE_INTERVAL = 1000;
 const LOADING_APPLE_TIMEOUT = 10000;
@@ -127,7 +126,7 @@ const Component: React.FC<SignInWithAppleProps> = ({ short }) => {
           lastName: name?.lastName,
           email,
           service: true,
-          redirect: (process.env.NEXT_PUBLIC_APPLE_REDIRECT_API as SignInWithAppleRedirect) || "WEB",
+          redirect: "NEXT",
         }),
       );
 

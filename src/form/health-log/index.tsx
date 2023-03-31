@@ -75,6 +75,8 @@ const Component = () => {
     setValue("additionalMedicines", value.additionalMedicines);
   };
 
+  const medicineError = { ...errors.medicines, ...errors.additionalMedicines };
+
   return (
     <Form onSubmit={onSubmit} apiStatus={apiStatus} error={apiError} success={apiMessage} onCloseModal={resetForm}>
       <Controller
@@ -119,7 +121,7 @@ const Component = () => {
           </BmeFormController>
         )}
       />
-      <MedicinesSelector value={medicineValues} onChange={handleChangeMedicinesX} />
+      <MedicinesSelector value={medicineValues} onChange={handleChangeMedicinesX} errorMessage={medicineError} />
       <Controller
         name="diagnosis"
         control={control}

@@ -1,4 +1,6 @@
-import { FormData } from "./type";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { FormData, formSchema } from "./type";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import {
   profileActions,
@@ -9,6 +11,15 @@ import {
 
 const useLogic = () => {
   const dispatch = useAppDispatch();
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: yupResolver(formSchema),
+  });
+
   const storeStatus = useAppSelector(selectProfileChangePasswordStatus);
   const storeError = useAppSelector(selectProfileChangePasswordError);
   const storeMessage = useAppSelector(selectProfileChangePasswordMessage);
@@ -33,6 +44,9 @@ const useLogic = () => {
     apiMessage: storeMessage,
     submit,
     resetForm,
+    control,
+    handleSubmit,
+    errors,
   };
 };
 

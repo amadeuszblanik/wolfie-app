@@ -564,5 +564,7 @@
   "common.component.sign_in_with_apple.error": "Failed to sign in with Apple. Please try again.",
   "common.component.sign_in_with_apple.or": "or",
   "form.pet_delete.verify": "Type your pet name to confirm",
-  "common.delete": "Delete"
+  "common.delete": "Delete",
+  "form.load_error.title": "Form load error",
+  "form.load_error.message": "Could not load data. Please try again."
 }

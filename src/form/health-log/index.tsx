@@ -1,17 +1,12 @@
-import { Controller, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { Controller } from "react-hook-form";
 import { BmeFormController, BmeInput, BmeInputDate, BmeSelect } from "bme-ui";
 import { useIntl } from "react-intl";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { FormData, formSchema } from "./type";
 import useLogic from "./logic";
 import { Form, MedicinesSelector } from "../../components";
 import { changeCase } from "../../utils";
 import { ChangeCaseUtil } from "../../utils/change-case.util";
 import { HealthLogKind } from "../../types/health-log-kind.types";
-import { useAppDispatch, useAppSelector } from "../../hooks";
-import { petsHealthLogActions, selectPetsHealthLogDataById } from "../../store/petsHealthLog.slice";
 
 // @TODO Update bme-ui select to handle multiple values
 // @TODO Backend fix for additionalMedicines - empty values
@@ -19,47 +14,22 @@ import { petsHealthLogActions, selectPetsHealthLogDataById } from "../../store/p
 const Component = () => {
   const router = useRouter();
   const intl = useIntl();
-  const dispatch = useAppDispatch();
-
-  const petId = router.query.petId as string | undefined;
-  const healthLogId = router.query.healthLogId as string | undefined;
-
-  const storePetsHealthLogDataById = useAppSelector(selectPetsHealthLogDataById(healthLogId || ""));
 
   const {
+    apiStatus,
+    apiError,
+    apiMessage,
+    submit,
+    resetForm,
+    loadFailed,
+    loadFailedMessage,
+    tryAgainLoadForm,
     watch,
     control,
     handleSubmit,
     setValue,
-    formState: { errors },
-  } = useForm<FormData>({
-    resolver: yupResolver(formSchema),
-  });
-
-  const { apiStatus, apiError, apiMessage, submit, resetForm } = useLogic();
-
-  useEffect(() => {
-    if (!petId) {
-      return;
-    }
-
-    dispatch(petsHealthLogActions.get({ petId }));
-  }, [petId]);
-
-  useEffect(() => {
-    if (storePetsHealthLogDataById) {
-      setValue("kind", storePetsHealthLogDataById.kind);
-      setValue("date", storePetsHealthLogDataById.date);
-      setValue(
-        "medicines",
-        storePetsHealthLogDataById.medicines.map((medicine) => medicine.productNumber),
-      );
-      setValue("additionalMedicines", storePetsHealthLogDataById.additionalMedicines || []);
-      setValue("diagnosis", storePetsHealthLogDataById.diagnosis || undefined);
-      setValue("veterinary", storePetsHealthLogDataById.veterinary || undefined);
-      setValue("description", storePetsHealthLogDataById.description || undefined);
-    }
-  }, [storePetsHealthLogDataById]);
+    errors,
+  } = useLogic();
 
   const onSubmit = handleSubmit((data) => {
     submit(data);
@@ -70,13 +40,36 @@ const Component = () => {
     additionalMedicines: watch("additionalMedicines"),
   };
 
-  const handleChangeMedicinesX = (value: { medicines: string[]; additionalMedicines: string[] }) => {
+  const handleChangeMedicines = (value: { medicines: string[]; additionalMedicines: string[] }) => {
     setValue("medicines", value.medicines);
     setValue("additionalMedicines", value.additionalMedicines);
   };
 
+  const medicineError = { ...errors.medicines, ...errors.additionalMedicines };
+
+  const handleCloseModal = (success: boolean) => {
+    if (!success) {
+      return;
+    }
+
+    resetForm();
+    const path = router.asPath.split("/");
+    path.pop();
+
+    void router.push(path.join("/"));
+  };
+
   return (
-    <Form onSubmit={onSubmit} apiStatus={apiStatus} error={apiError} success={apiMessage} onCloseModal={resetForm}>
+    <Form
+      onSubmit={onSubmit}
+      apiStatus={apiStatus}
+      error={apiError}
+      success={apiMessage}
+      onCloseModal={handleCloseModal}
+      loadFailed={loadFailed}
+      loadFailedMessage={loadFailedMessage}
+      onTryAgain={tryAgainLoadForm}
+    >
       <Controller
         name="kind"
         control={control}
@@ -119,7 +112,7 @@ const Component = () => {
           </BmeFormController>
         )}
       />
-      <MedicinesSelector value={medicineValues} onChange={handleChangeMedicinesX} />
+      <MedicinesSelector value={medicineValues} onChange={handleChangeMedicines} errorMessage={medicineError} />
       <Controller
         name="diagnosis"
         control={control}

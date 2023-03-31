@@ -1,7 +1,7 @@
 import { BmeBox, BmeButton, BmeText } from "bme-ui";
 import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
-import Image from "next/image";
+import { Image } from "./../../atoms";
 import { useMobile } from "../../hooks";
 import { Link } from "../../atoms";
 
@@ -9,17 +9,6 @@ import { Link } from "../../atoms";
 
 const StyledSection = styled.section`
   white-space: pre-line;
-`;
-
-const StyledPhotoWrapper = styled.figure`
-  position: relative;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0 0 100%;
-  overflow: hidden;
-  background: ${({ theme }) => theme.colors.backgroundSecondary};
-  border-radius: ${({ theme }) => theme.radius}px;
 `;
 
 const Component = () => {
@@ -41,9 +30,7 @@ const Component = () => {
           margin="no|no|auto"
         >
           <BmeBox width={isMobile ? "100%" : "50%"} padding={isMobile ? "sm|md" : "md"}>
-            <StyledPhotoWrapper>
-              <Image src="/dog-3.jpg" alt="Photo of Dog" fill />
-            </StyledPhotoWrapper>
+            <Image src="/dog-3.jpg" alt="Photo of Dog" />
           </BmeBox>
           <BmeBox direction="column" width={isMobile ? "100%" : "50%"} padding={isMobile ? "sm|md" : "md"}>
             <BmeText>

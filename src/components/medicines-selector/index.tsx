@@ -115,7 +115,13 @@ const Component: React.FC<MedicinesSelectorProps> = ({ value, onChange, errorMes
           id: `common.form.medicines.label`,
         })}
         name="medicines"
-        error={errorMessage && intl.formatMessage({ id: String(errorMessage) })}
+        error={
+          errorMessage
+            ? Object.values(errorMessage)
+                .map(({ message }) => message)
+                .join(", ")
+            : undefined
+        }
         hint={intl.formatMessage({ id: "common.form.medicines.hint" })}
       >
         <BmeBox position="relative" width="100%">

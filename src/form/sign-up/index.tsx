@@ -1,8 +1,6 @@
-import { Controller, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { Controller } from "react-hook-form";
 import { BmeCheckbox, BmeFormController, BmeInput, BmeSelect } from "bme-ui";
 import { useIntl } from "react-intl";
-import { FormData, formSchema } from "./type";
 import useLogic from "./logic";
 import { Form } from "../../components";
 import { changeCase } from "../../utils";
@@ -12,15 +10,7 @@ import { WeightUnits } from "../../types/weight-units.type";
 const Component = () => {
   const intl = useIntl();
 
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>({
-    resolver: yupResolver(formSchema),
-  });
-
-  const { apiStatus, apiError, apiMessage, submit, resetForm } = useLogic();
+  const { apiStatus, apiError, apiMessage, submit, resetForm, control, handleSubmit, errors } = useLogic();
 
   const onSubmit = handleSubmit((data) => {
     submit(data);

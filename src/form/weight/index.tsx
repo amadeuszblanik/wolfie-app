@@ -1,67 +1,58 @@
-import { Controller, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { Controller } from "react-hook-form";
 import { BmeFormController, BmeInputDate, BmeInputNumber } from "bme-ui";
 import { useIntl } from "react-intl";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { FormData, formSchema } from "./type";
 import useLogic from "./logic";
 import { Form } from "../../components";
-import { changeCase, toInputDate, toInputTime } from "../../utils";
+import { changeCase } from "../../utils";
 import { ChangeCaseUtil } from "../../utils/change-case.util";
-import { useAppDispatch, useAppSelector } from "../../hooks";
-import { petsWeightActions, selectPetsWeightDataById, selectPetsWeightDataLast } from "../../store/petsWeight.slice";
-
-const DEFAULT_WEIGHT = 15;
 
 const Component = () => {
   const router = useRouter();
   const intl = useIntl();
-  const dispatch = useAppDispatch();
-
-  const petId = router.query.petId as string | undefined;
-  const weightId = router.query.weightId as string | undefined;
-
-  const storePetsWeightDataById = useAppSelector(selectPetsWeightDataById(weightId || ""));
-  const storePetsWeightDataLast = useAppSelector(selectPetsWeightDataLast);
 
   const {
+    apiStatus,
+    apiError,
+    apiMessage,
+    submit,
+    resetForm,
+    disabled,
+    loadFailed,
+    loadFailedMessage,
+    tryAgainLoadForm,
     control,
     handleSubmit,
-    setValue,
-    formState: { errors },
-  } = useForm<FormData>({
-    resolver: yupResolver(formSchema),
-  });
-
-  const { apiStatus, apiError, apiMessage, submit, resetForm } = useLogic();
-
-  useEffect(() => {
-    if (!petId) {
-      return;
-    }
-
-    dispatch(petsWeightActions.get({ petId }));
-  }, [petId]);
-
-  useEffect(() => {
-    if (storePetsWeightDataById) {
-      setValue("weight", storePetsWeightDataById.raw);
-      setValue("date", toInputDate(storePetsWeightDataById.date));
-      setValue("time", toInputTime(storePetsWeightDataById.date));
-    } else {
-      setValue("weight", storePetsWeightDataLast?.raw || DEFAULT_WEIGHT);
-      setValue("date", toInputDate());
-      setValue("time", toInputTime());
-    }
-  }, [storePetsWeightDataById]);
+    errors,
+  } = useLogic();
 
   const onSubmit = handleSubmit((data) => {
     submit(data);
   });
 
+  const handleCloseModal = (success: boolean) => {
+    if (!success) {
+      return;
+    }
+
+    resetForm();
+    const path = router.asPath.split("/");
+    path.pop();
+
+    void router.push(path.join("/"));
+  };
+
   return (
-    <Form onSubmit={onSubmit} apiStatus={apiStatus} error={apiError} success={apiMessage} onCloseModal={resetForm}>
+    <Form
+      onSubmit={onSubmit}
+      apiStatus={apiStatus}
+      error={apiError}
+      success={apiMessage}
+      onCloseModal={handleCloseModal}
+      loadFailed={loadFailed}
+      loadFailedMessage={loadFailedMessage}
+      onTryAgain={tryAgainLoadForm}
+    >
       <Controller
         name="weight"
         control={control}
@@ -73,8 +64,9 @@ const Component = () => {
             })}
             name={field.name}
             error={errors[field.name] && intl.formatMessage({ id: errors[field.name]?.message })}
+            disabled={disabled}
           >
-            <BmeInputNumber {...field} inputMode="decimal" />
+            <BmeInputNumber {...field} inputMode="decimal" disabled />
           </BmeFormController>
         )}
       />
@@ -89,6 +81,7 @@ const Component = () => {
             })}
             name={field.name}
             error={errors[field.name] && intl.formatMessage({ id: errors[field.name]?.message })}
+            disabled={disabled}
           >
             <BmeInputDate {...field} />
           </BmeFormController>
@@ -105,6 +98,7 @@ const Component = () => {
             })}
             name={field.name}
             error={errors[field.name] && intl.formatMessage({ id: errors[field.name]?.message })}
+            disabled={disabled}
           >
             <BmeInputDate {...field} type="time" />
           </BmeFormController>

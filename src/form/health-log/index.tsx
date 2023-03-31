@@ -70,7 +70,7 @@ const Component = () => {
     additionalMedicines: watch("additionalMedicines"),
   };
 
-  const handleChangeMedicinesX = (value: { medicines: string[]; additionalMedicines: string[] }) => {
+  const handleChangeMedicines = (value: { medicines: string[]; additionalMedicines: string[] }) => {
     setValue("medicines", value.medicines);
     setValue("additionalMedicines", value.additionalMedicines);
   };
@@ -121,7 +121,7 @@ const Component = () => {
           </BmeFormController>
         )}
       />
-      <MedicinesSelector value={medicineValues} onChange={handleChangeMedicinesX} errorMessage={medicineError} />
+      <MedicinesSelector value={medicineValues} onChange={handleChangeMedicines} errorMessage={medicineError} />
       <Controller
         name="diagnosis"
         control={control}

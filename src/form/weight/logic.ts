@@ -40,19 +40,19 @@ const useLogic = () => {
     resolver: yupResolver(formSchema),
   });
 
-  const storePetsWeightStatus = useAppSelector(selectPetsWeightStatus);
-  const storePetsWeightError = useAppSelector(selectPetsWeightError);
-  const storePetsWeightDataById = useAppSelector(selectPetsWeightDataById(weightId || ""));
-  const storePetsWeightDataLast = useAppSelector(selectPetsWeightDataLast);
+  const storeDataStatus = useAppSelector(selectPetsWeightStatus);
+  const storeDataError = useAppSelector(selectPetsWeightError);
+  const storeDataById = useAppSelector(selectPetsWeightDataById(weightId || ""));
+  const storeDataLast = useAppSelector(selectPetsWeightDataLast);
 
   const storePetsWeightPostStatus = useAppSelector(selectPetsWeightPostStatus);
   const storePetsWeightPostError = useAppSelector(selectPetsWeightPostError);
   const storePetsWeightPatchStatus = useAppSelector(selectPetsWeightPatchStatus);
   const storePetsWeightPatchError = useAppSelector(selectPetsWeightPatchError);
 
-  const isLoading = storePetsWeightStatus === "pending" || storePetsWeightStatus === "idle";
-  const loadFailedLast = !isLoading && !storePetsWeightDataById;
-  const loadFailed = isEdit ? storePetsWeightStatus === "error" || loadFailedLast : false;
+  const isLoading = storeDataStatus === "pending" || storeDataStatus === "idle";
+  const loadFailedLast = !isLoading && !storeDataById;
+  const loadFailed = isEdit ? storeDataStatus === "error" || loadFailedLast : false;
 
   const storeStatus: ApiStatus = isLoading
     ? "pending"
@@ -72,21 +72,19 @@ const useLogic = () => {
     dispatch(petsWeightActions.get({ petId }));
   };
 
-  useEffect(() => {
-    loadForm();
-  }, [petId]);
+  useEffect(loadForm, [petId]);
 
   useEffect(() => {
-    if (storePetsWeightDataById) {
-      setValue("weight", storePetsWeightDataById.raw);
-      setValue("date", toInputDate(storePetsWeightDataById.date));
-      setValue("time", toInputTime(storePetsWeightDataById.date));
+    if (storeDataById) {
+      setValue("weight", storeDataById.raw);
+      setValue("date", toInputDate(storeDataById.date));
+      setValue("time", toInputTime(storeDataById.date));
     } else {
-      setValue("weight", storePetsWeightDataLast?.raw || DEFAULT_WEIGHT);
+      setValue("weight", storeDataLast?.raw || DEFAULT_WEIGHT);
       setValue("date", toInputDate());
       setValue("time", toInputTime());
     }
-  }, [storePetsWeightDataById]);
+  }, [storeDataLast, storeDataLast]);
 
   const submit = (formData: FormData) => {
     const payload: PetsPetIdWeightPostPayload = {
@@ -126,7 +124,7 @@ const useLogic = () => {
     resetForm,
     disabled: isLoading,
     loadFailed,
-    loadFailedMessage: storePetsWeightError,
+    loadFailedMessage: storeDataError,
     tryAgainLoadForm: loadForm,
     control,
     handleSubmit,

@@ -1,6 +1,8 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { FormData } from "./type";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { FormData, formSchema } from "./type";
 import { authActions, selectAuthError, selectAuthStatus } from "../../store/auth.slice";
 import { useAppDispatch, useAppSelector, useDeviceName } from "../../hooks";
 
@@ -12,6 +14,14 @@ const useLogic = () => {
   const storeAuthError = useAppSelector(selectAuthError);
 
   const deviceName = useDeviceName();
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: yupResolver(formSchema),
+  });
 
   useEffect(() => {
     if (storeAuthError) {
@@ -45,6 +55,9 @@ const useLogic = () => {
     apiError: storeAuthError,
     submit,
     resetForm,
+    control,
+    handleSubmit,
+    errors,
   };
 };
 

@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useIntl } from "react-intl";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect } from "react";
 import { FormData, formSchema } from "./type";
 import { useAppDispatch, useAppSelector } from "../../hooks";

@@ -15,8 +15,21 @@ const Component = () => {
   const router = useRouter();
   const intl = useIntl();
 
-  const { apiStatus, apiError, apiMessage, submit, resetForm, watch, control, handleSubmit, setValue, errors } =
-    useLogic();
+  const {
+    apiStatus,
+    apiError,
+    apiMessage,
+    submit,
+    resetForm,
+    loadFailed,
+    loadFailedMessage,
+    tryAgainLoadForm,
+    watch,
+    control,
+    handleSubmit,
+    setValue,
+    errors,
+  } = useLogic();
 
   const onSubmit = handleSubmit((data) => {
     submit(data);
@@ -53,6 +66,9 @@ const Component = () => {
       error={apiError}
       success={apiMessage}
       onCloseModal={handleCloseModal}
+      loadFailed={loadFailed}
+      loadFailedMessage={loadFailedMessage}
+      onTryAgain={tryAgainLoadForm}
     >
       <Controller
         name="kind"

@@ -1,47 +1,44 @@
-import { Controller, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { Controller } from "react-hook-form";
 import { BmeFormController, BmeInput, BmeSelect } from "bme-ui";
 import { useIntl } from "react-intl";
-import { useEffect } from "react";
-import { FormData, formSchema } from "./type";
 import useLogic from "./logic";
 import { Form } from "../../components";
 import { changeCase } from "../../utils";
 import { ChangeCaseUtil } from "../../utils/change-case.util";
 import { WeightUnits } from "../../types/weight-units.type";
-import { useAppSelector } from "../../hooks";
-import { selectProfileData } from "../../store/profile.slice";
 
 const Component = () => {
   const intl = useIntl();
 
-  const storeProfileData = useAppSelector(selectProfileData);
-
   const {
-    setValue,
+    apiStatus,
+    apiError,
+    apiMessage,
+    submit,
+    resetForm,
+    loadFailed,
+    loadFailedMessage,
+    tryAgainLoadForm,
     control,
     handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>({
-    resolver: yupResolver(formSchema),
-  });
-
-  const { apiStatus, apiError, apiMessage, submit, resetForm } = useLogic();
+    errors,
+  } = useLogic();
 
   const onSubmit = handleSubmit((data) => {
     submit(data);
   });
 
-  useEffect(() => {
-    if (storeProfileData) {
-      setValue("firstName", storeProfileData.firstName);
-      setValue("lastName", storeProfileData.lastName);
-      setValue("weightUnit", storeProfileData.weightUnit);
-    }
-  }, [storeProfileData]);
-
   return (
-    <Form onSubmit={onSubmit} apiStatus={apiStatus} error={apiError} success={apiMessage} onCloseModal={resetForm}>
+    <Form
+      onSubmit={onSubmit}
+      apiStatus={apiStatus}
+      error={apiError}
+      success={apiMessage}
+      onCloseModal={resetForm}
+      loadFailed={loadFailed}
+      loadFailedMessage={loadFailedMessage}
+      onTryAgain={tryAgainLoadForm}
+    >
       <Controller
         name="firstName"
         control={control}

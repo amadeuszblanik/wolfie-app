@@ -57,7 +57,8 @@ export default class ApiBase {
       url: path,
       headers: this.getHeaders(options?.headers),
     });
-    const data = await response.data;
+
+    const data = response.data;
 
     if (response.status >= ERROR_STATUS_CODE_BREAKPOINT) {
       throw new Error(data.message);
@@ -73,7 +74,8 @@ export default class ApiBase {
       headers: this.getHeaders(),
       data: JSON.stringify(body),
     });
-    const data = await response.data;
+
+    const data = response.data;
 
     if (response.status >= ERROR_STATUS_CODE_BREAKPOINT) {
       throw new Error(data.message);
@@ -119,7 +121,8 @@ export default class ApiBase {
       headers: this.getHeaders({}, null),
       data: formData,
     });
-    const data = await response.data;
+
+    const data = response.data;
 
     if (response.status >= ERROR_STATUS_CODE_BREAKPOINT) {
       throw new Error(data.message);
@@ -135,7 +138,8 @@ export default class ApiBase {
       headers: this.getHeaders(),
       data: JSON.stringify(body),
     });
-    const data = await response.data();
+
+    const data = response.data;
 
     if (response.status >= ERROR_STATUS_CODE_BREAKPOINT) {
       throw new Error(data.message);
@@ -151,7 +155,8 @@ export default class ApiBase {
       headers: this.getHeaders(),
       data: JSON.stringify(body),
     });
-    const data = await response.data();
+
+    const data = response.data;
 
     if (response.status >= ERROR_STATUS_CODE_BREAKPOINT) {
       throw new Error(data.message);
@@ -167,7 +172,8 @@ export default class ApiBase {
       headers: this.getHeaders(),
       data: body ? JSON.stringify(body) : undefined,
     });
-    const data = await response.data();
+
+    const data = response.data;
 
     if (response.status >= ERROR_STATUS_CODE_BREAKPOINT) {
       throw new Error(data.message);

@@ -1,23 +1,15 @@
-import { Controller, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { Controller } from "react-hook-form";
 import { BmeFormController, BmeInputDate, BmeInputNumber } from "bme-ui";
 import { useIntl } from "react-intl";
-import { FormData, formSchema } from "./type";
+import { useRouter } from "next/router";
 import useLogic from "./logic";
 import { Form } from "../../components";
 import { changeCase } from "../../utils";
 import { ChangeCaseUtil } from "../../utils/change-case.util";
 
 const Component = () => {
+  const router = useRouter();
   const intl = useIntl();
-
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>({
-    resolver: yupResolver(formSchema),
-  });
 
   const {
     apiStatus,
@@ -29,11 +21,26 @@ const Component = () => {
     loadFailed,
     loadFailedMessage,
     tryAgainLoadForm,
+    control,
+    handleSubmit,
+    errors,
   } = useLogic();
 
   const onSubmit = handleSubmit((data) => {
     submit(data);
   });
+
+  const handleCloseModal = (success: boolean) => {
+    if (!success) {
+      return;
+    }
+
+    resetForm();
+    const path = router.asPath.split("/");
+    path.pop();
+
+    void router.push(path.join("/"));
+  };
 
   return (
     <Form
@@ -41,7 +48,7 @@ const Component = () => {
       apiStatus={apiStatus}
       error={apiError}
       success={apiMessage}
-      onCloseModal={resetForm}
+      onCloseModal={handleCloseModal}
       loadFailed={loadFailed}
       loadFailedMessage={loadFailedMessage}
       onTryAgain={tryAgainLoadForm}

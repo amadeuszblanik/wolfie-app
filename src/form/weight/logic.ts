@@ -31,7 +31,12 @@ const useLogic = () => {
   const weightId = router.query.weightId as string | undefined;
   const isEdit = !!weightId;
 
-  const { setValue } = useForm<FormData>({
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+  } = useForm<FormData>({
     resolver: yupResolver(formSchema),
   });
 
@@ -123,6 +128,9 @@ const useLogic = () => {
     loadFailed,
     loadFailedMessage: storePetsWeightError,
     tryAgainLoadForm: loadForm,
+    control,
+    handleSubmit,
+    errors,
   };
 };
 

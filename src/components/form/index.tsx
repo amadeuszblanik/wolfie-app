@@ -9,7 +9,7 @@ interface FormProps extends React.HTMLAttributes<HTMLFormElement> {
   apiStatus?: ApiStatus;
   error?: string | null;
   success?: string | null;
-  onCloseModal?: () => void;
+  onCloseModal?: (success: boolean) => void;
   loadFailed?: boolean;
   loadFailedMessage?: string | null;
   onTryAgain?: () => void;
@@ -58,7 +58,9 @@ const Component: FormType = ({
     <StyledFormWrapper {...props}>
       <BmeBox direction="column" width="100%" margin="no|no|sm">
         {isLoading && <Loader />}
-        {isModalVisible && <BmeModal onClose={onCloseModal}>{error || success}</BmeModal>}
+        {isModalVisible && (
+          <BmeModal onClose={() => onCloseModal && onCloseModal(apiStatus === "success")}>{error || success}</BmeModal>
+        )}
         {children}
       </BmeBox>
       <BmeButton type="submit">

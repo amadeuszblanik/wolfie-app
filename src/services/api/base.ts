@@ -46,7 +46,7 @@ export default class ApiBase {
           }
         }
 
-        return Promise.reject(error);
+        return Promise.reject(error.response.data);
       },
     );
   }
@@ -214,7 +214,7 @@ export default class ApiBase {
 
       return accessToken;
     } catch (error) {
-      if (!IS_SERVER) {
+      if (!IS_SERVER && location.href.startsWith("/app")) {
         location.href = "/auth/sign-off";
       }
 

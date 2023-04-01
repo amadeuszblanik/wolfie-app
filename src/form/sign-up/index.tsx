@@ -1,6 +1,7 @@
 import { Controller } from "react-hook-form";
 import { BmeCheckbox, BmeFormController, BmeInput, BmeSelect } from "bme-ui";
 import { useIntl } from "react-intl";
+import { useRouter } from "next/router";
 import useLogic from "./logic";
 import { Form } from "../../components";
 import { changeCase } from "../../utils";
@@ -8,6 +9,7 @@ import { ChangeCaseUtil } from "../../utils/change-case.util";
 import { WeightUnits } from "../../types/weight-units.type";
 
 const Component = () => {
+  const router = useRouter();
   const intl = useIntl();
 
   const { apiStatus, apiError, apiMessage, submit, resetForm, control, handleSubmit, errors } = useLogic();
@@ -16,8 +18,23 @@ const Component = () => {
     submit(data);
   });
 
+  const handleCloseModal = (success: boolean) => {
+    if (!success) {
+      return;
+    }
+
+    resetForm();
+    void router.push("/auth/sign-in");
+  };
+
   return (
-    <Form onSubmit={onSubmit} apiStatus={apiStatus} error={apiError} success={apiMessage} onCloseModal={resetForm}>
+    <Form
+      onSubmit={onSubmit}
+      apiStatus={apiStatus}
+      error={apiError}
+      success={apiMessage}
+      onCloseModal={handleCloseModal}
+    >
       <Controller
         name="email"
         control={control}

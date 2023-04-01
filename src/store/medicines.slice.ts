@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
-import { SelectItem } from "bme-ui/dist/atoms/select/types";
+import { SelectItem } from "bme-ui/dist/atoms/select-deperacated/types";
 import { ApiStatus } from "../services/api/types/status.type";
 import { ApiMessage } from "../services/api/types/api-message.type";
 import { ApiService } from "../services";

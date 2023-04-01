@@ -46,7 +46,18 @@ export const resetPasswordSlice = createSlice({
 
   initialState,
 
-  reducers: {},
+  reducers: {
+    resetGetForm: (state) => {
+      state.getStatus = "idle";
+      state.getError = null;
+      state.getData = null;
+    },
+    resetPutForm: (state) => {
+      state.putStatus = "idle";
+      state.putError = null;
+      state.putData = null;
+    },
+  },
 
   extraReducers: (builder) => {
     builder.addCase(HYDRATE, (state, action) => ({
@@ -91,10 +102,12 @@ export const resetPasswordSlice = createSlice({
 export const selectResetPasswordGetStatus = ({ resetPassword }: AppState) => resetPassword.getStatus;
 export const selectResetPasswordGetError = ({ resetPassword }: AppState) => resetPassword.getError;
 export const selectResetPasswordGetData = ({ resetPassword }: AppState) => resetPassword.getData;
+export const selectResetPasswordGetMessage = ({ resetPassword }: AppState) => resetPassword.getData?.message;
 
 export const selectResetPasswordPutStatus = ({ resetPassword }: AppState) => resetPassword.putStatus;
 export const selectResetPasswordPutError = ({ resetPassword }: AppState) => resetPassword.putError;
 export const selectResetPasswordPutData = ({ resetPassword }: AppState) => resetPassword.putData;
+export const selectResetPasswordPutMessage = ({ resetPassword }: AppState) => resetPassword.putData?.message;
 
 export const resetPasswordActions = {
   ...resetPasswordSlice.actions,

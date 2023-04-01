@@ -1,76 +1,38 @@
-import { BmeBox, BmeButton, BmeInput, BmeText } from "bme-ui";
-import { FormattedMessage, useIntl } from "react-intl";
-import { useEffect, useState } from "react";
-import { DefaultTheme } from "styled-components";
-import { useAppDispatch, useAppSelector } from "../../hooks";
+import { Controller } from "react-hook-form";
+import { BmeFormController, BmeInput } from "bme-ui";
+import { useIntl } from "react-intl";
+import useLogic from "./logic";
 import { Form } from "../../components";
-import {
-  resetPasswordActions,
-  selectResetPasswordGetData,
-  selectResetPasswordGetError,
-  selectResetPasswordGetStatus,
-} from "../../store/reset-password.slice";
+import { changeCase } from "../../utils";
+import { ChangeCaseUtil } from "../../utils/change-case.util";
 
 const Component = () => {
   const intl = useIntl();
-  const dispatch = useAppDispatch();
-  const storeResetPasswordGetStatus = useAppSelector(selectResetPasswordGetStatus);
-  const storeResetPasswordGetError = useAppSelector(selectResetPasswordGetError);
-  const storeResetPasswordGetData = useAppSelector(selectResetPasswordGetData);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modelBorderColor, setModelBorderColor] = useState<keyof DefaultTheme["colors"]>("red");
-  const [userEmail, setUserEmail] = useState("");
+  const { apiStatus, apiError, apiMessage, submit, resetForm, control, handleSubmit, errors } = useLogic();
 
-  useEffect(() => {
-    if (storeResetPasswordGetError) {
-      setIsModalOpen(true);
-      setModelBorderColor("red");
-    }
-
-    if (storeResetPasswordGetData) {
-      setIsModalOpen(true);
-      setModelBorderColor("green");
-    }
-  }, [storeResetPasswordGetError, storeResetPasswordGetData]);
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    dispatch(
-      resetPasswordActions.get({
-        userEmail,
-      }),
-    );
-  };
+  const onSubmit = handleSubmit((data) => {
+    submit(data);
+  });
 
   return (
-    <Form
-      onSubmit={handleSubmit}
-      apiStatus={storeResetPasswordGetStatus}
-      modalBorder={modelBorderColor}
-      modal={
-        isModalOpen ? (
-          <BmeText align="center">{storeResetPasswordGetError || storeResetPasswordGetData?.message}</BmeText>
-        ) : undefined
-      }
-      onCloseModal={!storeResetPasswordGetData ? () => setIsModalOpen(false) : undefined}
-    >
-      <BmeBox direction="column" alignX="center" alignY="center" width="100%" maxWidth="420px" margin="no|auto">
-        <BmeBox width="100%" margin="no|no|sm">
-          <BmeInput
-            name="user-email"
-            value={userEmail}
-            label={intl.formatMessage({ id: "common.form.email.label" })}
-            onValue={setUserEmail}
-            type="email"
+    <Form onSubmit={onSubmit} apiStatus={apiStatus} error={apiError} success={apiMessage} onCloseModal={resetForm}>
+      <Controller
+        name="userEmail"
+        control={control}
+        render={({ field }) => (
+          <BmeFormController
             width="100%"
-          />
-        </BmeBox>
-        <BmeButton type="submit">
-          <FormattedMessage id="common.form.submit.label" />
-        </BmeButton>
-      </BmeBox>
+            label={intl.formatMessage({
+              id: `common.form.${changeCase(field.name, ChangeCaseUtil.CamelCase, ChangeCaseUtil.SnakeCase)}.label`,
+            })}
+            name={field.name}
+            error={errors[field.name] && intl.formatMessage({ id: errors[field.name]?.message })}
+          >
+            <BmeInput {...field} type="email" />
+          </BmeFormController>
+        )}
+      />
     </Form>
   );
 };

@@ -58,6 +58,11 @@ export const breedsSlice = createSlice({
 export const selectBreedsStatus = ({ breeds }: AppState) => breeds.status;
 export const selectBreedsError = ({ breeds }: AppState) => breeds.error;
 export const selectBreedsData = ({ breeds }: AppState) => breeds.data;
+export const selectBreedsDataList = ({ breeds }: AppState) =>
+  (breeds.data || []).map((breed) => ({
+    key: Number(breed.id),
+    label: String(breed.name),
+  }));
 
 export const breedsActions = {
   ...breedsSlice.actions,

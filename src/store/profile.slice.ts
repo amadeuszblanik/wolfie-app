@@ -189,6 +189,7 @@ export const selectProfileData = ({ profile }: AppState) => profile.data;
 export const selectProfileChangePasswordStatus = ({ profile }: AppState) => profile.changePasswordStatus;
 export const selectProfileChangePasswordError = ({ profile }: AppState) => profile.changePasswordError;
 export const selectProfileChangePasswordData = ({ profile }: AppState) => profile.changePasswordData;
+export const selectProfileChangePasswordMessage = ({ profile }: AppState) => profile.changePasswordData?.message;
 export const selectProfileDeleteAccountStatus = ({ profile }: AppState) => profile.deleteAccountStatus;
 export const selectProfileDeleteAccountError = ({ profile }: AppState) => profile.deleteAccountError;
 export const selectProfileDeleteAccountData = ({ profile }: AppState) => profile.deleteAccountData;

@@ -66,7 +66,7 @@ const Component = () => {
             error={errors[field.name] && intl.formatMessage({ id: errors[field.name]?.message })}
             disabled={disabled}
           >
-            <BmeInputNumber {...field} inputMode="decimal" disabled />
+            <BmeInputNumber {...field} inputMode="decimal" />
           </BmeFormController>
         )}
       />

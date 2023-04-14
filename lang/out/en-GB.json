@@ -566,5 +566,10 @@
   "form.pet_delete.verify": "Type your pet name to confirm",
   "common.delete": "Delete",
   "form.load_error.title": "Form load error",
-  "form.load_error.message": "Could not load data. Please try again."
+  "form.load_error.message": "Could not load data. Please try again.",
+  "cookie_consent.title": "Cookie Consent",
+  "cookie_consent.description": "We use cookies to improve your experience on our website. By browsing this website, you agree to our use of cookies. You can change your cookie settings at any time. You can find more information in our Privacy Policy.",
+  "cookie_consent.analytics": "This website uses cookies to collect information about how you interact with our website so we can improve it. We use this information to make the website work as well as possible and improve our services.",
+  "cookie_consent.crashlytics": "This website uses cookies to collect information about how you interact with our website so we can improve it. We use this information to make the website work as well as possible and improve our services.",
+  "cookie_consent.save": "Save settings"
 }

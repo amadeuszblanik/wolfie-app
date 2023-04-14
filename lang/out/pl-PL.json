@@ -565,5 +565,10 @@
   "form.pet_delete.verify": "Wpisz nazwę zwierzęcia, aby potwierdzić usunięcie",
   "common.delete": "Usuń",
   "form.load_error.title": "Błąd ładowania",
-  "form.load_error.message": "Wystąpił błąd podczas ładowania formularza. Spróbuj ponownie."
+  "form.load_error.message": "Wystąpił błąd podczas ładowania formularza. Spróbuj ponownie.",
+  "cookie_consent.title": "Ustawienia cookies",
+  "cookie_consent.description": "Ta strona używa plików cookie, aby zapewnić najlepszą jakość usług. Możesz określić warunki przechowywania lub dostępu do plików cookie w Twojej przeglądarce. Więcej informacji na temat plików cookie znajdziesz w naszej Polityce prywatności.",
+  "cookie_consent.analytics": "Ta strona używa plików cookie do zbierania informacji o tym, jak korzystasz z naszej witryny, abyśmy mogli ją ulepszyć. Wykorzystujemy te informacje, aby strona działała jak najlepiej oraz usprawnić nasze usługi.",
+  "cookie_consent.crashlytics": "Ta strona używa plików cookie, aby zbierać informacje na temat sposobu, w jaki współdziałasz z naszą witryną, abyśmy mogli ją ulepszyć. Używamy tych informacji, aby strona działała jak najlepiej oraz aby udoskonalić nasze usługi.",
+  "cookie_consent.save": "Zapisz ustawienia"
 }

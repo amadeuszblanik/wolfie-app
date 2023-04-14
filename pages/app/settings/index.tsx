@@ -1,10 +1,13 @@
 import { FormattedMessage, useIntl } from "react-intl";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import { BmeList, BmeText } from "bme-ui";
+import { BmeBox, BmeIcon, BmeList, BmeSpinner, BmeText } from "bme-ui";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import { LayoutApp } from "../../../src/layouts";
 import getAuth from "../../../lib/get-auth";
 import { getSession } from "../../../lib/get-session";
+import { ApiService } from "../../../src/services";
+import { ApiStatus } from "../../../src/services/api/types/status.type";
 
 export const getServerSideProps: GetServerSideProps<{ isSignedId: boolean }> = async (context) => {
   const session = await getSession(context.req, context.res);
@@ -40,6 +43,22 @@ export default function Page(_: InferGetServerSidePropsType<typeof getServerSide
   const intl = useIntl();
   const router = useRouter();
 
+  const [testNotificationState, setTestNotificationState] = useState<ApiStatus>("idle");
+
+  const handleTestNotification = async () => {
+    setTestNotificationState("pending");
+
+    try {
+      const response = await new ApiService().authTestNotification();
+
+      if (response) {
+        setTestNotificationState("success");
+      }
+    } catch (error) {
+      setTestNotificationState("error");
+    }
+  };
+
   return (
     <LayoutApp title={intl.formatMessage({ id: "page.settings.title" })}>
       <BmeList>
@@ -65,8 +84,17 @@ export default function Page(_: InferGetServerSidePropsType<typeof getServerSide
         </BmeList.Item>
       </BmeList>
       <BmeList>
-        <BmeList.Item onClick={() => {}}>
-          <FormattedMessage id="page.settings.link.test_notification" />
+        <BmeList.Item onClick={handleTestNotification}>
+          <BmeBox alignY="center">
+            {testNotificationState !== "idle" && (
+              <BmeBox padding="no|xs|no|no" alignY="center">
+                {testNotificationState === "pending" && <BmeSpinner variant="text" size="small" />}
+                {testNotificationState === "success" && <BmeIcon name="checkmark" color="green" />}
+                {testNotificationState === "error" && <BmeIcon name="close" color="red" />}
+              </BmeBox>
+            )}{" "}
+            <FormattedMessage id="page.settings.link.test_notification" />
+          </BmeBox>
         </BmeList.Item>
       </BmeList>
       <BmeList>

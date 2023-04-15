@@ -67,7 +67,7 @@ export default class ApiBase {
     return data;
   }
 
-  protected async post<T>(path: string, body: any): Promise<T> {
+  protected async post<T>(path: string, body?: any): Promise<T> {
     const response = await this.request({
       method: "POST",
       url: path,

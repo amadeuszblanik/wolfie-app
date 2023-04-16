@@ -5,7 +5,7 @@ import { IntlProvider } from "react-intl";
 import { Provider } from "react-redux";
 import dark from "bme-ui/dist/themes/dark";
 import { locales } from "../src/settings";
-import { GlobalStyles } from "../src/components";
+import { CookieConsent, GlobalStyles } from "../src/components";
 import { wrapper } from "../src/store";
 import type { AppProps } from "next/app";
 
@@ -30,6 +30,7 @@ function App({ Component, ...rest }: AppProps) {
       <Provider store={store}>
         <IntlProvider locale={locale} messages={locales[locale]}>
           <GlobalStyles />
+          <CookieConsent />
           <Component {...props.pageProps} />
         </IntlProvider>
       </Provider>

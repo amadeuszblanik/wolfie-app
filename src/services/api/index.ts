@@ -51,6 +51,7 @@ import { AuthApplePayload } from "./types/auth/apple/payload.type";
 import { AuthAppleResponse } from "./types/auth/apple/response.type";
 import { PetsPetIdAvatarPostPayload } from "./types/pets/:petId/avatar/payload.type";
 import { PetsPetIdAvatarPostResponse } from "./types/pets/:petId/avatar/response.type";
+import { AuthTestNotificationResponse } from "./types/auth/test-notification/response.type";
 import { apiUrl } from "../../utils";
 
 export default class ApiService extends ApiBase {
@@ -126,6 +127,8 @@ export default class ApiService extends ApiBase {
 
   authSignUp = async (payload: AuthSignUpPayload) =>
     await this.post<AuthSignUpResponse>(ApiAuthEndpoint.SignUp, payload);
+
+  authTestNotification = async () => await this.post<AuthTestNotificationResponse>(ApiAuthEndpoint.TestNotification);
 
   authConfirmEmail = async (payload: AuthConfirmEmailPayload) =>
     await this.post<AuthConfirmEmailResponse>(ApiAuthEndpoint.ConfirmEmail, payload);

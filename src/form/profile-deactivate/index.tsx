@@ -1,4 +1,4 @@
-import { BmeButton, BmeCheckboxDeprecated, BmeInputDeprecated, BmeList, BmeText } from "bme-ui";
+import { BmeButton, BmeCheckbox, BmeFormController, BmeInput, BmeList, BmeText } from "bme-ui";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useEffect, useState } from "react";
 import { DefaultTheme } from "styled-components";
@@ -11,6 +11,8 @@ import {
   selectProfileDeactivateAccountError,
   selectProfileDeactivateAccountStatus,
 } from "../../store/profile.slice";
+
+// @TODO: Refactor this component to use the new Form component
 
 const SIGN_OFF_TIMEOUT = 5000;
 
@@ -80,22 +82,23 @@ const Component = () => {
           </BmeText>
         </BmeList.Item>
         <BmeList.Item>
-          <BmeCheckboxDeprecated
+          <BmeFormController
             name="delete-approve"
             label={intl.formatMessage({ id: "common.form.profile_deactivate.checkbox" })}
-            value={approve}
-            onValue={setApprove}
-          />
+            labelPosition="right"
+            width="100%"
+          >
+            <BmeCheckbox name="delete-approve" value={approve} onChange={setApprove} />
+          </BmeFormController>
         </BmeList.Item>
         <BmeList.Item>
-          <BmeInputDeprecated
+          <BmeFormController
             name="password"
-            value={password}
             label={intl.formatMessage({ id: "common.form.password.label" })}
-            onValue={setPassword}
             width="100%"
-            type="password"
-          />
+          >
+            <BmeInput name="password" value={password} onChange={setPassword} width="100%" type="password" />
+          </BmeFormController>
         </BmeList.Item>
         <BmeList.Item>
           <BmeButton width="100%" variant="red" disabled={!approve}>

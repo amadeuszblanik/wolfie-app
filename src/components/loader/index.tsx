@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { BmeProgressBar } from "bme-ui";
+import { BmeBox, BmeSpinner } from "bme-ui";
 import { Container } from "../../atoms";
 
 const StyledLoader = styled.div`
@@ -19,7 +19,9 @@ const StyledLoader = styled.div`
 const Component = () => (
   <StyledLoader>
     <Container>
-      <BmeProgressBar />
+      <BmeBox alignX="center" alignY="center" width="100%">
+        <BmeSpinner size="large" variant="primary" />
+      </BmeBox>
     </Container>
   </StyledLoader>
 );

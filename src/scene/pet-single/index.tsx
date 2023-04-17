@@ -65,14 +65,19 @@ const Scene = () => {
       <StyledScenePromo>{storePetsSingle && <PetCard {...storePetsSingle} />}</StyledScenePromo>
       <Link href={`/app/pet/${petId}/weight`}>
         <BigFancyBox
-          icon="barbell"
+          icon="barbell-outline"
           title="Weight"
           value={storePetsSingle?.currentWeight?.formatted ?? "—"}
           variant="blue"
         />
       </Link>
       <Link href={`/app/pet/${petId}/health-log`}>
-        <BigFancyBox icon="heart" title="Health log" value={String(storePetsSingle?.healthLog ?? "—")} variant="red" />
+        <BigFancyBox
+          icon="heart-outline"
+          title="Health log"
+          value={String(storePetsSingle?.healthLog ?? "—")}
+          variant="red"
+        />
       </Link>
       {storePetsMyStatus === "pending" && <Loader />}
     </StyledSceneWrapper>

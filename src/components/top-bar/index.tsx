@@ -90,7 +90,7 @@ const Component: ComponentType = ({ left, right, children }) => {
             <BmeBox alignY="center" margin="no|no|no|auto">
               {isMobile ? (
                 <BmeButton size="small" variant="backgroundSecondary" onClick={() => setIsDrawerOpen(!isDrawerOpen)}>
-                  <BmeIcon name="menu" />
+                  <BmeIcon name="menu-outline" />
                 </BmeButton>
               ) : (
                 right

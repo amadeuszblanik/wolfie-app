@@ -89,8 +89,8 @@ export default function Page(_: InferGetServerSidePropsType<typeof getServerSide
             {testNotificationState !== "idle" && (
               <BmeBox padding="no|xs|no|no" alignY="center">
                 {testNotificationState === "pending" && <BmeSpinner variant="text" size="small" />}
-                {testNotificationState === "success" && <BmeIcon name="checkmark" color="green" />}
-                {testNotificationState === "error" && <BmeIcon name="close" color="red" />}
+                {testNotificationState === "success" && <BmeIcon name="checkmark-outline" color="green" />}
+                {testNotificationState === "error" && <BmeIcon name="close-outline" color="red" />}
               </BmeBox>
             )}{" "}
             <FormattedMessage id="page.settings.link.test_notification" />

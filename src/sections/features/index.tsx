@@ -82,7 +82,7 @@ const Component = () => {
         </BmeBox>
         <BmeBox direction="row" wrap alignY="center" width="100%" padding="md|no|no" margin="no|no|auto">
           <FeatureSingle
-            icon="barbell"
+            icon="barbell-outline"
             title="section.features.feature_weight.title"
             description="section.features.feature_weight.description"
             state="ready"
@@ -90,7 +90,7 @@ const Component = () => {
             isMobile={isMobile}
           />
           <FeatureSingle
-            icon="heart"
+            icon="heart-outline"
             title="section.features.feature_health_log.title"
             description="section.features.feature_health_log.description"
             state="ready"
@@ -98,7 +98,7 @@ const Component = () => {
             isMobile={isMobile}
           />
           <FeatureSingle
-            icon="medkit"
+            icon="medkit-outline"
             title="section.features.feature_heat.title"
             description="section.features.feature_heat.description"
             state="planned"
@@ -106,7 +106,7 @@ const Component = () => {
             isMobile={isMobile}
           />
           <FeatureSingle
-            icon="people"
+            icon="people-outline"
             title="section.features.feature_share.title"
             description="section.features.feature_share.description"
             state="in-progress"

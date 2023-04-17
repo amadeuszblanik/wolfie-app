@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useIntl } from "react-intl";
+import { isEmpty } from "bme-utils";
 import { MIN_6MONTHS, MIN_MONTHS, MIN_WEEKS, MIN_YEARS, PetWeightFilter } from "./filter";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { petsActions, selectPets, selectPetsMyError, selectPetsMyStatus } from "../../store/pets.slice";
@@ -86,7 +87,7 @@ const useLogic = () => {
 
     isPending: isAnyPending,
     isError: isAnyError,
-    errorMessages: errorMessages || [intl.formatMessage({ id: "error.generic_fetch" })],
+    errorMessages: !isEmpty(errorMessages) ? errorMessages : [intl.formatMessage({ id: "error.generic_fetch" })],
 
     tryAgain: handleTryAgain,
     weightFilter: filter,

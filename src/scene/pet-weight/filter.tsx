@@ -40,7 +40,7 @@ const Filter: React.FC<FilterProps> = ({ selected, entries, onChange }) => {
   }, []);
 
   useEffect(() => {
-    const dateDiff = dateDifference(lastEntryDate || new Date(), new Date(), false);
+    const dateDiff = dateDifference(lastEntryDate, new Date(), false);
     handleSetFilters(dateDiff);
   }, [lastEntryDate, handleSetFilters]);
 

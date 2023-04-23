@@ -8,7 +8,7 @@ import {
   selectCalendarError,
   selectCalendarStatus,
 } from "../../store/calendar.slice";
-import { ErrorMessage, Loader } from "../../components";
+import { CalendarList, ErrorMessage, Loader } from "../../components";
 
 const Scene = () => {
   const intl = useIntl();
@@ -29,11 +29,8 @@ const Scene = () => {
   return (
     <>
       {calendarStatus === "success" && (
-        <BmeBox wrap width="100%" minHeight="100%">
-          <code>
-            {/* eslint-disable-next-line no-magic-numbers */}
-            <pre>{JSON.stringify(calendarData, null, 2) || "No data"}</pre>
-          </code>
+        <BmeBox wrap width="100%">
+          {calendarData && <CalendarList items={calendarData} />}
         </BmeBox>
       )}
       {calendarStatus === "pending" && <Loader />}

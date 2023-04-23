@@ -6,8 +6,8 @@ export interface CalendarEntry {
   id: number;
   type: CalendarEntryType;
   date: {
-    start: Date;
-    end: Date;
+    start: string;
+    end: string;
   };
   title: string;
   description?: string;

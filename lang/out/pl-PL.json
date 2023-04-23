@@ -577,5 +577,6 @@
   "weight.filters.y": "R",
   "weight.filters.6m": "6M",
   "weight.filters.m": "M",
-  "weight.filters.w": "T"
+  "weight.filters.w": "T",
+  "calendar.types.healthLog": "Dziennik zdrowia"
 }

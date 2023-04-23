@@ -17,7 +17,7 @@ export const getServerSideProps: GetServerSideProps<{ isSignedId: boolean }> = a
     if (refreshToken) {
       return {
         redirect: {
-          destination: "/auth/refresh-session",
+          destination: "/auth/sign-off",
           permanent: false,
         },
       };

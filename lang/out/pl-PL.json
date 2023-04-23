@@ -376,6 +376,7 @@
   "layout.landing.menu.download": "Pobierz",
   "layout.app.menu.pets": "Zwierzaki",
   "layout.app.menu.pet_add": "Dodaj zwierzaka",
+  "layout.app.menu.calendar": "Kalendarz",
   "layout.app.profile.usage": "Zwierzaki: {petsCount} / {petsLimit}",
   "layout.app.profile.settings": "Ustawienia",
   "layout.app.profile.profile": "Profil",
@@ -415,6 +416,7 @@
   "component.error_message.try_again": "Spróbuj ponownie",
   "page.app.title": "Pulpit",
   "page.pet_add.title": "Dodaj zwierzaka",
+  "page.calendar.title": "Kalendarz",
   "page.pet_id.title": "Zwierzak",
   "page.pet_id_weight.title": "Waga",
   "page.auth_sign_in.title": "Wpisz się",
@@ -575,5 +577,6 @@
   "weight.filters.y": "R",
   "weight.filters.6m": "6M",
   "weight.filters.m": "M",
-  "weight.filters.w": "T"
+  "weight.filters.w": "T",
+  "calendar.types.healthLog": "Dziennik zdrowia"
 }

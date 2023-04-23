@@ -7,3 +7,4 @@ export { default as enumToList } from "./enum-to-list.util";
 export { default as toInputDate } from "./to-input-date.util";
 export { default as toInputDatetimeLocal } from "./to-input-datetime-local.util";
 export { default as toInputTime } from "./to-input-time.util";
+export { default as uniqueArray } from "./unique-array.util";

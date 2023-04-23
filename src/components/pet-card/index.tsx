@@ -72,14 +72,14 @@ const Component: React.FC<PetCardProps> = ({ id, name, image, birthDate, microch
       <BmeBox alignY="bottom" width="100%" margin="no|no|sm">
         <BmeBox padding="no|sm|no|no">
           <BmeAvatar src={image} variant="primary">
-            {!withLink && <BmeAvatar.Action icon="camera" onClick={handleUpdateAvatar} />}
+            {!withLink && <BmeAvatar.Action icon="camera-outline" onClick={handleUpdateAvatar} />}
           </BmeAvatar>
         </BmeBox>
         <BmeText variant="Title1">{name}</BmeText>
         <BmeBox alignY="top" height="100%" margin="no|no|auto|auto">
           <Link href={`/app/pet/${id}/edit`}>
             <BmeButton variant="gray5" size="small">
-              <BmeIcon name="create" />
+              <BmeIcon name="create-outline" />
             </BmeButton>
           </Link>
         </BmeBox>

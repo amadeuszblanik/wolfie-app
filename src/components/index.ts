@@ -1,4 +1,5 @@
 export { default as BigFancyBox } from "./big-fancy-box";
+export { default as CalendarList } from "./calendar-list";
 export { default as CookieConsent } from "./cookie-consent";
 export { default as ErrorMessage } from "./error-message";
 export { default as Footer } from "./footer";

@@ -2,6 +2,7 @@ import ApiBase from "./base";
 import {
   ApiAuthEndpoint,
   ApiBreedEndpoint,
+  ApiCalendarEndpoint,
   ApiConfigEndpoint,
   ApiMedicineEndpoint,
   ApiPetsEndpoint,
@@ -52,6 +53,7 @@ import { AuthAppleResponse } from "./types/auth/apple/response.type";
 import { PetsPetIdAvatarPostPayload } from "./types/pets/:petId/avatar/payload.type";
 import { PetsPetIdAvatarPostResponse } from "./types/pets/:petId/avatar/response.type";
 import { AuthTestNotificationResponse } from "./types/auth/test-notification/response.type";
+import { CalendarResponse } from "./types/calendar/response.type";
 import { apiUrl } from "../../utils";
 
 export default class ApiService extends ApiBase {
@@ -149,6 +151,8 @@ export default class ApiService extends ApiBase {
   breed = async () => await this.get<BreedResponse>(ApiBreedEndpoint.Breed);
 
   medicine = async () => await this.get<MedicineShortResponse>(ApiMedicineEndpoint.Medicine);
+
+  calendar = async () => await this.get<CalendarResponse>(ApiCalendarEndpoint.Calendar);
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
   constructor() {

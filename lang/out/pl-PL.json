@@ -376,6 +376,7 @@
   "layout.landing.menu.download": "Pobierz",
   "layout.app.menu.pets": "Zwierzaki",
   "layout.app.menu.pet_add": "Dodaj zwierzaka",
+  "layout.app.menu.calendar": "Kalendarz",
   "layout.app.profile.usage": "Zwierzaki: {petsCount} / {petsLimit}",
   "layout.app.profile.settings": "Ustawienia",
   "layout.app.profile.profile": "Profil",
@@ -415,6 +416,7 @@
   "component.error_message.try_again": "Spróbuj ponownie",
   "page.app.title": "Pulpit",
   "page.pet_add.title": "Dodaj zwierzaka",
+  "page.calendar.title": "Kalendarz",
   "page.pet_id.title": "Zwierzak",
   "page.pet_id_weight.title": "Waga",
   "page.auth_sign_in.title": "Wpisz się",
@@ -570,5 +572,11 @@
   "cookie_consent.description": "Ta strona używa plików cookie, aby zapewnić najlepszą jakość usług. Możesz określić warunki przechowywania lub dostępu do plików cookie w Twojej przeglądarce. Więcej informacji na temat plików cookie znajdziesz w naszej Polityce prywatności.",
   "cookie_consent.analytics": "Ta strona używa plików cookie do zbierania informacji o tym, jak korzystasz z naszej witryny, abyśmy mogli ją ulepszyć. Wykorzystujemy te informacje, aby strona działała jak najlepiej oraz usprawnić nasze usługi.",
   "cookie_consent.crashlytics": "Ta strona używa plików cookie, aby zbierać informacje na temat sposobu, w jaki współdziałasz z naszą witryną, abyśmy mogli ją ulepszyć. Używamy tych informacji, aby strona działała jak najlepiej oraz aby udoskonalić nasze usługi.",
-  "cookie_consent.save": "Zapisz ustawienia"
+  "cookie_consent.save": "Zapisz ustawienia",
+  "weight.filters.all": "Wszystkie",
+  "weight.filters.y": "R",
+  "weight.filters.6m": "6M",
+  "weight.filters.m": "M",
+  "weight.filters.w": "T",
+  "calendar.types.healthLog": "Dziennik zdrowia"
 }

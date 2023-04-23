@@ -35,10 +35,19 @@ const Layout: React.FC<LayoutAppProps> = ({ title, children }) => {
       </Head>
 
       <SideBar title={title}>
-        <SideBar.Item icon="paw" label={intl.formatMessage({ id: "layout.app.menu.pets" })} href="/app" />
+        <SideBar.Item icon="paw-outline" label={intl.formatMessage({ id: "layout.app.menu.pets" })} href="/app" />
         {storeConfigData?.canAddNewPet && (
-          <SideBar.Item icon="paw" label={intl.formatMessage({ id: "layout.app.menu.pet_add" })} href="/app/pet/add" />
+          <SideBar.Item
+            icon="paw-outline"
+            label={intl.formatMessage({ id: "layout.app.menu.pet_add" })}
+            href="/app/pet/add"
+          />
         )}
+        <SideBar.Item
+          icon="calendar-outline"
+          label={intl.formatMessage({ id: "layout.app.menu.calendar" })}
+          href="/app/calendar"
+        />
       </SideBar>
       <StyledMain>
         <Container>{children}</Container>

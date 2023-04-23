@@ -375,6 +375,7 @@
   "layout.landing.menu.app": "Open App",
   "layout.landing.menu.download": "Download App",
   "layout.app.menu.pets": "Pets",
+  "layout.app.menu.calendar": "Calendar",
   "layout.app.menu.pet_add": "Add Pet",
   "layout.app.profile.usage": "Pets: {petsCount} / {petsLimit}",
   "layout.app.profile.settings": "Settings",
@@ -414,6 +415,7 @@
   "component.error_message.title": "Something went wrong",
   "component.error_message.try_again": "Try again",
   "page.app.title": "Dashboard",
+  "page.calendar.title": "Calendar",
   "page.pet_add.title": "Add Pet",
   "page.pet_id.title": "Pet",
   "page.pet_id_weight.title": "Weight",
@@ -571,5 +573,11 @@
   "cookie_consent.description": "We use cookies to improve your experience on our website. By browsing this website, you agree to our use of cookies. You can change your cookie settings at any time. You can find more information in our Privacy Policy.",
   "cookie_consent.analytics": "This website uses cookies to collect information about how you interact with our website so we can improve it. We use this information to make the website work as well as possible and improve our services.",
   "cookie_consent.crashlytics": "This website uses cookies to collect information about how you interact with our website so we can improve it. We use this information to make the website work as well as possible and improve our services.",
-  "cookie_consent.save": "Save settings"
+  "cookie_consent.save": "Save settings",
+  "weight.filters.all": "All",
+  "weight.filters.y": "Y",
+  "weight.filters.6m": "6M",
+  "weight.filters.m": "M",
+  "weight.filters.w": "W",
+  "calendar.types.healthLog": "Health log"
 }

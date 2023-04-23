@@ -19,10 +19,10 @@ const usePipe = (value: Date | string, options?: Intl.DateTimeFormatOptions): st
   if (!options) {
     options =
       width >= Breakpoints.iPhonePlus
-        ? { year: "numeric", month: "long", day: "numeric" }
+        ? { year: "numeric", month: "long", day: "numeric", hour: "numeric", minute: "numeric" }
         : width >= Breakpoints.iPhoneMini
-        ? { year: "numeric", month: "short", day: "numeric" }
-        : { year: "numeric", month: "2-digit", day: "numeric" };
+        ? { year: "numeric", month: "short", day: "numeric", hour: "numeric", minute: "numeric" }
+        : { year: "numeric", month: "2-digit", day: "numeric", hour: "numeric", minute: "numeric" };
   }
 
   return value.toLocaleDateString(localStorage.getItem("locale") || navigator.language, options);

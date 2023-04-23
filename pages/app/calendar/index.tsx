@@ -1,9 +1,9 @@
 import { useIntl } from "react-intl";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import { LayoutApp } from "../../../../../src/layouts";
-import getAuth from "../../../../../lib/get-auth";
-import { getSession } from "../../../../../lib/get-session";
-import { FormHealthLog } from "../../../../../src/form";
+import { LayoutApp } from "../../../src/layouts";
+import { getSession } from "../../../lib/get-session";
+import getAuth from "../../../lib/get-auth";
+import { SceneCalendar } from "../../../src/scene";
 
 export const getServerSideProps: GetServerSideProps<{ isSignedId: boolean }> = async (context) => {
   const session = await getSession(context.req, context.res);
@@ -39,8 +39,8 @@ export default function Page(_: InferGetServerSidePropsType<typeof getServerSide
   const intl = useIntl();
 
   return (
-    <LayoutApp title={intl.formatMessage({ id: "page.pet_id_health_log.title" })}>
-      <FormHealthLog />
+    <LayoutApp title={intl.formatMessage({ id: "page.calendar.title" })}>
+      <SceneCalendar />
     </LayoutApp>
   );
 }

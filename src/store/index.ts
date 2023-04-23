@@ -12,6 +12,7 @@ import { confirmEmailSlice } from "./confirm-email.slice";
 import { resetPasswordSlice } from "./reset-password.slice";
 import { breedsSlice } from "./breeds.slice";
 import { medicinesSlice } from "./medicines.slice";
+import { calendarSlice } from "./calendar.slice";
 import { ApiService } from "../services";
 
 const makeStore = () =>
@@ -19,6 +20,7 @@ const makeStore = () =>
     reducer: {
       [authSlice.name]: authSlice.reducer,
       [breedsSlice.name]: breedsSlice.reducer,
+      [calendarSlice.name]: calendarSlice.reducer,
       [configSlice.name]: configSlice.reducer,
       [confirmEmailSlice.name]: confirmEmailSlice.reducer,
       [medicinesSlice.name]: medicinesSlice.reducer,

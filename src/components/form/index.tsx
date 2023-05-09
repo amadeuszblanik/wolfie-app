@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { BmeBox, BmeButton, bmeMixins, BmeModal } from "bme-ui";
 import { FormattedMessage, useIntl } from "react-intl";
@@ -41,8 +41,23 @@ const Component: FormType = ({
   ...props
 }) => {
   const intl = useIntl();
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
   const isLoading = apiStatus === "pending";
-  const isModalVisible = (!!error || !!success) && (apiStatus === "success" || apiStatus === "error");
+
+  useEffect(() => {
+    if ((!!error || !!success) && (apiStatus === "success" || apiStatus === "error")) {
+      setIsModalVisible(true);
+    }
+  }, [error, success]);
+
+  const handleCloseModal = () => {
+    setIsModalVisible(false);
+
+    if (onCloseModal) {
+      onCloseModal(apiStatus === "success");
+    }
+  };
 
   if (loadFailed) {
     return (
@@ -58,9 +73,7 @@ const Component: FormType = ({
     <StyledFormWrapper {...props}>
       <BmeBox direction="column" width="100%" margin="no|no|sm">
         {isLoading && <Loader />}
-        {isModalVisible && (
-          <BmeModal onClose={() => onCloseModal && onCloseModal(apiStatus === "success")}>{error || success}</BmeModal>
-        )}
+        {isModalVisible && <BmeModal onClose={handleCloseModal}>{error || success}</BmeModal>}
         {children}
       </BmeBox>
       <BmeButton type="submit">

@@ -10,16 +10,16 @@ export const formSchema = yup
       .string()
       .required("common.form.errors.required")
       .matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/, "common.form.errors.password"),
-    passwordConfirm: yup
+    birthDate: yup
       .string()
       .required("common.form.errors.required")
-      .oneOf([yup.ref("password"), null], "common.form.errors.password_confirm"),
+      .matches(/^\d{4}-\d{2}-\d{2}$/, "common.form.errors.date"),
     weightUnit: yup
       .mixed()
       .oneOf(Object.values(WeightUnits))
       .required("common.form.errors.required")
       .default(WeightUnits.Kilogram),
-    gdprConsent: yup.bool().oneOf([true], "common.form.errors.gdpr_consent"),
+    acceptedGdpr: yup.bool().oneOf([true], "common.form.errors.gdpr_consent"),
   })
   .required();
 

@@ -30,7 +30,7 @@ const edit = createAsyncThunk<
     payload: PetsAddPayload;
   },
   { extra: { apiService: ApiService }; rejectValue: ApiMessage }
->("pets/edit", async ({ petId, payload }, thunkAPI) => await thunkAPI.extra.apiService.pets.put(petId, payload));
+>("pets/edit", async ({ petId, payload }, thunkAPI) => await thunkAPI.extra.apiService.pets.patch(petId, payload));
 
 const remove = createAsyncThunk<
   ApiMessage,
@@ -131,10 +131,10 @@ export const petsSlice = createSlice({
       state.addStatus = "pending";
       state.addError = null;
     });
-    builder.addCase(add.fulfilled, (state, action) => {
+    builder.addCase(add.fulfilled, (state) => {
       state.addStatus = "success";
       state.addError = null;
-      state.data = [...(state.data || []), action.payload];
+      // state.data = [...(state.data || []), action.payload];
     });
     builder.addCase(add.rejected, (state, action) => {
       state.addStatus = "error";
@@ -192,7 +192,7 @@ export const selectPetsMy = ({ pets }: AppState) => pets.data;
 export const selectPets =
   (id: string) =>
   ({ pets }: AppState) =>
-    pets.data?.find((pet) => pet.id === id);
+    pets.data?.results.find((pet) => pet.id === id);
 export const selectPetsAddStatus = ({ pets }: AppState) => pets.addStatus;
 export const selectPetsAddError = ({ pets }: AppState) => pets.addError;
 export const selectPetsEditStatus = ({ pets }: AppState) => pets.editStatus;

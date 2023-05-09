@@ -83,12 +83,12 @@ export default class ApiService extends ApiBase {
   };
 
   petsAdd = {
-    post: async (payload: PetsAddPayload) => await this.post<PetsAddResponse>(ApiPetsEndpoint.PetAdd, payload),
+    post: async (payload: PetsAddPayload) => await this.post<PetsAddResponse>(ApiPetsEndpoint.Pets, payload),
   };
 
   pets = {
-    put: async (petId: string, payload: PetsPetIdPutPayload) =>
-      await this.put<PetsPetIdPutResponse>(apiUrl(ApiPetsEndpoint.PetsById, { petId }), payload),
+    patch: async (petId: string, payload: PetsPetIdPutPayload) =>
+      await this.patch<PetsPetIdPutResponse>(apiUrl(ApiPetsEndpoint.PetsById, { petId }), payload),
     delete: async (petId: string) => await this.delete<ApiMessage>(apiUrl(ApiPetsEndpoint.PetsById, { petId })),
     avatarPost: async (petId: string, payload: PetsPetIdAvatarPostPayload) =>
       await this.postMultipart<PetsPetIdAvatarPostResponse>(apiUrl(ApiPetsEndpoint.PetsAvatar, { petId }), payload),
@@ -144,7 +144,7 @@ export default class ApiService extends ApiBase {
   authDeactivateAccount = async (payload: AuthDeactivateAccountPayload) =>
     await this.delete<AuthDeactivateAccountResponse>(ApiAuthEndpoint.DeactivateAccount, payload);
 
-  petsMy = async () => await this.get<PetsMyResponse>(ApiPetsEndpoint.PetsMy);
+  petsMy = async () => await this.get<PetsMyResponse>(ApiPetsEndpoint.Pets);
 
   config = async () => await this.get<ConfigResponse>(ApiConfigEndpoint.Config);
 

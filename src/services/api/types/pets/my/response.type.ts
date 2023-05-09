@@ -1,21 +1,21 @@
 import { PetKind } from "../../../../../types/pet-kind.type";
-import { PetsPetIdWeightSingleGetResponse } from "../:petId/weight/get/response.type";
+import { ResultsList } from "../../results-list.type";
 import { BreedSingleResponse } from "../../breed/response.type";
+
+export interface PetsBreed extends BreedSingleResponse {
+  isPure: boolean;
+}
 
 export interface PetsMySingleResponse {
   id: string;
   name: string;
   kind: PetKind;
-  microchip: string;
-  image: string;
-  currentWeight?: PetsPetIdWeightSingleGetResponse;
+  breed: PetsBreed | null;
   birthDate: string;
-  healthLog: number;
-  vaccinations: number;
-  medicines: number;
-  breed?: BreedSingleResponse | null;
-  createdAt: string;
-  updatedAt: string;
+  microchip: string | null;
+  neutered: boolean | null;
+  instagram: string | null;
+  image?: string;
 }
 
-export type PetsMyResponse = PetsMySingleResponse[];
+export type PetsMyResponse = ResultsList<PetsMySingleResponse>;

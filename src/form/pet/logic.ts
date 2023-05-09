@@ -17,6 +17,7 @@ import {
 } from "../../store/pets.slice";
 import { PetKind } from "../../types/pet-kind.type";
 import { breedsActions, selectBreedsDataList } from "../../store/breeds.slice";
+import { PetsAddPayload } from "../../services/api/types/pets/add/payload.type";
 
 const useLogic = () => {
   const router = useRouter();
@@ -70,17 +71,20 @@ const useLogic = () => {
     if (storeDataById) {
       setValue("name", storeDataById.name);
       setValue("breed", storeDataById.breed?.id);
-      setValue("birthDate", new Date("2022-02-12"));
+      setValue("birthDate", storeDataById.birthDate);
     }
   }, [storeDataById]);
 
   const submit = (formData: FormData) => {
-    const payload = {
+    const payload: PetsAddPayload = {
       name: formData.name,
       kind: PetKind.Dog,
       breed: formData.breed,
+      pureBreed: formData.pureBreed,
+      birthDate: formData.birthDate,
       microchip: formData.microchip,
-      birthDate: new Date(formData.birthDate),
+      neutered: formData.neutered,
+      instagram: formData.instagram,
     };
 
     if (isEdit) {

@@ -4,6 +4,9 @@ export interface PetsAddPayload {
   name: string;
   kind: PetKind;
   breed?: number;
+  pureBreed?: boolean;
+  birthDate: string;
   microchip?: string;
-  birthDate: Date;
+  neutered?: boolean;
+  instagram?: string;
 }

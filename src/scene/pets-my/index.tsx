@@ -1,6 +1,8 @@
 import { BmeBox } from "bme-ui";
 import { useEffect } from "react";
 import { useIntl } from "react-intl";
+import { isEmpty } from "bme-utils";
+import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector, useMobile } from "../../hooks";
 import { petsActions, selectPetsMy, selectPetsMyError, selectPetsMyStatus } from "../../store/pets.slice";
 import { ErrorMessage, Loader, PetCard } from "../../components";
@@ -9,6 +11,7 @@ const Scene = () => {
   const intl = useIntl();
   const dispatch = useAppDispatch();
   const isMobile = useMobile();
+  const router = useRouter();
 
   const storePetsMyStatus = useAppSelector(selectPetsMyStatus);
   const storePetsMyError = useAppSelector(selectPetsMyError);
@@ -18,6 +21,12 @@ const Scene = () => {
     dispatch(petsActions.petsMy());
   }, [dispatch]);
 
+  useEffect(() => {
+    if (storePetsMyStatus === "success" && isEmpty(storePetsMy?.results)) {
+      void router.push("/app/pet/add");
+    }
+  }, [storePetsMy, storePetsMyStatus]);
+
   const handleTryAgain = () => {
     dispatch(petsActions.petsMy());
   };
@@ -25,7 +34,7 @@ const Scene = () => {
   return (
     <>
       <BmeBox wrap width="100%" minHeight="100%">
-        {storePetsMy?.map((petProps) => (
+        {storePetsMy?.results.map((petProps) => (
           <BmeBox key={petProps.id} width={isMobile ? "100%" : "50%"} padding={isMobile ? "xs|no" : "xs"}>
             <PetCard {...petProps} withLink />
           </BmeBox>

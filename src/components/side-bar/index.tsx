@@ -188,10 +188,12 @@ const Component: ComponentType = ({ title, children }) => {
         <StyledSideBarProfile isOpen={isProfileOpen}>
           <BmeBox alignY="top">
             <BmeBox margin="no|xs|no|no">
-              <BmeText variant="Title2">{storeProfileData?.fullName}</BmeText>
+              <BmeText variant="Title2">
+                {storeProfileData?.firstName} {storeProfileData?.lastName}
+              </BmeText>
             </BmeBox>
             <BmeText>
-              <FormattedMessage id={`common.user_role.${storeProfileData?.userRole.toLowerCase() ?? "user"}`} />
+              <FormattedMessage id={`common.user_role.${storeProfileData?.role.toLowerCase() ?? "user"}`} />
             </BmeText>
           </BmeBox>
           <BmeBox direction="column" width="100%">

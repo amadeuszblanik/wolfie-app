@@ -15,9 +15,10 @@ import {
   selectPetsMyError,
   selectPetsMyStatus,
 } from "../../store/pets.slice";
-import { PetKind } from "../../types/pet-kind.type";
 import { breedsActions, selectBreedsDataList } from "../../store/breeds.slice";
-import { PetsAddPayload } from "../../services/api/types/pets/add/payload.type";
+import { PetCreatePayloadApi } from "../../services/api/types/pet-create-payload.type";
+import { PetKind } from "../../services/api/types/pet-kind.type";
+import { PetSex } from "../../services/api/types/pet-sex.type";
 
 const useLogic = () => {
   const router = useRouter();
@@ -56,12 +57,16 @@ const useLogic = () => {
     id: isEdit ? "common.form.pet_update.success" : "common.form.pet_add.success",
   });
 
+  useEffect(() => {
+    dispatch(isEdit ? petsActions.resetAdd() : petsActions.resetEdit());
+  }, []);
+
   const loadForm = () => {
     if (!(storeStatus === "idle" || storeStatus === "success")) {
       return;
     }
 
-    dispatch(petsActions.petsMy());
+    dispatch(petsActions.get());
     dispatch(breedsActions.get());
   };
 
@@ -71,18 +76,24 @@ const useLogic = () => {
     if (storeDataById) {
       setValue("name", storeDataById.name);
       setValue("breed", storeDataById.breed?.id);
+      setValue("pureBreed", storeDataById.breed?.isPure);
       setValue("birthDate", storeDataById.birthDate);
+      setValue("sex", storeDataById.sex);
+      setValue("microchip", storeDataById.microchip || undefined);
+      setValue("neutered", storeDataById.neutered || undefined);
+      setValue("instagram", storeDataById.instagram || undefined);
     }
   }, [storeDataById]);
 
   const submit = (formData: FormData) => {
-    const payload: PetsAddPayload = {
+    const payload: PetCreatePayloadApi = {
       name: formData.name,
       kind: PetKind.Dog,
       breed: formData.breed,
       pureBreed: formData.pureBreed,
       birthDate: formData.birthDate,
       microchip: formData.microchip,
+      sex: formData.sex as PetSex,
       neutered: formData.neutered,
       instagram: formData.instagram,
     };
@@ -102,7 +113,7 @@ const useLogic = () => {
   };
 
   const resetForm = () => {
-    dispatch(petsActions.petsMy());
+    dispatch(petsActions.get());
     dispatch(isEdit ? petsActions.resetEdit() : petsActions.resetAdd());
   };
 

@@ -1,48 +1,46 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import { ApiStatus } from "../services/api/types/status.type";
-import { ApiMessage } from "../services/api/types/api-message.type";
+import { GenericMessageApi } from "../services/api/types/generic-message.type";
 import { ApiService } from "../services";
-import { PetsAddResponse } from "../services/api/types/pets/add/response.type";
-import { PetsAddPayload } from "../services/api/types/pets/add/payload.type";
-import { PetsPetIdPutResponse } from "../services/api/types/pets/:petId/put/response.type";
 import { PetsPetIdAvatarPostPayload } from "../services/api/types/pets/:petId/avatar/payload.type";
 import { PetsPetIdAvatarPostResponse } from "../services/api/types/pets/:petId/avatar/response.type";
 import { PetApi } from "../services/api/types/pet.type";
 import { ResultsListApi } from "../services/api/types/results-list.type";
+import { PetCreatePayloadApi } from "../services/api/types/pet-create-payload.type";
 import { AppState } from "./index";
 
 const get = createAsyncThunk<
   ResultsListApi<PetApi>,
   undefined,
-  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
+  { extra: { apiService: ApiService }; rejectValue: GenericMessageApi }
 >("pets/get", async (_, thunkAPI) => await thunkAPI.extra.apiService.pets.get());
 
 const add = createAsyncThunk<
-  PetsAddResponse,
-  PetsAddPayload,
-  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
->("pets/add", async (payload, thunkAPI) => await thunkAPI.extra.apiService.petsAdd.post(payload));
+  GenericMessageApi,
+  PetCreatePayloadApi,
+  { extra: { apiService: ApiService }; rejectValue: GenericMessageApi }
+>("pets/add", async (payload, thunkAPI) => await thunkAPI.extra.apiService.pets.post(payload));
 
 const edit = createAsyncThunk<
-  PetsPetIdPutResponse,
+  GenericMessageApi,
   {
     petId: string;
-    payload: PetsAddPayload;
+    payload: PetCreatePayloadApi;
   },
-  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
+  { extra: { apiService: ApiService }; rejectValue: GenericMessageApi }
 >("pets/edit", async ({ petId, payload }, thunkAPI) => await thunkAPI.extra.apiService.pets.patch(petId, payload));
 
 const remove = createAsyncThunk<
-  ApiMessage,
+  GenericMessageApi,
   { petId: string },
-  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
+  { extra: { apiService: ApiService }; rejectValue: GenericMessageApi }
 >("pets/delete", async ({ petId }, thunkAPI) => await thunkAPI.extra.apiService.pets.delete(petId));
 
 const avatar = createAsyncThunk<
   PetsPetIdAvatarPostResponse,
   { petId: string; payload: PetsPetIdAvatarPostPayload },
-  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
+  { extra: { apiService: ApiService }; rejectValue: GenericMessageApi }
 >(
   "pets/avatar",
   async ({ petId, payload }, thunkAPI) => await thunkAPI.extra.apiService.pets.avatarPost(petId, payload),

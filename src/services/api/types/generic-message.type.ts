@@ -1,4 +1,4 @@
-export interface ApiMessage {
+export interface GenericMessageApi {
   message: string;
   success: boolean;
 }

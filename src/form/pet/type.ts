@@ -9,6 +9,7 @@ export const formSchema = yup
       .string()
       .required("common.form.errors.required")
       .matches(/^\d{4}-\d{2}-\d{2}$/, "common.form.errors.date"),
+    sex: yup.string().required("common.form.errors.required"),
     microchip: yup.string(),
     neutered: yup.boolean(),
     instagram: yup.string(),

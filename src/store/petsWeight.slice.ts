@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import { lastElement } from "bme-utils";
 import { ApiStatus } from "../services/api/types/status.type";
-import { ApiMessage } from "../services/api/types/api-message.type";
+import { ApiMessage } from "../services/api/types/generic-message.type";
 import { ApiService } from "../services";
 import { PetsPetIdWeightGetResponse } from "../services/api/types/pets/:petId/weight/get/response.type";
 import { PetsPetIdWeightPostResponse } from "../services/api/types/pets/:petId/weight/post/response.type";

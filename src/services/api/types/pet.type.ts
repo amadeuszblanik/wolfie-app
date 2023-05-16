@@ -8,7 +8,7 @@ export interface PetApi {
   kind: PetKind;
   sex: PetSex;
   image?: string | null;
-  breed: BreedApi;
+  breed?: BreedApi | null;
   birthDate: string;
   microchip: string | null;
   neutered: boolean | null;

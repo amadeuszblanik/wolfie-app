@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import { ApiStatus } from "../services/api/types/status.type";
-import { ApiMessage } from "../services/api/types/api-message.type";
+import { ApiMessage } from "../services/api/types/generic-message.type";
 import { ApiService } from "../services";
 import { ConfigResponse } from "../services/api/types/config/response.type";
 

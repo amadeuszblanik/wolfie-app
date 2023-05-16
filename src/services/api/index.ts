@@ -32,11 +32,7 @@ import { AuthConfirmEmailPayload } from "./types/auth/confirm-email/payload.type
 import { AuthResetPasswordPutPayload } from "./types/auth/reset-password/put/payload.type";
 import { AuthResetPasswordPutResponse } from "./types/auth/reset-password/put/response.type";
 import { AuthResetPasswordGetPayload } from "./types/auth/reset-password/get/response.type";
-import { PetsAddPayload } from "./types/pets/add/payload.type";
-import { PetsAddResponse } from "./types/pets/add/response.type";
 import { BreedResponse } from "./types/breed/response.type";
-import { PetsPetIdPutPayload } from "./types/pets/:petId/put/payload.type";
-import { PetsPetIdPutResponse } from "./types/pets/:petId/put/response.type";
 import { PetsPetIdWeightPostPayload } from "./types/pets/:petId/weight/post/payload.type";
 import { PetsPetIdWeightPostResponse } from "./types/pets/:petId/weight/post/response.type";
 import { PetsPetIdWeightPatchResponse } from "./types/pets/:petId/weight/patch/response.type";
@@ -46,7 +42,7 @@ import { PetsPetIdHealthLogPatchResponse } from "./types/pets/:petId/health-log/
 import { PetsPetIdHealthLogPostPayload } from "./types/pets/:petId/health-log/post/payload.type";
 import { PetsPetIdHealthLogPatchPayload } from "./types/pets/:petId/health-log/patch/payload.type";
 import { MedicineShortResponse } from "./types/medicine/response.type";
-import { ApiMessage } from "./types/api-message.type";
+import { GenericMessageApi } from "./types/generic-message.type";
 import { AuthApplePayload } from "./types/auth/apple/payload.type";
 import { AuthAppleResponse } from "./types/auth/apple/response.type";
 import { PetsPetIdAvatarPostPayload } from "./types/pets/:petId/avatar/payload.type";
@@ -55,6 +51,7 @@ import { AuthTestNotificationResponse } from "./types/auth/test-notification/res
 import { CalendarResponse } from "./types/calendar/response.type";
 import { PetApi } from "./types/pet.type";
 import { ResultsListApi } from "./types/results-list.type";
+import { PetCreatePayloadApi } from "./types/pet-create-payload.type";
 import { apiUrl } from "../../utils";
 
 export default class ApiService extends ApiBase {
@@ -83,15 +80,12 @@ export default class ApiService extends ApiBase {
       await this.put<AuthResetPasswordPutResponse>(ApiAuthEndpoint.ResetPassword, payload),
   };
 
-  petsAdd = {
-    post: async (payload: PetsAddPayload) => await this.post<PetsAddResponse>(ApiPetsEndpoint.Pets, payload),
-  };
-
   pets = {
     get: async () => await this.get<ResultsListApi<PetApi>>(ApiPetsEndpoint.Pets),
-    patch: async (petId: string, payload: PetsPetIdPutPayload) =>
-      await this.patch<PetsPetIdPutResponse>(apiUrl(ApiPetsEndpoint.PetsById, { petId }), payload),
-    delete: async (petId: string) => await this.delete<ApiMessage>(apiUrl(ApiPetsEndpoint.PetsById, { petId })),
+    post: async (payload: PetCreatePayloadApi) => await this.post<GenericMessageApi>(ApiPetsEndpoint.Pets, payload),
+    patch: async (petId: string, payload: PetCreatePayloadApi) =>
+      await this.patch<GenericMessageApi>(apiUrl(ApiPetsEndpoint.PetsById, { petId }), payload),
+    delete: async (petId: string) => await this.delete<GenericMessageApi>(apiUrl(ApiPetsEndpoint.PetsById, { petId })),
     avatarPost: async (petId: string, payload: PetsPetIdAvatarPostPayload) =>
       await this.postMultipart<PetsPetIdAvatarPostResponse>(apiUrl(ApiPetsEndpoint.PetsAvatar, { petId }), payload),
   };
@@ -107,7 +101,7 @@ export default class ApiService extends ApiBase {
         payload,
       ),
     delete: async (petId: string, weightId: string) =>
-      await this.delete<ApiMessage>(apiUrl(ApiPetsEndpoint.PetsWeightSingle, { petId, weightId })),
+      await this.delete<GenericMessageApi>(apiUrl(ApiPetsEndpoint.PetsWeightSingle, { petId, weightId })),
   };
 
   petsHealthLog = {
@@ -121,7 +115,7 @@ export default class ApiService extends ApiBase {
         payload,
       ),
     delete: async (petId: string, healthLogId: string) =>
-      await this.delete<ApiMessage>(apiUrl(ApiPetsEndpoint.PetsHealthLogSingle, { petId, healthLogId })),
+      await this.delete<GenericMessageApi>(apiUrl(ApiPetsEndpoint.PetsHealthLogSingle, { petId, healthLogId })),
   };
 
   authSignIn = async (payload: AuthSignInPayload) =>

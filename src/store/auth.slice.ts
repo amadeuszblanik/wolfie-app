@@ -3,7 +3,7 @@ import { HYDRATE } from "next-redux-wrapper";
 import { AuthSignInPayload } from "../services/api/types/auth/sign-in/payload.type";
 import { ApiStatus } from "../services/api/types/status.type";
 import { AuthSignInResponse } from "../services/api/types/auth/sign-in/response.type";
-import { ApiMessage } from "../services/api/types/api-message.type";
+import { ApiMessage } from "../services/api/types/generic-message.type";
 import { ApiService } from "../services";
 import { cookie } from "../utils";
 import { AuthApplePayload } from "../services/api/types/auth/apple/payload.type";

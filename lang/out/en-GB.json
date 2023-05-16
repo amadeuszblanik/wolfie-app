@@ -228,5 +228,8 @@
   "weight.filters.6m": "6M",
   "weight.filters.m": "M",
   "weight.filters.w": "W",
-  "calendar.types.healthLog": "Health log"
+  "calendar.types.healthLog": "Health log",
+  "pet_sex.FEMALE": "Female",
+  "pet_sex.MALE": "Male",
+  "common.form.sex.label": "Sex"
 }

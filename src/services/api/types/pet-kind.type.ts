@@ -1,3 +1,3 @@
-export interface PetKind {
-  Dog: "DOG";
+export enum PetKind {
+  Dog = "DOG",
 }

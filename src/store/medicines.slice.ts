@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import { SelectItem } from "bme-ui/dist/atoms/select-deperacated/types";
 import { ApiStatus } from "../services/api/types/status.type";
-import { ApiMessage } from "../services/api/types/api-message.type";
+import { ApiMessage } from "../services/api/types/generic-message.type";
 import { ApiService } from "../services";
 import { MedicineShortResponse } from "../services/api/types/medicine/response.type";
 import { AppState } from "./index";

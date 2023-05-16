@@ -6,6 +6,7 @@ import useLogic from "./logic";
 import { Form } from "../../components";
 import { changeCase } from "../../utils";
 import { ChangeCaseUtil } from "../../utils/change-case.util";
+import { PetSex } from "../../services/api/types/pet-sex.type";
 
 const Component = () => {
   const router = useRouter();
@@ -138,6 +139,31 @@ const Component = () => {
             error={errors[field.name] && intl.formatMessage({ id: errors[field.name]?.message })}
           >
             <BmeInput {...field} />
+          </BmeFormController>
+        )}
+      />
+      <Controller
+        name="sex"
+        control={control}
+        render={({ field }) => (
+          <BmeFormController
+            width="100%"
+            label={intl.formatMessage({
+              id: `common.form.${changeCase(field.name, ChangeCaseUtil.CamelCase, ChangeCaseUtil.SnakeCase)}.label`,
+            })}
+            name={field.name}
+            error={errors[field.name] && intl.formatMessage({ id: String(errors[field.name]?.message) })}
+          >
+            <BmeSelect {...field}>
+              {Object.values(PetSex).map((petSex) => (
+                <BmeSelect.Option
+                  key={petSex}
+                  value={petSex}
+                  label={intl.formatMessage({ id: `pet_sex.${petSex}` })}
+                  selected={field.value === petSex}
+                />
+              ))}
+            </BmeSelect>
           </BmeFormController>
         )}
       />

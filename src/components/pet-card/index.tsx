@@ -2,19 +2,18 @@ import React, { useEffect, useRef, useState } from "react";
 import { BmeAvatar, BmeBox, BmeButton, BmeIcon, BmeModal, BmeText } from "bme-ui";
 import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
-import { PetsMySingleResponse } from "../../services/api/types/pets/my/response.type";
 import { pipeAge, pipeDate } from "../../pipes";
 import { Link } from "../../atoms";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { petsActions, selectPetsAvatarError, selectPetsAvatarStatus } from "../../store/pets.slice";
 import { Loader } from "../index";
+import { PetApi } from "../../services/api/types/pet.type";
 
 // @TODO I know that anchor should not be in an anchor, but It's fine for now. Refactor it later.
-// @TODO Fix create icon - bme-ui
 
 const FILE_INDEX = 0;
 
-interface PetCardProps extends PetsMySingleResponse {
+interface PetCardProps extends PetApi {
   withLink?: boolean;
 }
 
@@ -40,7 +39,7 @@ const Component: React.FC<PetCardProps> = ({ id, name, image, birthDate, microch
   useEffect(() => {
     switch (storePetsAvatarStatus) {
       case "success":
-        dispatch(petsActions.petsMy());
+        dispatch(petsActions.get());
         dispatch(petsActions.resetAvatar());
         break;
       case "error":
@@ -71,7 +70,7 @@ const Component: React.FC<PetCardProps> = ({ id, name, image, birthDate, microch
     <BmeBox direction="column" width="100%" padding="md" rounded background="backgroundSecondary">
       <BmeBox alignY="bottom" width="100%" margin="no|no|sm">
         <BmeBox padding="no|sm|no|no">
-          <BmeAvatar src={image} variant="primary">
+          <BmeAvatar src={image || undefined} variant="primary">
             {!withLink && <BmeAvatar.Action icon="camera-outline" onClick={handleUpdateAvatar} />}
           </BmeAvatar>
         </BmeBox>

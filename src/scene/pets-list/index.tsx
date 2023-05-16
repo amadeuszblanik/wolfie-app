@@ -18,23 +18,23 @@ const Scene = () => {
   const storePetsMy = useAppSelector(selectPetsMy);
 
   useEffect(() => {
-    dispatch(petsActions.petsMy());
+    dispatch(petsActions.get());
   }, [dispatch]);
 
   useEffect(() => {
-    if (storePetsMyStatus === "success" && isEmpty(storePetsMy?.results)) {
+    if (storePetsMyStatus === "success" && isEmpty(storePetsMy)) {
       void router.push("/app/pet/add");
     }
   }, [storePetsMy, storePetsMyStatus]);
 
   const handleTryAgain = () => {
-    dispatch(petsActions.petsMy());
+    dispatch(petsActions.get());
   };
 
   return (
     <>
       <BmeBox wrap width="100%" minHeight="100%">
-        {storePetsMy?.results.map((petProps) => (
+        {storePetsMy?.map((petProps) => (
           <BmeBox key={petProps.id} width={isMobile ? "100%" : "50%"} padding={isMobile ? "xs|no" : "xs"}>
             <PetCard {...petProps} withLink />
           </BmeBox>

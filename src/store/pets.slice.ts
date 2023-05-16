@@ -3,19 +3,20 @@ import { HYDRATE } from "next-redux-wrapper";
 import { ApiStatus } from "../services/api/types/status.type";
 import { ApiMessage } from "../services/api/types/api-message.type";
 import { ApiService } from "../services";
-import { PetsMyResponse } from "../services/api/types/pets/my/response.type";
 import { PetsAddResponse } from "../services/api/types/pets/add/response.type";
 import { PetsAddPayload } from "../services/api/types/pets/add/payload.type";
 import { PetsPetIdPutResponse } from "../services/api/types/pets/:petId/put/response.type";
 import { PetsPetIdAvatarPostPayload } from "../services/api/types/pets/:petId/avatar/payload.type";
 import { PetsPetIdAvatarPostResponse } from "../services/api/types/pets/:petId/avatar/response.type";
+import { PetApi } from "../services/api/types/pet.type";
+import { ResultsListApi } from "../services/api/types/results-list.type";
 import { AppState } from "./index";
 
-const petsMy = createAsyncThunk<
-  PetsMyResponse,
+const get = createAsyncThunk<
+  ResultsListApi<PetApi>,
   undefined,
   { extra: { apiService: ApiService }; rejectValue: ApiMessage }
->("pets/get", async (_, thunkAPI) => await thunkAPI.extra.apiService.petsMy());
+>("pets/get", async (_, thunkAPI) => await thunkAPI.extra.apiService.pets.get());
 
 const add = createAsyncThunk<
   PetsAddResponse,
@@ -50,7 +51,7 @@ const avatar = createAsyncThunk<
 export interface PetsStore {
   myStatus: ApiStatus;
   myError: string | null;
-  data: PetsMyResponse | null;
+  data: PetApi[] | null;
   addStatus: ApiStatus;
   addError: string | null;
   editStatus: ApiStatus;
@@ -112,17 +113,17 @@ export const petsSlice = createSlice({
       // @ts-ignore
       ...action.payload.subject,
     }));
-    builder.addCase(petsMy.pending, (state) => {
+    builder.addCase(get.pending, (state) => {
       state.myStatus = "pending";
       state.myError = null;
       state.data = null;
     });
-    builder.addCase(petsMy.fulfilled, (state, action) => {
+    builder.addCase(get.fulfilled, (state, action) => {
       state.myStatus = "success";
       state.myError = null;
-      state.data = action.payload;
+      state.data = action.payload.results;
     });
-    builder.addCase(petsMy.rejected, (state, action) => {
+    builder.addCase(get.rejected, (state, action) => {
       state.myStatus = "error";
       state.myError = action.error.message || null;
       state.data = null;
@@ -192,7 +193,7 @@ export const selectPetsMy = ({ pets }: AppState) => pets.data;
 export const selectPets =
   (id: string) =>
   ({ pets }: AppState) =>
-    pets.data?.results.find((pet) => pet.id === id);
+    pets.data?.find((pet) => pet.id === id);
 export const selectPetsAddStatus = ({ pets }: AppState) => pets.addStatus;
 export const selectPetsAddError = ({ pets }: AppState) => pets.addError;
 export const selectPetsEditStatus = ({ pets }: AppState) => pets.editStatus;
@@ -206,7 +207,7 @@ export const selectPetsAvatarData = ({ pets }: AppState) => pets.avatarData;
 
 export const petsActions = {
   ...petsSlice.actions,
-  petsMy,
+  get,
   add,
   edit,
   remove,

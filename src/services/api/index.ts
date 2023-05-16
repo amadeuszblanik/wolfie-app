@@ -13,7 +13,6 @@ import { AuthSignUpPayload } from "./types/auth/sign-up/payload.type";
 import { AuthSignUpResponse } from "./types/auth/sign-up/response.type";
 import { AuthProfileGetResponse } from "./types/auth/profile/get/response.type";
 import { ConfigResponse } from "./types/config/response.type";
-import { PetsMyResponse } from "./types/pets/my/response.type";
 import { PetsPetIdWeightGetResponse } from "./types/pets/:petId/weight/get/response.type";
 import { PetsPetIdHealthLogGetResponse } from "./types/pets/:petId/health-log/get/response.type";
 import { AuthProfilePutResponse } from "./types/auth/profile/put/response.type";
@@ -54,6 +53,8 @@ import { PetsPetIdAvatarPostPayload } from "./types/pets/:petId/avatar/payload.t
 import { PetsPetIdAvatarPostResponse } from "./types/pets/:petId/avatar/response.type";
 import { AuthTestNotificationResponse } from "./types/auth/test-notification/response.type";
 import { CalendarResponse } from "./types/calendar/response.type";
+import { PetApi } from "./types/pet.type";
+import { ResultsListApi } from "./types/results-list.type";
 import { apiUrl } from "../../utils";
 
 export default class ApiService extends ApiBase {
@@ -87,6 +88,7 @@ export default class ApiService extends ApiBase {
   };
 
   pets = {
+    get: async () => await this.get<ResultsListApi<PetApi>>(ApiPetsEndpoint.Pets),
     patch: async (petId: string, payload: PetsPetIdPutPayload) =>
       await this.patch<PetsPetIdPutResponse>(apiUrl(ApiPetsEndpoint.PetsById, { petId }), payload),
     delete: async (petId: string) => await this.delete<ApiMessage>(apiUrl(ApiPetsEndpoint.PetsById, { petId })),
@@ -143,8 +145,6 @@ export default class ApiService extends ApiBase {
 
   authDeactivateAccount = async (payload: AuthDeactivateAccountPayload) =>
     await this.delete<AuthDeactivateAccountResponse>(ApiAuthEndpoint.DeactivateAccount, payload);
-
-  petsMy = async () => await this.get<PetsMyResponse>(ApiPetsEndpoint.Pets);
 
   config = async () => await this.get<ConfigResponse>(ApiConfigEndpoint.Config);
 

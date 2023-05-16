@@ -3,7 +3,7 @@ import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { LayoutApp } from "../../src/layouts";
 import { getSession } from "../../lib/get-session";
 import getAuth from "../../lib/get-auth";
-import { ScenePetsMy } from "../../src/scene";
+import { ScenePetsList } from "../../src/scene";
 
 export const getServerSideProps: GetServerSideProps<{ isSignedId: boolean }> = async (context) => {
   const session = await getSession(context.req, context.res);
@@ -40,7 +40,7 @@ export default function Page(_: InferGetServerSidePropsType<typeof getServerSide
 
   return (
     <LayoutApp title={intl.formatMessage({ id: "page.app.title" })}>
-      <ScenePetsMy />
+      <ScenePetsList />
     </LayoutApp>
   );
 }

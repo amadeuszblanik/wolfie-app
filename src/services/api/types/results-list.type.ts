@@ -1,4 +1,4 @@
-export interface ResultsList<T> {
+export interface ResultsListApi<T> {
   count: number;
   page: {
     current: number;

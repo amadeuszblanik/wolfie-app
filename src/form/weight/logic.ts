@@ -76,11 +76,11 @@ const useLogic = () => {
 
   useEffect(() => {
     if (storeDataById) {
-      setValue("weight", storeDataById.raw);
+      setValue("weight", storeDataById.weight.value);
       setValue("date", toInputDate(storeDataById.date));
       setValue("time", toInputTime(storeDataById.date));
     } else {
-      setValue("weight", storeDataLast?.raw || DEFAULT_WEIGHT);
+      setValue("weight", storeDataLast?.weight.value || DEFAULT_WEIGHT);
       setValue("date", toInputDate());
       setValue("time", toInputTime());
     }

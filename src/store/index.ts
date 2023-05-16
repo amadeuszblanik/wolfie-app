@@ -3,7 +3,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { authSlice } from "./auth.slice";
 import { signUpSlice } from "./sign-up.slice";
 import { profileSlice } from "./profile.slice";
-import { configSlice } from "./config.slice";
+import { limitSlice } from "./limit.slice";
 import { petsSlice } from "./pets.slice";
 import { petsWeightsSlice } from "./petsWeight.slice";
 import { petsHealthLogSlice } from "./petsHealthLog.slice";
@@ -21,7 +21,7 @@ const makeStore = () =>
       [authSlice.name]: authSlice.reducer,
       [breedsSlice.name]: breedsSlice.reducer,
       [calendarSlice.name]: calendarSlice.reducer,
-      [configSlice.name]: configSlice.reducer,
+      [limitSlice.name]: limitSlice.reducer,
       [confirmEmailSlice.name]: confirmEmailSlice.reducer,
       [medicinesSlice.name]: medicinesSlice.reducer,
       [petsSlice.name]: petsSlice.reducer,

@@ -23,7 +23,10 @@
   "layout.app.menu.pets": "Pets",
   "layout.app.menu.calendar": "Calendar",
   "layout.app.menu.pet_add": "Add Pet",
-  "layout.app.profile.usage": "Pets: {petsCount} / {petsLimit}",
+  "layout.app.profile.usage.pets": "Pets: {petsCount} / {petsLimit}",
+  "layout.app.profile.usage.health_logs": "Health logs: {petsCount} / {petsLimit}",
+  "layout.app.profile.usage.weights": "Weights: {petsCount} / {petsLimit}",
+  "layout.app.profile.usage.vets": "Vets: {petsCount} / {petsLimit}",
   "layout.app.profile.settings": "Settings",
   "layout.app.profile.profile": "Profile",
   "layout.app.profile.sign_off": "Sign off",
@@ -56,7 +59,7 @@
   "component.footer.cookie_info": "This website uses cookies to ensure you get the best experience on our website.",
   "component.pet_card.age": "Age",
   "component.pet_card.birth_date": "Birth date",
-  "component.pet_card.microchip": "Weight",
+  "component.pet_card.microchip": "Microchip",
   "component.pet_card.breed": "Breed",
   "component.error_message.title": "Something went wrong",
   "component.error_message.try_again": "Try again",
@@ -228,5 +231,8 @@
   "weight.filters.6m": "6M",
   "weight.filters.m": "M",
   "weight.filters.w": "W",
-  "calendar.types.healthLog": "Health log"
+  "calendar.types.healthLog": "Health log",
+  "pet_sex.FEMALE": "Female",
+  "pet_sex.MALE": "Male",
+  "common.form.sex.label": "Sex"
 }

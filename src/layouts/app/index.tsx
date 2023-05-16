@@ -5,7 +5,7 @@ import { useIntl } from "react-intl";
 import { Container } from "../../atoms";
 import { Footer, SideBar } from "../../components";
 import { useAppSelector } from "../../hooks";
-import { selectConfigData } from "../../store/config.slice";
+import { selectLimitData } from "../../store/limit.slice";
 
 interface LayoutAppProps {
   title: string;
@@ -23,7 +23,7 @@ const StyledMain = styled.main`
 
 const Layout: React.FC<LayoutAppProps> = ({ title, children }) => {
   const intl = useIntl();
-  const storeConfigData = useAppSelector(selectConfigData);
+  const storeLimitData = useAppSelector(selectLimitData);
 
   return (
     <>
@@ -36,7 +36,7 @@ const Layout: React.FC<LayoutAppProps> = ({ title, children }) => {
 
       <SideBar title={title}>
         <SideBar.Item icon="paw-outline" label={intl.formatMessage({ id: "layout.app.menu.pets" })} href="/app" />
-        {storeConfigData?.canAddNewPet && (
+        {storeLimitData?.pets.canAdd && (
           <SideBar.Item
             icon="paw-outline"
             label={intl.formatMessage({ id: "layout.app.menu.pet_add" })}

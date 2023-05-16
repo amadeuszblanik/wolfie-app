@@ -1,29 +1,30 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import { ApiStatus } from "../services/api/types/status.type";
-import { ApiMessage } from "../services/api/types/generic-message.type";
+import { GenericMessageApi } from "../services/api/types/generic-message.type";
 import { ApiService } from "../services";
-import { ConfigResponse } from "../services/api/types/config/response.type";
+import { AuthLimitApi } from "../services/api/types/auth-limit.type";
 
-const get = createAsyncThunk<ConfigResponse, undefined, { extra: { apiService: ApiService }; rejectValue: ApiMessage }>(
-  "config/get",
-  async (_, thunkAPI) => await thunkAPI.extra.apiService.config(),
-);
+const get = createAsyncThunk<
+  AuthLimitApi,
+  undefined,
+  { extra: { apiService: ApiService }; rejectValue: GenericMessageApi }
+>("limit/get", async (_, thunkAPI) => await thunkAPI.extra.apiService.authLimit.get());
 
-export interface ConfigStore {
+export interface LimitStore {
   status: ApiStatus;
   error: string | null;
-  data: ConfigResponse | null;
+  data: AuthLimitApi | null;
 }
 
-const initialState: ConfigStore = {
+const initialState: LimitStore = {
   status: "idle",
   error: null,
   data: null,
 };
 
-export const configSlice = createSlice({
-  name: "config",
+export const limitSlice = createSlice({
+  name: "limit",
 
   initialState,
 
@@ -54,11 +55,11 @@ export const configSlice = createSlice({
   },
 });
 
-export const selectConfigStatus = (state: { config: ConfigStore }) => state.config.status;
-export const selectConfigError = (state: { config: ConfigStore }) => state.config.error;
-export const selectConfigData = (state: { config: ConfigStore }) => state.config.data;
+export const selectLimitStatus = (state: { limit: LimitStore }) => state.limit.status;
+export const selectLimitError = (state: { limit: LimitStore }) => state.limit.error;
+export const selectLimitData = (state: { limit: LimitStore }) => state.limit.data;
 
-export const configActions = {
-  ...configSlice.actions,
+export const limitActions = {
+  ...limitSlice.actions,
   get,
 };

@@ -49,6 +49,7 @@ import { ResultsListApi } from "./types/results-list.type";
 import { PetCreatePayloadApi } from "./types/pet-create-payload.type";
 import { WeightApi } from "./types/weight.type";
 import { WeightCreatePayloadApi } from "./types/weight-create-payload.type";
+import { AuthLimitApi } from "./types/auth-limit.type";
 import { apiUrl } from "../../utils";
 
 export default class ApiService extends ApiBase {
@@ -56,6 +57,10 @@ export default class ApiService extends ApiBase {
     get: async () => await this.get<AuthProfileGetResponse>(ApiAuthEndpoint.Profile),
     put: async (payload: AuthProfilePutPayload) =>
       await this.put<AuthProfilePutResponse>(ApiAuthEndpoint.Profile, payload),
+  };
+
+  authLimit = {
+    get: async () => await this.get<AuthLimitApi>(ApiAuthEndpoint.Limit),
   };
 
   authRefreshToken = {

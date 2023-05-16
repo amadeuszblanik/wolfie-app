@@ -7,6 +7,7 @@ export enum ApiAuthEndpoint {
   FcmToken = "/auth/fcm-token",
   TestNotification = "/auth/test-notification",
   Profile = "/auth/profile",
+  Limit = "/auth/limit",
   DeactivateAccount = "/auth/deactivate-account",
   DeleteAccount = "/auth/delete-account",
   ChangePassword = "/auth/change-password",

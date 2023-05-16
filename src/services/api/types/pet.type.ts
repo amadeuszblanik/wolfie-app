@@ -1,6 +1,7 @@
 import { BreedApi } from "./breed.type";
 import { PetSex } from "./pet-sex.type";
 import { PetKind } from "./pet-kind.type";
+import { WeightApi } from "./weight.type";
 
 export interface PetApi {
   id: string;
@@ -13,4 +14,6 @@ export interface PetApi {
   microchip: string | null;
   neutered: boolean | null;
   instagram: string | null;
+  currentWeight: WeightApi | null;
+  healthLog: number;
 }

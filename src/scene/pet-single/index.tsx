@@ -42,7 +42,7 @@ const Scene = () => {
   // @TODO: Check this code when I will be rested
   const handleUpdatePets = useCallback(() => {
     if (!storePetsSingle) {
-      dispatch(petsActions.petsMy());
+      dispatch(petsActions.get());
     }
   }, [dispatch, storePetsSingle]);
 
@@ -67,7 +67,7 @@ const Scene = () => {
         <BigFancyBox
           icon="barbell-outline"
           title="Weight"
-          value={storePetsSingle?.currentWeight?.formatted ?? "—"}
+          value={storePetsSingle?.currentWeight?.weight.formatted ?? "—"}
           variant="blue"
         />
       </Link>

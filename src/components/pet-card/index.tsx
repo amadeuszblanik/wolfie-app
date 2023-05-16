@@ -94,7 +94,7 @@ const Component: React.FC<PetCardProps> = ({ id, name, image, birthDate, microch
         <FormattedMessage id="component.pet_card.microchip" />: {microchip}
       </BmeText>
       <BmeText>
-        <FormattedMessage id="component.pet_card.breed" />: <FormattedMessage id={breed?.name || "breed.mixed"} />
+        <FormattedMessage id="component.pet_card.breed" />: {breed?.name ?? <FormattedMessage id="breed.mixed" />}
       </BmeText>
     </BmeBox>
   );

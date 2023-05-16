@@ -57,7 +57,7 @@ const useLogic = () => {
 
   const handleUpdatePets = useCallback(() => {
     if (!storePetsSingle) {
-      dispatch(petsActions.petsMy());
+      dispatch(petsActions.get());
     }
   }, [storePetsSingle]);
 

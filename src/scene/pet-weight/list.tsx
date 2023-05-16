@@ -3,7 +3,6 @@ import { BmeList, BmeText } from "bme-ui";
 import { useRouter } from "next/router";
 import { useIntl } from "react-intl";
 import { pipeDate } from "../../pipes";
-import { PetsPetIdWeightGetResponse } from "../../services/api/types/pets/:petId/weight/get/response.type";
 import { RemoveEntryModal } from "../../components";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import {
@@ -12,10 +11,11 @@ import {
   selectPetsWeightDeleteError,
   selectPetsWeightDeleteStatus,
 } from "../../store/petsWeight.slice";
+import { WeightApi } from "../../services/api/types/weight.type";
 
 interface ListProps {
   weightUnit?: string;
-  entries: PetsPetIdWeightGetResponse | null;
+  entries: WeightApi[] | null;
 }
 
 const List: React.FC<ListProps> = ({ weightUnit, entries }) => {
@@ -59,7 +59,7 @@ const List: React.FC<ListProps> = ({ weightUnit, entries }) => {
               },
             ]}
           >
-            <BmeText>{item.formatted}</BmeText>
+            <BmeText>{item.weight.value}</BmeText>
             <BmeText>{pipeDate(item.date)}</BmeText>
           </BmeList.Item>
         ))}

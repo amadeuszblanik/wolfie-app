@@ -1,11 +1,11 @@
 import React from "react";
 import { BmeLineChart } from "bme-ui";
-import { PetsPetIdWeightGetResponse } from "../../services/api/types/pets/:petId/weight/get/response.type";
+import { WeightApi } from "../../services/api/types/weight.type";
 
 const ENTRIES_TO_DISPLAY_CHART = 3;
 
 interface ChartProps {
-  entries: PetsPetIdWeightGetResponse | null;
+  entries: WeightApi[] | null;
   width?: number;
 }
 
@@ -17,8 +17,8 @@ const Chart: React.FC<ChartProps> = ({ entries, width }) => {
   return (
     <BmeLineChart
       width={width}
-      data={entries.map(({ raw, date }) => ({
-        y: raw,
+      data={entries.map(({ weight: { value }, date }) => ({
+        y: value,
         x: new Date(date),
       }))}
     />

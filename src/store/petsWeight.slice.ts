@@ -2,34 +2,32 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import { lastElement } from "bme-utils";
 import { ApiStatus } from "../services/api/types/status.type";
-import { ApiMessage } from "../services/api/types/generic-message.type";
+import { GenericMessageApi } from "../services/api/types/generic-message.type";
 import { ApiService } from "../services";
-import { PetsPetIdWeightGetResponse } from "../services/api/types/pets/:petId/weight/get/response.type";
-import { PetsPetIdWeightPostResponse } from "../services/api/types/pets/:petId/weight/post/response.type";
-import { PetsPetIdWeightPostPayload } from "../services/api/types/pets/:petId/weight/post/payload.type";
-import { PetsPetIdWeightPatchResponse } from "../services/api/types/pets/:petId/weight/patch/response.type";
-import { PetsPetIdWeightPatchPayload } from "../services/api/types/pets/:petId/weight/patch/payload.type";
+import { WeightCreatePayloadApi } from "../services/api/types/weight-create-payload.type";
+import { ResultsListApi } from "../services/api/types/results-list.type";
+import { WeightApi } from "../services/api/types/weight.type";
 import { AppState } from "./index";
 
 const get = createAsyncThunk<
-  PetsPetIdWeightGetResponse,
+  ResultsListApi<WeightApi>,
   { petId: string },
-  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
+  { extra: { apiService: ApiService }; rejectValue: GenericMessageApi }
 >("petsWeight/get", async ({ petId }, thunkAPI) => await thunkAPI.extra.apiService.petsWeight.get(petId));
 
 const post = createAsyncThunk<
-  PetsPetIdWeightPostResponse,
-  { petId: string; payload: PetsPetIdWeightPostPayload },
-  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
+  GenericMessageApi,
+  { petId: string; payload: WeightCreatePayloadApi },
+  { extra: { apiService: ApiService }; rejectValue: GenericMessageApi }
 >(
   "petsWeight/post",
   async ({ petId, payload }, thunkAPI) => await thunkAPI.extra.apiService.petsWeight.post(petId, payload),
 );
 
 const patch = createAsyncThunk<
-  PetsPetIdWeightPatchResponse,
-  { petId: string; weightId: string; payload: PetsPetIdWeightPatchPayload },
-  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
+  GenericMessageApi,
+  { petId: string; weightId: string; payload: WeightCreatePayloadApi },
+  { extra: { apiService: ApiService }; rejectValue: GenericMessageApi }
 >(
   "petsWeight/patch",
   async ({ petId, weightId, payload }, thunkAPI) =>
@@ -37,9 +35,9 @@ const patch = createAsyncThunk<
 );
 
 const remove = createAsyncThunk<
-  ApiMessage,
+  GenericMessageApi,
   { petId: string; weightId: string },
-  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
+  { extra: { apiService: ApiService }; rejectValue: GenericMessageApi }
 >(
   "petsWeight/delete",
   async ({ petId, weightId }, thunkAPI) => await thunkAPI.extra.apiService.petsWeight.delete(petId, weightId),
@@ -48,13 +46,13 @@ const remove = createAsyncThunk<
 export interface PetsWeightStore {
   getStatus: ApiStatus;
   getError: string | null;
-  getData: PetsPetIdWeightGetResponse | null;
+  getData: WeightApi[] | null;
   postStatus: ApiStatus;
   postError: string | null;
-  postData: PetsPetIdWeightPostResponse | null;
+  postData: GenericMessageApi | null;
   patchStatus: ApiStatus;
   patchError: string | null;
-  patchData: PetsPetIdWeightPatchResponse | null;
+  patchData: GenericMessageApi | null;
   deleteStatus: ApiStatus;
   deleteError: string | null;
   deleteData: string | null;
@@ -113,7 +111,7 @@ export const petsWeightsSlice = createSlice({
     builder.addCase(get.fulfilled, (state, action) => {
       state.getStatus = "success";
       state.getError = null;
-      state.getData = action.payload;
+      state.getData = action.payload.results;
     });
     builder.addCase(get.rejected, (state, action) => {
       state.getStatus = "error";

@@ -13,7 +13,6 @@ import { AuthSignUpPayload } from "./types/auth/sign-up/payload.type";
 import { AuthSignUpResponse } from "./types/auth/sign-up/response.type";
 import { AuthProfileGetResponse } from "./types/auth/profile/get/response.type";
 import { ConfigResponse } from "./types/config/response.type";
-import { PetsPetIdWeightGetResponse } from "./types/pets/:petId/weight/get/response.type";
 import { PetsPetIdHealthLogGetResponse } from "./types/pets/:petId/health-log/get/response.type";
 import { AuthProfilePutResponse } from "./types/auth/profile/put/response.type";
 import { AuthProfilePutPayload } from "./types/auth/profile/put/payload.type";
@@ -33,10 +32,6 @@ import { AuthResetPasswordPutPayload } from "./types/auth/reset-password/put/pay
 import { AuthResetPasswordPutResponse } from "./types/auth/reset-password/put/response.type";
 import { AuthResetPasswordGetPayload } from "./types/auth/reset-password/get/response.type";
 import { BreedResponse } from "./types/breed/response.type";
-import { PetsPetIdWeightPostPayload } from "./types/pets/:petId/weight/post/payload.type";
-import { PetsPetIdWeightPostResponse } from "./types/pets/:petId/weight/post/response.type";
-import { PetsPetIdWeightPatchResponse } from "./types/pets/:petId/weight/patch/response.type";
-import { PetsPetIdWeightPatchPayload } from "./types/pets/:petId/weight/patch/payload.type";
 import { PetsPetIdHealthLogPostResponse } from "./types/pets/:petId/health-log/post/response.type";
 import { PetsPetIdHealthLogPatchResponse } from "./types/pets/:petId/health-log/patch/response.type";
 import { PetsPetIdHealthLogPostPayload } from "./types/pets/:petId/health-log/post/payload.type";
@@ -52,6 +47,8 @@ import { CalendarResponse } from "./types/calendar/response.type";
 import { PetApi } from "./types/pet.type";
 import { ResultsListApi } from "./types/results-list.type";
 import { PetCreatePayloadApi } from "./types/pet-create-payload.type";
+import { WeightApi } from "./types/weight.type";
+import { WeightCreatePayloadApi } from "./types/weight-create-payload.type";
 import { apiUrl } from "../../utils";
 
 export default class ApiService extends ApiBase {
@@ -92,14 +89,11 @@ export default class ApiService extends ApiBase {
 
   petsWeight = {
     get: async (petId: string) =>
-      await this.get<PetsPetIdWeightGetResponse>(apiUrl(ApiPetsEndpoint.PetsWeight, { petId })),
-    post: async (petId: string, payload: PetsPetIdWeightPostPayload) =>
-      await this.post<PetsPetIdWeightPostResponse>(apiUrl(ApiPetsEndpoint.PetsWeight, { petId }), payload),
-    patch: async (petId: string, weightId: string, payload: PetsPetIdWeightPatchPayload) =>
-      await this.patch<PetsPetIdWeightPatchResponse>(
-        apiUrl(ApiPetsEndpoint.PetsWeightSingle, { petId, weightId }),
-        payload,
-      ),
+      await this.get<ResultsListApi<WeightApi>>(apiUrl(ApiPetsEndpoint.PetsWeight, { petId })),
+    post: async (petId: string, payload: WeightCreatePayloadApi) =>
+      await this.post<GenericMessageApi>(apiUrl(ApiPetsEndpoint.PetsWeight, { petId }), payload),
+    patch: async (petId: string, weightId: string, payload: WeightCreatePayloadApi) =>
+      await this.patch<GenericMessageApi>(apiUrl(ApiPetsEndpoint.PetsWeightSingle, { petId, weightId }), payload),
     delete: async (petId: string, weightId: string) =>
       await this.delete<GenericMessageApi>(apiUrl(ApiPetsEndpoint.PetsWeightSingle, { petId, weightId })),
   };

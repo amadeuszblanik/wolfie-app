@@ -1,111 +1,70 @@
 import React, { useEffect, useState } from "react";
 import { BmeBox, BmeFormController, BmeInput, BmeList, BmeText } from "bme-ui";
 import { useIntl } from "react-intl";
-import { compareObjects, isEmpty } from "bme-utils";
+import { isEmpty } from "bme-utils";
 import { StyledDrawer, StyledDrawerContent, StyledDrawerItem } from "./styled";
 import { useAppDispatch, useAppSelector, useClickOutside } from "../../hooks";
-import { medicinesActions, selectMedicinesDataAsList } from "../../store/medicines.slice";
-
-interface MedicineSelectorValue {
-  medicines: string[];
-  additionalMedicines: string[];
-}
+import { medicinesActions, selectMedicinesData } from "../../store/medicines.slice";
 
 interface MedicinesSelectorProps {
-  value: MedicineSelectorValue;
-  onChange: (value: MedicineSelectorValue) => void;
+  value: string[] | null;
+  onChange: (value: string[]) => void;
   errorMessage?: Record<string, any>;
 }
-
-const INDEX_EMPTY = -1;
-const VALUE_TO_DELETE = 1;
 
 const Component: React.FC<MedicinesSelectorProps> = ({ value, onChange, errorMessage }) => {
   const intl = useIntl();
   const dispatch = useAppDispatch();
 
-  const storeMedicinesDataAsList = useAppSelector(selectMedicinesDataAsList);
+  const storeMedicinesData = useAppSelector(selectMedicinesData);
 
-  const [valueToAdd, setValueToAdd] = useState<string>("");
-  const [medicines, setMedicines] = useState<string[]>(value.medicines ?? []);
-  const [additionalMedicines, setAdditionalMedicines] = useState<string[]>(value.additionalMedicines ?? []);
+  const [valueToAdd, setValueToAdd] = useState("");
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
-  useEffect(() => {
-    if (!compareObjects(value, { medicines, additionalMedicines })) {
-      setMedicines(value.medicines ?? []);
-      setAdditionalMedicines(value.additionalMedicines ?? []);
-    }
-  }, [value]);
+  const medicineListSelected = (value || []).map((name) => {
+    const medicine = storeMedicinesData?.find(({ productNumber }) => productNumber === name);
 
-  const selectedMedicines = [
-    ...medicines.map((medicine) => {
-      const result = storeMedicinesDataAsList.find((item) => item.key === medicine);
+    return (
+      medicine || {
+        name,
+        productNumber: null,
+      }
+    );
+  });
 
-      return result ? { key: result.key, label: result.label, type: "medicine" } : null;
-    }),
-    ...additionalMedicines.map((medicine) => ({ key: medicine, label: medicine, type: "additional" })),
-  ].filter(Boolean) as unknown as { key: string; label: string; type: "medicine" | "additional" }[];
-
-  const filteredMedicinesList = storeMedicinesDataAsList.filter((medicine) =>
-    medicine.label.toLowerCase().includes(valueToAdd.toLowerCase()),
-  );
+  const medicineListFiltered =
+    storeMedicinesData?.filter(
+      ({ name, productNumber }) =>
+        name.toLowerCase().includes(valueToAdd.toLowerCase()) ||
+        productNumber.toLowerCase().includes(valueToAdd.toLowerCase()),
+    ) || [];
 
   const ref = useClickOutside<HTMLDivElement>(() => {
     setIsDrawerOpen(false);
   });
 
-  useEffect(() => {
-    dispatch(medicinesActions.get());
-  }, []);
-
   const openDrawer = () => {
     setIsDrawerOpen(true);
   };
 
-  const handleChangeMedicines = (changeValue: string | number) => {
-    const nextValue = [...medicines];
-    const valuesToSwitch = changeValue.toString().split(",");
-
-    valuesToSwitch.forEach((valueToSwitch) => {
-      const index = nextValue.indexOf(valueToSwitch);
-
-      if (index > INDEX_EMPTY) {
-        nextValue.splice(index, VALUE_TO_DELETE);
-      } else {
-        nextValue.push(valueToSwitch);
-      }
-    });
-
-    setMedicines(nextValue);
+  const addValue = (event: string) => {
+    onChange([...(value || []), event]);
+    setValueToAdd("");
   };
 
-  useEffect(() => {
-    onChange({ medicines, additionalMedicines });
-  }, [medicines, additionalMedicines]);
-
-  const handleValueToAddChange = (event: string) => {
-    setValueToAdd(event);
+  const deleteValue = (event: string) => {
+    onChange((value || []).filter((entry) => entry !== event));
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      event.preventDefault();
-      setAdditionalMedicines([...additionalMedicines, ...valueToAdd.split(",").filter((key) => !isEmpty(key))]);
-      setValueToAdd("");
+      addValue(valueToAdd);
     }
   };
 
-  const handleDeleteMedicine = (type: "medicine" | "additional", medicine: string) => {
-    switch (type) {
-      case "medicine":
-        setMedicines(medicines.filter((item) => item !== medicine));
-        break;
-      case "additional":
-        setAdditionalMedicines(additionalMedicines.filter((item) => item !== medicine));
-        break;
-    }
-  };
+  useEffect(() => {
+    dispatch(medicinesActions.get());
+  }, []);
 
   return (
     <BmeBox innerRef={ref} position="relative" direction="column" width="100%" height="100%">
@@ -125,22 +84,17 @@ const Component: React.FC<MedicinesSelectorProps> = ({ value, onChange, errorMes
         hint={intl.formatMessage({ id: "common.form.medicines.hint" })}
       >
         <BmeBox position="relative" width="100%">
-          <BmeInput
-            value={valueToAdd}
-            onChange={handleValueToAddChange}
-            onFocus={openDrawer}
-            onKeyDown={handleKeyDown}
-          />
+          <BmeInput value={valueToAdd} onChange={setValueToAdd} onFocus={openDrawer} onKeyDown={handleKeyDown} />
           {isDrawerOpen && (
             <StyledDrawer>
               <StyledDrawerContent>
-                {filteredMedicinesList.map((medicine) => (
+                {medicineListFiltered.map((medicine) => (
                   <StyledDrawerItem
-                    key={medicine.key}
-                    onClick={() => handleChangeMedicines(medicine.key)}
+                    key={medicine.productNumber}
+                    onClick={() => addValue(medicine.productNumber)}
                     type="button"
                   >
-                    {medicine.label}
+                    {medicine.name}
                   </StyledDrawerItem>
                 ))}
               </StyledDrawerContent>
@@ -148,22 +102,22 @@ const Component: React.FC<MedicinesSelectorProps> = ({ value, onChange, errorMes
           )}
         </BmeBox>
       </BmeFormController>
-      {!isEmpty(selectedMedicines) && (
+      {!isEmpty(medicineListSelected) && (
         <BmeBox wrap width="100%">
           <BmeList label={intl.formatMessage({ id: "common.form.medicines.selected_medicines.label" })}>
-            {selectedMedicines.map((medicine, index) => (
+            {medicineListSelected.map((medicine, index) => (
               <BmeList.Item
                 key={index}
                 actions={[
                   {
-                    onClick: () => handleDeleteMedicine(medicine.type, medicine.key),
+                    onClick: () => deleteValue(medicine.productNumber || medicine.name),
                     children: intl.formatMessage({ id: "common.delete" }),
                     variant: "red",
                   },
                 ]}
               >
-                <BmeText>{medicine.label}</BmeText>
-                {medicine.type === "medicine" && <BmeText>{medicine.key}</BmeText>}
+                <BmeText>{medicine.name}</BmeText>
+                {medicine.productNumber && <BmeText>{medicine.productNumber}</BmeText>}
               </BmeList.Item>
             ))}
           </BmeList>

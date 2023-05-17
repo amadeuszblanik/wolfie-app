@@ -1,34 +1,32 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import { ApiStatus } from "../services/api/types/status.type";
-import { ApiMessage } from "../services/api/types/generic-message.type";
+import { GenericMessageApi } from "../services/api/types/generic-message.type";
 import { ApiService } from "../services";
-import { PetsPetIdHealthLogGetResponse } from "../services/api/types/pets/:petId/health-log/get/response.type";
-import { PetsPetIdHealthLogPostPayload } from "../services/api/types/pets/:petId/health-log/post/payload.type";
-import { PetsPetIdHealthLogPostResponse } from "../services/api/types/pets/:petId/health-log/post/response.type";
-import { PetsPetIdHealthLogPatchResponse } from "../services/api/types/pets/:petId/health-log/patch/response.type";
-import { PetsPetIdHealthLogPatchPayload } from "../services/api/types/pets/:petId/health-log/patch/payload.type";
+import { ResultsListApi } from "../services/api/types/results-list.type";
+import { HealthLogApi } from "../services/api/types/health-log.type";
+import { HealthLogCreateApi } from "../services/api/types/health-log-create.type";
 import { AppState } from "./index";
 
 const get = createAsyncThunk<
-  PetsPetIdHealthLogGetResponse,
+  ResultsListApi<HealthLogApi>,
   { petId: string },
-  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
+  { extra: { apiService: ApiService }; rejectValue: GenericMessageApi }
 >("petsHealthLog/get", async ({ petId }, thunkAPI) => await thunkAPI.extra.apiService.petsHealthLog.get(petId));
 
 const post = createAsyncThunk<
-  PetsPetIdHealthLogPostResponse,
-  { petId: string; payload: PetsPetIdHealthLogPostPayload },
-  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
+  GenericMessageApi,
+  { petId: string; payload: HealthLogCreateApi },
+  { extra: { apiService: ApiService }; rejectValue: GenericMessageApi }
 >(
   "petsHealthLog/post",
   async ({ petId, payload }, thunkAPI) => await thunkAPI.extra.apiService.petsHealthLog.post(petId, payload),
 );
 
 const patch = createAsyncThunk<
-  PetsPetIdHealthLogPatchResponse,
-  { petId: string; healthLogId: string; payload: PetsPetIdHealthLogPatchPayload },
-  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
+  GenericMessageApi,
+  { petId: string; healthLogId: string; payload: HealthLogCreateApi },
+  { extra: { apiService: ApiService }; rejectValue: GenericMessageApi }
 >(
   "petsHealthLog/patch",
   async ({ petId, healthLogId, payload }, thunkAPI) =>
@@ -36,30 +34,30 @@ const patch = createAsyncThunk<
 );
 
 const remove = createAsyncThunk<
-  ApiMessage,
+  GenericMessageApi,
   { petId: string; healthLogId: string },
-  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
+  { extra: { apiService: ApiService }; rejectValue: GenericMessageApi }
 >(
   "petsHealthLog/delete",
   async ({ petId, healthLogId }, thunkAPI) => await thunkAPI.extra.apiService.petsHealthLog.delete(petId, healthLogId),
 );
 
-export interface PetsHealthLogtore {
+export interface PetsHealthLogStore {
   getStatus: ApiStatus;
   getError: string | null;
-  getData: PetsPetIdHealthLogGetResponse | null;
+  getData: HealthLogApi[] | null;
   postStatus: ApiStatus;
   postError: string | null;
-  postData: PetsPetIdHealthLogPostResponse | null;
+  postData: GenericMessageApi | null;
   patchStatus: ApiStatus;
   patchError: string | null;
-  patchData: PetsPetIdHealthLogPatchResponse | null;
+  patchData: GenericMessageApi | null;
   deleteStatus: ApiStatus;
   deleteError: string | null;
   deleteData: string | null;
 }
 
-const initialState: PetsHealthLogtore = {
+const initialState: PetsHealthLogStore = {
   getStatus: "idle",
   getError: null,
   getData: null,
@@ -112,7 +110,7 @@ export const petsHealthLogSlice = createSlice({
     builder.addCase(get.fulfilled, (state, action) => {
       state.getStatus = "success";
       state.getError = null;
-      state.getData = action.payload;
+      state.getData = action.payload.results;
     });
     builder.addCase(get.rejected, (state, action) => {
       state.getStatus = "error";

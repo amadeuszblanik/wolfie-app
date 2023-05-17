@@ -13,7 +13,6 @@ import { AuthSignUpPayload } from "./types/auth/sign-up/payload.type";
 import { AuthSignUpResponse } from "./types/auth/sign-up/response.type";
 import { AuthProfileGetResponse } from "./types/auth/profile/get/response.type";
 import { ConfigResponse } from "./types/config/response.type";
-import { PetsPetIdHealthLogGetResponse } from "./types/pets/:petId/health-log/get/response.type";
 import { AuthProfilePutResponse } from "./types/auth/profile/put/response.type";
 import { AuthProfilePutPayload } from "./types/auth/profile/put/payload.type";
 import { AuthChangePasswordPayload } from "./types/auth/change-password/payload.type";
@@ -32,10 +31,6 @@ import { AuthResetPasswordPutPayload } from "./types/auth/reset-password/put/pay
 import { AuthResetPasswordPutResponse } from "./types/auth/reset-password/put/response.type";
 import { AuthResetPasswordGetPayload } from "./types/auth/reset-password/get/response.type";
 import { BreedResponse } from "./types/breed/response.type";
-import { PetsPetIdHealthLogPostResponse } from "./types/pets/:petId/health-log/post/response.type";
-import { PetsPetIdHealthLogPatchResponse } from "./types/pets/:petId/health-log/patch/response.type";
-import { PetsPetIdHealthLogPostPayload } from "./types/pets/:petId/health-log/post/payload.type";
-import { PetsPetIdHealthLogPatchPayload } from "./types/pets/:petId/health-log/patch/payload.type";
 import { MedicineShortResponse } from "./types/medicine/response.type";
 import { GenericMessageApi } from "./types/generic-message.type";
 import { AuthApplePayload } from "./types/auth/apple/payload.type";
@@ -50,6 +45,8 @@ import { WeightApi } from "./types/weight.type";
 import { WeightCreatePayloadApi } from "./types/weight-create-payload.type";
 import { AuthLimitApi } from "./types/auth-limit.type";
 import { CalendarDao } from "./types/calendar.type";
+import { HealthLogApi } from "./types/health-log.type";
+import { HealthLogCreateApi } from "./types/health-log-create.type";
 import { apiUrl } from "../../utils";
 
 export default class ApiService extends ApiBase {
@@ -105,14 +102,11 @@ export default class ApiService extends ApiBase {
 
   petsHealthLog = {
     get: async (petId: string) =>
-      await this.get<PetsPetIdHealthLogGetResponse>(apiUrl(ApiPetsEndpoint.PetsHealthLog, { petId })),
-    post: async (petId: string, payload: PetsPetIdHealthLogPostPayload) =>
-      await this.post<PetsPetIdHealthLogPostResponse>(apiUrl(ApiPetsEndpoint.PetsHealthLog, { petId }), payload),
-    patch: async (petId: string, healthLogId: string, payload: PetsPetIdHealthLogPatchPayload) =>
-      await this.patch<PetsPetIdHealthLogPatchResponse>(
-        apiUrl(ApiPetsEndpoint.PetsHealthLogSingle, { petId, healthLogId }),
-        payload,
-      ),
+      await this.get<ResultsListApi<HealthLogApi>>(apiUrl(ApiPetsEndpoint.PetsHealthLog, { petId })),
+    post: async (petId: string, payload: HealthLogCreateApi) =>
+      await this.post<GenericMessageApi>(apiUrl(ApiPetsEndpoint.PetsHealthLog, { petId }), payload),
+    patch: async (petId: string, healthLogId: string, payload: HealthLogCreateApi) =>
+      await this.patch<GenericMessageApi>(apiUrl(ApiPetsEndpoint.PetsHealthLogSingle, { petId, healthLogId }), payload),
     delete: async (petId: string, healthLogId: string) =>
       await this.delete<GenericMessageApi>(apiUrl(ApiPetsEndpoint.PetsHealthLogSingle, { petId, healthLogId })),
   };

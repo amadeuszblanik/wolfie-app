@@ -14,8 +14,8 @@ import {
   selectPetsHealthLogPostStatus,
   selectPetsHealthLogStatus,
 } from "../../store/petsHealthLog.slice";
-import { PetsPetIdHealthLogPostPayload } from "../../services/api/types/pets/:petId/health-log/post/payload.type";
 import { selectPetsWeightError } from "../../store/petsWeight.slice";
+import { HealthLogCreateApi } from "../../services/api/types/health-log-create.type";
 
 const useLogic = () => {
   const router = useRouter();
@@ -67,28 +67,33 @@ const useLogic = () => {
 
   useEffect(() => {
     if (storeDataById) {
-      setValue("kind", storeDataById.kind);
+      setValue("name", storeDataById.name || undefined);
       setValue("date", storeDataById.date);
+      setValue("time", storeDataById.time);
+      setValue("kind", storeDataById.kind);
       setValue(
         "medicines",
-        storeDataById.medicines.map((medicine) => medicine.productNumber),
+        storeDataById.medicines.map((medicine) => medicine.productNumber || medicine.name),
       );
-      setValue("additionalMedicines", storeDataById.additionalMedicines || []);
       setValue("diagnosis", storeDataById.diagnosis || undefined);
-      setValue("veterinary", storeDataById.veterinary || undefined);
+      setValue("nextVisitDate", storeDataById.nextVisitDate || undefined);
+      setValue("nextVisitTime", storeDataById.nextVisitTime || undefined);
+      setValue("vet", storeDataById.vet?.id || undefined);
       setValue("description", storeDataById.description || undefined);
     }
   }, [storeDataById]);
 
   const submit = (formData: FormData) => {
-    const payload: PetsPetIdHealthLogPostPayload = {
-      kind: formData.kind,
+    const payload: HealthLogCreateApi = {
+      name: formData.name,
       date: formData.date,
+      time: formData.time,
+      kind: formData.kind,
       medicines: formData.medicines,
-      additionalMedicines: formData.additionalMedicines.join(","),
       diagnosis: formData.diagnosis,
-      nextVisit: formData.nextVisit ? new Date(formData.nextVisit) : undefined,
-      veterinary: formData.veterinary,
+      nextVisitDate: formData.nextVisitDate,
+      nextVisitTime: formData.nextVisitTime,
+      vet: formData.vet,
       description: formData.description,
     };
 

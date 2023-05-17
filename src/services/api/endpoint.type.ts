@@ -36,7 +36,7 @@ export enum ApiBreedEndpoint {
 }
 
 export enum ApiMedicineEndpoint {
-  Medicine = "/medicine",
+  Medicine = "/medicines",
 }
 
 export enum ApiCalendarEndpoint {

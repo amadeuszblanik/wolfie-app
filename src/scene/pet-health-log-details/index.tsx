@@ -12,7 +12,7 @@ import {
   selectPetsHealthLogError,
   selectPetsHealthLogStatus,
 } from "../../store/petsHealthLog.slice";
-import { pipeDate } from "../../pipes";
+import { pipeDate, pipeDateTime } from "../../pipes";
 import { Link } from "../../atoms";
 
 // @TODO Add 404 view
@@ -49,7 +49,7 @@ const Scene = () => {
 
   const handleUpdatePets = useCallback(() => {
     if (!storePetsSingle) {
-      dispatch(petsActions.petsMy());
+      dispatch(petsActions.get());
     }
   }, [dispatch, storePetsSingle]);
 
@@ -81,10 +81,7 @@ const Scene = () => {
     );
   }
 
-  const medicinesList = [
-    ...(storePetsHealthLogData?.medicines || []).map((medicine) => medicine.name),
-    ...(storePetsHealthLogData?.additionalMedicines || []),
-  ];
+  const medicinesList = storePetsHealthLogData?.medicines?.map((medicine) => medicine.name) || [];
 
   return (
     <StyledSceneWrapper>
@@ -95,6 +92,14 @@ const Scene = () => {
         </BmeButton>
       </Link>
       <BmeList>
+        {storePetsHealthLogData?.name && (
+          <BmeList.Item>
+            <BmeText>
+              <FormattedMessage id="scene.health_log_details.name" />
+            </BmeText>
+            <BmeText>{storePetsHealthLogData?.name}</BmeText>
+          </BmeList.Item>
+        )}
         <BmeList.Item>
           <BmeText>
             <FormattedMessage id="scene.health_log_details.kind" />
@@ -103,12 +108,12 @@ const Scene = () => {
             <FormattedMessage id={`common.health_log.kind.${storePetsHealthLogData?.kind.toLowerCase()}`} />
           </BmeText>
         </BmeList.Item>
-        {storePetsHealthLogData?.date && (
+        {storePetsHealthLogData?.dateTime && (
           <BmeList.Item>
             <BmeText>
               <FormattedMessage id="scene.health_log_details.date" />
             </BmeText>
-            <BmeText>{pipeDate(storePetsHealthLogData.date)}</BmeText>
+            <BmeText>{pipeDateTime(storePetsHealthLogData.dateTime)}</BmeText>
           </BmeList.Item>
         )}
         {medicinesList && (
@@ -119,14 +124,6 @@ const Scene = () => {
             <BmeText>{medicinesList.join(", ")}</BmeText>
           </BmeList.Item>
         )}
-        {storePetsHealthLogData?.veterinary && (
-          <BmeList.Item>
-            <BmeText>
-              <FormattedMessage id="scene.health_log_details.veterinary" />
-            </BmeText>
-            <BmeText>{storePetsHealthLogData.veterinary}</BmeText>
-          </BmeList.Item>
-        )}
         {storePetsHealthLogData?.diagnosis && (
           <BmeList.Item>
             <BmeText>
@@ -135,12 +132,20 @@ const Scene = () => {
             <BmeText>{storePetsHealthLogData.diagnosis}</BmeText>
           </BmeList.Item>
         )}
-        {storePetsHealthLogData?.nextVisit && (
+        {storePetsHealthLogData?.vet && (
+          <BmeList.Item>
+            <BmeText>
+              <FormattedMessage id="scene.health_log_details.veterinary" />
+            </BmeText>
+            <BmeText>{storePetsHealthLogData.vet.name}</BmeText>
+          </BmeList.Item>
+        )}
+        {storePetsHealthLogData?.nextVisitDateTime && (
           <BmeList.Item>
             <BmeText>
               <FormattedMessage id="scene.health_log_details.next_visit" />
             </BmeText>
-            <BmeText>{pipeDate(storePetsHealthLogData.nextVisit)}</BmeText>
+            <BmeText>{pipeDate(storePetsHealthLogData.nextVisitDateTime)}</BmeText>
           </BmeList.Item>
         )}
         {storePetsHealthLogData?.description && (
@@ -149,14 +154,6 @@ const Scene = () => {
               <FormattedMessage id="scene.health_log_details.description" />
             </BmeText>
             <BmeText>{storePetsHealthLogData.description}</BmeText>
-          </BmeList.Item>
-        )}
-        {storePetsHealthLogData?.addedBy && (
-          <BmeList.Item>
-            <BmeText>
-              <FormattedMessage id="scene.health_log_details.added_by" />
-            </BmeText>
-            <BmeText>{storePetsHealthLogData.addedBy.fullName}</BmeText>
           </BmeList.Item>
         )}
       </BmeList>

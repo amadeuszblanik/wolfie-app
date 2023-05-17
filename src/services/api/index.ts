@@ -43,13 +43,13 @@ import { AuthAppleResponse } from "./types/auth/apple/response.type";
 import { PetsPetIdAvatarPostPayload } from "./types/pets/:petId/avatar/payload.type";
 import { PetsPetIdAvatarPostResponse } from "./types/pets/:petId/avatar/response.type";
 import { AuthTestNotificationResponse } from "./types/auth/test-notification/response.type";
-import { CalendarResponse } from "./types/calendar/response.type";
 import { PetApi } from "./types/pet.type";
 import { ResultsListApi } from "./types/results-list.type";
 import { PetCreatePayloadApi } from "./types/pet-create-payload.type";
 import { WeightApi } from "./types/weight.type";
 import { WeightCreatePayloadApi } from "./types/weight-create-payload.type";
 import { AuthLimitApi } from "./types/auth-limit.type";
+import { CalendarDao } from "./types/calendar.type";
 import { apiUrl } from "../../utils";
 
 export default class ApiService extends ApiBase {
@@ -145,7 +145,7 @@ export default class ApiService extends ApiBase {
 
   medicine = async () => await this.get<MedicineShortResponse>(ApiMedicineEndpoint.Medicine);
 
-  calendar = async () => await this.get<CalendarResponse>(ApiCalendarEndpoint.Calendar);
+  calendar = async () => await this.get<ResultsListApi<CalendarDao>>(ApiCalendarEndpoint.Calendar);
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
   constructor() {

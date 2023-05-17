@@ -1,21 +1,22 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import { ApiStatus } from "../services/api/types/status.type";
-import { ApiMessage } from "../services/api/types/generic-message.type";
+import { GenericMessageApi } from "../services/api/types/generic-message.type";
 import { ApiService } from "../services";
-import { CalendarResponse } from "../services/api/types/calendar/response.type";
+import { CalendarDao } from "../services/api/types/calendar.type";
+import { ResultsListApi } from "../services/api/types/results-list.type";
 import { AppState } from "./index";
 
 const get = createAsyncThunk<
-  CalendarResponse,
+  ResultsListApi<CalendarDao>,
   undefined,
-  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
+  { extra: { apiService: ApiService }; rejectValue: GenericMessageApi }
 >("calendar/get", async (_, thunkAPI) => await thunkAPI.extra.apiService.calendar());
 
 export interface CalendarStore {
   status: ApiStatus;
   error: string | null;
-  data: CalendarResponse | null;
+  data: CalendarDao[] | null;
 }
 
 const initialState: CalendarStore = {
@@ -46,7 +47,7 @@ export const calendarSlice = createSlice({
     builder.addCase(get.fulfilled, (state, action) => {
       state.status = "success";
       state.error = null;
-      state.data = action.payload;
+      state.data = action.payload.results;
     });
     builder.addCase(get.rejected, (state, action) => {
       state.status = "error";

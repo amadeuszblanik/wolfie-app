@@ -1,19 +1,21 @@
 import React from "react";
 import { BmeBox, BmeText } from "bme-ui";
 import Item from "./item";
-import { CalendarEntry } from "../../services/api/types/calendar/response.type";
-import { DateType } from "../../types/date.ttype";
 import { uniqueArray } from "../../utils";
 import { pipeDate } from "../../pipes";
+import { CalendarDao } from "../../services/api/types/calendar.type";
 
 interface CalendarListProps {
-  items: CalendarEntry[];
+  items: CalendarDao[];
 }
 
 const Component: React.FC<CalendarListProps> = ({ items }) => {
   const itemsGroupedByDate: {
-    date: DateType;
-    events: CalendarEntry[];
+    date: {
+      year: number;
+      monthIndex: number;
+    };
+    events: CalendarDao[];
   }[] = [];
 
   const dates = uniqueArray(
@@ -23,7 +25,6 @@ const Component: React.FC<CalendarListProps> = ({ items }) => {
       return {
         year: dateStart.getFullYear(),
         monthIndex: dateStart.getMonth(),
-        day: dateStart.getDate(),
       };
     }),
   );
@@ -32,11 +33,7 @@ const Component: React.FC<CalendarListProps> = ({ items }) => {
     const eventsByDate = items.filter((item) => {
       const itemDate = new Date(item.date.start);
 
-      return (
-        itemDate.getFullYear() === date.year &&
-        itemDate.getMonth() === date.monthIndex &&
-        itemDate.getDate() === date.day
-      );
+      return itemDate.getFullYear() === date.year && itemDate.getMonth() === date.monthIndex;
     });
 
     itemsGroupedByDate.push({
@@ -49,9 +46,17 @@ const Component: React.FC<CalendarListProps> = ({ items }) => {
     <BmeBox direction="column" width="100%">
       {itemsGroupedByDate.map(({ date, events }, index) => (
         <BmeBox key={index} direction="column" width="100%">
-          <BmeBox alignX="center" width="100%" margin="no|no|xs" padding="xs" border="backgroundSecondary" rounded>
+          <BmeBox
+            alignX="center"
+            width="100%"
+            margin="no|no|xs"
+            padding="xs"
+            background="gray6"
+            border="backgroundSecondary"
+            rounded
+          >
             <BmeText variant="Headline" color="gray" align="center">
-              {pipeDate(new Date(date.year, date.monthIndex, date.day))}
+              {pipeDate(new Date(date.year, date.monthIndex), { month: "long", year: "numeric" })}
             </BmeText>
           </BmeBox>
           {events.map((event) => (

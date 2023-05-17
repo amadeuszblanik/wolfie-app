@@ -1,47 +1,45 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import { ApiStatus } from "../services/api/types/status.type";
-import { ApiMessage } from "../services/api/types/generic-message.type";
+import { GenericMessageApi } from "../services/api/types/generic-message.type";
 import { ApiService } from "../services";
-import { AuthProfileGetResponse } from "../services/api/types/auth/profile/get/response.type";
-import { AuthProfilePutResponse } from "../services/api/types/auth/profile/put/response.type";
-import { AuthProfilePutPayload } from "../services/api/types/auth/profile/put/payload.type";
 import { AuthChangePasswordResponse } from "../services/api/types/auth/change-password/response.type";
 import { AuthChangePasswordPayload } from "../services/api/types/auth/change-password/payload.type";
 import { AuthDeleteAccountResponse } from "../services/api/types/auth/delete-account/response.type";
 import { AuthDeleteAccountPayload } from "../services/api/types/auth/delete-account/payload.type";
 import { AuthDeactivateAccountResponse } from "../services/api/types/auth/deactivate-account/response.type";
 import { AuthDeactivateAccountPayload } from "../services/api/types/auth/deactivate-account/payload.type";
+import { ProfileUpdateApi } from "../services/api/types/profile-update.type";
+import { UserApi } from "../services/api/user.type";
 import { AppState } from "./index";
 
-const get = createAsyncThunk<
-  AuthProfileGetResponse,
-  undefined,
-  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
->("profile/get", async (_, thunkAPI) => await thunkAPI.extra.apiService.authProfile.get());
+const get = createAsyncThunk<UserApi, undefined, { extra: { apiService: ApiService }; rejectValue: GenericMessageApi }>(
+  "profile/get",
+  async (_, thunkAPI) => await thunkAPI.extra.apiService.authProfile.get(),
+);
 
 const put = createAsyncThunk<
-  AuthProfilePutResponse,
-  AuthProfilePutPayload,
-  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
+  GenericMessageApi,
+  ProfileUpdateApi,
+  { extra: { apiService: ApiService }; rejectValue: GenericMessageApi }
 >("profile/put", async (payload, thunkAPI) => await thunkAPI.extra.apiService.authProfile.put(payload));
 
 const changePassword = createAsyncThunk<
   AuthChangePasswordResponse,
   AuthChangePasswordPayload,
-  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
+  { extra: { apiService: ApiService }; rejectValue: GenericMessageApi }
 >("profile/change-password", async (payload, thunkAPI) => await thunkAPI.extra.apiService.authChangePassword(payload));
 
 const deleteAccount = createAsyncThunk<
   AuthDeleteAccountResponse,
   AuthDeleteAccountPayload,
-  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
+  { extra: { apiService: ApiService }; rejectValue: GenericMessageApi }
 >("profile/delete-account", async (payload, thunkAPI) => await thunkAPI.extra.apiService.authDeleteAccount(payload));
 
 const deactivateAccount = createAsyncThunk<
   AuthDeactivateAccountResponse,
   AuthDeactivateAccountPayload,
-  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
+  { extra: { apiService: ApiService }; rejectValue: GenericMessageApi }
 >(
   "profile/deactivate-account",
   async (payload, thunkAPI) => await thunkAPI.extra.apiService.authDeactivateAccount(payload),
@@ -50,7 +48,8 @@ const deactivateAccount = createAsyncThunk<
 export interface ProfileStore {
   getStatus: ApiStatus;
   getError: string | null;
-  data: AuthProfileGetResponse | null;
+  data: UserApi | null;
+  putData: GenericMessageApi | null;
   putStatus: ApiStatus;
   putError: string | null;
   changePasswordStatus: ApiStatus;
@@ -68,6 +67,7 @@ const initialState: ProfileStore = {
   getStatus: "idle",
   getError: null,
   data: null,
+  putData: null,
   putStatus: "idle",
   putError: null,
   changePasswordStatus: "idle",
@@ -126,8 +126,8 @@ export const profileSlice = createSlice({
     });
     builder.addCase(put.fulfilled, (state, action) => {
       state.putStatus = "success";
+      state.putData = action.payload;
       state.putError = null;
-      state.data = action.payload;
     });
     builder.addCase(put.rejected, (state, action) => {
       state.putStatus = "error";

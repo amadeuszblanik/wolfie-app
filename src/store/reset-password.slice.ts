@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import { ApiStatus } from "../services/api/types/status.type";
-import { ApiMessage } from "../services/api/types/generic-message.type";
+import { GenericMessageApi } from "../services/api/types/generic-message.type";
 import { ApiService } from "../services";
 import { AuthResetPasswordGetPayload } from "../services/api/types/auth/reset-password/get/response.type";
 import { AuthResetPasswordPutResponse } from "../services/api/types/auth/reset-password/put/response.type";
@@ -11,7 +11,7 @@ import { AppState } from "./index";
 const get = createAsyncThunk<
   AuthResetPasswordGetPayload,
   { userEmail: string },
-  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
+  { extra: { apiService: ApiService }; rejectValue: GenericMessageApi }
 >(
   "resetPassword/get",
   async ({ userEmail }, thunkAPI) => await thunkAPI.extra.apiService.authResetPassword.get(userEmail),
@@ -20,7 +20,7 @@ const get = createAsyncThunk<
 const put = createAsyncThunk<
   AuthResetPasswordPutResponse,
   AuthResetPasswordPutPayload,
-  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
+  { extra: { apiService: ApiService }; rejectValue: GenericMessageApi }
 >("resetPassword/post", async (payload, thunkAPI) => await thunkAPI.extra.apiService.authResetPassword.put(payload));
 
 export interface ResetPasswordStore {

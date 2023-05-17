@@ -3,8 +3,6 @@ import { HYDRATE } from "next-redux-wrapper";
 import { ApiStatus } from "../services/api/types/status.type";
 import { GenericMessageApi } from "../services/api/types/generic-message.type";
 import { ApiService } from "../services";
-import { PetsPetIdAvatarPostPayload } from "../services/api/types/pets/:petId/avatar/payload.type";
-import { PetsPetIdAvatarPostResponse } from "../services/api/types/pets/:petId/avatar/response.type";
 import { PetApi } from "../services/api/types/pet.type";
 import { ResultsListApi } from "../services/api/types/results-list.type";
 import { PetCreatePayloadApi } from "../services/api/types/pet-create-payload.type";
@@ -38,8 +36,8 @@ const remove = createAsyncThunk<
 >("pets/delete", async ({ petId }, thunkAPI) => await thunkAPI.extra.apiService.pets.delete(petId));
 
 const avatar = createAsyncThunk<
-  PetsPetIdAvatarPostResponse,
-  { petId: string; payload: PetsPetIdAvatarPostPayload },
+  any,
+  { petId: string; payload: any },
   { extra: { apiService: ApiService }; rejectValue: GenericMessageApi }
 >(
   "pets/avatar",

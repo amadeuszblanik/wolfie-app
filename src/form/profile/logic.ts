@@ -41,6 +41,7 @@ const useLogic = () => {
     if (storeData) {
       setValue("firstName", storeData.firstName);
       setValue("lastName", storeData.lastName);
+      setValue("birthDate", storeData.birthDate);
       setValue("weightUnit", storeData.weightUnit);
     }
   };
@@ -52,6 +53,7 @@ const useLogic = () => {
       profileActions.put({
         firstName: formData.firstName,
         lastName: formData.lastName,
+        birthDate: formData.birthDate,
         weightUnit: formData.weightUnit,
       }),
     );

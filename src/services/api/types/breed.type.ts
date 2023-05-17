@@ -8,5 +8,4 @@ export interface BreedApi {
   url: string;
   image: string;
   pdf: string;
-  isPure: boolean;
 }

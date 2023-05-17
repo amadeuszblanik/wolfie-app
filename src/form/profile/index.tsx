@@ -1,5 +1,5 @@
 import { Controller } from "react-hook-form";
-import { BmeFormController, BmeInput, BmeSelect } from "bme-ui";
+import { BmeFormController, BmeInput, BmeInputDate, BmeSelect } from "bme-ui";
 import { useIntl } from "react-intl";
 import useLogic from "./logic";
 import { Form } from "../../components";
@@ -68,6 +68,22 @@ const Component = () => {
             error={errors[field.name] && intl.formatMessage({ id: errors[field.name]?.message })}
           >
             <BmeInput {...field} />
+          </BmeFormController>
+        )}
+      />
+      <Controller
+        name="birthDate"
+        control={control}
+        render={({ field }) => (
+          <BmeFormController
+            width="100%"
+            label={intl.formatMessage({
+              id: `common.form.${changeCase(field.name, ChangeCaseUtil.CamelCase, ChangeCaseUtil.SnakeCase)}.label`,
+            })}
+            name={field.name}
+            error={errors[field.name] && intl.formatMessage({ id: errors[field.name]?.message })}
+          >
+            <BmeInputDate {...field} type="date" />
           </BmeFormController>
         )}
       />

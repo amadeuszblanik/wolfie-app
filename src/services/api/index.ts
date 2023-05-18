@@ -48,18 +48,19 @@ import { apiUrl } from "../../utils";
 
 export default class ApiService extends ApiBase {
   authProfile = {
-    get: async () => await this.get<UserApi>(ApiAuthEndpoint.Profile),
-    patch: async (payload: ProfileUpdateApi) => await this.patch<GenericMessageApi>(ApiAuthEndpoint.Profile, payload),
+    get: async () => await this.get<UserApi>(apiUrl(ApiAuthEndpoint.Profile)),
+    patch: async (payload: ProfileUpdateApi) =>
+      await this.patch<GenericMessageApi>(apiUrl(ApiAuthEndpoint.Profile), payload),
   };
 
   authLimit = {
-    get: async () => await this.get<AuthLimitApi>(ApiAuthEndpoint.Limit),
+    get: async () => await this.get<AuthLimitApi>(apiUrl(ApiAuthEndpoint.Limit)),
   };
 
   authRefreshToken = {
-    get: async () => await this.get<AuthRefreshTokenGetResponse>(ApiAuthEndpoint.RefreshToken),
+    get: async () => await this.get<AuthRefreshTokenGetResponse>(apiUrl(ApiAuthEndpoint.RefreshToken)),
     post: async (payload: AuthRefreshTokenPostPayload) =>
-      await this.post<AuthRefreshTokenPostResponse>(ApiAuthEndpoint.RefreshToken, payload),
+      await this.post<AuthRefreshTokenPostResponse>(apiUrl(ApiAuthEndpoint.RefreshToken), payload),
     delete: async (refreshTokenId: string) =>
       await this.delete<AuthRefreshTokenDeleteResponse>(apiUrl(ApiAuthEndpoint.RefreshTokenById, { refreshTokenId })),
   };
@@ -72,12 +73,13 @@ export default class ApiService extends ApiBase {
         }),
       ),
     put: async (payload: AuthResetPasswordPutPayload) =>
-      await this.put<AuthResetPasswordPutResponse>(ApiAuthEndpoint.ResetPassword, payload),
+      await this.put<AuthResetPasswordPutResponse>(apiUrl(ApiAuthEndpoint.ResetPassword), payload),
   };
 
   pets = {
-    get: async () => await this.get<ResultsListApi<PetApi>>(ApiPetsEndpoint.Pets),
-    post: async (payload: PetCreatePayloadApi) => await this.post<GenericMessageApi>(ApiPetsEndpoint.Pets, payload),
+    get: async () => await this.get<ResultsListApi<PetApi>>(apiUrl(ApiPetsEndpoint.Pets)),
+    post: async (payload: PetCreatePayloadApi) =>
+      await this.post<GenericMessageApi>(apiUrl(ApiPetsEndpoint.Pets), payload),
     patch: async (petId: string, payload: PetCreatePayloadApi) =>
       await this.patch<GenericMessageApi>(apiUrl(ApiPetsEndpoint.PetsById, { petId }), payload),
     delete: async (petId: string) => await this.delete<GenericMessageApi>(apiUrl(ApiPetsEndpoint.PetsById, { petId })),
@@ -108,34 +110,36 @@ export default class ApiService extends ApiBase {
   };
 
   authSignIn = async (payload: AuthSignInPayload) =>
-    await this.post<AuthSignInResponse>(ApiAuthEndpoint.SignIn, payload);
+    await this.post<AuthSignInResponse>(apiUrl(ApiAuthEndpoint.SignIn), payload);
 
-  authApple = async (payload: AuthApplePayload) => await this.post<AuthAppleResponse>(ApiAuthEndpoint.Apple, payload);
+  authApple = async (payload: AuthApplePayload) =>
+    await this.post<AuthAppleResponse>(apiUrl(ApiAuthEndpoint.Apple), payload);
 
   authSignUp = async (payload: AuthSignUpPayload) =>
-    await this.post<AuthSignUpResponse>(ApiAuthEndpoint.SignUp, payload);
+    await this.post<AuthSignUpResponse>(apiUrl(ApiAuthEndpoint.SignUp), payload);
 
-  authTestNotification = async () => await this.post<AuthTestNotificationResponse>(ApiAuthEndpoint.TestNotification);
+  authTestNotification = async () =>
+    await this.post<AuthTestNotificationResponse>(apiUrl(ApiAuthEndpoint.TestNotification));
 
   authConfirmEmail = async (payload: AuthConfirmEmailPayload) =>
-    await this.post<AuthConfirmEmailResponse>(ApiAuthEndpoint.ConfirmEmail, payload);
+    await this.post<AuthConfirmEmailResponse>(apiUrl(ApiAuthEndpoint.ConfirmEmail), payload);
 
   authChangePassword = async (payload: AuthChangePasswordPayload) =>
-    await this.put<AuthChangePasswordResponse>(ApiAuthEndpoint.ChangePassword, payload);
+    await this.put<AuthChangePasswordResponse>(apiUrl(ApiAuthEndpoint.ChangePassword), payload);
 
   authDeleteAccount = async (payload: AuthDeleteAccountPayload) =>
-    await this.delete<AuthDeleteAccountResponse>(ApiAuthEndpoint.DeleteAccount, payload);
+    await this.delete<AuthDeleteAccountResponse>(apiUrl(ApiAuthEndpoint.DeleteAccount), payload);
 
   authDeactivateAccount = async (payload: AuthDeactivateAccountPayload) =>
-    await this.delete<AuthDeactivateAccountResponse>(ApiAuthEndpoint.DeactivateAccount, payload);
+    await this.delete<AuthDeactivateAccountResponse>(apiUrl(ApiAuthEndpoint.DeactivateAccount), payload);
 
-  config = async () => await this.get<ConfigResponse>(ApiConfigEndpoint.Config);
+  config = async () => await this.get<ConfigResponse>(apiUrl(ApiConfigEndpoint.Config));
 
-  breed = async () => await this.get<BreedApi[]>(ApiBreedEndpoint.Breed);
+  breed = async () => await this.get<BreedApi[]>(apiUrl(ApiBreedEndpoint.Breed));
 
-  medicine = async () => await this.get<MedicineShortResponse>(ApiMedicineEndpoint.Medicine);
+  medicine = async () => await this.get<MedicineShortResponse>(apiUrl(ApiMedicineEndpoint.Medicine));
 
-  calendar = async () => await this.get<ResultsListApi<CalendarDao>>(ApiCalendarEndpoint.Calendar);
+  calendar = async () => await this.get<ResultsListApi<CalendarDao>>(apiUrl(ApiCalendarEndpoint.Calendar));
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
   constructor() {

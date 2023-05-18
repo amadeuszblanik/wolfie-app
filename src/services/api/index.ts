@@ -49,7 +49,7 @@ import { apiUrl } from "../../utils";
 export default class ApiService extends ApiBase {
   authProfile = {
     get: async () => await this.get<UserApi>(ApiAuthEndpoint.Profile),
-    put: async (payload: ProfileUpdateApi) => await this.put<GenericMessageApi>(ApiAuthEndpoint.Profile, payload),
+    patch: async (payload: ProfileUpdateApi) => await this.patch<GenericMessageApi>(ApiAuthEndpoint.Profile, payload),
   };
 
   authLimit = {

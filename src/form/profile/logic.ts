@@ -9,8 +9,8 @@ import {
   selectProfileData,
   selectProfileGetError,
   selectProfileGetStatus,
-  selectProfilePutError,
-  selectProfilePutStatus,
+  selectProfilepatchError,
+  selectProfilepatchStatus,
 } from "../../store/profile.slice";
 
 const useLogic = () => {
@@ -25,8 +25,8 @@ const useLogic = () => {
   const loadFailedLast = !isLoading && !storeData;
   const loadFailed = storeDataStatus === "error" || loadFailedLast;
 
-  const storeStatus = useAppSelector(selectProfilePutStatus);
-  const storeError = useAppSelector(selectProfilePutError);
+  const storeStatus = useAppSelector(selectProfilepatchStatus);
+  const storeError = useAppSelector(selectProfilepatchError);
 
   const {
     setValue,
@@ -50,7 +50,7 @@ const useLogic = () => {
 
   const submit = (formData: FormData) => {
     dispatch(
-      profileActions.put({
+      profileActions.patch({
         firstName: formData.firstName,
         lastName: formData.lastName,
         birthDate: formData.birthDate,
@@ -60,7 +60,7 @@ const useLogic = () => {
   };
 
   const resetForm = () => {
-    dispatch(profileActions.resetPut());
+    dispatch(profileActions.resetPatch());
   };
 
   return {

@@ -18,11 +18,11 @@ const get = createAsyncThunk<UserApi, undefined, { extra: { apiService: ApiServi
   async (_, thunkAPI) => await thunkAPI.extra.apiService.authProfile.get(),
 );
 
-const put = createAsyncThunk<
+const patch = createAsyncThunk<
   GenericMessageApi,
   ProfileUpdateApi,
   { extra: { apiService: ApiService }; rejectValue: GenericMessageApi }
->("profile/put", async (payload, thunkAPI) => await thunkAPI.extra.apiService.authProfile.put(payload));
+>("profile/patch", async (payload, thunkAPI) => await thunkAPI.extra.apiService.authProfile.patch(payload));
 
 const changePassword = createAsyncThunk<
   AuthChangePasswordResponse,
@@ -49,9 +49,9 @@ export interface ProfileStore {
   getStatus: ApiStatus;
   getError: string | null;
   data: UserApi | null;
-  putData: GenericMessageApi | null;
-  putStatus: ApiStatus;
-  putError: string | null;
+  patchData: GenericMessageApi | null;
+  patchStatus: ApiStatus;
+  patchError: string | null;
   changePasswordStatus: ApiStatus;
   changePasswordError: string | null;
   changePasswordData: AuthChangePasswordResponse | null;
@@ -67,9 +67,9 @@ const initialState: ProfileStore = {
   getStatus: "idle",
   getError: null,
   data: null,
-  putData: null,
-  putStatus: "idle",
-  putError: null,
+  patchData: null,
+  patchStatus: "idle",
+  patchError: null,
   changePasswordStatus: "idle",
   changePasswordError: null,
   changePasswordData: null,
@@ -87,9 +87,9 @@ export const profileSlice = createSlice({
   initialState,
 
   reducers: {
-    resetPut: (state) => {
-      state.putStatus = "idle";
-      state.putError = null;
+    resetPatch: (state) => {
+      state.patchStatus = "idle";
+      state.patchError = null;
     },
     resetChangePassword: (state) => {
       state.changePasswordStatus = "idle";
@@ -120,18 +120,18 @@ export const profileSlice = createSlice({
       state.getError = action.error.message || null;
       state.data = null;
     });
-    builder.addCase(put.pending, (state) => {
-      state.putStatus = "pending";
-      state.putError = null;
+    builder.addCase(patch.pending, (state) => {
+      state.patchStatus = "pending";
+      state.patchError = null;
     });
-    builder.addCase(put.fulfilled, (state, action) => {
-      state.putStatus = "success";
-      state.putData = action.payload;
-      state.putError = null;
+    builder.addCase(patch.fulfilled, (state, action) => {
+      state.patchStatus = "success";
+      state.patchData = action.payload;
+      state.patchError = null;
     });
-    builder.addCase(put.rejected, (state, action) => {
-      state.putStatus = "error";
-      state.putError = action.error.message || null;
+    builder.addCase(patch.rejected, (state, action) => {
+      state.patchStatus = "error";
+      state.patchError = action.error.message || null;
     });
     builder.addCase(changePassword.pending, (state) => {
       state.changePasswordStatus = "pending";
@@ -183,8 +183,8 @@ export const profileSlice = createSlice({
 
 export const selectProfileGetStatus = ({ profile }: AppState) => profile.getStatus;
 export const selectProfileGetError = ({ profile }: AppState) => profile.getError;
-export const selectProfilePutStatus = ({ profile }: AppState) => profile.putStatus;
-export const selectProfilePutError = ({ profile }: AppState) => profile.putError;
+export const selectProfilepatchStatus = ({ profile }: AppState) => profile.patchStatus;
+export const selectProfilepatchError = ({ profile }: AppState) => profile.patchError;
 export const selectProfileData = ({ profile }: AppState) => profile.data;
 export const selectProfileChangePasswordStatus = ({ profile }: AppState) => profile.changePasswordStatus;
 export const selectProfileChangePasswordError = ({ profile }: AppState) => profile.changePasswordError;
@@ -200,7 +200,7 @@ export const selectProfileDeactivateAccountData = ({ profile }: AppState) => pro
 export const profileActions = {
   ...profileSlice.actions,
   get,
-  put,
+  patch,
   changePassword,
   deleteAccount,
   deactivateAccount,

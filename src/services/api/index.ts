@@ -6,6 +6,7 @@ import {
   ApiConfigEndpoint,
   ApiMedicineEndpoint,
   ApiPetsEndpoint,
+  ApiVetEndpoint,
 } from "./endpoint.type";
 import { AuthSignInResponse } from "./types/auth/sign-in/response.type";
 import { AuthSignInPayload } from "./types/auth/sign-in/payload.type";
@@ -44,6 +45,8 @@ import { HealthLogCreateApi } from "./types/health-log-create.type";
 import { BreedApi } from "./types/breed.type";
 import { UserApi } from "./user.type";
 import { ProfileUpdateApi } from "./types/profile-update.type";
+import { VetApi } from "./types/vet.type";
+import { VetCreateApi } from "./types/vet-create.type";
 import { apiUrl } from "../../utils";
 
 export default class ApiService extends ApiBase {
@@ -107,6 +110,14 @@ export default class ApiService extends ApiBase {
       await this.patch<GenericMessageApi>(apiUrl(ApiPetsEndpoint.PetsHealthLogSingle, { petId, healthLogId }), payload),
     delete: async (petId: string, healthLogId: string) =>
       await this.delete<GenericMessageApi>(apiUrl(ApiPetsEndpoint.PetsHealthLogSingle, { petId, healthLogId })),
+  };
+
+  vet = {
+    get: async () => await this.get<ResultsListApi<VetApi>>(apiUrl(ApiVetEndpoint.Vet)),
+    post: async (payload: VetCreateApi) => await this.post<GenericMessageApi>(apiUrl(ApiVetEndpoint.Vet), payload),
+    patch: async (vetId: string, payload: VetCreateApi) =>
+      await this.patch<GenericMessageApi>(apiUrl(ApiVetEndpoint.Single, { vetId }), payload),
+    delete: async (vetId: string) => await this.delete<GenericMessageApi>(apiUrl(ApiVetEndpoint.Single, { vetId })),
   };
 
   authSignIn = async (payload: AuthSignInPayload) =>

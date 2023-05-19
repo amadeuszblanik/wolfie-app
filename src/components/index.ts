@@ -13,3 +13,4 @@ export { default as RemoveEntryModal } from "./remove-entry-modal";
 export { default as SideBar } from "./side-bar";
 export { default as SignInWithApple } from "./sign-in-with-apple";
 export { default as TopBar } from "./top-bar";
+export { default as VetCard } from "./vet-card";

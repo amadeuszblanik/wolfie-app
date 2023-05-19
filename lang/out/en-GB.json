@@ -238,5 +238,9 @@
   "common.form.sex.label": "Sex",
   "common.form.next_visit_date.label": "Next visit date",
   "common.form.next_visit_time.label": "Next visit time",
-  "common.form.vet.label": "Vet"
+  "common.form.vet.label": "Vet",
+  "page.vet.title": "Vet",
+  "page.vet_add.title": "Add vet",
+  "page.vet_edit.title": "Edit vet",
+  "layout.app.menu.vets": "Vet"
 }

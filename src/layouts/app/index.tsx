@@ -44,6 +44,11 @@ const Layout: React.FC<LayoutAppProps> = ({ title, children }) => {
           />
         )}
         <SideBar.Item
+          icon="medical-outline"
+          label={intl.formatMessage({ id: "layout.app.menu.vets" })}
+          href="/app/vet"
+        />
+        <SideBar.Item
           icon="calendar-outline"
           label={intl.formatMessage({ id: "layout.app.menu.calendar" })}
           href="/app/calendar"

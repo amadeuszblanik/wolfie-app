@@ -42,3 +42,8 @@ export enum ApiMedicineEndpoint {
 export enum ApiCalendarEndpoint {
   Calendar = "/calendar",
 }
+
+export enum ApiVetEndpoint {
+  Vet = "/vet",
+  Single = "/vet/:vetId",
+}

@@ -13,6 +13,7 @@ import { resetPasswordSlice } from "./reset-password.slice";
 import { breedsSlice } from "./breeds.slice";
 import { medicinesSlice } from "./medicines.slice";
 import { calendarSlice } from "./calendar.slice";
+import { vetSlice } from "./vet.slice";
 import { ApiService } from "../services";
 
 const makeStore = () =>
@@ -31,6 +32,7 @@ const makeStore = () =>
       [refreshTokenSlice.name]: refreshTokenSlice.reducer,
       [resetPasswordSlice.name]: resetPasswordSlice.reducer,
       [signUpSlice.name]: signUpSlice.reducer,
+      [vetSlice.name]: vetSlice.reducer,
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({

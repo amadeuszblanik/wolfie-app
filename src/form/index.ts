@@ -9,4 +9,5 @@ export { default as FormProfileDeactivate } from "./profile-deactivate";
 export { default as FormProfileDelete } from "./profile-delete";
 export { default as FormSignIn } from "./sign-in";
 export { default as FormSignUp } from "./sign-up";
+export { default as FormVet } from "./vet";
 export { default as FormWeight } from "./weight";

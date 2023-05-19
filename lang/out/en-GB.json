@@ -242,5 +242,11 @@
   "page.vet.title": "Vet",
   "page.vet_add.title": "Add vet",
   "page.vet_edit.title": "Edit vet",
-  "layout.app.menu.vets": "Vet"
+  "layout.app.menu.vets": "Vet",
+  "layout.app.menu.vet_add": "Add vet",
+  "common.form.address.label": "Address",
+  "common.form.city.label": "City",
+  "common.form.post_code.label": "Post code",
+  "common.form.country.label": "Country",
+  "common.form.phone_number.label": "Phone number"
 }

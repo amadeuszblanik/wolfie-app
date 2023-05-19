@@ -48,6 +48,13 @@ const Layout: React.FC<LayoutAppProps> = ({ title, children }) => {
           label={intl.formatMessage({ id: "layout.app.menu.vets" })}
           href="/app/vet"
         />
+        {storeLimitData?.vets.canAdd && (
+          <SideBar.Item
+            icon="medical-outline"
+            label={intl.formatMessage({ id: "layout.app.menu.vet_add" })}
+            href="/app/vet/add"
+          />
+        )}
         <SideBar.Item
           icon="calendar-outline"
           label={intl.formatMessage({ id: "layout.app.menu.calendar" })}

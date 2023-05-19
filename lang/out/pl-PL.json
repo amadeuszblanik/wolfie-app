@@ -128,6 +128,7 @@
   "common.health_log.kind.use_of_gamaglobulin": "Use of gamaglobulin",
   "common.health_log.kind.treatment": "Treatment",
   "error.generic_fetch": "Something went wrong. Please try again later.",
+  "scene.health_log_details.name": "Name",
   "scene.health_log_details.kind": "Kind",
   "scene.health_log_details.date": "Date",
   "scene.health_log_details.medicines": "Medicines",
@@ -234,5 +235,18 @@
   "calendar.types.HEALTH_LOG": "Health log",
   "pet_sex.FEMALE": "Female",
   "pet_sex.MALE": "Male",
-  "common.form.sex.label": "Sex"
+  "common.form.sex.label": "Sex",
+  "common.form.next_visit_date.label": "Next visit date",
+  "common.form.next_visit_time.label": "Next visit time",
+  "common.form.vet.label": "Vet",
+  "page.vet.title": "Vet",
+  "page.vet_add.title": "Add vet",
+  "page.vet_edit.title": "Edit vet",
+  "layout.app.menu.vets": "Vet",
+  "layout.app.menu.vet_add": "Add vet",
+  "common.form.address.label": "Address",
+  "common.form.city.label": "City",
+  "common.form.post_code.label": "Post code",
+  "common.form.country.label": "Country",
+  "common.form.phone_number.label": "Phone number"
 }

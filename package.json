@@ -54,7 +54,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "husky": "^4.3.8",
     "prettier": "^2.8.1",
-    "stylelint": "^14.16.1",
+    "stylelint": "^15.10.1",
     "stylelint-config-rational-order": "^0.1.2",
     "stylelint-config-recommended": "^9.0.0",
     "stylelint-config-styled-components": "^0.1.1",

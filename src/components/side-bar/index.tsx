@@ -14,7 +14,7 @@ import { limitActions, selectLimitData } from "../../store/limit.slice";
 
 interface TopBarProps {
   title: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 interface StyledSideBarWrapperProps {
@@ -40,10 +40,11 @@ const StyledSideBarWrapper = styled.div<StyledSideBarWrapperProps>`
   border-bottom: 1px solid ${({ theme }) => theme.colors.gray6};
   ${bmeMixins.animations(["height"])};
 
-  // If larger than container and safe area it's not needed to close the sidebar
-  @media (min-width: 1300px) {
-    height: var(--bme-vh, 100vh);
-  }
+  // @TODO: Temporary
+  //// If larger than container and safe area it's not needed to close the sidebar
+  //@media (min-width: 1300px) {
+  //  height: var(--bme-vh, 100vh);
+  //}
 `;
 
 const StyledSideBarTitleWrapper = styled.div`
@@ -163,7 +164,7 @@ const Component: ComponentType = ({ title, children }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
-  const isBackButtonVisible = router.pathname !== "/app";
+  const isBackButtonVisible = router.pathname !== "/app" && router.pathname !== "/app/settings";
 
   useEffect(() => {
     dispatch(profileActions.get());
@@ -171,7 +172,7 @@ const Component: ComponentType = ({ title, children }) => {
   }, [dispatch]);
 
   const switchDrawerOpen = () => {
-    setIsDrawerOpen(!isDrawerOpen);
+    setIsDrawerOpen(false); // @TODO: Temporary. Website is not ready for APIv2 yet.
     setIsProfileOpen(false);
   };
 

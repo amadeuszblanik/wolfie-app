@@ -29,8 +29,9 @@ export const getServerSideProps: GetServerSideProps<{ isSignedId: boolean }> = a
   }
 
   return {
-    props: {
-      isSignedId: isSignedIn,
+    redirect: {
+      destination: "/app/settings",
+      permanent: false,
     },
   };
 };

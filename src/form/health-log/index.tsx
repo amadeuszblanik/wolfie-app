@@ -2,6 +2,7 @@ import { Controller } from "react-hook-form";
 import { BmeFormController, BmeInput, BmeInputDate, BmeSelect } from "bme-ui";
 import { useIntl } from "react-intl";
 import { useRouter } from "next/router";
+import React from "react";
 import useLogic from "./logic";
 import { Form, MedicinesSelector } from "../../components";
 import { changeCase } from "../../utils";
@@ -35,18 +36,6 @@ const Component = () => {
     submit(data);
   });
 
-  const medicineValues = {
-    medicines: watch("medicines"),
-    additionalMedicines: watch("additionalMedicines"),
-  };
-
-  const handleChangeMedicines = (value: { medicines: string[]; additionalMedicines: string[] }) => {
-    setValue("medicines", value.medicines);
-    setValue("additionalMedicines", value.additionalMedicines);
-  };
-
-  const medicineError = { ...errors.medicines, ...errors.additionalMedicines };
-
   const handleCloseModal = (success: boolean) => {
     if (!success) {
       return;
@@ -70,6 +59,22 @@ const Component = () => {
       loadFailedMessage={loadFailedMessage}
       onTryAgain={tryAgainLoadForm}
     >
+      <Controller
+        name="name"
+        control={control}
+        render={({ field }) => (
+          <BmeFormController
+            width="100%"
+            label={intl.formatMessage({
+              id: `common.form.${changeCase(field.name, ChangeCaseUtil.CamelCase, ChangeCaseUtil.SnakeCase)}.label`,
+            })}
+            name={field.name}
+            error={errors[field.name] && intl.formatMessage({ id: errors[field.name]?.message })}
+          >
+            <BmeInput {...field} />
+          </BmeFormController>
+        )}
+      />
       <Controller
         name="kind"
         control={control}
@@ -112,7 +117,27 @@ const Component = () => {
           </BmeFormController>
         )}
       />
-      <MedicinesSelector value={medicineValues} onChange={handleChangeMedicines} errorMessage={medicineError} />
+      <Controller
+        name="time"
+        control={control}
+        render={({ field }) => (
+          <BmeFormController
+            width="100%"
+            label={intl.formatMessage({
+              id: `common.form.${changeCase(field.name, ChangeCaseUtil.CamelCase, ChangeCaseUtil.SnakeCase)}.label`,
+            })}
+            name={field.name}
+            error={errors[field.name] && intl.formatMessage({ id: errors[field.name]?.message })}
+          >
+            <BmeInputDate {...field} type="time" />
+          </BmeFormController>
+        )}
+      />
+      <MedicinesSelector
+        value={watch("medicines")}
+        onChange={(value) => setValue("medicines", value)}
+        errorMessage={errors.medicines}
+      />
       <Controller
         name="diagnosis"
         control={control}
@@ -130,7 +155,7 @@ const Component = () => {
         )}
       />
       <Controller
-        name="nextVisit"
+        name="nextVisitDate"
         control={control}
         render={({ field }) => (
           <BmeFormController
@@ -141,12 +166,28 @@ const Component = () => {
             name={field.name}
             error={errors[field.name] && intl.formatMessage({ id: errors[field.name]?.message })}
           >
-            <BmeInputDate {...field} type="datetime-local" />
+            <BmeInputDate {...field} type="date" />
           </BmeFormController>
         )}
       />
       <Controller
-        name="veterinary"
+        name="nextVisitTime"
+        control={control}
+        render={({ field }) => (
+          <BmeFormController
+            width="100%"
+            label={intl.formatMessage({
+              id: `common.form.${changeCase(field.name, ChangeCaseUtil.CamelCase, ChangeCaseUtil.SnakeCase)}.label`,
+            })}
+            name={field.name}
+            error={errors[field.name] && intl.formatMessage({ id: errors[field.name]?.message })}
+          >
+            <BmeInputDate {...field} type="time" />
+          </BmeFormController>
+        )}
+      />
+      <Controller
+        name="vet"
         control={control}
         render={({ field }) => (
           <BmeFormController

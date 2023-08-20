@@ -55,7 +55,7 @@ const Scene = () => {
 
   const handleUpdatePets = useCallback(() => {
     if (!storePetsSingle) {
-      dispatch(petsActions.petsMy());
+      dispatch(petsActions.get());
     }
   }, [dispatch, storePetsSingle]);
 
@@ -130,7 +130,7 @@ const Scene = () => {
                 ]}
               >
                 <BmeText>
-                  <FormattedMessage id={`common.health_log.kind.${item.kind.toLowerCase()}`} />
+                  {item.name || <FormattedMessage id={`common.health_log.kind.${item.kind.toLowerCase()}`} />}
                 </BmeText>
                 <BmeText>{pipeDate(item.date)}</BmeText>
               </BmeList.Item>

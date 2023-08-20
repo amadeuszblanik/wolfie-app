@@ -3,7 +3,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { authSlice } from "./auth.slice";
 import { signUpSlice } from "./sign-up.slice";
 import { profileSlice } from "./profile.slice";
-import { configSlice } from "./config.slice";
+import { limitSlice } from "./limit.slice";
 import { petsSlice } from "./pets.slice";
 import { petsWeightsSlice } from "./petsWeight.slice";
 import { petsHealthLogSlice } from "./petsHealthLog.slice";
@@ -12,6 +12,8 @@ import { confirmEmailSlice } from "./confirm-email.slice";
 import { resetPasswordSlice } from "./reset-password.slice";
 import { breedsSlice } from "./breeds.slice";
 import { medicinesSlice } from "./medicines.slice";
+import { calendarSlice } from "./calendar.slice";
+import { vetSlice } from "./vet.slice";
 import { ApiService } from "../services";
 
 const makeStore = () =>
@@ -19,7 +21,8 @@ const makeStore = () =>
     reducer: {
       [authSlice.name]: authSlice.reducer,
       [breedsSlice.name]: breedsSlice.reducer,
-      [configSlice.name]: configSlice.reducer,
+      [calendarSlice.name]: calendarSlice.reducer,
+      [limitSlice.name]: limitSlice.reducer,
       [confirmEmailSlice.name]: confirmEmailSlice.reducer,
       [medicinesSlice.name]: medicinesSlice.reducer,
       [petsSlice.name]: petsSlice.reducer,
@@ -29,6 +32,7 @@ const makeStore = () =>
       [refreshTokenSlice.name]: refreshTokenSlice.reducer,
       [resetPasswordSlice.name]: resetPasswordSlice.reducer,
       [signUpSlice.name]: signUpSlice.reducer,
+      [vetSlice.name]: vetSlice.reducer,
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({

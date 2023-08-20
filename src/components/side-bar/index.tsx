@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { BmeAvatar, BmeBox, BmeButton, BmeProgressBar, BmeText } from "bme-ui";
+import { BmeAvatar, BmeBox, BmeButton, BmeText } from "bme-ui";
 import { bmeMixins } from "bme-ui";
 import { FormattedMessage } from "react-intl";
 import { useRouter } from "next/router";
@@ -8,13 +8,13 @@ import Item, { SideBarItemType } from "./item";
 import { Brand, Link } from "../../atoms";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { profileActions, selectProfileData } from "../../store/profile.slice";
-import { configActions, selectConfigData } from "../../store/config.slice";
+import { limitActions, selectLimitData } from "../../store/limit.slice";
 
 // @TODO: Redesign back button
 
 interface TopBarProps {
   title: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 interface StyledSideBarWrapperProps {
@@ -40,10 +40,11 @@ const StyledSideBarWrapper = styled.div<StyledSideBarWrapperProps>`
   border-bottom: 1px solid ${({ theme }) => theme.colors.gray6};
   ${bmeMixins.animations(["height"])};
 
-  // If larger than container and safe area it's not needed to close the sidebar
-  @media (min-width: 1300px) {
-    height: var(--bme-vh, 100vh);
-  }
+  // @TODO: Temporary
+  //// If larger than container and safe area it's not needed to close the sidebar
+  //@media (min-width: 1300px) {
+  //  height: var(--bme-vh, 100vh);
+  //}
 `;
 
 const StyledSideBarTitleWrapper = styled.div`
@@ -158,20 +159,20 @@ const Component: ComponentType = ({ title, children }) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const storeProfileData = useAppSelector(selectProfileData);
-  const storeConfigData = useAppSelector(selectConfigData);
+  const storeLimitData = useAppSelector(selectLimitData);
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
-  const isBackButtonVisible = router.pathname !== "/app";
+  const isBackButtonVisible = router.pathname !== "/app" && router.pathname !== "/app/settings";
 
   useEffect(() => {
     dispatch(profileActions.get());
-    dispatch(configActions.get());
+    dispatch(limitActions.get());
   }, [dispatch]);
 
   const switchDrawerOpen = () => {
-    setIsDrawerOpen(!isDrawerOpen);
+    setIsDrawerOpen(false); // @TODO: Temporary. Website is not ready for APIv2 yet.
     setIsProfileOpen(false);
   };
 
@@ -188,31 +189,57 @@ const Component: ComponentType = ({ title, children }) => {
         <StyledSideBarProfile isOpen={isProfileOpen}>
           <BmeBox alignY="top">
             <BmeBox margin="no|xs|no|no">
-              <BmeText variant="Title2">{storeProfileData?.fullName}</BmeText>
+              <BmeText variant="Title2">
+                {storeProfileData?.firstName} {storeProfileData?.lastName}
+              </BmeText>
             </BmeBox>
-            <BmeText>
-              <FormattedMessage id={`common.user_role.${storeProfileData?.userRole.toLowerCase() ?? "user"}`} />
-            </BmeText>
+            <BmeText>{storeProfileData?.role}</BmeText>
           </BmeBox>
-          <BmeBox direction="column" width="100%">
+          <BmeBox direction="column" width="100%" margin="no|no|xs|no">
             <BmeBox margin="no|no|xs|no">
-              <BmeText>
+              <BmeText noBottomMargin>
                 <FormattedMessage
-                  id="layout.app.profile.usage"
+                  id="layout.app.profile.usage.pets"
                   values={{
-                    petsCount: storeConfigData?.userPets,
-                    petsLimit: storeConfigData?.userPetsAllowed,
+                    petsCount: storeLimitData?.pets.used,
+                    petsLimit: storeLimitData?.pets.limit ?? "∞",
                   }}
                 />
               </BmeText>
             </BmeBox>
-            <BmeProgressBar
-              value={
-                storeConfigData?.userPets && storeConfigData?.userPetsAllowed
-                  ? storeConfigData.userPets / storeConfigData.userPetsAllowed
-                  : undefined
-              }
-            />
+            <BmeBox margin="no|no|xs|no">
+              <BmeText noBottomMargin>
+                <FormattedMessage
+                  id="layout.app.profile.usage.health_logs"
+                  values={{
+                    petsCount: storeLimitData?.healthLogs.used,
+                    petsLimit: storeLimitData?.healthLogs.limit ?? "∞",
+                  }}
+                />
+              </BmeText>
+            </BmeBox>
+            <BmeBox margin="no|no|xs|no">
+              <BmeText noBottomMargin>
+                <FormattedMessage
+                  id="layout.app.profile.usage.weights"
+                  values={{
+                    petsCount: storeLimitData?.weights.used,
+                    petsLimit: storeLimitData?.weights.limit ?? "∞",
+                  }}
+                />
+              </BmeText>
+            </BmeBox>
+            <BmeBox margin="no|no|xs|no">
+              <BmeText noBottomMargin>
+                <FormattedMessage
+                  id="layout.app.profile.usage.vets"
+                  values={{
+                    petsCount: storeLimitData?.vets.used,
+                    petsLimit: storeLimitData?.vets.limit ?? "∞",
+                  }}
+                />
+              </BmeText>
+            </BmeBox>
           </BmeBox>
           <BmeBox direction="column" alignY="bottom" margin="auto|no|no">
             <BmeBox padding="no|no|xs" width="100%">

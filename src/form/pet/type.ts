@@ -4,8 +4,15 @@ export const formSchema = yup
   .object({
     name: yup.string().required("common.form.errors.required"),
     breed: yup.number(),
+    pureBreed: yup.boolean(),
+    birthDate: yup
+      .string()
+      .required("common.form.errors.required")
+      .matches(/^\d{4}-\d{2}-\d{2}$/, "common.form.errors.date"),
+    sex: yup.string().required("common.form.errors.required"),
     microchip: yup.string(),
-    birthDate: yup.date().required("common.form.errors.required"),
+    neutered: yup.boolean(),
+    instagram: yup.string(),
   })
   .required();
 

@@ -2,8 +2,8 @@ export interface AuthSignUpPayload {
   email: string;
   firstName: string;
   lastName: string;
+  birthDate: string;
   password: string;
-  passwordConfirm: string;
   weightUnit: string;
-  gdprConsent: boolean;
+  acceptedGdpr: boolean;
 }

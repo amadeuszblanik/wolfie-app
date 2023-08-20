@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import { ApiStatus } from "../services/api/types/status.type";
-import { ApiMessage } from "../services/api/types/api-message.type";
+import { GenericMessageApi } from "../services/api/types/generic-message.type";
 import { ApiService } from "../services";
 import { AuthRefreshTokenGetResponse } from "../services/api/types/auth/refresh-token/get/response.type";
 import { AuthRefreshTokenPostResponse } from "../services/api/types/auth/refresh-token/post/response.type";
@@ -12,19 +12,19 @@ import { AppState } from "./index";
 const get = createAsyncThunk<
   AuthRefreshTokenGetResponse,
   undefined,
-  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
+  { extra: { apiService: ApiService }; rejectValue: GenericMessageApi }
 >("refreshToken/get", async (_, thunkAPI) => await thunkAPI.extra.apiService.authRefreshToken.get());
 
 const post = createAsyncThunk<
   AuthRefreshTokenPostResponse,
   AuthRefreshTokenPostPayload,
-  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
+  { extra: { apiService: ApiService }; rejectValue: GenericMessageApi }
 >("refreshToken/post", async (payload, thunkAPI) => await thunkAPI.extra.apiService.authRefreshToken.post(payload));
 
 const remove = createAsyncThunk<
   AuthRefreshTokenDeleteResponse,
   { refreshTokenId: string },
-  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
+  { extra: { apiService: ApiService }; rejectValue: GenericMessageApi }
 >(
   "refreshToken/remove",
   async ({ refreshTokenId }, thunkAPI) => await thunkAPI.extra.apiService.authRefreshToken.delete(refreshTokenId),

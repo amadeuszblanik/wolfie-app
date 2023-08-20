@@ -3,7 +3,7 @@ import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { LayoutApp } from "../../src/layouts";
 import { getSession } from "../../lib/get-session";
 import getAuth from "../../lib/get-auth";
-import { ScenePetsMy } from "../../src/scene";
+import { ScenePetsList } from "../../src/scene";
 
 export const getServerSideProps: GetServerSideProps<{ isSignedId: boolean }> = async (context) => {
   const session = await getSession(context.req, context.res);
@@ -14,7 +14,7 @@ export const getServerSideProps: GetServerSideProps<{ isSignedId: boolean }> = a
     if (refreshToken) {
       return {
         redirect: {
-          destination: "/auth/refresh-session",
+          destination: "/auth/sign-off",
           permanent: false,
         },
       };
@@ -29,8 +29,9 @@ export const getServerSideProps: GetServerSideProps<{ isSignedId: boolean }> = a
   }
 
   return {
-    props: {
-      isSignedId: isSignedIn,
+    redirect: {
+      destination: "/app/settings",
+      permanent: false,
     },
   };
 };
@@ -40,7 +41,7 @@ export default function Page(_: InferGetServerSidePropsType<typeof getServerSide
 
   return (
     <LayoutApp title={intl.formatMessage({ id: "page.app.title" })}>
-      <ScenePetsMy />
+      <ScenePetsList />
     </LayoutApp>
   );
 }

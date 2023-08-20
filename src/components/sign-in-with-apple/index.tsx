@@ -96,7 +96,7 @@ const Component: React.FC<SignInWithAppleProps> = ({ short }) => {
     if (!isLoaded) {
       return;
     }
-
+    // Test
     AppleID.auth.init({
       clientId: process.env.NEXT_PUBLIC_APPLE_CLIENT_ID,
       scope: "name email",

@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import { ApiStatus } from "../services/api/types/status.type";
-import { ApiMessage } from "../services/api/types/api-message.type";
+import { GenericMessageApi } from "../services/api/types/generic-message.type";
 import { ApiService } from "../services";
 import { AuthConfirmEmailResponse } from "../services/api/types/auth/confirm-email/response.type";
 import { AuthConfirmEmailPayload } from "../services/api/types/auth/confirm-email/payload.type";
@@ -10,7 +10,7 @@ import { AppState } from "./index";
 const post = createAsyncThunk<
   AuthConfirmEmailResponse,
   AuthConfirmEmailPayload,
-  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
+  { extra: { apiService: ApiService }; rejectValue: GenericMessageApi }
 >("confirmEmail/post", async (payload, thunkAPI) => await thunkAPI.extra.apiService.authConfirmEmail(payload));
 
 export interface ConfirmEmailStore {

@@ -1,11 +1,12 @@
 import { Controller } from "react-hook-form";
-import { BmeFormController, BmeInput, BmeInputDate, BmeSelect } from "bme-ui";
+import { BmeCheckbox, BmeFormController, BmeInput, BmeInputDate, BmeSelect } from "bme-ui";
 import { useIntl } from "react-intl";
 import { useRouter } from "next/router";
 import useLogic from "./logic";
 import { Form } from "../../components";
 import { changeCase } from "../../utils";
 import { ChangeCaseUtil } from "../../utils/change-case.util";
+import { PetSex } from "../../services/api/types/pet-sex.type";
 
 const Component = () => {
   const router = useRouter();
@@ -84,11 +85,44 @@ const Component = () => {
                 <BmeSelect.Option
                   key={breed.key}
                   value={breed.key}
-                  label={intl.formatMessage({ id: `breed.${breed.label}` })}
+                  label={breed.label}
                   selected={field.value === breed.key}
                 />
               ))}
             </BmeSelect>
+          </BmeFormController>
+        )}
+      />
+      <Controller
+        name="pureBreed"
+        control={control}
+        render={({ field }) => (
+          <BmeFormController
+            width="100%"
+            label={intl.formatMessage({
+              id: `common.form.${changeCase(field.name, ChangeCaseUtil.CamelCase, ChangeCaseUtil.SnakeCase)}.label`,
+            })}
+            labelPosition="left"
+            name={field.name}
+            error={errors[field.name] && intl.formatMessage({ id: errors[field.name]?.message })}
+          >
+            <BmeCheckbox {...field} type="checkbox" />
+          </BmeFormController>
+        )}
+      />
+      <Controller
+        name="birthDate"
+        control={control}
+        render={({ field }) => (
+          <BmeFormController
+            width="100%"
+            label={intl.formatMessage({
+              id: `common.form.${changeCase(field.name, ChangeCaseUtil.CamelCase, ChangeCaseUtil.SnakeCase)}.label`,
+            })}
+            name={field.name}
+            error={errors[field.name] && intl.formatMessage({ id: errors[field.name]?.message })}
+          >
+            <BmeInputDate {...field} />
           </BmeFormController>
         )}
       />
@@ -109,7 +143,49 @@ const Component = () => {
         )}
       />
       <Controller
-        name="birthDate"
+        name="sex"
+        control={control}
+        render={({ field }) => (
+          <BmeFormController
+            width="100%"
+            label={intl.formatMessage({
+              id: `common.form.${changeCase(field.name, ChangeCaseUtil.CamelCase, ChangeCaseUtil.SnakeCase)}.label`,
+            })}
+            name={field.name}
+            error={errors[field.name] && intl.formatMessage({ id: String(errors[field.name]?.message) })}
+          >
+            <BmeSelect {...field}>
+              {Object.values(PetSex).map((petSex) => (
+                <BmeSelect.Option
+                  key={petSex}
+                  value={petSex}
+                  label={intl.formatMessage({ id: `pet_sex.${petSex}` })}
+                  selected={field.value === petSex}
+                />
+              ))}
+            </BmeSelect>
+          </BmeFormController>
+        )}
+      />
+      <Controller
+        name="neutered"
+        control={control}
+        render={({ field }) => (
+          <BmeFormController
+            width="100%"
+            label={intl.formatMessage({
+              id: `common.form.${changeCase(field.name, ChangeCaseUtil.CamelCase, ChangeCaseUtil.SnakeCase)}.label`,
+            })}
+            labelPosition="left"
+            name={field.name}
+            error={errors[field.name] && intl.formatMessage({ id: errors[field.name]?.message })}
+          >
+            <BmeCheckbox {...field} type="checkbox" />
+          </BmeFormController>
+        )}
+      />
+      <Controller
+        name="instagram"
         control={control}
         render={({ field }) => (
           <BmeFormController
@@ -120,7 +196,7 @@ const Component = () => {
             name={field.name}
             error={errors[field.name] && intl.formatMessage({ id: errors[field.name]?.message })}
           >
-            <BmeInputDate {...field} />
+            <BmeInput {...field} />
           </BmeFormController>
         )}
       />

@@ -3,7 +3,7 @@ import { HYDRATE } from "next-redux-wrapper";
 import { AuthSignInPayload } from "../services/api/types/auth/sign-in/payload.type";
 import { ApiStatus } from "../services/api/types/status.type";
 import { AuthSignInResponse } from "../services/api/types/auth/sign-in/response.type";
-import { ApiMessage } from "../services/api/types/api-message.type";
+import { GenericMessageApi } from "../services/api/types/generic-message.type";
 import { ApiService } from "../services";
 import { cookie } from "../utils";
 import { AuthApplePayload } from "../services/api/types/auth/apple/payload.type";
@@ -13,13 +13,13 @@ import { AppState } from "./index";
 const signIn = createAsyncThunk<
   AuthSignInResponse,
   AuthSignInPayload,
-  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
+  { extra: { apiService: ApiService }; rejectValue: GenericMessageApi }
 >("auth/signIn", async (payload, thunkAPI) => await thunkAPI.extra.apiService.authSignIn(payload));
 
 const signInApple = createAsyncThunk<
   AuthAppleResponse,
   AuthApplePayload,
-  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
+  { extra: { apiService: ApiService }; rejectValue: GenericMessageApi }
 >("auth/signInApple", async (payload, thunkAPI) => await thunkAPI.extra.apiService.authApple(payload));
 
 export interface AuthStore {

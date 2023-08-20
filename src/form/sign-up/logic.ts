@@ -26,9 +26,9 @@ const useLogic = () => {
         firstName: formData.firstName,
         lastName: formData.lastName,
         password: formData.password,
-        passwordConfirm: formData.passwordConfirm,
+        birthDate: formData.birthDate,
         weightUnit: formData.weightUnit,
-        gdprConsent: formData.gdprConsent ?? false,
+        acceptedGdpr: formData.acceptedGdpr ?? false,
       }),
     );
   };

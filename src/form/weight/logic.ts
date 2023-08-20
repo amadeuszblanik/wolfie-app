@@ -5,7 +5,6 @@ import { useEffect } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormData, formSchema } from "./type";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { PetsPetIdWeightPostPayload } from "../../services/api/types/pets/:petId/weight/post/payload.type";
 import {
   petsWeightActions,
   selectPetsWeightDataById,
@@ -19,6 +18,7 @@ import {
 } from "../../store/petsWeight.slice";
 import { ApiStatus } from "../../services/api/types/status.type";
 import { toInputDate, toInputTime } from "../../utils";
+import { WeightCreatePayloadApi } from "../../services/api/types/weight-create-payload.type";
 
 const DEFAULT_WEIGHT = 15;
 
@@ -76,18 +76,18 @@ const useLogic = () => {
 
   useEffect(() => {
     if (storeDataById) {
-      setValue("weight", storeDataById.raw);
+      setValue("weight", storeDataById.weight.value);
       setValue("date", toInputDate(storeDataById.date));
       setValue("time", toInputTime(storeDataById.date));
     } else {
-      setValue("weight", storeDataLast?.raw || DEFAULT_WEIGHT);
+      setValue("weight", storeDataLast?.weight.value || DEFAULT_WEIGHT);
       setValue("date", toInputDate());
       setValue("time", toInputTime());
     }
   }, [storeDataLast, storeDataLast]);
 
   const submit = (formData: FormData) => {
-    const payload: PetsPetIdWeightPostPayload = {
+    const payload: WeightCreatePayloadApi = {
       weight: formData.weight,
       date: new Date(`${formData.date}T${formData.time}`),
     };

@@ -1,4 +1,5 @@
 export { default as BigFancyBox } from "./big-fancy-box";
+export { default as CalendarList } from "./calendar-list";
 export { default as CookieConsent } from "./cookie-consent";
 export { default as ErrorMessage } from "./error-message";
 export { default as Footer } from "./footer";
@@ -12,3 +13,4 @@ export { default as RemoveEntryModal } from "./remove-entry-modal";
 export { default as SideBar } from "./side-bar";
 export { default as SignInWithApple } from "./sign-in-with-apple";
 export { default as TopBar } from "./top-bar";
+export { default as VetCard } from "./vet-card";

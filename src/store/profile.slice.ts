@@ -1,47 +1,45 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import { ApiStatus } from "../services/api/types/status.type";
-import { ApiMessage } from "../services/api/types/api-message.type";
+import { GenericMessageApi } from "../services/api/types/generic-message.type";
 import { ApiService } from "../services";
-import { AuthProfileGetResponse } from "../services/api/types/auth/profile/get/response.type";
-import { AuthProfilePutResponse } from "../services/api/types/auth/profile/put/response.type";
-import { AuthProfilePutPayload } from "../services/api/types/auth/profile/put/payload.type";
 import { AuthChangePasswordResponse } from "../services/api/types/auth/change-password/response.type";
 import { AuthChangePasswordPayload } from "../services/api/types/auth/change-password/payload.type";
 import { AuthDeleteAccountResponse } from "../services/api/types/auth/delete-account/response.type";
 import { AuthDeleteAccountPayload } from "../services/api/types/auth/delete-account/payload.type";
 import { AuthDeactivateAccountResponse } from "../services/api/types/auth/deactivate-account/response.type";
 import { AuthDeactivateAccountPayload } from "../services/api/types/auth/deactivate-account/payload.type";
+import { ProfileUpdateApi } from "../services/api/types/profile-update.type";
+import { UserApi } from "../services/api/user.type";
 import { AppState } from "./index";
 
-const get = createAsyncThunk<
-  AuthProfileGetResponse,
-  undefined,
-  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
->("profile/get", async (_, thunkAPI) => await thunkAPI.extra.apiService.authProfile.get());
+const get = createAsyncThunk<UserApi, undefined, { extra: { apiService: ApiService }; rejectValue: GenericMessageApi }>(
+  "profile/get",
+  async (_, thunkAPI) => await thunkAPI.extra.apiService.authProfile.get(),
+);
 
-const put = createAsyncThunk<
-  AuthProfilePutResponse,
-  AuthProfilePutPayload,
-  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
->("profile/put", async (payload, thunkAPI) => await thunkAPI.extra.apiService.authProfile.put(payload));
+const patch = createAsyncThunk<
+  GenericMessageApi,
+  ProfileUpdateApi,
+  { extra: { apiService: ApiService }; rejectValue: GenericMessageApi }
+>("profile/patch", async (payload, thunkAPI) => await thunkAPI.extra.apiService.authProfile.patch(payload));
 
 const changePassword = createAsyncThunk<
   AuthChangePasswordResponse,
   AuthChangePasswordPayload,
-  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
+  { extra: { apiService: ApiService }; rejectValue: GenericMessageApi }
 >("profile/change-password", async (payload, thunkAPI) => await thunkAPI.extra.apiService.authChangePassword(payload));
 
 const deleteAccount = createAsyncThunk<
   AuthDeleteAccountResponse,
   AuthDeleteAccountPayload,
-  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
+  { extra: { apiService: ApiService }; rejectValue: GenericMessageApi }
 >("profile/delete-account", async (payload, thunkAPI) => await thunkAPI.extra.apiService.authDeleteAccount(payload));
 
 const deactivateAccount = createAsyncThunk<
   AuthDeactivateAccountResponse,
   AuthDeactivateAccountPayload,
-  { extra: { apiService: ApiService }; rejectValue: ApiMessage }
+  { extra: { apiService: ApiService }; rejectValue: GenericMessageApi }
 >(
   "profile/deactivate-account",
   async (payload, thunkAPI) => await thunkAPI.extra.apiService.authDeactivateAccount(payload),
@@ -50,9 +48,10 @@ const deactivateAccount = createAsyncThunk<
 export interface ProfileStore {
   getStatus: ApiStatus;
   getError: string | null;
-  data: AuthProfileGetResponse | null;
-  putStatus: ApiStatus;
-  putError: string | null;
+  data: UserApi | null;
+  patchData: GenericMessageApi | null;
+  patchStatus: ApiStatus;
+  patchError: string | null;
   changePasswordStatus: ApiStatus;
   changePasswordError: string | null;
   changePasswordData: AuthChangePasswordResponse | null;
@@ -68,8 +67,9 @@ const initialState: ProfileStore = {
   getStatus: "idle",
   getError: null,
   data: null,
-  putStatus: "idle",
-  putError: null,
+  patchData: null,
+  patchStatus: "idle",
+  patchError: null,
   changePasswordStatus: "idle",
   changePasswordError: null,
   changePasswordData: null,
@@ -87,9 +87,9 @@ export const profileSlice = createSlice({
   initialState,
 
   reducers: {
-    resetPut: (state) => {
-      state.putStatus = "idle";
-      state.putError = null;
+    resetPatch: (state) => {
+      state.patchStatus = "idle";
+      state.patchError = null;
     },
     resetChangePassword: (state) => {
       state.changePasswordStatus = "idle";
@@ -120,18 +120,18 @@ export const profileSlice = createSlice({
       state.getError = action.error.message || null;
       state.data = null;
     });
-    builder.addCase(put.pending, (state) => {
-      state.putStatus = "pending";
-      state.putError = null;
+    builder.addCase(patch.pending, (state) => {
+      state.patchStatus = "pending";
+      state.patchError = null;
     });
-    builder.addCase(put.fulfilled, (state, action) => {
-      state.putStatus = "success";
-      state.putError = null;
-      state.data = action.payload;
+    builder.addCase(patch.fulfilled, (state, action) => {
+      state.patchStatus = "success";
+      state.patchData = action.payload;
+      state.patchError = null;
     });
-    builder.addCase(put.rejected, (state, action) => {
-      state.putStatus = "error";
-      state.putError = action.error.message || null;
+    builder.addCase(patch.rejected, (state, action) => {
+      state.patchStatus = "error";
+      state.patchError = action.error.message || null;
     });
     builder.addCase(changePassword.pending, (state) => {
       state.changePasswordStatus = "pending";
@@ -183,8 +183,8 @@ export const profileSlice = createSlice({
 
 export const selectProfileGetStatus = ({ profile }: AppState) => profile.getStatus;
 export const selectProfileGetError = ({ profile }: AppState) => profile.getError;
-export const selectProfilePutStatus = ({ profile }: AppState) => profile.putStatus;
-export const selectProfilePutError = ({ profile }: AppState) => profile.putError;
+export const selectProfilepatchStatus = ({ profile }: AppState) => profile.patchStatus;
+export const selectProfilepatchError = ({ profile }: AppState) => profile.patchError;
 export const selectProfileData = ({ profile }: AppState) => profile.data;
 export const selectProfileChangePasswordStatus = ({ profile }: AppState) => profile.changePasswordStatus;
 export const selectProfileChangePasswordError = ({ profile }: AppState) => profile.changePasswordError;
@@ -200,7 +200,7 @@ export const selectProfileDeactivateAccountData = ({ profile }: AppState) => pro
 export const profileActions = {
   ...profileSlice.actions,
   get,
-  put,
+  patch,
   changePassword,
   deleteAccount,
   deactivateAccount,

@@ -1,5 +1,5 @@
 import { Controller } from "react-hook-form";
-import { BmeCheckbox, BmeFormController, BmeInput, BmeSelect } from "bme-ui";
+import { BmeCheckbox, BmeFormController, BmeInput, BmeInputDate, BmeSelect } from "bme-ui";
 import { useIntl } from "react-intl";
 import { useRouter } from "next/router";
 import useLogic from "./logic";
@@ -84,7 +84,7 @@ const Component = () => {
         )}
       />
       <Controller
-        name="password"
+        name="birthDate"
         control={control}
         render={({ field }) => (
           <BmeFormController
@@ -95,12 +95,12 @@ const Component = () => {
             name={field.name}
             error={errors[field.name] && intl.formatMessage({ id: errors[field.name]?.message })}
           >
-            <BmeInput {...field} type="password" />
+            <BmeInputDate {...field} />
           </BmeFormController>
         )}
       />
       <Controller
-        name="passwordConfirm"
+        name="password"
         control={control}
         render={({ field }) => (
           <BmeFormController
@@ -142,7 +142,7 @@ const Component = () => {
         )}
       />
       <Controller
-        name="gdprConsent"
+        name="acceptedGdpr"
         control={control}
         render={({ field }) => (
           <BmeFormController

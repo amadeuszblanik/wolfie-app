@@ -2,15 +2,10 @@ import { WeightUnits } from "../../../../../../types/weight-units.type";
 import { UserRoles } from "../../../../../../types/user-roles.type";
 
 export interface AuthProfileGetResponse {
-  id: string;
+  birthDate: string;
   email: string;
-  fullName: string;
   firstName: string;
   lastName: string;
-  isActive: boolean;
-  isEmailVerified: boolean;
+  role: UserRoles;
   weightUnit: WeightUnits;
-  userRole: UserRoles;
-  createdAt: string;
-  updatedAt: string;
 }

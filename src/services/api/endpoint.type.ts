@@ -7,6 +7,7 @@ export enum ApiAuthEndpoint {
   FcmToken = "/auth/fcm-token",
   TestNotification = "/auth/test-notification",
   Profile = "/auth/profile",
+  Limit = "/auth/limit",
   DeactivateAccount = "/auth/deactivate-account",
   DeleteAccount = "/auth/delete-account",
   ChangePassword = "/auth/change-password",
@@ -20,9 +21,8 @@ export enum ApiConfigEndpoint {
 
 export enum ApiPetsEndpoint {
   PetsById = "/pets/:petId",
-  PetsMy = "/pets/my",
-  Pet = "/pets/:petId",
-  PetAdd = "/pets/add",
+  Pets = "/pets",
+  PetsSingle = "/pets/:petId",
   PetsAvatar = "/pets/:petId/avatar",
   PetsWeight = "/pets/:petId/weight",
   PetsWeightSingle = "/pets/:petId/weight/:weightId",
@@ -32,9 +32,18 @@ export enum ApiPetsEndpoint {
 }
 
 export enum ApiBreedEndpoint {
-  Breed = "/breed",
+  Breed = "/breeds/dogs",
 }
 
 export enum ApiMedicineEndpoint {
-  Medicine = "/medicine",
+  Medicine = "/medicines",
+}
+
+export enum ApiCalendarEndpoint {
+  Calendar = "/calendar",
+}
+
+export enum ApiVetEndpoint {
+  Vet = "/vet",
+  Single = "/vet/:vetId",
 }

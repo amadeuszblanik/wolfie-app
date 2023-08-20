@@ -14,7 +14,7 @@ interface ApiRequestGetOptions {
 }
 
 export default class ApiBase {
-  protected readonly baseUrl: string = process.env.NEXT_PUBLIC_API_URL || "https://api.wolfie.app/v1";
+  protected readonly baseUrl: string = process.env.NEXT_PUBLIC_API_URL || "https://api.wolfie.app/v2";
   private axiosInstance: AxiosInstance;
 
   constructor() {

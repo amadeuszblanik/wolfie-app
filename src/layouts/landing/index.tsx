@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Head from "next/head";
 import { BmeBox, BmeButton } from "bme-ui";
 import styled from "styled-components";
 import { FormattedMessage } from "react-intl";
-import { detectDevice } from "bme-utils";
 import { Footer, TopBar } from "../../components";
 import { Brand, Container, Link } from "../../atoms";
 
@@ -16,64 +15,47 @@ const StyledMain = styled.div`
   }
 `;
 
-const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [isAvailableDownload, setIsAvailableDownload] = useState(false);
+const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <>
+    <Head>
+      <title>Wolfie.app — Pet management application</title>
+      <meta name="description" content="Your pet management application" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link rel="icon" href="/favicon.ico" />
+    </Head>
 
-  useEffect(() => {
-    const { os } = detectDevice();
-
-    setIsAvailableDownload(os === "iOS");
-  }, []);
-
-  return (
-    <>
-      <Head>
-        <title>Wolfie.app — Pet management application</title>
-        <meta name="description" content="Your pet management application" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <TopBar
-        left={<Brand withName />}
-        right={
-          <>
-            {isAvailableDownload && (
-              <BmeBox padding="no|md|no|no">
-                <Link href="download">
-                  <BmeButton size="small">
-                    <FormattedMessage id="layout.landing.menu.download" />
-                  </BmeButton>
-                </Link>
-              </BmeBox>
-            )}
-            <Link href="/app">
+    <TopBar
+      left={<Brand withName />}
+      right={
+        <>
+          <BmeBox padding="no|md|no|no">
+            <Link href="download">
               <BmeButton size="small">
-                <FormattedMessage id="layout.landing.menu.app" />
+                <FormattedMessage id="layout.landing.menu.download" />
               </BmeButton>
             </Link>
-          </>
-        }
-      >
-        <TopBar.Item href="/#about">
-          <FormattedMessage id="layout.landing.menu.about" />
-        </TopBar.Item>
-        <TopBar.Item href="/#features">
-          <FormattedMessage id="layout.landing.menu.features" />
-        </TopBar.Item>
-        <TopBar.Item href="/#pricing">
-          <FormattedMessage id="layout.landing.menu.pricing" />
-        </TopBar.Item>
-        <TopBar.Item href="/#contact">
-          <FormattedMessage id="layout.landing.menu.contact" />
-        </TopBar.Item>
-      </TopBar>
-      <StyledMain>
-        <Container>{children}</Container>
-      </StyledMain>
-      <Footer />
-    </>
-  );
-};
+          </BmeBox>
+        </>
+      }
+    >
+      <TopBar.Item href="/#about">
+        <FormattedMessage id="layout.landing.menu.about" />
+      </TopBar.Item>
+      <TopBar.Item href="/#features">
+        <FormattedMessage id="layout.landing.menu.features" />
+      </TopBar.Item>
+      <TopBar.Item href="/#pricing">
+        <FormattedMessage id="layout.landing.menu.pricing" />
+      </TopBar.Item>
+      <TopBar.Item href="/#contact">
+        <FormattedMessage id="layout.landing.menu.contact" />
+      </TopBar.Item>
+    </TopBar>
+    <StyledMain>
+      <Container>{children}</Container>
+    </StyledMain>
+    <Footer />
+  </>
+);
 
 export default Layout;

@@ -5,6 +5,7 @@ export const formSchema = yup
   .object({
     firstName: yup.string().required("common.form.errors.required"),
     lastName: yup.string().required("common.form.errors.required"),
+    birthDate: yup.string().required("common.form.errors.required"),
     weightUnit: yup
       .mixed()
       .oneOf(Object.values(WeightUnits))

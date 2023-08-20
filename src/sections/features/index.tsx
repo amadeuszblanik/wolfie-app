@@ -99,6 +99,14 @@ const Component = () => {
           />
           <FeatureSingle
             icon="medkit-outline"
+            title="section.features.feature_vets.title"
+            description="section.features.feature_vets.description"
+            state="ready"
+            color="purple"
+            isMobile={isMobile}
+          />
+          <FeatureSingle
+            icon="heart-outline"
             title="section.features.feature_heat.title"
             description="section.features.feature_heat.description"
             state="planned"

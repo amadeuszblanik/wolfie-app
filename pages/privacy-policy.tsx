@@ -13,6 +13,8 @@ const SANITIZE_OPTIONS: sanitizeHtml.IOptions = {
 
 const StyledContent = styled.div`
   line-height: 1.2;
+  white-space: pre-line;
+
   a {
     color: ${({ theme }) => theme.colors.primary};
   }
@@ -40,10 +42,10 @@ export default function Page({ html }: { html: string }) {
 
 export async function getServerSideProps() {
   try {
-    const res = await fetch(`https://api.wolfie.app/v1/gdpr`);
+    const res = await fetch(`https://api.wolfie.app/v2/public/gdpr`);
     const data = await res.json();
 
-    const html = sanitizeHtml(data.html, SANITIZE_OPTIONS);
+    const html = sanitizeHtml(data.content, SANITIZE_OPTIONS);
 
     return { props: { html } };
   } catch (error) {

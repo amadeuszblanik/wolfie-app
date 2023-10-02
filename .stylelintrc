@@ -1,0 +1,66 @@
+{
+  "extends": [
+    "stylelint-config-recommended",
+    "stylelint-config-rational-order"
+  ],
+  "plugins": [
+    "stylelint-order",
+    "stylelint-prettier",
+    "stylelint-scss"
+  ],
+  "customSyntax": "postcss-scss",
+  "rules": {
+    "at-rule-no-unknown": [
+      true,
+      {
+        "ignoreAtRules": [
+          "tailwind",
+          "apply",
+          "variants",
+          "responsive",
+          "screen"
+        ]
+      }
+    ],
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {
+        "ignorePseudoClasses": ["export", "import", "global", "local"]
+      }
+    ],
+    "property-no-unknown": [
+      true,
+      {
+        "ignoreProperties": [
+          "primaryColor"
+        ]
+      }
+    ],
+    "selector-type-no-unknown": [
+      true,
+      {}
+    ],
+    "no-descending-specificity": null,
+    "color-no-invalid-hex": true,
+    "color-hex-case": [
+      "lower",
+      {
+        "message": "Lowercase letters are easier to distinguish from numbers"
+      }
+    ],
+    "max-empty-lines": 1,
+    "unit-allowed-list": [
+      "em",
+      "rem",
+      "%",
+      "px",
+      "vw",
+      "vh",
+      "s",
+      "ms",
+      "fr",
+      "deg"
+    ],
+    "prettier/prettier": true
+  }
+}

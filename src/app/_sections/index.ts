@@ -1,1 +1,1 @@
-export { default as SectionHero } from './hero';
+export { default as SectionHero } from "./hero";

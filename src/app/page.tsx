@@ -1,9 +1,9 @@
-import {SectionHero} from "@/app/_sections";
+import { SectionHero } from "@/app/_sections";
 
 export default function Home() {
   return (
     <main>
-        <SectionHero />
+      <SectionHero />
     </main>
-  )
+  );
 }

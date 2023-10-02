@@ -9,7 +9,8 @@
     "lint": "next lint && stylelint './**/*.{css,scss}'",
     "lint:intellij": "eslint \"src/**/*.{ts,tsx,js,jsx}\" && stylelint './**/*.{css,scss}'",
     "lint:ts": "next lint",
-    "lint:css": "stylelint './**/*.{css,scss}'"
+    "lint:css": "stylelint './**/*.{css,scss}'",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^6.7.4",
@@ -28,6 +29,7 @@
     "autoprefixer": "latest",
     "eslint": "latest",
     "eslint-config-next": "latest",
+    "husky": "^8.0.3",
     "postcss": "latest",
     "sass": "^1.68.0",
     "stylelint-config-rational-order": "^0.1.2",

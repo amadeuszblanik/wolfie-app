@@ -12,6 +12,25 @@
       "title": "Wolfie.app",
       "description": "Twój osobisty asystent do zarządzania zadaniami",
       "cta": "Pobierz teraz na iOS"
+    },
+    "features": {
+      "upper": "Funkcje",
+      "title": "Zarządzaj swoimi zadaniami w prosty sposób",
+      "description": "Wolfie.app to aplikacja do zarządzania zadaniami, która pozwala Ci na skupienie się na tym co najważniejsze. Zorganizuj sprawy swojego psiaka w jednym miejscu.",
+      "items": [
+        {
+          "name": "Waga",
+          "description": "Zapisuj wagę swojego psiaka i obserwuj jego postępy."
+        },
+        {
+          "name": "Dziennik zdrowia",
+          "description": "Zapisuj wszystkie ważne informacje o swoim psiaku."
+        },
+        {
+          "name": "Weterynarze",
+          "description": "Zapisuj dane kontaktowe swojego weterynarza."
+        }
+      ]
     }
   }
 }

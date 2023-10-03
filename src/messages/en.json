@@ -12,6 +12,25 @@
       "title": "Wolfie.app",
       "description": "Your new favorite app for managing your pets.",
       "cta": "Get it now for iOS"
+    },
+    "features": {
+      "upper": "Features",
+      "title": "Manage your pets with ease",
+      "description": "Wolfie.app is the best way to manage your pets. It's simple, easy to use, and free.",
+      "items": [
+        {
+          "name": "Weight tracker",
+          "description": "Track your pet's weight over time and get insights on their health."
+        },
+        {
+          "name": "Health log",
+          "description": "Keep track of your pet's health history and get reminders for upcoming appointments."
+        },
+        {
+          "name": "Vets",
+          "description": "Keep a list of your pet's vets and get directions to their offices."
+        }
+      ]
     }
   }
 }

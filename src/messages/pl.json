@@ -6,6 +6,12 @@
       "pricing": "Cennik",
       "contact": "Kontakt",
       "cta": "Pobierz"
+    },
+    "hero": {
+      "upper": "Pobierz za darmo",
+      "title": "Wolfie.app",
+      "description": "Twój osobisty asystent do zarządzania zadaniami",
+      "cta": "Pobierz teraz na iOS"
     }
   }
 }

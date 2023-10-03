@@ -6,6 +6,12 @@
       "pricing": "Pricing",
       "contact": "Contact",
       "cta": "Download"
+    },
+    "hero": {
+      "upper": "Download for free",
+      "title": "Wolfie.app",
+      "description": "Your new favorite app for managing your pets.",
+      "cta": "Get it now for iOS"
     }
   }
 }

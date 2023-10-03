@@ -56,7 +56,7 @@ export default function LocaleLayout({ children, params: { locale } }: Props) {
           ]}
           cta={{
             title: t("nav.cta"),
-            link: "#",
+            link: "/download",
           }}
         />
         {children}

@@ -17,6 +17,7 @@
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
     "next": "latest",
+    "next-intl": "^3.0.0-beta.19",
     "prettier": "^3.0.3",
     "react": "latest",
     "react-dom": "latest",

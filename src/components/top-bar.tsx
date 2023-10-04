@@ -10,7 +10,7 @@ interface Item {
 }
 
 interface Props {
-  items: Item[];
+  items?: Item[];
   cta?: Item;
 }
 
@@ -46,7 +46,7 @@ const Component: React.FC<Props> = ({ items, cta }) => {
           </button>
         </div>
         <div className="hidden lg:flex lg:gap-x-12">
-          {items.map(({ link, title }) => (
+          {items?.map(({ link, title }) => (
             <a key={title} href={link} className="text-sm font-semibold leading-6 text-gray-900">
               {title}
             </a>
@@ -90,7 +90,7 @@ const Component: React.FC<Props> = ({ items, cta }) => {
             <div className="mt-6 flow-root">
               <div className="-my-6 divide-y divide-gray-500/10">
                 <div className="space-y-2 py-6">
-                  {items.map(({ link, title }) => (
+                  {items?.map(({ link, title }) => (
                     <Link
                       key={title}
                       href={link}

@@ -1,5 +1,5 @@
 import { ApiService } from "@/service";
-import { Article } from "@/components";
+import { Article, Footer, TopBar } from "@/components";
 
 // @TODO - Add error handling
 
@@ -13,8 +13,12 @@ export default async function Home() {
   const { data } = await getData();
 
   return (
-    <main>
-      <Article content={data?.content ?? ""} />
-    </main>
+    <>
+      <TopBar />
+      <main>
+        <Article content={data?.content ?? ""} />
+      </main>
+      <Footer />
+    </>
   );
 }

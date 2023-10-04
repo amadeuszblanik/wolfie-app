@@ -31,6 +31,18 @@
           "description": "Zapisuj dane kontaktowe swojego weterynarza."
         }
       ]
+    },
+    "pricing": {
+      "title": "Cennik będzie dostępny wkrótce",
+      "cta": "Pobierz"
+    },
+    "contact": {
+      "title": "Kontakt",
+      "description": "Masz pytania? Napisz do nas!",
+      "cta": {
+        "mail": "Napisz do nas",
+        "linkedin": "LinkedIn"
+      }
     }
   }
 }

@@ -1,4 +1,4 @@
-import { SectionFeatures, SectionHero, SectionPricing } from "@/app/[locale]/_sections";
+import { SectionContact, SectionFeatures, SectionHero, SectionPricing } from "@/app/[locale]/_sections";
 import { ApiService } from "@/service";
 
 async function getData() {
@@ -15,6 +15,7 @@ export default async function Home() {
       <SectionHero />
       <SectionFeatures />
       <SectionPricing data={data} error={error} />
+      <SectionContact />
     </main>
   );
 }

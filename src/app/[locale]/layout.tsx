@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import { PropsWithChildren } from "react";
 import { notFound } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { TopBar } from "@/components";
+import { Footer, TopBar } from "@/components";
 import { I18N_LOCALES } from "@/i18n";
 import type { Metadata } from "next";
 
@@ -56,6 +56,7 @@ export default function LocaleLayout({ children, params: { locale } }: Props) {
           }}
         />
         {children}
+        <Footer />
       </body>
     </html>
   );

@@ -7,6 +7,16 @@
       "contact": "Contact",
       "cta": "Download"
     },
+    "footer": {
+      "legal": {
+        "title": "Legal",
+        "privacy_policy": "Privacy policy"
+      },
+      "features": "Features",
+      "pricing": "Pricing",
+      "contact": "Contact",
+      "cta": "Download"
+    },
     "hero": {
       "upper": "Download for free",
       "title": "Wolfie.app",

@@ -23,7 +23,7 @@ const Component: React.FC<Props> = ({ items, cta }) => {
         <div className="flex lg:flex-1">
           <Link href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Wolfie.app</span>
-            <Image src="logo.svg" alt="Wolfie.app logo" width={40} height={40} />
+            <Image src="/logo.svg" alt="Wolfie.app logo" width={40} height={40} />
           </Link>
         </div>
         <div className="flex lg:hidden">
@@ -67,7 +67,7 @@ const Component: React.FC<Props> = ({ items, cta }) => {
             <div className="flex items-center justify-between">
               <a href="#" className="-m-1.5 p-1.5">
                 <span className="sr-only">Wolfie.app</span>
-                <Image src="logo.svg" alt="Wolfie.app logo" width={40} height={40} />
+                <Image src="/logo.svg" alt="Wolfie.app logo" width={40} height={40} />
               </a>
               <button
                 type="button"

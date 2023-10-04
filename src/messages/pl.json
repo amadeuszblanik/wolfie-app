@@ -54,5 +54,8 @@
         "linkedin": "LinkedIn"
       }
     }
+  },
+  "PrivacyPolicy": {
+    "error": "Nie udało się załadować polityki prywatności"
   }
 }

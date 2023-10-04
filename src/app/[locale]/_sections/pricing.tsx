@@ -4,6 +4,7 @@ import Link from "next-intl/link";
 import Image from "next/image";
 import ApiPublicPricingGetResponse from "@/model/api-public-pricing-get.model";
 import ApiError from "@/model/api-error.model";
+import { ApiService } from "@/service";
 
 interface Props {
   data?: ApiPublicPricingGetResponse[];
@@ -12,7 +13,13 @@ interface Props {
 
 // @TODO: Add pricing table when will be available
 
-export const Section = ({ error }: Props) => {
+async function getData() {
+  const res = await new ApiService().public.pricing.get();
+
+  return res;
+}
+
+const Section = ({ error }: Props) => {
   const t = useTranslations("Index");
 
   return (
@@ -62,4 +69,10 @@ export const Section = ({ error }: Props) => {
   );
 };
 
-export default Section;
+const SectionWrapper = async () => {
+  const { data, error } = await getData();
+
+  return <Section data={data} error={error} />;
+};
+
+export default SectionWrapper;

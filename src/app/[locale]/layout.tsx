@@ -1,10 +1,10 @@
 import "../globals.scss";
 import { Inter } from "next/font/google";
-import { PropsWithChildren } from "react";
+import React, { PropsWithChildren } from "react";
 import { notFound } from "next/navigation";
-import { useTranslations } from "next-intl";
-import { Footer, TopBar } from "@/components";
+import { NextIntlClientProvider, useMessages } from "next-intl";
 import { I18N_LOCALES } from "@/i18n";
+import { ReactQueryProvider } from "@/providers";
 import type { Metadata } from "next";
 
 interface Props extends PropsWithChildren {
@@ -30,33 +30,14 @@ export default function LocaleLayout({ children, params: { locale } }: Props) {
     notFound();
   }
 
-  const t = useTranslations("Index");
+  const messages = useMessages();
 
   return (
     <html lang={locale}>
       <body className={inter.className}>
-        <TopBar
-          items={[
-            {
-              title: t("nav.features"),
-              link: "/#features",
-            },
-            {
-              title: t("nav.pricing"),
-              link: "/#pricing",
-            },
-            {
-              title: t("nav.contact"),
-              link: "/#contact",
-            },
-          ]}
-          cta={{
-            title: t("nav.cta"),
-            link: "/download",
-          }}
-        />
-        {children}
-        <Footer />
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <ReactQueryProvider>{children}</ReactQueryProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

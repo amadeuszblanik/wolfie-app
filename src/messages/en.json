@@ -57,5 +57,13 @@
   },
   "PrivacyPolicy": {
     "error": "Could not load privacy policy."
+  },
+  "Auth": {
+    "ConfirmEmail": {
+      "title": "Confirm your email address",
+      "description": "Please confirm your email address by clicking the button below.",
+      "cta": "Confirm",
+      "error": "Could not confirm email address."
+    }
   }
 }

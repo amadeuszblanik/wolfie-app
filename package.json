@@ -14,6 +14,8 @@
   },
   "dependencies": {
     "@effect/schema": "^0.39.2",
+    "@tanstack/react-query": "^5.0.0-rc.4",
+    "@tanstack/react-query-devtools": "^5.0.0-rc.4",
     "@typescript-eslint/eslint-plugin": "^6.7.4",
     "axios": "^1.5.1",
     "eslint-config-prettier": "^9.0.0",
@@ -27,6 +29,7 @@
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
+    "@tanstack/eslint-plugin-query": "^5.0.0-rc.4",
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",

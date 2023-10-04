@@ -1,21 +1,39 @@
+import { useTranslations } from "next-intl";
 import { SectionContact, SectionFeatures, SectionHero, SectionPricing } from "@/app/[locale]/_sections";
-import { ApiService } from "@/service";
+import { Footer, TopBar } from "@/components";
 
-async function getData() {
-  const res = await new ApiService().public.pricing.get();
-
-  return res;
-}
-
-export default async function Home() {
-  const { data, error } = await getData();
+export default function Home() {
+  const t = useTranslations("Index");
 
   return (
-    <main>
-      <SectionHero />
-      <SectionFeatures />
-      <SectionPricing data={data} error={error} />
-      <SectionContact />
-    </main>
+    <>
+      <TopBar
+        items={[
+          {
+            title: t("nav.features"),
+            link: "/#features",
+          },
+          {
+            title: t("nav.pricing"),
+            link: "/#pricing",
+          },
+          {
+            title: t("nav.contact"),
+            link: "/#contact",
+          },
+        ]}
+        cta={{
+          title: t("nav.cta"),
+          link: "/download",
+        }}
+      />
+      <main>
+        <SectionHero />
+        <SectionFeatures />
+        <SectionPricing />
+        <SectionContact />
+      </main>
+      <Footer />
+    </>
   );
 }

@@ -38,20 +38,16 @@ export default function LocaleLayout({ children, params: { locale } }: Props) {
         <TopBar
           items={[
             {
-              title: t("nav.about"),
-              link: "#",
-            },
-            {
               title: t("nav.features"),
-              link: "#",
+              link: "/#features",
             },
             {
               title: t("nav.pricing"),
-              link: "#",
+              link: "/#pricing",
             },
             {
               title: t("nav.contact"),
-              link: "#",
+              link: "/#contact",
             },
           ]}
           cta={{

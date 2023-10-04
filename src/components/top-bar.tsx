@@ -91,13 +91,13 @@ const Component: React.FC<Props> = ({ items, cta }) => {
               <div className="-my-6 divide-y divide-gray-500/10">
                 <div className="space-y-2 py-6">
                   {items.map(({ link, title }) => (
-                    <a
+                    <Link
                       key={title}
                       href={link}
                       className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                     >
                       {title}
-                    </a>
+                    </Link>
                   ))}
                 </div>
                 {cta && (

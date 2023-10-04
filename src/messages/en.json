@@ -31,6 +31,10 @@
           "description": "Keep a list of your pet's vets and get directions to their offices."
         }
       ]
+    },
+    "pricing": {
+      "title": "Pricing plans will be available soon.",
+      "cta": "Download app"
     }
   }
 }

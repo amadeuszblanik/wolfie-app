@@ -1,10 +1,20 @@
-import { SectionFeatures, SectionHero } from "@/app/[locale]/_sections";
+import { SectionFeatures, SectionHero, SectionPricing } from "@/app/[locale]/_sections";
+import { ApiService } from "@/service";
 
-export default function Home() {
+async function getData() {
+  const res = await new ApiService().public.pricing.get();
+
+  return res;
+}
+
+export default async function Home() {
+  const { data, error } = await getData();
+
   return (
     <main>
       <SectionHero />
       <SectionFeatures />
+      <SectionPricing data={data} error={error} />
     </main>
   );
 }

@@ -16,3 +16,7 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+input:checked ~ .dot {
+  transform: translateX(100%);
+}

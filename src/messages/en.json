@@ -64,6 +64,13 @@
       "description": "Please confirm your email address by clicking the button below.",
       "cta": "Confirm",
       "error": "Could not confirm email address."
+    },
+    "ResetPassword": {
+      "title": "Reset your password",
+      "description": "Please enter your new password below.",
+      "password": "Password",
+      "cta": "Set new password",
+      "error": "Could not reset password."
     }
   }
 }

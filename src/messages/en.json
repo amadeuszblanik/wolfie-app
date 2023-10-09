@@ -58,6 +58,14 @@
   "PrivacyPolicy": {
     "error": "Could not load privacy policy."
   },
+  "Download": {
+    "title": "Download for free",
+    "description": "Wolfie.app is the best way to manage your pets. It's simple, easy to use, and free.",
+    "cta": {
+      "ios": "Get it now for iOS",
+      "android": "Get it now for Android"
+    }
+  },
   "Auth": {
     "ConfirmEmail": {
       "title": "Confirm your email address",

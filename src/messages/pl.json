@@ -58,6 +58,14 @@
   "PrivacyPolicy": {
     "error": "Nie udało się załadować polityki prywatności"
   },
+  "Download": {
+    "title": "Pobierz za darmo",
+    "description": "Wolfie.app jest dostępny na iOS i wkrótce na Androida.",
+    "cta": {
+      "ios": "Pobierz teraz na iOS",
+      "android": "Pobierz teraz na Androida"
+    }
+  },
   "Auth": {
     "ConfirmEmail": {
       "title": "Confirm your email address",

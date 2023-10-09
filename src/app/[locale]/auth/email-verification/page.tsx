@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import HotFix from "@/app/[locale]/auth/confirm-email/hot-fix";
+import HotFix from "@/app/[locale]/auth/email-verification/hot-fix";
 
 interface Props {
   searchParams: {

@@ -71,6 +71,13 @@
       "title": "Confirm your email address",
       "description": "Please confirm your email address by clicking the button below.",
       "cta": "Confirm"
+    },
+    "ResetPassword": {
+      "title": "Zresetuj hasło",
+      "description": "Wpisz nowe hasło.",
+      "password": "Hasło",
+      "cta": "Zresetuj hasło",
+      "error": "Nie udało się zresetować hasła"
     }
   }
 }

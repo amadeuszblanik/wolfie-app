@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslations } from "next-intl";
-import Link from "next-intl/link";
+import Link from "next/link";
 import Image from "next/image";
 import ApiPublicPricingGetResponse from "@/model/api-public-pricing-get.model";
 import ApiError from "@/model/api-error.model";

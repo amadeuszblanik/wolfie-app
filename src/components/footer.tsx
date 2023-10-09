@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import Link from "next-intl/link";
+import Link from "next/link";
 
 const Component = () => {
   const t = useTranslations("Index.footer");

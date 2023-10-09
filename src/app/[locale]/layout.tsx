@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import React, { PropsWithChildren } from "react";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider, useMessages } from "next-intl";
+import { unstable_setRequestLocale } from "next-intl/server";
 import { I18N_LOCALES } from "@/i18n";
 import { ReactQueryProvider } from "@/providers";
 import type { Metadata } from "next";
@@ -29,6 +30,8 @@ export default function LocaleLayout({ children, params: { locale } }: Props) {
   if (!isValidLocale) {
     notFound();
   }
+
+  unstable_setRequestLocale(locale);
 
   const messages = useMessages();
 

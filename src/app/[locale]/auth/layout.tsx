@@ -8,10 +8,6 @@ export const metadata: Metadata = {
   description: "Pet companion app for iOS and Android",
 };
 
-export function generateStaticParams() {
-  return [{ locale: "en" }, { locale: "de" }];
-}
-
 export default function LocaleLayout({ children }: PropsWithChildren) {
   return (
     <div className="flex justify-center items-center min-h-screen dark:bg-gray-700">

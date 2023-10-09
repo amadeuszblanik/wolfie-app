@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import Link from "next-intl/link";
+import Link from "next/link";
 import LogoAppleAppStore from "@/icons/logo-apple-appstore.svg";
 import LogoGooglePlayStore from "@/icons/logo-google-playstore.svg";
 
